@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Nota mo nota ko</string>
+    <string name="app_name">Taking Notes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="password_signup">Password</string>
+    <string name="notes">Notes</string>
+    <string name="flashcards">Flashcards</string>
+    <string name="title">Nota Mo Nota Ko</string>
+    <string name="signin">SIGN IN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="forgotpassword">Forgot Password?</string>
+
+
 </resources>

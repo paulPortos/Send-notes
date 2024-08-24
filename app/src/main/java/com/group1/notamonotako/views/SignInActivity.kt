@@ -1,6 +1,5 @@
 package com.group1.notamonotako.views
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -17,15 +16,14 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var btnLoginNow: Button
 
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
         btnSignup = findViewById(R.id.btnSignUp)
-        etUsername = findViewById(R.id.usernameInput)
-        etPassword = findViewById(R.id.passwordInput)
-        btnForgot = findViewById(R.id.btnforgot)
-        btnLoginNow = findViewById(R.id.btnloginnow)
+        etUsername = findViewById(R.id.etUsername)
+        etPassword = findViewById(R.id.etPassword)
+        btnForgot = findViewById(R.id.btnForgotPassword)
+        btnLoginNow = findViewById(R.id.btnSignInNow)
 
 
         // LOGIN

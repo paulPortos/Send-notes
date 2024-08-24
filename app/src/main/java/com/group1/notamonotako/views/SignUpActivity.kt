@@ -23,11 +23,11 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up)
-        etUsername = findViewById(R.id.etusername)
-        etPassword = findViewById(R.id.Password)
-        etConfirmPassword = findViewById(R.id.confirmedpasss)
-        btnLoginNow = findViewById(R.id.btnloginnow)
-        btnSignIn = findViewById(R.id.btnSignIn)
+        this.etUsername = findViewById(R.id.etUsername)
+        this.etPassword = findViewById(R.id.etPassword)
+        this.etConfirmPassword = findViewById(R.id.etConfirmPassword)
+        this.btnLoginNow = findViewById(R.id.btnSignUpNow)
+        this.btnSignIn = findViewById(R.id.btnSignIn)
 
 
         this.btnLoginNow.setOnClickListener {

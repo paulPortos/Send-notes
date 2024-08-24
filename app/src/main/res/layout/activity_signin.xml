@@ -10,7 +10,7 @@
 
 
     <Button
-        android:id="@+id/btnloginnow"
+        android:id="@+id/btnSignInNow"
         android:layout_width="308dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/blue"
@@ -69,7 +69,7 @@
         app:srcCompat="@drawable/logo" />
 
     <Button
-        android:id="@+id/etSignIn"
+        android:id="@+id/btnSignIn"
         android:layout_width="130dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/blue"
@@ -105,7 +105,7 @@
         app:layout_constraintVertical_bias="0.474" />
 
     <Button
-        android:id="@+id/btnforgot"
+        android:id="@+id/btnForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00E2E2E2"
@@ -137,7 +137,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usernameInput"
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round"
@@ -164,7 +164,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordInput"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round"

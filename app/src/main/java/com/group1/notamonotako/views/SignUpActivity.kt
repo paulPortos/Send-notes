@@ -1,14 +1,22 @@
 package com.group1.notamonotako.views
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import retrofit2.Callback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.ApiClient
+import com.group1.notamonotako.api.ApiService
+import com.group1.notamonotako.api.requests_responses.RegistrationRequest
+import com.group1.notamonotako.api.requests_responses.RegistrationResponse
+import retrofit2.Call
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var etUsername: EditText
@@ -33,36 +41,34 @@ class SignUpActivity : AppCompatActivity() {
         this.btnLoginNow.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
-            val confirmpassword = etConfirmPassword.text.toString()
-            if (username == "") { // Empty Input
-                Toast.makeText(this@SignUpActivity, "Please Enter your Username", Toast.LENGTH_SHORT).show()
-            } else if (password == "") //Empty Input
-
-            { Toast.makeText(this@SignUpActivity, "Please Enter your Password", Toast.LENGTH_SHORT).show()
-
-            }
-            else if (confirmpassword == "") //Empty Input
-            { Toast.makeText(this@SignUpActivity, "Please Enter your Confirm Password", Toast.LENGTH_SHORT).show()
-
-            }
-            else if (password == confirmpassword)
-            { Toast.makeText(this@SignUpActivity, "Account has been successfully created", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this,SignUpActivity::class.java)
-                startActivity(intent)
-
-            }
-            else
-            { Toast.makeText(this@SignUpActivity, "Confirm Password is not match to Password", Toast.LENGTH_SHORT).show()
-            }
-
+            registerUser(username, password)
         }
 
         this.btnSignIn.setOnClickListener{
             val intent = Intent(this,SignInActivity::class.java)
             startActivity(intent)
         }
-
-
-
     }
+    private fun registerUser(username: String, password: String){
+        val apiService = ApiClient.retrofit.create(ApiService::class.java)
+        val registrationRequest = RegistrationRequest(username = username, password = password)
+        val call = apiService.signUpUser(registrationRequest)
+
+        call.enqueue(object : Callback<RegistrationResponse> {
+            override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
+                if (response.isSuccessful) {
+                    val registerResponse = response.body()
+                    Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@SignUpActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(p0: Call<RegistrationResponse>, t: Throwable) {
+                Toast.makeText(this@SignUpActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
 }

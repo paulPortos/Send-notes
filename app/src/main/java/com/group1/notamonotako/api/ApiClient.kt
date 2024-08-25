@@ -6,7 +6,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://127.0.0.1:8000/api/"
+    /*
+    Change it to your ip address
+    Ex:
+    private const val BASE_URL = "http://YOUR_IP_ADDRESS:8000/api/"
+     */
+    private const val BASE_URL = "http://192.168.0.102:8000/api/"
 
     private val logging = HttpLoggingInterceptor().apply {
         setLevel(HttpLoggingInterceptor.Level.BODY)

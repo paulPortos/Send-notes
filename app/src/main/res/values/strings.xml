@@ -12,6 +12,7 @@
     <string name="signin">SIGN IN</string>
     <string name="signup">SIGN UP</string>
     <string name="forgotpassword">Forgot Password?</string>
+    <string name="authentication_done">AUTHENTICATION DONE!</string>
 
 
 </resources>

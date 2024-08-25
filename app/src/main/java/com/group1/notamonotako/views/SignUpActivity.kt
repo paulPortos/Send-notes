@@ -42,10 +42,10 @@ class SignUpActivity : AppCompatActivity() {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
             val confirmPassword = etConfirmPassword.text.toString()
-            if(password == confirmPassword){
-                registerUser(username, password)
-            } else if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
+            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this@SignUpActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
+            } else if (password == confirmPassword) {
+                registerUser(username, password)
             } else {
                 Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }

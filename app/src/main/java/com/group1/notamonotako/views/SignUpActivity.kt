@@ -41,7 +41,14 @@ class SignUpActivity : AppCompatActivity() {
         this.btnLoginNow.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
-            registerUser(username, password)
+            val confirmPassword = etConfirmPassword.text.toString()
+            if(password == confirmPassword){
+                registerUser(username, password)
+            } else if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
+                Toast.makeText(this@SignUpActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            }
         }
 
         this.btnSignIn.setOnClickListener{
@@ -57,8 +64,9 @@ class SignUpActivity : AppCompatActivity() {
         call.enqueue(object : Callback<RegistrationResponse> {
             override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
                 if (response.isSuccessful) {
-                    val registerResponse = response.body()
                     Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                    startActivity(intent)
                 } else {
                     Toast.makeText(this@SignUpActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }

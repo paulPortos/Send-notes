@@ -37,7 +37,6 @@ class SignUpActivity : AppCompatActivity() {
         this.btnLoginNow = findViewById(R.id.btnSignUpNow)
         this.btnSignIn = findViewById(R.id.btnSignIn)
 
-
         this.btnLoginNow.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()

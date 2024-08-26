@@ -37,7 +37,7 @@ class SignInActivity : AppCompatActivity() {
             }
             else
             { Toast.makeText(this@SignInActivity, "You Log in Successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, ActivityHandler::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }
         }

@@ -11,7 +11,7 @@ import com.group1.notamonotako.fragments.Flashcards
 import com.group1.notamonotako.fragments.Home
 import com.group1.notamonotako.fragments.Notes
 
-class ActivityHandler : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHandlerBinding
     private val fromBottomFabAnim: Animation by lazy {
         AnimationUtils.loadAnimation(this, R.anim.from_bottom_fab)

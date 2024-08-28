@@ -70,8 +70,8 @@ class SignInActivity : AppCompatActivity() {
                         Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@SignInActivity, Home::class.java)
                         startActivity(intent)
-                    } else {
-                        Toast.makeText(this@SignInActivity, "Token is not received", Toast.LENGTH_SHORT).show()
+                    } else if (response.code() == 201){
+                        Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()

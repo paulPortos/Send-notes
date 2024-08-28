@@ -13,6 +13,8 @@
     <string name="signup">SIGN UP</string>
     <string name="forgotpassword">Forgot Password?</string>
     <string name="authentication_done">AUTHENTICATION DONE!</string>
+    <string name="search">Search</string>
+    <string name="s">S</string>
 
 
 </resources>

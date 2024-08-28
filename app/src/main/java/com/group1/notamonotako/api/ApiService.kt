@@ -1,5 +1,7 @@
 package com.group1.notamonotako.api
 
+import com.group1.notamonotako.api.requests_responses.LoginRequest
+import com.group1.notamonotako.api.requests_responses.LoginResponse
 import com.group1.notamonotako.api.requests_responses.RegistrationRequest
 import com.group1.notamonotako.api.requests_responses.RegistrationResponse
 import retrofit2.Call
@@ -11,7 +13,7 @@ interface ApiService {
     
     //Unfinished
     @POST("login")
-    fun signInUser(@Body request: RegistrationRequest): Call<RegistrationResponse>
+    fun signInUser(@Body request: LoginRequest): Call<LoginResponse>
 
     @POST("register")
     fun signUpUser(@Body request: RegistrationRequest): Call<RegistrationResponse>

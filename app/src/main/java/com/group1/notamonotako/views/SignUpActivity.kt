@@ -44,7 +44,13 @@ class SignUpActivity : AppCompatActivity() {
             if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this@SignUpActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
             } else if (password == confirmPassword) {
-                registerUser(username, password)
+                if (username.length >= 10 && password.length >= 10) {
+                    registerUser(username, password)
+                } else if (username.length < 10){
+                    Toast.makeText(this@SignUpActivity, "Username must be at least 10 characters", Toast.LENGTH_SHORT).show()
+                } else if (password.length < 10){
+                    Toast.makeText(this@SignUpActivity, "Password must be at least 10 characters", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }

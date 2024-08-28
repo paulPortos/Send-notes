@@ -29,8 +29,8 @@
 
     <TextView
         android:id="@+id/tvContents"
-        android:layout_width="379dp"
-        android:layout_height="621dp"
+        android:layout_width="332dp"
+        android:layout_height="566dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="16dp"

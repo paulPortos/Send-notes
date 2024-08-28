@@ -68,7 +68,7 @@ class SignInActivity : AppCompatActivity() {
                     if(token != null){
                         saveToken(token)
                         Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@SignInActivity, Home::class.java)
+                        val intent = Intent(this@SignInActivity, ActivityHandler::class.java)
                         startActivity(intent)
                     } else if (response.code() == 201){
                         Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()

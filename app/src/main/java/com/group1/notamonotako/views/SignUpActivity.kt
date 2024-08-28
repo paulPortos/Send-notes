@@ -3,6 +3,7 @@ package com.group1.notamonotako.views
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -63,11 +64,17 @@ class SignUpActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<RegistrationResponse> {
             override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
-                if (response.isSuccessful) {
+
+                if (response.code() == 202) {
+                    Log.e("LoginError", "Response code: ${response.code()}")
+                    Toast.makeText(this@SignUpActivity, "User already exists", Toast.LENGTH_SHORT).show()
+                } else if (response.isSuccessful) {
+                    Log.e("LoginError", "Response code: ${response.code()}")
                     Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
                     startActivity(intent)
                 } else {
+                    Log.e("LoginError", "Response code: ${response.code()}")
                     Toast.makeText(this@SignUpActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -75,7 +82,6 @@ class SignUpActivity : AppCompatActivity() {
             override fun onFailure(p0: Call<RegistrationResponse>, t: Throwable) {
                 Toast.makeText(this@SignUpActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 

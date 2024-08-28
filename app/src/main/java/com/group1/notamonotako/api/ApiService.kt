@@ -15,4 +15,5 @@ interface ApiService {
 
     @POST("register")
     fun signUpUser(@Body request: RegistrationRequest): Call<RegistrationResponse>
+
 }

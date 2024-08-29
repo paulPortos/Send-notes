@@ -12,8 +12,6 @@ import com.group1.notamonotako.api.ApiClient
 import com.group1.notamonotako.api.ApiService
 import com.group1.notamonotako.api.requests_responses.LoginRequest
 import com.group1.notamonotako.api.requests_responses.LoginResponse
-import com.group1.notamonotako.api.requests_responses.RegistrationRequest
-import com.group1.notamonotako.api.requests_responses.RegistrationResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,7 +65,7 @@ class SignInActivity : AppCompatActivity() {
                     if(token != null){
                         saveToken(token)
                         Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@SignInActivity, HomeActivity::class.java)
+                        val intent = Intent(this@SignInActivity, ActivityHandler::class.java)
                         startActivity(intent)
                     } else if (response.code() == 201){
                         Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()

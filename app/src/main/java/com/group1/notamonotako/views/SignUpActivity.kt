@@ -68,13 +68,12 @@ class SignUpActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<RegistrationResponse> {
             override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
-                if (response.code() == 201) {
+                if (response.code() == 409) {
                     Toast.makeText(this@SignUpActivity, "User already exists", Toast.LENGTH_SHORT).show()
                 } else if (response.isSuccessful){
                     Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
                     startActivity(intent)
-
                 }else {
                     Toast.makeText(this@SignUpActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }

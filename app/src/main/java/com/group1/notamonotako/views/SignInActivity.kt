@@ -45,7 +45,6 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-
         // SIGN UP
         this.btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)

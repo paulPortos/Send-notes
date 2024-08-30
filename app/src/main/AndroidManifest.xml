@@ -15,13 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotaMoNotaKo"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
-        <activity
-            android:name=".views.UserHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.Home"
-            android:exported="false" />
+        tools:targetApi="31">
         <activity
             android:name=".views.HomeActivity"
             android:exported="false" />

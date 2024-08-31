@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,12 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotaMoNotaKo"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name=".views.UserHomeActivity"
+            android:name=".views.SignInActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".views.Adapter"
             android:exported="false" />
         <activity
-            android:name=".views.Home"
+            android:name=".views.AdminActivity"
             android:exported="false" />
         <activity
             android:name=".views.HomeActivity"
@@ -28,15 +31,16 @@
         <activity
             android:name=".views.SignUpActivity"
             android:exported="false" />
+
         <activity
-            android:name=".views.SignInActivity"
-            android:exported="true" >
+            android:name=".views.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

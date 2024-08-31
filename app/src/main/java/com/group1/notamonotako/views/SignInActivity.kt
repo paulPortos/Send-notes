@@ -23,7 +23,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
@@ -33,8 +32,7 @@ class SignInActivity : AppCompatActivity() {
         btnForgot = findViewById(R.id.btnForgotPassword)
         btnLoginNow = findViewById(R.id.btnSignInNow)
 
-        // LOGIN
-        this.btnLoginNow.setOnClickListener {
+        btnLoginNow.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
 
@@ -45,14 +43,13 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-
-        // SIGN UP
-        this.btnSignup.setOnClickListener {
+        btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
     }
-    private fun loginUser(username: String, password: String){
+
+    private fun loginUser(username: String, password: String) {
         val apiService = ApiClient.retrofit.create(ApiService::class.java)
         val loginRequest = LoginRequest(username = username, password = password)
         val call = apiService.signInUser(loginRequest)
@@ -62,25 +59,33 @@ class SignInActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     val token = loginResponse?.token
-                    if(token != null){
+                    if (token != null) {
                         saveToken(token)
-                        Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@SignInActivity, HomeActivity::class.java)
+                        val intent = when {
+                            username == "admin" && password == "admin123" -> {
+                                Toast.makeText(this@SignInActivity, "Admin Logged In", Toast.LENGTH_SHORT).show()
+                                Intent(this@SignInActivity, AdminActivity::class.java)
+                            }
+                            else -> {
+                                Toast.makeText(this@SignInActivity, "User Logged In", Toast.LENGTH_SHORT).show()
+                                Intent(this@SignInActivity, HomeActivity::class.java)
+                            }
+                        }
                         startActivity(intent)
-                    } else if (response.code() == 201){
-                        Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
+                        finish()
                     }
                 } else {
-                    Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                 }
             }
-            override fun onFailure(p0: Call<LoginResponse>, t: Throwable) {
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(this@SignInActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
+
     private fun saveToken(token: String) {
-        // Save the token to SharedPreferences or another secure storage method
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         sharedPreferences.edit().putString("auth_token", token).apply()
     }

@@ -13,6 +13,7 @@
     <string name="signup">SIGN UP</string>
     <string name="forgotpassword">Forgot Password?</string>
     <string name="authentication_done">AUTHENTICATION DONE!</string>
+    <string name="anim_zoom_in">anim/zoom_in</string>
 
 
 </resources>

@@ -343,10 +343,29 @@
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="271dp"
+            android:layout_marginTop="245dp"
             android:layout_marginEnd="33dp"
             android:layout_marginBottom="198dp"
+            android:buttonTintMode="screen"
+            android:foregroundTintMode="src_atop" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="273dp"
+            android:layout_marginTop="332dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="111dp"
             android:buttonTintMode="screen"
             android:foregroundTintMode="src_atop" />
 

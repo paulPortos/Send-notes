@@ -3,15 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    style="@style/ScreenBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/ScreenBackground"
     tools:context=".views.SignUpActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
@@ -39,26 +43,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.023" />
+
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="127dp"
+            android:layout_height="57dp"
+            android:backgroundTint="@color/beige"
+            android:fontFamily="@font/poppins_extrabold"
+            android:gravity="center"
+
+            android:text="@string/signin"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.204"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.27" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/btnSignIn"
-        android:layout_width="127dp"
-        android:layout_height="57dp"
-        android:backgroundTint="@color/beige"
-        android:fontFamily="@font/poppins_extrabold"
-        android:gravity="center"
-
-        android:text="@string/signin"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.253"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
 
 
     <Button
@@ -102,8 +106,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="top|center"
-                android:contentDescription="@null"
                 android:src="@drawable/baseline_lock_24"
+                android:contentDescription="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -115,9 +119,9 @@
                 android:layout_width="267dp"
                 android:layout_height="54dp"
                 android:hint="@string/password_signup"
-                android:textColorHint="@color/grey"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/black"
+                android:textColorHint="@color/grey"
                 app:hintTextColor="@color/black"
 
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -141,8 +145,8 @@
                 android:layout_width="267dp"
                 android:layout_height="54dp"
                 android:hint="@string/confirm_password"
-                android:textColorHint="@color/grey"
                 app:endIconMode="password_toggle"
+                android:textColorHint="@color/grey"
                 app:endIconTint="@color/black"
                 app:hintTextColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -203,8 +207,8 @@
                 android:layout_height="54dp"
                 android:hint="@string/username"
                 android:textColorHint="@color/grey"
-                app:hintTextColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.895"
                 app:layout_constraintStart_toStartOf="parent"
@@ -217,8 +221,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/round"
                     android:backgroundTint="@color/white"
-                    android:inputType="text"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
@@ -232,7 +236,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5"
-                app:srcCompat="@drawable/baseline_person_24" />
+                app:srcCompat="@drawable/baseline_person_24"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

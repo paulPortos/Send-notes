@@ -41,7 +41,7 @@
 
 
     <TextView
-        android:layout_width="415dp"
+        android:layout_width="match_parent"
         android:layout_height="82dp"
         android:fontFamily="@font/poppins_black"
         android:gravity="center"
@@ -57,8 +57,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="155dp"
-        android:layout_height="130dp"
+        android:layout_width="214dp"
+        android:layout_height="168dp"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,39 +70,39 @@
 
     <Button
         android:id="@+id/btnSignIn"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/blue"
         android:fontFamily="@font/poppins_extrabold"
         android:gravity="center"
         android:text="@string/signin"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.239"
+        app:layout_constraintHorizontal_bias="0.321"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474" />
+        app:layout_constraintVertical_bias="0.471" />
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/beige"
         android:fontFamily="@font/poppins_extrabold"
         android:gravity="center"
         android:text="@string/signup"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintHorizontal_bias="0.704"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474" />
+        app:layout_constraintVertical_bias="0.471" />
 
     <Button
         android:id="@+id/btnForgotPassword"
@@ -113,15 +113,15 @@
         android:textColor="#80000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.798" />
+        app:layout_constraintVertical_bias="0.829" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="313dp"
-        android:layout_height="64dp"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
         android:hint="@string/username"
         android:textColorHint="@color/grey"
         app:endIconMode="clear_text"
@@ -139,8 +139,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
             android:background="@drawable/round"
             android:backgroundTint="@color/beige"
             android:textColor="@color/black"
@@ -150,8 +150,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="313dp"
-        android:layout_height="64dp"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
         android:hint="@string/password"
         android:textColorHint="@color/grey"
         app:endIconMode="password_toggle"
@@ -161,7 +161,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691"
+        app:layout_constraintVertical_bias="0.7"
         app:startIconTint="@color/black"
         app:startIconDrawable="@drawable/baseline_lock_24"
 
@@ -169,8 +169,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
             android:background="@drawable/round"
             android:backgroundTint="@color/beige"
             android:textColor="@color/black"

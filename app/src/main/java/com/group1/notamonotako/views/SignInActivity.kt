@@ -66,6 +66,8 @@ class SignInActivity : AppCompatActivity() {
                                 Toast.makeText(this@SignInActivity, "Admin Logged In", Toast.LENGTH_SHORT).show()
                                 Intent(this@SignInActivity, AdminActivity::class.java)
                             }
+
+
                             else -> {
                                 Toast.makeText(this@SignInActivity, "User Logged In", Toast.LENGTH_SHORT).show()
                                 Intent(this@SignInActivity, HomeActivity::class.java)
@@ -74,8 +76,14 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-                } else {
-                    Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
+                    else if (response.code() == 201){
+                        Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+                else {
+                    Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -89,4 +97,5 @@ class SignInActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         sharedPreferences.edit().putString("auth_token", token).apply()
     }
+
 }

@@ -52,12 +52,17 @@ class AdminActivity : AppCompatActivity() {
 
 
     private fun logoutUser() {
+        val token = getToken() ?: run {
+            Toast.makeText(this@AdminActivity, "No token found", Toast.LENGTH_SHORT).show()
+            return
+        }
         val apiService = ApiClient.retrofit.create(ApiService::class.java)
-        val call = apiService.logout()
+        val call = apiService.logout("Bearer $token")
 
         call.enqueue(object : Callback<Unit> {
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                 if (response.isSuccessful) {
+                    clearToken()
                     Toast.makeText(
                         this@AdminActivity,
                         "Logged Out Successfully",
@@ -74,6 +79,7 @@ class AdminActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+
             override fun onFailure(call: Call<Unit>, t: Throwable) {
                 Toast.makeText(
                     this@AdminActivity,
@@ -84,5 +90,12 @@ class AdminActivity : AppCompatActivity() {
         })
     }
 
-
+    private fun clearToken() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().remove("auth_token").apply()
+    }
+    private fun getToken(): String? {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("auth_token", null)
+    }
 }

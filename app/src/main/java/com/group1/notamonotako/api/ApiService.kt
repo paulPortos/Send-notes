@@ -20,6 +20,6 @@ interface ApiService {
     fun signUpUser(@Body request: RegistrationRequest): Call<RegistrationResponse>
 
     @POST("logout")
-    fun logout(): Call<Unit>
+    fun logout(@Header("Authorization") authHeader: String): Call<Unit>
 
 }

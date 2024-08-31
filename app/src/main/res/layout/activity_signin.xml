@@ -164,6 +164,7 @@
         app:layout_constraintVertical_bias="0.691"
         app:startIconTint="@color/black"
         app:startIconDrawable="@drawable/baseline_lock_24"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText

@@ -11,19 +11,19 @@
 
     <Button
         android:id="@+id/btnSignInNow"
-        android:layout_width="308dp"
-        android:layout_height="60dp"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/blue"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/poppins_extrabold"
         android:text="@string/signin"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.955" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <TextView
         android:id="@+id/textView"
@@ -65,12 +65,12 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.196"
+        app:layout_constraintVertical_bias="0.175"
         app:srcCompat="@drawable/logo" />
 
     <FrameLayout
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         android:layout_marginTop="150dp"
         android:background="@drawable/white_round"
         android:elevation="7dp"
@@ -86,14 +86,14 @@
 
             <Button
                 android:id="@+id/btnSignIn"
-                android:layout_width="130dp"
-                android:layout_height="60dp"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
                 android:backgroundTint="@color/blue"
                 android:fontFamily="@font/poppins_extrabold"
                 android:gravity="center"
                 android:text="@string/signin"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnSignUp"
@@ -104,14 +104,14 @@
 
             <Button
                 android:id="@+id/btnSignUp"
-                android:layout_width="130dp"
-                android:layout_height="60dp"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
                 android:backgroundTint="@color/beige"
                 android:fontFamily="@font/poppins_extrabold"
                 android:gravity="center"
                 android:text="@string/signup"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -136,9 +136,9 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="313dp"
-                android:layout_height="64dp"
-                android:layout_marginBottom="50dp"
+                android:layout_width="340dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="70dp"
                 android:hint="@string/username"
                 android:textColorHint="@color/grey"
                 app:endIconMode="clear_text"
@@ -156,8 +156,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="340dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/round"
                     android:backgroundTint="@color/beige"
                     android:inputType="text"
@@ -167,8 +167,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="313dp"
-                android:layout_height="64dp"
+                android:layout_width="340dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="150dp"
                 android:layout_marginBottom="50dp"
                 android:hint="@string/password"
@@ -188,8 +188,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="340dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/round"
                     android:backgroundTint="@color/beige"
                     android:inputType="textPassword"

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/ScreenBackground"
+    tools:context=".views.SettingsActivity">
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="00dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/imageViewSettings"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:src="@android:drawable/screen_background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:tint="#01A3ED" />
+
+        <ImageButton
+            android:id="@+id/btnback"
+            style="@android:style/Widget.DeviceDefault.ImageButton"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@color/material_on_background_disabled"
+            android:src="@drawable/btnback"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:elevation="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Settings"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.113"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.125" />
+
+        <FrameLayout
+            android:id="@+id/FrameLayout"
+            android:layout_width="452dp"
+            android:layout_height="698dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round_settings"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/tvappearnce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="235dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Appearance"
+                android:textColor="@color/grey"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvaudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="375dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Audio"
+                android:textColor="@color/grey"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvinformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="515dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Information"
+                android:textSize="20sp"
+                android:textColor="@color/grey" />
+
+            <TextView
+                android:id="@+id/tvaccsettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Account Settings"
+                android:textColor="@color/grey"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="110dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/username"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvusername2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="110dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/username"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="180dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/password"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvdarktheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="310dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Dark Theme"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvsounds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="450dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Sounds"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvabout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="590dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="About"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/user_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/user_icon" />
+
+            <ImageView
+                android:id="@+id/pass_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="170dp"
+
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/pass_icon" />
+
+            <ImageView
+                android:id="@+id/darkmode_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="300dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/darkmode_icon" />
+
+            <ImageView
+                android:id="@+id/sounds_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="440dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/sound_icon" />
+
+            <ImageView
+                android:id="@+id/about_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="570dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/about_icon" />
+
+            <ImageButton
+                android:id="@+id/rightarrow_icon1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="350dp"
+                android:layout_marginTop="180dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/rightarrow_icon" />
+
+            <ImageButton
+                android:id="@+id/rightarrow_icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="350dp"
+                android:layout_marginTop="590dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/rightarrow_icon" />
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="340dp"
+                android:layout_marginTop="450dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="340dp"
+                android:layout_marginTop="310dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="400dp"
+            android:layout_height="66dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/round_settings"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/tvsignout"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="74dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="192dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Sign Out"
+                android:clickable="true"
+                android:focusable="true"
+                android:textColor="#FF2828"
+                android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/btnsign_out"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:src="@drawable/btnsignout" />
+
+        </FrameLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

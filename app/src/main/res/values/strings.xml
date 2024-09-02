@@ -8,11 +8,12 @@
     <string name="password_signup">Password</string>
     <string name="notes">Notes</string>
     <string name="flashcards">Flashcards</string>
-    <string name="title">Nota Mo Nota Ko</string>
+    <string name="title">Send Notes</string>
     <string name="signin">SIGN IN</string>
     <string name="signup">SIGN UP</string>
     <string name="forgotpassword">Forgot Password?</string>
     <string name="authentication_done">AUTHENTICATION DONE!</string>
+    <string name="anim_zoom_in" />
 
 
 </resources>

@@ -11,7 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textView"
@@ -35,54 +41,52 @@
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintVertical_bias="0.016" />
+
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/beige"
+            android:fontFamily="@font/poppins_extrabold"
+            android:gravity="center"
+
+            android:text="@string/signin"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.248"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.269" />
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/blue"
+            android:fontFamily="@font/poppins_extrabold"
+            android:gravity="center"
+            android:text="@string/signup"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.269" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/btnSignIn"
-        android:layout_width="127dp"
-        android:layout_height="57dp"
-        android:backgroundTint="@color/beige"
-        android:fontFamily="@font/poppins_extrabold"
-        android:gravity="center"
-
-        android:text="@string/signin"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.253"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
-
-
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="127dp"
-        android:layout_height="57dp"
-        android:backgroundTint="@color/blue"
-        android:fontFamily="@font/poppins_extrabold"
-        android:gravity="center"
-        android:text="@string/signup"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.746"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
-
-
     <FrameLayout
-        android:layout_width="315dp"
-        android:layout_height="209dp"
+        android:layout_width="340dp"
+        android:layout_height="250dp"
         android:background="@drawable/round"
         android:backgroundTint="@color/beige"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,13 +171,13 @@
 
     <Button
         android:id="@+id/btnSignUpNow"
-        android:layout_width="308dp"
-        android:layout_height="60dp"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/blue"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/signup"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,10 +187,12 @@
         app:layout_constraintVertical_bias="0.901" />
 
     <FrameLayout
-        android:layout_width="315dp"
-        android:layout_height="63dp"
+        android:layout_width="340dp"
+        android:layout_height="70dp"
         android:background="@drawable/round"
         android:backgroundTint="@color/beige"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.458"

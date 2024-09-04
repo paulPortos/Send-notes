@@ -74,7 +74,6 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
                     startActivity(intent)
-
                 }else {
                     Toast.makeText(this@SignUpActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }

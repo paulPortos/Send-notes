@@ -12,6 +12,8 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeMaxTextSize="1000sp"
+        android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/textview"
         android:fontFamily="@font/poppins_black"
@@ -30,6 +32,8 @@
         android:id="@+id/btnSignIn"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeMaxTextSize="1000sp"
+        android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:backgroundTint="@color/beige"
         android:fontFamily="@font/poppins_extrabold"
@@ -49,6 +53,8 @@
         android:id="@+id/btnSignUp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeMaxTextSize="1000sp"
+        android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:backgroundTint="@color/blue"
         android:fontFamily="@font/poppins_extrabold"
@@ -67,10 +73,9 @@
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/round"
-        android:backgroundTint="@color/beige"
+        android:background="@drawable/white_round"
+        android:elevation="7dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline13"
-        app:layout_constraintDimensionRatio="1:0"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -118,7 +123,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/round"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/beige"
+                    android:autoSizeMaxTextSize="1000sp"
+                    android:autoSizeMinTextSize="1sp"
+                    android:autoSizeTextType="uniform"
                     android:inputType="textPassword"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -143,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/round"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/beige"
                     android:inputType="textPassword"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -241,10 +249,10 @@
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/round"
-        android:backgroundTint="@color/beige"
+        android:background="@drawable/white_round"
+        android:backgroundTint="@color/white"
+        android:elevation="7dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintDimensionRatio="1:0"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -273,7 +281,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/round"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/beige"
+                    android:autoSizeMaxTextSize="1000sp"
+                    android:autoSizeMinTextSize="1sp"
+                    android:autoSizeTextType="uniform"
                     android:inputType="text"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -357,14 +368,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="0.93" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04" />
+        app:layout_constraintGuide_percent="0.07" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
         android:layout_width="wrap_content"
@@ -383,7 +394,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.09" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline17"
@@ -404,7 +415,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.91" />
+        app:layout_constraintGuide_percent="0.88" />
 
     <!-- horizontal guidlines -->
     <androidx.constraintlayout.widget.Guideline

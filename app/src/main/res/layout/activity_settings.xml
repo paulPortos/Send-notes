@@ -209,7 +209,7 @@
 
                 <ImageView
                     android:id="@+id/darkmode_icon"
-                    android:layout_width="40dp"
+                    android:layout_width="38dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="270dp"

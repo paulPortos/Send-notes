@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,6 +20,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         imageView = findViewById(R.id.noteszoom)
         val zoomInAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
         imageView.startAnimation(zoomInAnimation)

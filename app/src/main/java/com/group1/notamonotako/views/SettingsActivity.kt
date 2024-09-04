@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +20,8 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         val signout = findViewById<TextView>(R.id.tvsignout)
 
         signout.setOnClickListener{

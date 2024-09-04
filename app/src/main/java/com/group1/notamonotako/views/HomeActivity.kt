@@ -1,5 +1,6 @@
 package com.group1.notamonotako.views
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -36,8 +37,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Initialize binding first
         binding = ActivityHomeBinding.inflate(layoutInflater)

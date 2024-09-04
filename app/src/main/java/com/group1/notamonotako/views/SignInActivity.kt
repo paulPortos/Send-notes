@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -27,6 +28,8 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         btnSignup = findViewById(R.id.btnSignUp)
         etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)

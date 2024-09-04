@@ -11,35 +11,38 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="766dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline35"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fabConstraint"
             android:layout_width="199dp"
             android:layout_height="251dp"
-            android:elevation="10dp"
-            android:layout_gravity="bottom|end">
+            android:layout_gravity="bottom|end"
+            android:elevation="10dp">
+
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/mainFabBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="1dp"
+                android:maxWidth="100dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="15dp"
+                android:contentDescription="@null"
+                android:elevation="10dp"
                 app:backgroundTint="@color/beige"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/btn_add"
-                app:tint="@color/black"
-                android:elevation="10dp"
-                android:contentDescription="@null"/>
+                app:tint="@color/black" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/notesFabBtn"
@@ -47,6 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="28dp"
+                android:minWidth="1dp"
+                android:maxWidth="100dp"
                 android:tint="@color/beige"
                 android:visibility="invisible"
                 app:backgroundTint="@color/beige"
@@ -66,6 +71,9 @@
                 android:elevation="8dp"
                 android:paddingHorizontal="32dp"
                 android:text="@string/notes"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="1sp"
+                android:autoSizeMaxTextSize="1000sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:visibility="invisible"
@@ -80,6 +88,8 @@
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/beige"
                 android:tint="@color/beige"
+                android:minWidth="1dp"
+                android:maxWidth="100dp"
                 android:visibility="invisible"
                 app:backgroundTint="@color/beige"
                 app:layout_constraintBottom_toTopOf="@+id/notesFabBtn"
@@ -92,11 +102,14 @@
                 android:id="@+id/flashcardsTV"
                 android:layout_width="107dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="188dp"
                 android:background="@drawable/edittext"
                 android:elevation="8dp"
                 android:paddingStart="20dp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="1sp"
+                android:autoSizeMaxTextSize="1000sp"
                 android:text="@string/flashcards"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -106,17 +119,27 @@
                 tools:ignore="RtlSymmetry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#D9000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline35"
+        app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/menu" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.905" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

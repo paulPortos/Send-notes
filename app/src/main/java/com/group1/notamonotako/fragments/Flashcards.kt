@@ -1,5 +1,7 @@
 package com.group1.notamonotako.fragments
 
+import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +26,7 @@ class Flashcards : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -36,6 +39,7 @@ class Flashcards : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_flashcards, container, false)
+
     }
 
     companion object {
@@ -56,5 +60,9 @@ class Flashcards : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 }

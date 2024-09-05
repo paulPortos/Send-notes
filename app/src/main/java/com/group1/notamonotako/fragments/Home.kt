@@ -32,6 +32,7 @@ class Home : Fragment() {
             val intent = Intent(requireContext(),SettingsActivity::class.java)
             startActivity(intent)
         }
+
         val recyclerView: RecyclerView = view.findViewById(R.id.rvhome)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -41,13 +42,24 @@ class Home : Fragment() {
     }
 
     private fun example(): List<HomeData> {
-        return listOf(
-            HomeData("Title 1", "Lorem Ipsum"),
-            HomeData("Title 2", "Lorem Ipsum"),
-            HomeData("Title 3", "Lorem Ipsum")
+        val title = listOf(
+            "Title 1",
+            "Title 2",
+            "Title 3"
         )
+        val contents = listOf(
+            "Lorem Ipsum dolor",
+            "Lorem Ipsum set amet",
+            "Lorem Ipsum"
+        )
+        val dataList = mutableListOf<HomeData>()
+        for (i in 0..10) {
+            dataList.add(
+                HomeData(title[i % title.size], contents[i % contents.size])
+            )
+        }
+        return dataList
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

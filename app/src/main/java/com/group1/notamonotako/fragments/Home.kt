@@ -14,7 +14,7 @@ import com.group1.notamonotako.views.SettingsActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.views.HomeAdapter
-import com.group1.notamonotako.views.HomeData
+import com.group1.notamonotako.api.requests_responses.HomeData
 
 class Home : Fragment() {
 

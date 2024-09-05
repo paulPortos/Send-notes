@@ -20,11 +20,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         imageView = findViewById(R.id.noteszoom)
         val zoomInAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
         imageView.startAnimation(zoomInAnimation)
-
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)

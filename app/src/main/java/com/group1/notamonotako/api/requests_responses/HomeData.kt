@@ -1,4 +1,4 @@
-package com.group1.notamonotako.views
+package com.group1.notamonotako.api.requests_responses
 
 class HomeData (
     val title: String ,

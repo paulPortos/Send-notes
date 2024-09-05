@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.ApiClient
 import com.group1.notamonotako.api.ApiService
-import com.group1.notamonotako.api.requests_responses.LoginRequest
-import com.group1.notamonotako.api.requests_responses.LoginResponse
+import com.group1.notamonotako.api.requests_responses.signin.LoginRequest
+import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

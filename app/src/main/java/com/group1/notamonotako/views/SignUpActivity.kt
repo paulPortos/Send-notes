@@ -1,6 +1,5 @@
 package com.group1.notamonotako.views
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -13,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.ApiClient
 import com.group1.notamonotako.api.ApiService
-import com.group1.notamonotako.api.requests_responses.RegistrationRequest
-import com.group1.notamonotako.api.requests_responses.RegistrationResponse
+import com.group1.notamonotako.api.requests_responses.signup.RegistrationRequest
+import com.group1.notamonotako.api.requests_responses.signup.RegistrationResponse
 import retrofit2.Call
 import retrofit2.Response
 

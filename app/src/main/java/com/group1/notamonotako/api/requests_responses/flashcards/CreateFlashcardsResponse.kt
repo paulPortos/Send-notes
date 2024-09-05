@@ -2,7 +2,7 @@ package com.group1.notamonotako.api.requests_responses.flashcards
 
 import com.google.gson.annotations.SerializedName
 
-data class FlashcardsResponse(
+data class CreateFlashcardsResponse(
     val id: Int,
     val title: String,
     val cards: List<String>,

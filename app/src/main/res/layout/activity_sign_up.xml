@@ -6,6 +6,7 @@
     style="@style/ScreenBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".views.SignUpActivity">
 
 
@@ -16,7 +17,7 @@
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/textview"
-        android:fontFamily="@font/poppins_black"
+        android:fontFamily="@font/poppins_extrabold"
         android:gravity="center"
         android:text="@string/title"
         android:textColor="@color/white"

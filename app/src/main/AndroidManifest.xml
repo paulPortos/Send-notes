@@ -20,8 +20,8 @@
             android:name=".views.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".views.SplashActivity"
-            android:exported="false" />
+            android:name=".views.SignInActivity"
+            android:exported="false"/>
         <activity
             android:name=".views.HomeActivity"
             android:exported="false" />
@@ -29,7 +29,7 @@
             android:name=".views.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".views.SignInActivity"
+            android:name=".views.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

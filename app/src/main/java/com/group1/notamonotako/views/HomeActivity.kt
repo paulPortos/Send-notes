@@ -56,8 +56,6 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-
-
         binding.mainFabBtn.setOnClickListener {
 
             if (areFabButtonsVisible) {

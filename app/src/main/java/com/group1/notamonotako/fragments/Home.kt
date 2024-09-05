@@ -11,6 +11,10 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import com.group1.notamonotako.R
 import com.group1.notamonotako.views.SettingsActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.group1.notamonotako.views.HomeAdapter
+import com.group1.notamonotako.views.HomeData
 
 class Home : Fragment() {
 
@@ -28,8 +32,22 @@ class Home : Fragment() {
             val intent = Intent(requireContext(),SettingsActivity::class.java)
             startActivity(intent)
         }
+        val recyclerView: RecyclerView = view.findViewById(R.id.rvhome)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val adapter = HomeAdapter(example())
+        recyclerView.adapter = adapter
         return view
     }
+
+    private fun example(): List<HomeData> {
+        return listOf(
+            HomeData("Title 1", "Lorem Ipsum"),
+            HomeData("Title 2", "Lorem Ipsum"),
+            HomeData("Title 3", "Lorem Ipsum")
+        )
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

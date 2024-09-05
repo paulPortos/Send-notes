@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout2"
-    android:background="@color/white"
+    style="@style/ScreenBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.Home">
@@ -13,6 +13,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="00dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,10 +21,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="764dp">
+
+            <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="30dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:backgroundTint="#00FFFFFF"
+                android:elevation="10dp"
+                android:src="@drawable/btn_settings"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.897"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.048" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="766dp">
+            android:layout_height="match_parent">
 
             <TextView
 
@@ -40,20 +60,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.041" />
 
-            <ImageButton
-                android:id="@+id/btnsettings"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="end"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="@null"
-                android:src="@drawable/btn_settings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.918"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.047" />
 
             <SearchView
                 android:id="@+id/svsearchView"
@@ -77,13 +83,14 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvrecycleView"
-                android:layout_width="335dp"
-                android:layout_height="524dp"
+                android:layout_width="323dp"
+                android:layout_height="454dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.513"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.582" />
+                app:layout_constraintVertical_bias="0.698" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -91,6 +98,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-

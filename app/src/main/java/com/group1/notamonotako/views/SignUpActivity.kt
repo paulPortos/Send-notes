@@ -1,6 +1,7 @@
 package com.group1.notamonotako.views
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -30,6 +31,8 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         this.etUsername = findViewById(R.id.etUsername)
         this.etPassword = findViewById(R.id.etPassword)
         this.etConfirmPassword = findViewById(R.id.etConfirmPassword)

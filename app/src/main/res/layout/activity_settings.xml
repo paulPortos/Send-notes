@@ -23,7 +23,7 @@
         <ImageView
             android:id="@+id/imageViewSettings"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="120dp"
             android:src="@android:drawable/screen_background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:text="Settings"
             android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="27sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,221 +65,222 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.125" />
 
-            <FrameLayout
-                android:id="@+id/FrameLayout"
-                android:layout_width="350dp"
-                android:layout_height="550dp"
-                android:layout_gravity="center"
-                android:background="@drawable/round_settings"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+        <FrameLayout
+            android:id="@+id/FrameLayout"
+            android:layout_width="350dp"
+            android:layout_height="550dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round_settings"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-                <TextView
-                    android:id="@+id/tvappearnce"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="215dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Appearance"
-                    android:textColor="@color/grey"
-                    android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tvappearnce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="215dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Appearance"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tvaudio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="335dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Audio"
-                    android:textColor="@color/grey"
-                    android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tvaudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="335dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Audio"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tvinformation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="455dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Information"
-                    android:textColor="@color/grey" />
+            <TextView
+                android:id="@+id/tvinformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="455dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Information"
+                android:textColor="@color/grey" />
 
-                <TextView
-                    android:id="@+id/tvaccsettings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="35dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Account Settings"
-                    android:textColor="@color/grey"
-                    android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tvaccsettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Account Settings"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tvusername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginTop="100dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/username"
-                    android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/tvusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/username"
+                android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvusername2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="250dp"
-                    android:layout_marginTop="100dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/username"
-                    android:textColor="@color/grey" />
+            <TextView
+                android:id="@+id/tvusername2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/username"
+                android:textColor="@color/grey" />
 
-                <TextView
-                    android:id="@+id/tvpassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/tvpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-                    android:layout_marginStart="90dp"
-                    android:layout_marginTop="160dp"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="160dp"
 
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/password"
-                    android:textColor="@color/black" />
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/password"
+                android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvdarktheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginTop="280dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Dark Theme"
-                    android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/tvdarktheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="280dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Dark Theme"
+                android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvsounds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginTop="400dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Sounds"
-                    android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/tvsounds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="400dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Sounds"
+                android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvabout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginTop="570dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="About"
-                    android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/tvabout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="499dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="About"
+                android:textColor="@color/black" />
 
-                <ImageView
-                    android:id="@+id/user_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="90dp"
-                    android:background="@drawable/circle"
-                    android:backgroundTint="#DBDADA"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/user_icon" />
+            <ImageView
+                android:id="@+id/user_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/user_icon" />
 
-                <ImageView
-                    android:id="@+id/pass_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="150dp"
+            <ImageView
+                android:id="@+id/pass_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="150dp"
 
-                    android:background="@drawable/circle"
-                    android:backgroundTint="#DBDADA"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/pass_icon" />
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/pass_icon" />
 
-                <ImageView
-                    android:id="@+id/darkmode_icon"
-                    android:layout_width="38dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="270dp"
-                    android:background="@drawable/circle"
-                    android:backgroundTint="#DBDADA"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/darkmode_icon" />
+            <ImageView
+                android:id="@+id/darkmode_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="270dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/darkmode_icon" />
 
-                <ImageView
-                    android:id="@+id/sounds_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="390dp"
-                    android:background="@drawable/circle"
-                    android:backgroundTint="#DBDADA"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/sound_icon" />
+            <ImageView
+                android:id="@+id/sounds_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="390dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/sound_icon" />
 
-                <ImageView
-                    android:id="@+id/about_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="490dp"
-                    android:background="@drawable/circle"
-                    android:backgroundTint="#DBDADA"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/about_icon" />
+            <ImageView
+                android:id="@+id/about_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="490dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="#DBDADA"
+                android:scaleType="centerInside"
+                android:src="@drawable/about_icon" />
 
-                <ImageButton
-                    android:id="@+id/rightarrow_icon1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="290dp"
-                    android:layout_marginTop="160dp"
-                    android:background="#00FFFFFF"
-                    android:src="@drawable/rightarrow_icon" />
+            <ImageButton
+                android:id="@+id/rightarrow_icon1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="290dp"
+                android:layout_marginTop="160dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/rightarrow_icon" />
 
-                <ImageButton
-                    android:id="@+id/rightarrow_icon2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="280dp"
-                    android:layout_marginTop="490dp"
-                    android:background="#00FFFFFF"
-                    android:src="@drawable/rightarrow_icon" />
+            <ImageButton
+                android:id="@+id/rightarrow_icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="293dp"
+                android:layout_marginTop="497dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/rightarrow_icon" />
 
-                <Switch
-                    android:id="@+id/switch2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="280dp"
-                    android:layout_marginTop="400dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="280dp"
+                android:layout_marginTop="400dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="280dp"
-                    android:layout_marginTop="280dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="280dp"
+                android:layout_marginTop="280dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-            </FrameLayout>
+        </FrameLayout>
+
         <FrameLayout
             android:layout_width="350dp"
             android:layout_height="66dp"
             android:layout_gravity="center|bottom"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/round_settings"
             android:elevation="4dp">
 
@@ -291,10 +292,10 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="192dp"
                 android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Sign Out"
                 android:clickable="true"
                 android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Sign Out"
                 android:textColor="#FF2828"
                 android:textSize="20sp" />
 

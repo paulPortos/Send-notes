@@ -46,8 +46,8 @@
 
                 <TextView
 
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="134dp"
+                    android:layout_height="47dp"
                     android:autoSizeMaxTextSize="10000sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
@@ -69,7 +69,8 @@
                     android:layout_height="0dp"
                     android:background="@drawable/search"
                     android:closeIcon="@drawable/baseline_close_24"
-                    android:focusable="false"
+                    android:focusable="true"
+
                     android:iconifiedByDefault="false"
                     android:queryHint="Search here"
                     android:searchHintIcon="@null"
@@ -97,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.1" />
+                    app:layout_constraintGuide_percent="0.04" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline41"
@@ -111,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.80" />
+                    app:layout_constraintGuide_percent="0.8" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline43"
@@ -139,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.15957446" />
+                    app:layout_constraintGuide_percent="0.18" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline47"
@@ -153,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.90" />
+                    app:layout_constraintGuide_percent="0.96" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,18 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import com.group1.notamonotako.R
-import com.group1.notamonotako.views.SettingsActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.group1.notamonotako.adapter.HomeAdapter
-import com.group1.notamonotako.api.requests_responses.HomeData
+import com.group1.notamonotako.R
+import com.group1.notamonotako.api.requests_responses.FlashcardsData
+import com.group1.notamonotako.views.GridSpacingMyFlashcards
+import com.group1.notamonotako.adapter.MyFlashcardsAdapter
+import com.group1.notamonotako.views.SettingsActivity
 
-class Home : Fragment() {
 
+class MyFlashcards : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_my_flashcards, container, false)
+
 
         val btnSettings = view.findViewById<ImageButton>(R.id.btnSettings)
         btnSettings.setOnClickListener {
@@ -28,15 +30,19 @@ class Home : Fragment() {
             startActivity(intent)
         }
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.rvhome)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val recyclerView: RecyclerView = view.findViewById(R.id.rv_myflashcards)
+        val spanCount = 2
+        val spacing = 25 // Space in pixels
+        val includeEdge = true
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), spanCount)
+        recyclerView.addItemDecoration(GridSpacingMyFlashcards(spanCount, spacing, includeEdge))
 
-        val adapter = HomeAdapter(example())
+        val adapter = MyFlashcardsAdapter(example())
         recyclerView.adapter = adapter
         return view
     }
 
-    private fun example(): List<HomeData> {
+    private fun example(): List<FlashcardsData> {
         val title = listOf(
             "Title 1",
             "Title 2",
@@ -47,10 +53,10 @@ class Home : Fragment() {
             "Lorem Ipsum set amet",
             "Lorem Ipsum"
         )
-        val dataList = mutableListOf<HomeData>()
+        val dataList = mutableListOf<FlashcardsData>()
         for (i in 0..10) {
             dataList.add(
-                HomeData(title[i % title.size], contents[i % contents.size])
+                FlashcardsData(title[i % title.size], contents[i % contents.size])
             )
         }
         return dataList

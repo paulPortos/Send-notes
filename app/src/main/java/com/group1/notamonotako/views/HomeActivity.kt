@@ -10,6 +10,7 @@ import com.group1.notamonotako.R
 import com.group1.notamonotako.databinding.ActivityHomeBinding
 import com.group1.notamonotako.fragments.Flashcards
 import com.group1.notamonotako.fragments.Home
+import com.group1.notamonotako.fragments.MyFlashcards
 import com.group1.notamonotako.fragments.Notes
 
 class HomeActivity : AppCompatActivity() {
@@ -49,10 +50,14 @@ class HomeActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.btnhome -> replaceFragment(Home())
                 R.id.btnnotes -> replaceFragment(Notes())
-                R.id.btnflashcards -> replaceFragment(Flashcards())
+                R.id.btnflashcards -> replaceFragment(MyFlashcards())
                 else -> {}
             }
             true
+        }
+
+        binding.flashcardsFabBtn.setOnClickListener {
+            replaceFragment(Flashcards())
         }
 
 

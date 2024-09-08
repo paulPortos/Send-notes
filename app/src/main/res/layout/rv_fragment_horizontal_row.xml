@@ -41,18 +41,21 @@
         <EditText
             android:id="@+id/contents"
             android:layout_width="350dp"
-            android:layout_height="450dp"
+            android:layout_height="250dp"
             android:background="@drawable/textview_grey"
-            android:paddingStart="10dp"
+            android:gravity="center|top"
             android:hint="text"
-            android:textSize="15sp"
             android:inputType="textMultiLine"
+            android:lines="20"
+            android:minLines="1"
+            android:paddingTop="20dp"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.562" />
+            app:layout_constraintVertical_bias="0.553" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

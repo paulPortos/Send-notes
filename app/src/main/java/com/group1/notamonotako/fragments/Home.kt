@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Note
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.adapter.HomeAdapter
-import com.group1.notamonotako.api.requests_responses.HomeData
-import kotlin.math.exp
+import com.group1.notamonotako.api.requests_responses.home.HomeData
 
 class Home : Fragment() {
     lateinit var flashcardsFabBtn : FloatingActionButton

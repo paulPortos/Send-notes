@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.HomeData
+import com.group1.notamonotako.api.requests_responses.home.HomeData
 
 class HomeAdapter(private var data: List<HomeData>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 

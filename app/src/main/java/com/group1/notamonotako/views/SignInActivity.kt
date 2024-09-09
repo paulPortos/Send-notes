@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -11,8 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.ApiClient
 import com.group1.notamonotako.api.ApiService
-import com.group1.notamonotako.api.requests_responses.LoginRequest
-import com.group1.notamonotako.api.requests_responses.LoginResponse
+import com.group1.notamonotako.api.TokenManager
+import com.group1.notamonotako.api.requests_responses.signin.LoginRequest
+import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +25,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
-
+    private lateinit var tokenManager: TokenManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +67,9 @@ class SignInActivity : AppCompatActivity() {
                     val loginResponse = response.body()
                     val token = loginResponse?.token
                     if(token != null){
-                        saveToken(token)
+                        tokenManager = TokenManager(this@SignInActivity)
+                        tokenManager.saveToken(token)
+                        Log.d("Token: ", token)
                         Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@SignInActivity, HomeActivity::class.java)
                         startActivity(intent)
@@ -80,10 +84,5 @@ class SignInActivity : AppCompatActivity() {
                 Toast.makeText(this@SignInActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
-    }
-    private fun saveToken(token: String) {
-        // Save the token to SharedPreferences or another secure storage method
-        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putString("auth_token", token).apply()
     }
 }

@@ -1,11 +1,13 @@
 package com.group1.notamonotako.api
 
-import com.group1.notamonotako.api.requests_responses.LoginRequest
-import com.group1.notamonotako.api.requests_responses.LoginResponse
-import com.group1.notamonotako.api.requests_responses.RegistrationRequest
-import com.group1.notamonotako.api.requests_responses.RegistrationResponse
+import com.group1.notamonotako.api.requests_responses.notes.GetNotesResponse
+import com.group1.notamonotako.api.requests_responses.signin.LoginRequest
+import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
+import com.group1.notamonotako.api.requests_responses.signup.RegistrationRequest
+import com.group1.notamonotako.api.requests_responses.signup.RegistrationResponse
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -22,4 +24,6 @@ interface ApiService {
     @POST("logout")
     fun logout(@Header("Authorization") authHeader: String): Call<Unit>
 
+    @GET("notes")
+    fun getNotes(@Header("Authorization") authHeader: String): Call<GetNotesResponse>
 }

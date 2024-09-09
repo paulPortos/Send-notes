@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".views.Test"
+            android:name=".views.Mynotes"
             android:exported="false" />
         <activity
             android:name=".views.SettingsActivity"

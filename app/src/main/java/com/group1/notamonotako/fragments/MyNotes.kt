@@ -59,7 +59,7 @@ class MyNotes : Fragment() {
             "Lorem Ipsum"
         )
         val dataList = mutableListOf<NotesData>()
-        for (i in 0..10) {
+        for (i in title.indices) {
             dataList.add(
                 NotesData(title[i % title.size], contents[i % contents.size])
             )

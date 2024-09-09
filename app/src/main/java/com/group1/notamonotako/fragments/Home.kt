@@ -141,7 +141,7 @@ class Home : Fragment() {
             "Lorem Ipsum"
         )
         val dataList = mutableListOf<HomeData>()
-        for (i in 0..10) {
+        for (i in title.indices) {
             dataList.add(
                 HomeData(title[i % title.size], contents[i % contents.size])
             )

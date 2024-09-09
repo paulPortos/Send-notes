@@ -238,14 +238,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.12" />
+                    app:layout_constraintGuide_percent="0.13" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline46"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.19" />
+                    app:layout_constraintGuide_percent="0.2" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline47"

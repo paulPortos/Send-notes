@@ -646,16 +646,21 @@
                         android:id="@+id/tvsignout"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:autoSizeMaxTextSize="10000sp"
+                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeTextType="uniform"
                         android:clickable="true"
                         android:focusable="true"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Sign Out"
                         android:textColor="#FF2828"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="@id/guideline137"
+                        app:layout_constraintBottom_toBottomOf="@id/guideline141"
                         app:layout_constraintEnd_toEndOf="@id/guideline138"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@id/guideline137"
                         app:layout_constraintTop_toTopOf="@id/guideline140"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline141" />
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <ImageButton
                         android:id="@+id/btnsign_out"
@@ -688,14 +693,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.25" />
+                        app:layout_constraintGuide_percent="0.26" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline138"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.57" />
+                        app:layout_constraintGuide_percent="0.511" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline139"

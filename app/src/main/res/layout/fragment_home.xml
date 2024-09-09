@@ -203,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.05" />
+                    app:layout_constraintGuide_percent="0.1" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline41"
@@ -224,42 +224,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.03" />
+                    app:layout_constraintGuide_percent="0.06" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline44"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.08" />
+                    app:layout_constraintGuide_percent="0.12" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline45"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10520095" />
+                    app:layout_constraintGuide_percent="0.15" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline46"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.18" />
+                    app:layout_constraintGuide_percent="0.22" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline47"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.21749409" />
+                    app:layout_constraintGuide_percent="0.24" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline50"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.95" />
+                    app:layout_constraintGuide_percent="0.9" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

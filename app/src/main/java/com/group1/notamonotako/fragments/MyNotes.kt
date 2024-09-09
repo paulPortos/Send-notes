@@ -15,13 +15,6 @@ import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
 import com.group1.notamonotako.api.requests_responses.NotesData
 import com.group1.notamonotako.views.SettingsActivity
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class MyNotes : Fragment() {
     lateinit var btnSettings : ImageButton
 

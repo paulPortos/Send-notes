@@ -1,4 +1,4 @@
-package com.group1.notamonotako.views
+package com.group1.notamonotako.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.HomeData
+import com.group1.notamonotako.api.requests_responses.FlashcardsData
 
-class HomeAdapter(private var data: List<HomeData>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+class MyFlashcardsAdapter(private var data: List<FlashcardsData>) : RecyclerView.Adapter<MyFlashcardsAdapter.ItemViewHolder>(){
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
@@ -17,9 +17,10 @@ class HomeAdapter(private var data: List<HomeData>) : RecyclerView.Adapter<HomeA
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflatedView: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.rv_home_row, parent, false)
+            .inflate(R.layout.rv_myflashcards_grid, parent, false)
         return ItemViewHolder(inflatedView)
     }
+
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]

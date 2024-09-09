@@ -17,14 +17,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".views.Mynotes"
+            android:exported="false" />
+        <activity
             android:name=".views.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".views.SignInActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".views.HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".views.SignUpActivity"
             android:exported="false" />

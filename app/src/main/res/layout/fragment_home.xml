@@ -21,246 +21,248 @@
         app:layout_constraintVertical_bias="0.0">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <ImageButton
-                android:id="@+id/btnSettings"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:backgroundTint="#00FFFFFF"
-                android:src="@drawable/btn_settings"
-                app:layout_constraintBottom_toTopOf="@+id/guideline44"
-                app:layout_constraintEnd_toStartOf="@+id/guideline50"
-                app:layout_constraintStart_toStartOf="@+id/guideline42"
-                app:layout_constraintTop_toTopOf="@+id/guideline43" />
-
-            <TextView
-
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:autoSizeMaxTextSize="10000sp"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/title"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline44"
-                app:layout_constraintEnd_toStartOf="@+id/guideline41"
-                app:layout_constraintHorizontal_bias="0.108"
-                app:layout_constraintStart_toStartOf="@+id/guideline36"
-                app:layout_constraintTop_toTopOf="@+id/guideline43"
-                app:layout_constraintVertical_bias="0.041" />
-
-
-            <SearchView
-                android:id="@+id/svsearchView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/search"
-                android:closeIcon="@drawable/baseline_close_24"
-                android:focusable="true"
-
-                android:iconifiedByDefault="false"
-                android:queryHint="Search here"
-                android:searchHintIcon="@null"
-                android:searchIcon="@drawable/baseline_search_24"
-                app:layout_constraintBottom_toTopOf="@+id/guideline46"
-                app:layout_constraintEnd_toStartOf="@+id/guideline50"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline36"
-                app:layout_constraintTop_toTopOf="@+id/guideline45"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvhome"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline50"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline36"
-                app:layout_constraintTop_toTopOf="@+id/guideline47"
-                app:layout_constraintVertical_bias="0.0" />
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fabConstraint"
-                android:layout_width="199dp"
-                android:layout_height="251dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:elevation="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <ImageButton
+                    android:id="@+id/btnSettings"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:src="@drawable/btn_settings"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline44"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline50"
+                    app:layout_constraintStart_toStartOf="@+id/guideline42"
+                    app:layout_constraintTop_toTopOf="@+id/guideline43"
+                    />
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:autoSizeMaxTextSize="10000sp"
+                    android:autoSizeMinTextSize="10sp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/title"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline44"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline41"
+                    app:layout_constraintHorizontal_bias="0.108"
+                    app:layout_constraintStart_toStartOf="@+id/guideline36"
+                    app:layout_constraintTop_toTopOf="@+id/guideline43"
+                    app:layout_constraintVertical_bias="0.041" />
 
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/mainFabBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="15dp"
-                    android:contentDescription="@null"
+                <SearchView
+                    android:id="@+id/svsearchView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/search"
+                    android:closeIcon="@drawable/baseline_close_24"
+                    android:focusable="true"
+
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Search here"
+                    android:searchHintIcon="@null"
+                    android:searchIcon="@drawable/baseline_search_24"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline46"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline50"
+                    app:layout_constraintStart_toStartOf="@+id/guideline36"
+                    app:layout_constraintTop_toTopOf="@+id/guideline45"
+                    app:layout_constraintVertical_bias="0.111" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvhome"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline50"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline36"
+                    app:layout_constraintTop_toTopOf="@+id/guideline47"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fabConstraint"
+                    android:layout_width="199dp"
+                    android:layout_height="251dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
                     android:elevation="10dp"
-                    android:maxWidth="100dp"
-                    android:minWidth="1dp"
-                    app:backgroundTint="@color/beige"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/btn_add"
-                    app:tint="@color/black" />
+                    app:layout_constraintEnd_toEndOf="parent">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/notesFabBtn"
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/mainFabBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="15dp"
+                        android:contentDescription="@null"
+                        android:elevation="10dp"
+                        android:maxWidth="100dp"
+                        android:minWidth="1dp"
+                        app:backgroundTint="@color/beige"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/btn_add"
+                        app:tint="@color/black" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/notesFabBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="28dp"
+                        android:maxWidth="100dp"
+                        android:minWidth="1dp"
+                        android:tint="@color/beige"
+                        android:visibility="invisible"
+                        app:backgroundTint="@color/beige"
+                        app:layout_constraintBottom_toTopOf="@+id/mainFabBtn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/notes"
+                        app:tint="@color/black"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/notesTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="128dp"
+                        android:autoSizeMaxTextSize="1000sp"
+                        android:autoSizeMinTextSize="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/edittext"
+                        android:elevation="8dp"
+                        android:paddingHorizontal="32dp"
+                        android:text="@string/notes"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/notesFabBtn" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/flashcardsFabBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="16dp"
+                        android:backgroundTint="@color/beige"
+                        android:maxWidth="100dp"
+                        android:minWidth="1dp"
+                        android:tint="@color/beige"
+                        android:visibility="invisible"
+                        app:backgroundTint="@color/beige"
+                        app:layout_constraintBottom_toTopOf="@+id/notesFabBtn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/btn_flashcards"
+                        app:tint="@color/black"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/flashcardsTV"
+                        android:layout_width="107dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="188dp"
+                        android:autoSizeMaxTextSize="1000sp"
+                        android:autoSizeMinTextSize="1sp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/edittext"
+                        android:elevation="8dp"
+                        android:paddingStart="20dp"
+                        android:text="@string/flashcards"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/flashcardsFabBtn"
+                        tools:ignore="RtlSymmetry" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline36"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="28dp"
-                    android:maxWidth="100dp"
-                    android:minWidth="1dp"
-                    android:tint="@color/beige"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/beige"
-                    app:layout_constraintBottom_toTopOf="@+id/mainFabBtn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/notes"
-                    app:tint="@color/black"
-                    tools:ignore="ContentDescription" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.05" />
 
-                <TextView
-                    android:id="@+id/notesTV"
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="128dp"
-                    android:autoSizeMaxTextSize="1000sp"
-                    android:autoSizeMinTextSize="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:background="@drawable/edittext"
-                    android:elevation="8dp"
-                    android:paddingHorizontal="32dp"
-                    android:text="@string/notes"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/notesFabBtn" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.38" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/flashcardsFabBtn"
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:backgroundTint="@color/beige"
-                    android:maxWidth="100dp"
-                    android:minWidth="1dp"
-                    android:tint="@color/beige"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/beige"
-                    app:layout_constraintBottom_toTopOf="@+id/notesFabBtn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/btn_flashcards"
-                    app:tint="@color/black"
-                    tools:ignore="ContentDescription" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.8" />
 
-                <TextView
-                    android:id="@+id/flashcardsTV"
-                    android:layout_width="107dp"
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline43"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="188dp"
-                    android:autoSizeMaxTextSize="1000sp"
-                    android:autoSizeMinTextSize="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:background="@drawable/edittext"
-                    android:elevation="8dp"
-                    android:paddingStart="20dp"
-                    android:text="@string/flashcards"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/flashcardsFabBtn"
-                    tools:ignore="RtlSymmetry" />
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.05" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.12" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.19" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.21749409" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.95" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline36"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.1" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline41"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.38" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline42"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.8" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline43"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.14" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline44"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.19" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline45"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.21" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline46"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.29" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline47"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.31" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline50"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.9" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 

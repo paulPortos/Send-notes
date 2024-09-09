@@ -111,7 +111,9 @@
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/black"
                 app:hintTextColor="@color/black"
-
+                android:autoSizeMaxTextSize="1000sp"
+                android:autoSizeMinTextSize="1sp"
+                android:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline28"
                 app:layout_constraintEnd_toStartOf="@+id/guideline23"
                 app:layout_constraintHorizontal_bias="0.487"
@@ -125,9 +127,6 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/round"
                     android:backgroundTint="@color/beige"
-                    android:autoSizeMaxTextSize="1000sp"
-                    android:autoSizeMinTextSize="1sp"
-                    android:autoSizeTextType="uniform"
                     android:inputType="textPassword"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -136,6 +135,9 @@
                 android:id="@+id/textInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:autoSizeMaxTextSize="1000sp"
+                android:autoSizeMinTextSize="1sp"
+                android:autoSizeTextType="uniform"
                 android:hint="@string/confirm_password"
                 android:textColorHint="@color/grey"
                 app:endIconMode="password_toggle"
@@ -268,6 +270,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:hint="@string/username"
+                android:autoSizeMaxTextSize="1000sp"
+                android:autoSizeMinTextSize="1sp"
+                android:autoSizeTextType="uniform"
                 android:textColorHint="@color/grey"
                 app:hintTextColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/guideline31"
@@ -283,9 +288,6 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/round"
                     android:backgroundTint="@color/beige"
-                    android:autoSizeMaxTextSize="1000sp"
-                    android:autoSizeMinTextSize="1sp"
-                    android:autoSizeTextType="uniform"
                     android:inputType="text"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>

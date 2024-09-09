@@ -79,7 +79,7 @@ class Flashcards : Fragment() {
             "Three"
         )
         val dataList = mutableListOf<FlashcardsData>()
-        for (i in 0..10) {
+        for (i in title.indices) {
             dataList.add(
                 FlashcardsData(title[i % title.size], contents[i % contents.size])
             )

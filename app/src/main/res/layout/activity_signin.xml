@@ -28,21 +28,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/barrier"
         app:layout_constraintTop_toTopOf="@id/barrier"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignInNow"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeMaxTextSize="1000sp"
-        android:autoSizeMinTextSize="20sp"
+        android:autoSizeMaxTextSize="32sp"
+        android:autoSizeMinTextSize="18sp"
         android:autoSizeTextType="uniform"
-        android:backgroundTint="@color/blue"
+        android:background="@drawable/btn_purple"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/signin"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:cornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline32"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
@@ -85,47 +84,62 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5">
 
-            <Button
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_person_24"
+                app:layout_constraintBottom_toTopOf="@+id/guideline144"
+                app:layout_constraintEnd_toStartOf="@+id/guideline142"
+                app:layout_constraintStart_toStartOf="@+id/guideline96"
+                app:layout_constraintTop_toTopOf="@+id/guideline143"
+                app:layout_constraintVertical_bias="0.465" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_lock_24"
+                app:layout_constraintBottom_toTopOf="@+id/guideline146"
+                app:layout_constraintEnd_toStartOf="@+id/guideline142"
+                app:layout_constraintStart_toStartOf="@+id/guideline96"
+                app:layout_constraintTop_toTopOf="@+id/guideline145" />
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSignIn"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:autoSizeMaxTextSize="1000sp"
-                android:autoSizeMinTextSize="1sp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="12sp"
                 android:autoSizeTextType="uniform"
-                android:backgroundTint="@color/blue"
+                android:background="@drawable/btn_purple"
                 android:fontFamily="@font/poppins_extrabold"
-                android:gravity="center"
                 android:text="@string/signin"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                app:cornerRadius="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline30"
                 app:layout_constraintEnd_toStartOf="@+id/guideline22"
-                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline14"
                 app:layout_constraintTop_toTopOf="@+id/guideline29"
-                app:layout_constraintVertical_bias="0.144" />
+                app:layout_constraintVertical_bias="0.0" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSignUp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:autoSizeMaxTextSize="1000sp"
-                android:autoSizeMinTextSize="1sp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="12sp"
                 android:autoSizeTextType="uniform"
-                android:backgroundTint="@color/beige"
+                android:background="@drawable/btn_purple_corner"
                 android:fontFamily="@font/poppins_extrabold"
-                android:gravity="center"
                 android:text="@string/signup"
-                android:textColor="@color/white"
+                android:textColor="@color/background2"
                 android:textSize="18sp"
-                app:cornerRadius="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline30"
                 app:layout_constraintEnd_toStartOf="@+id/guideline15"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline23"
                 app:layout_constraintTop_toTopOf="@+id/guideline29"
-                app:layout_constraintVertical_bias="0.144" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/btnForgotPassword"
@@ -160,18 +174,16 @@
                 app:layout_constraintBottom_toTopOf="@+id/guideline26"
                 app:layout_constraintEnd_toStartOf="@+id/guideline15"
                 app:layout_constraintHorizontal_bias="0.54"
-                app:layout_constraintStart_toStartOf="@+id/guideline14"
+                app:layout_constraintStart_toStartOf="@+id/guideline94"
                 app:layout_constraintTop_toTopOf="@+id/guideline25"
                 app:layout_constraintVertical_bias="0.56"
-                app:startIconDrawable="@drawable/baseline_person_24"
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsername"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/round"
-                    android:backgroundTint="@color/beige"
+                    android:background="@drawable/btn_purple_corner"
                     android:inputType="text"
                     android:textColor="@color/black" />
 
@@ -182,10 +194,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:hint="@string/password"
                 android:autoSizeMaxTextSize="1000sp"
                 android:autoSizeMinTextSize="1sp"
                 android:autoSizeTextType="uniform"
+                android:hint="@string/password"
                 android:textColorHint="@color/grey"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/black"
@@ -193,19 +205,17 @@
                 app:layout_constraintBottom_toTopOf="@+id/guideline28"
                 app:layout_constraintEnd_toEndOf="@id/guideline15"
                 app:layout_constraintHorizontal_bias="0.543"
-                app:layout_constraintStart_toStartOf="@id/guideline14"
+                app:layout_constraintStart_toStartOf="@+id/guideline94"
                 app:layout_constraintTop_toTopOf="@+id/guideline27"
 
                 app:layout_constraintVertical_bias="0.697"
-                app:startIconDrawable="@drawable/baseline_lock_24"
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/round"
-                    android:backgroundTint="@color/beige"
+                    android:background="@drawable/btn_purple_corner"
                     android:inputType="textPassword"
                     android:textColor="@color/black" />
 
@@ -309,6 +319,55 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent=".965" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline94"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline96"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.08" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline142"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline143"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.43" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline144"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.51" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline145"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.65" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline146"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.73" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
@@ -346,7 +405,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".68" />
+        app:layout_constraintGuide_percent="0.66" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -388,7 +447,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".36" />
+        app:layout_constraintGuide_percent="0.33" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline20"
@@ -416,6 +475,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.92" />
+        app:layout_constraintGuide_percent="0.93" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

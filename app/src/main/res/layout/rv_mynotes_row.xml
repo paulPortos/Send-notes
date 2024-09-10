@@ -5,7 +5,6 @@
     android:layout_height="100dp"
     app:cardBackgroundColor="@color/cardview_light_background"
     app:cardCornerRadius="15dp"
-    app:cardElevation="8dp"
     style="@style/ScreenBackground"
     android:layout_marginBottom="10dp"
     >
@@ -31,16 +30,23 @@
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:textColor="@android:color/black"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
+
+            <TextView
+
+                android:layout_width="350dp"
+                android:layout_height="1dp"
+                android:background="@color/background"/>
 
             <TextView
                 android:id="@+id/contents"
                 android:layout_width="367dp"
                 android:layout_height="37dp"
                 android:text="Contents"
+
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

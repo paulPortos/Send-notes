@@ -11,8 +11,6 @@ class LoginResponse(
     val user: User
 )
 
-
-
 data class User(
     val id: Int,
     val username: String

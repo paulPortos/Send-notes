@@ -20,33 +20,34 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize TokenManager
         TokenManager.init(this)
 
+        // Check if the user is already logged in
         if (TokenManager.isLoggedIn()) {
-            // Redirect to the main activity if the user is logged in
-            val intent = Intent(this, Test::class.java)
+            // If logged in, redirect to HomeActivity and finish this activity
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-        } else {
-            // Redirect to the SignInActivity if the user is not logged in
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
+            finish()  // Close SignInActivity
+            return  // Prevent further execution
         }
-        setContentView(R.layout.activity_signin)
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        // If not logged in, continue with login process
+        setContentView(R.layout.activity_signin)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
+        // Initialize UI elements
         btnSignup = findViewById(R.id.btnSignUp)
         etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
         btnForgot = findViewById(R.id.btnForgotPassword)
         btnLoginNow = findViewById(R.id.btnSignInNow)
 
-        // LOGIN
-        this.btnLoginNow.setOnClickListener {
+        // Handle login button click
+        btnLoginNow.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
 
@@ -54,20 +55,20 @@ class SignInActivity : AppCompatActivity() {
                 Toast.makeText(this@SignInActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(username, password)
-                       }
+            }
         }
 
-        // SIGN UP
-        this.btnSignup.setOnClickListener {
+        // Handle sign-up button click
+        btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
     }
-    private fun loginUser(username: String, password: String){
+
+    private fun loginUser(username: String, password: String) {
         val apiService = RetrofitInstance.create(ApiService::class.java)
         val loginRequest = Login(username = username, password = password)
         val call = apiService.login(loginRequest)
-
 
         call.enqueue(object : retrofit2.Callback<LoginResponse> {
             override fun onResponse(call: retrofit2.Call<LoginResponse>, response: retrofit2.Response<LoginResponse>) {
@@ -76,10 +77,12 @@ class SignInActivity : AppCompatActivity() {
                     authResponse?.let {
                         // Save the token
                         TokenManager.saveToken(it.token)
-                        // Navigate to the next screen
+                        // Navigate to the HomeActivity
                         Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@SignInActivity, Test::class.java)
+                        val intent = Intent(this@SignInActivity, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
+                        finish()  // Close SignInActivity
                     }
                 } else {
                     Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
@@ -91,38 +94,5 @@ class SignInActivity : AppCompatActivity() {
                 Log.d("tester", t.message.toString())
             }
         })
-
-
-
-
-
-
-
-
-
-       /* call.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    val token = loginResponse?.token
-                    if(token != null){
-                        tokenManager = TokenManager(this@SignInActivity)
-                        tokenManager.saveToken(token)
-                        Log.d("Token: ", token)
-                        Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@SignInActivity, HomeActivity::class.java)
-                        startActivity(intent)
-                    } else if (response.code() == 201){
-                        Toast.makeText(this@SignInActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onFailure(p0: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(this@SignInActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })*/
     }
-
 }

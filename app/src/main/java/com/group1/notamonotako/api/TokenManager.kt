@@ -2,30 +2,28 @@ import android.content.Context
 import android.content.SharedPreferences
 
 object TokenManager {
-
-    private const val PREFS_NAME = "app_prefs"
-    private const val KEY_TOKEN = "auth_token"
-    private var prefs: SharedPreferences? = null
+    private const val PREFS_NAME = "user_prefs"
+    private const val TOKEN_KEY = "token"
+    private lateinit var preferences: SharedPreferences
 
     fun init(context: Context) {
-        if (prefs == null) {
-            prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        }
+        preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
     fun saveToken(token: String) {
-        prefs?.edit()?.putString(KEY_TOKEN, token)?.apply()
+        preferences.edit().putString(TOKEN_KEY, token).apply()
     }
 
     fun getToken(): String? {
-        return prefs?.getString(KEY_TOKEN, null)
+        return preferences.getString(TOKEN_KEY, null)
     }
 
     fun clearToken() {
-        prefs?.edit()?.remove(KEY_TOKEN)?.apply()
+        preferences.edit().remove(TOKEN_KEY).apply()
     }
 
     fun isLoggedIn(): Boolean {
-        return getToken() != null
+        val token = getToken()
+        return !token.isNullOrEmpty()  // Checks if a token exists
     }
 }

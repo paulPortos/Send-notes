@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.ApiClient
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,7 +36,7 @@ class SettingsActivity : AppCompatActivity() {
             Toast.makeText(this@SettingsActivity, "No token found", Toast.LENGTH_SHORT).show()
             return
         }
-        val apiService = ApiClient.retrofit.create(ApiService::class.java)
+        val apiService = RetrofitInstance.create(ApiService::class.java)
         val call = apiService.logout("Bearer $token")
 
         call.enqueue(object : Callback<Void> {

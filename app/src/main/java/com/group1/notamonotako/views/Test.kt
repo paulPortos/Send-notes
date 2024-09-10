@@ -20,6 +20,15 @@ class Test : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         TokenManager.init(this)
+
+        if (!TokenManager.isLoggedIn()) {
+            val intent = Intent(this, SignInActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         Log.d("tester", TokenManager.getToken().toString())
         setContentView(R.layout.activity_test)
 

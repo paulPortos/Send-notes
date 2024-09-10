@@ -10,7 +10,6 @@ import android.widget.Toast
 import retrofit2.Callback
 import androidx.appcompat.app.AppCompatActivity
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.ApiClient
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
 import com.group1.notamonotako.api.requests_responses.signup.RegistrationResponses
 import retrofit2.Call
@@ -63,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
     }
     private fun registerUser(username: String, password: String) {
         // Create API service instance
-        val apiService = ApiClient.retrofit.create(ApiService::class.java)
+        val apiService = RetrofitInstance.create(ApiService::class.java)
 
         // Create request body
         val registrationRequest = RegisterRequests(username = username, password = password)

@@ -1,33 +1,31 @@
-package com.group1.notamonotako.api
-
 import android.content.Context
 import android.content.SharedPreferences
 
-class TokenManager(context: Context) {
+object TokenManager {
 
-    private val preferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private const val PREFS_NAME = "app_prefs"
+    private const val KEY_TOKEN = "auth_token"
+    private var prefs: SharedPreferences? = null
 
-    companion object {
-        private const val PREFS_NAME = "user_prefs" // SharedPreferences file name
-        private const val TOKEN_KEY = "auth_token" // Key to store the token
+    fun init(context: Context) {
+        if (prefs == null) {
+            prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        }
     }
 
-    // Save token to SharedPreferences
     fun saveToken(token: String) {
-        val editor = preferences.edit()
-        editor.putString(TOKEN_KEY, token)
-        editor.apply()
+        prefs?.edit()?.putString(KEY_TOKEN, token)?.apply()
     }
 
-    // Retrieve token from SharedPreferences
     fun getToken(): String? {
-        return preferences.getString(TOKEN_KEY, null)
+        return prefs?.getString(KEY_TOKEN, null)
     }
 
-    // Clear the token from SharedPreferences
     fun clearToken() {
-        val editor = preferences.edit()
-        editor.remove(TOKEN_KEY)
-        editor.apply()
+        prefs?.edit()?.remove(KEY_TOKEN)?.apply()
+    }
+
+    fun isLoggedIn(): Boolean {
+        return getToken() != null
     }
 }

@@ -1,6 +1,6 @@
 package com.group1.notamonotako.views
 
-import android.content.Context
+import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -10,14 +10,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.ApiClient
-import com.group1.notamonotako.api.ApiService
-import com.group1.notamonotako.api.TokenManager
-import com.group1.notamonotako.api.requests_responses.signin.LoginRequest
+import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var btnSignup: Button
@@ -25,10 +19,23 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
-    private lateinit var tokenManager: TokenManager
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        TokenManager.init(this)
+
+        if (TokenManager.isLoggedIn()) {
+            // Redirect to the main activity if the user is logged in
+            val intent = Intent(this, Test::class.java)
+            startActivity(intent)
+        } else {
+            // Redirect to the SignInActivity if the user is not logged in
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+        }
         setContentView(R.layout.activity_signin)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -47,7 +54,7 @@ class SignInActivity : AppCompatActivity() {
                 Toast.makeText(this@SignInActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(username, password)
-            }
+                       }
         }
 
         // SIGN UP
@@ -57,11 +64,43 @@ class SignInActivity : AppCompatActivity() {
         }
     }
     private fun loginUser(username: String, password: String){
-        val apiService = ApiClient.retrofit.create(ApiService::class.java)
-        val loginRequest = LoginRequest(username = username, password = password)
-        val call = apiService.signInUser(loginRequest)
+        val apiService = RetrofitInstance.create(ApiService::class.java)
+        val loginRequest = Login(username = username, password = password)
+        val call = apiService.login(loginRequest)
 
-        call.enqueue(object : Callback<LoginResponse> {
+
+        call.enqueue(object : retrofit2.Callback<LoginResponse> {
+            override fun onResponse(call: retrofit2.Call<LoginResponse>, response: retrofit2.Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    val authResponse = response.body()
+                    authResponse?.let {
+                        // Save the token
+                        TokenManager.saveToken(it.token)
+                        // Navigate to the next screen
+                        Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@SignInActivity, Test::class.java)
+                        startActivity(intent)
+                    }
+                } else {
+                    Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<LoginResponse>, t: Throwable) {
+                Toast.makeText(this@SignInActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.d("tester", t.message.toString())
+            }
+        })
+
+
+
+
+
+
+
+
+
+       /* call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
@@ -83,6 +122,7 @@ class SignInActivity : AppCompatActivity() {
             override fun onFailure(p0: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(this@SignInActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
             }
-        })
+        })*/
     }
+
 }

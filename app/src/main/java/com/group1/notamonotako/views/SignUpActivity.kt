@@ -1,5 +1,6 @@
 package com.group1.notamonotako.views
 
+import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -8,12 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import retrofit2.Callback
 import androidx.appcompat.app.AppCompatActivity
-
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.ApiClient
-import com.group1.notamonotako.api.ApiService
-import com.group1.notamonotako.api.requests_responses.signup.RegistrationRequest
-import com.group1.notamonotako.api.requests_responses.signup.RegistrationResponse
+import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
+import com.group1.notamonotako.api.requests_responses.signup.RegistrationResponses
 import retrofit2.Call
 import retrofit2.Response
 
@@ -28,6 +27,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        TokenManager.init(this)
         setContentView(R.layout.activity_sign_up)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -61,28 +61,51 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun registerUser(username: String, password: String){
+    private fun registerUser(username: String, password: String) {
+        // Create API service instance
         val apiService = ApiClient.retrofit.create(ApiService::class.java)
-        val registrationRequest = RegistrationRequest(username = username, password = password)
-        val call = apiService.signUpUser(registrationRequest)
 
-        call.enqueue(object : Callback<RegistrationResponse> {
-            override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
-                if (response.code() == 409) {
-                    Toast.makeText(this@SignUpActivity, "User already exists", Toast.LENGTH_SHORT).show()
-                } else if (response.isSuccessful){
-                    Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                    startActivity(intent)
-                }else {
-                    Toast.makeText(this@SignUpActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+        // Create request body
+        val registrationRequest = RegisterRequests(username = username, password = password)
+
+        // Make the API call
+        val call = apiService.register(registrationRequest)
+
+        // Enqueue the API call to be executed asynchronously
+        call.enqueue(object : Callback<RegistrationResponses> {
+            override fun onResponse(call: Call<RegistrationResponses>, response: Response<RegistrationResponses>) {
+                when {
+                    response.code() == 409 -> {
+                        // Handle conflict error (e.g., user already exists)
+                        Toast.makeText(this@SignUpActivity, "User already exists", Toast.LENGTH_SHORT).show()
+                    }
+                    response.isSuccessful -> {
+                        // Registration successful, navigate to sign-in activity
+                        Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
+
+                        // You can also save the token here if the response contains it
+                        val registrationResponse = response.body()
+                        registrationResponse?.token?.let { token ->
+                            TokenManager.saveToken(token) // Save the token
+                        }
+
+                        // Navigate to the login activity
+                        val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                        finish()
+                    }
+                    else -> {
+                        // Handle other errors with detailed error message
+                        val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                        Toast.makeText(this@SignUpActivity, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 
-            override fun onFailure(p0: Call<RegistrationResponse>, t: Throwable) {
+            override fun onFailure(p0: Call<RegistrationResponses>, t: Throwable) {
                 Toast.makeText(this@SignUpActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 

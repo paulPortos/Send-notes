@@ -24,7 +24,6 @@ class Mynotes : AppCompatActivity() {
 
 
         val intent = intent
-
         val title = intent.getStringExtra("title")
         val contents = intent.getStringExtra("contents")
 

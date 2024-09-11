@@ -75,6 +75,7 @@ class Home : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+
         notesFabBtn.setOnClickListener {
             val Notes =Notes()
             val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -118,13 +119,7 @@ class Home : Fragment() {
         areFabButtonsVisible = !areFabButtonsVisible
     }
 
-     fun onBackPressed() {
-        if (areFabButtonsVisible) {
-            shrinkFab()
-        } else {
-            expandFab()
-        }
-    }
+
 
 
     private fun example(): List<HomeData> {

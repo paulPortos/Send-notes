@@ -17,8 +17,6 @@ import com.group1.notamonotako.api.requests_responses.FlashcardsData
 import com.group1.notamonotako.adapter.FlashcardsAdapter
 
 class Flashcards : Fragment() {
-    private lateinit var btn_left :ImageButton
-    private lateinit var btn_right :ImageButton
     private lateinit var btn_back :ImageButton
     private lateinit var layoutManager: LinearLayoutManager
 
@@ -36,8 +34,7 @@ class Flashcards : Fragment() {
         recyclerView.adapter = adapter
 
 
-        btn_right = view.findViewById(R.id.btn_right)
-        btn_left = view.findViewById(R.id.btn_left)
+
         btn_back = view.findViewById(R.id.btn_back)
 
 
@@ -48,23 +45,7 @@ class Flashcards : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
-
-
-
-        btn_right.setOnClickListener{
-            val nextPosition = layoutManager.findLastVisibleItemPosition() + 1
-            if (nextPosition < adapter.itemCount){
-                recyclerView.smoothScrollToPosition(nextPosition)
-            }
-        }
-        btn_left.setOnClickListener{
-            val previousPosition = layoutManager.findFirstVisibleItemPosition() - 1
-            if (previousPosition >= 0){
-                recyclerView.smoothScrollToPosition(previousPosition)
-            }
-        }
         return view
-
     }
 
     private fun example(): List<FlashcardsData> {

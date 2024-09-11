@@ -28,7 +28,7 @@
                 android:id="@+id/imageViewSettings"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@android:drawable/screen_background_light"
+                android:background="@color/background2"
                 app:layout_constraintBottom_toBottomOf="@id/guideline93"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,8 @@
                 app:layout_constraintEnd_toEndOf="@id/guideline84"
                 app:layout_constraintHorizontal_bias="0.077"
                 app:layout_constraintStart_toStartOf="@id/guideline83"
-                app:layout_constraintTop_toTopOf="@id/guideline87" />
+                app:layout_constraintTop_toTopOf="@id/guideline87"
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/tvSettings"
@@ -89,22 +90,6 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/tvappearnce"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="10sp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Appearance"
-                        android:textColor="@color/grey"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline118"
-                        app:layout_constraintEnd_toEndOf="@id/guideline106"
-                        app:layout_constraintStart_toStartOf="@id/guideline95"
-                        app:layout_constraintTop_toTopOf="@id/guideline117" />
-
-                    <TextView
                         android:id="@+id/tvaudio"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -115,10 +100,10 @@
                         android:text="Audio"
                         android:textColor="@color/grey"
                         android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline124"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline118"
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
                         app:layout_constraintStart_toStartOf="@id/guideline95"
-                        app:layout_constraintTop_toTopOf="@id/guideline123" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline117" />
 
                     <TextView
                         android:id="@+id/tvinformation"
@@ -130,10 +115,10 @@
                         android:fontFamily="@font/poppins_medium"
                         android:text="Information"
                         android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline130"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline124"
                         app:layout_constraintEnd_toEndOf="@id/guideline106"
                         app:layout_constraintStart_toStartOf="@id/guideline95"
-                        app:layout_constraintTop_toTopOf="@id/guideline129" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline123" />
 
                     <TextView
                         android:id="@+id/tvaccsettings"
@@ -198,21 +183,6 @@
                         app:layout_constraintTop_toTopOf="@id/guideline114" />
 
                     <TextView
-                        android:id="@+id/tvdarktheme"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="10sp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Dark Theme"
-                        android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline121"
-                        app:layout_constraintEnd_toEndOf="@id/guideline101"
-                        app:layout_constraintStart_toStartOf="@id/guideline99"
-                        app:layout_constraintTop_toTopOf="@id/guideline120" />
-
-                    <TextView
                         android:id="@+id/tvsounds"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -222,10 +192,10 @@
                         android:fontFamily="@font/poppins_medium"
                         android:text="Sounds"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline127"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline121"
                         app:layout_constraintEnd_toEndOf="@id/guideline100"
                         app:layout_constraintStart_toStartOf="@id/guideline99"
-                        app:layout_constraintTop_toTopOf="@id/guideline126" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline120" />
 
                     <TextView
                         android:id="@+id/tvabout"
@@ -236,76 +206,67 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppins_medium"
                         android:text="About"
+                        android:textSize="10sp"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline133"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline127"
                         app:layout_constraintEnd_toEndOf="@id/guideline100"
                         app:layout_constraintStart_toStartOf="@id/guideline99"
-                        app:layout_constraintTop_toTopOf="@id/guideline132" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline126" />
 
                     <ImageView
                         android:id="@+id/user_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:background="@drawable/circle"
                         android:backgroundTint="#DBDADA"
-                        android:scaleType="centerInside"
                         android:src="@drawable/user_icon"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline112"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline112"
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
-                        app:layout_constraintTop_toTopOf="@id/guideline109" />
+                        app:layout_constraintTop_toTopOf="@id/guideline109"
+                        app:tint="@color/background2" />
 
                     <ImageView
                         android:id="@+id/pass_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:background="@drawable/circle"
                         android:backgroundTint="#DBDADA"
-                        android:scaleType="centerInside"
                         android:src="@drawable/pass_icon"
+
                         app:layout_constraintBottom_toBottomOf="@id/guideline116"
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
-                        app:layout_constraintTop_toTopOf="@id/guideline113" />
-
-                    <ImageView
-                        android:id="@+id/darkmode_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/circle"
-                        android:backgroundTint="#DBDADA"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/darkmode_icon"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline122"
-                        app:layout_constraintEnd_toEndOf="@id/guideline98"
-                        app:layout_constraintStart_toStartOf="@id/guideline97"
-                        app:layout_constraintTop_toTopOf="@id/guideline119" />
+                        app:layout_constraintTop_toTopOf="@id/guideline113"
+                        app:tint="@color/background2" />
 
                     <ImageView
                         android:id="@+id/sounds_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:background="@drawable/circle"
                         android:backgroundTint="#DBDADA"
-                        android:scaleType="centerInside"
                         android:src="@drawable/sound_icon"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline128"
+
+                        app:layout_constraintBottom_toTopOf="@+id/guideline122"
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
-                        app:layout_constraintTop_toTopOf="@id/guideline125" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline119"
+                        app:tint="@color/background2" />
 
                     <ImageView
                         android:id="@+id/about_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:background="@drawable/circle"
                         android:backgroundTint="#DBDADA"
-                        android:scaleType="centerInside"
                         android:src="@drawable/about_icon"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline134"
+
+                        app:layout_constraintBottom_toTopOf="@+id/guideline128"
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
-                        app:layout_constraintTop_toTopOf="@id/guideline131" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline125"
+                        app:tint="@color/background2" />
 
                     <ImageButton
                         android:id="@+id/rightarrow_icon1"
@@ -324,29 +285,19 @@
                         android:layout_height="0dp"
                         android:background="#00FFFFFF"
                         android:src="@drawable/rightarrow_icon"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline133"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline128"
                         app:layout_constraintEnd_toEndOf="@id/guideline105"
                         app:layout_constraintStart_toStartOf="@id/guideline104"
-                        app:layout_constraintTop_toTopOf="@id/guideline132" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline125" />
 
                     <Switch
                         android:id="@+id/switch2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline128"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline122"
                         app:layout_constraintEnd_toEndOf="@id/guideline105"
                         app:layout_constraintStart_toStartOf="@id/guideline103"
-                        app:layout_constraintTop_toTopOf="@id/guideline126"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-                    <Switch
-                        android:id="@+id/switch1"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline122"
-                        app:layout_constraintEnd_toEndOf="@id/guideline105"
-                        app:layout_constraintStart_toStartOf="@id/guideline103"
-                        app:layout_constraintTop_toTopOf="@id/guideline120"
+                        app:layout_constraintTop_toTopOf="@+id/guideline119"
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                     <androidx.constraintlayout.widget.Guideline
@@ -781,21 +732,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.876" />
+                app:layout_constraintGuide_percent="0.71" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline91"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.887" />
+                app:layout_constraintGuide_percent="0.79" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline92"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.978" />
+                app:layout_constraintGuide_percent="0.87" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline93"

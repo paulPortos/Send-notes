@@ -9,46 +9,112 @@
     android:layout_marginBottom="10dp"
     >
 
-    <RelativeLayout
-        android:id="@+id/layout_notes"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="365dp"
-            android:layout_height="74dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="25dp"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Title"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="20sp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline160"
+            app:layout_constraintEnd_toStartOf="@+id/guideline158"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline157"
+            app:layout_constraintTop_toTopOf="@+id/guideline161"
+            app:layout_constraintVertical_bias="1.0" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:textColor="@android:color/black"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+        <TextView
 
-            <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/background"
+            app:layout_constraintBottom_toTopOf="@+id/guideline163"
+            app:layout_constraintEnd_toStartOf="@+id/guideline159"
+            app:layout_constraintStart_toStartOf="@+id/guideline157"
+            app:layout_constraintTop_toTopOf="@+id/guideline162" />
 
-                android:layout_width="350dp"
-                android:layout_height="1dp"
-                android:background="@color/background"/>
+        <TextView
+            android:id="@+id/contents"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Contents"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline165"
+            app:layout_constraintEnd_toStartOf="@+id/guideline159"
+            app:layout_constraintStart_toStartOf="@+id/guideline157"
+            app:layout_constraintTop_toTopOf="@+id/guideline164" />
 
-            <TextView
-                android:id="@+id/contents"
-                android:layout_width="367dp"
-                android:layout_height="37dp"
-                android:text="Contents"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline157"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
 
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline158"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.26" />
 
-        </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline159"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.93" />
 
-    </RelativeLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline160"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.28" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline161"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline162"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.36" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline163"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline164"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.47" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline165"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.84" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

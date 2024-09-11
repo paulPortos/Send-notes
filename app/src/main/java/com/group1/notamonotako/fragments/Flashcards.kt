@@ -45,10 +45,7 @@ class Flashcards : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
-
-
         return view
-
     }
 
     private fun example(): List<FlashcardsData> {

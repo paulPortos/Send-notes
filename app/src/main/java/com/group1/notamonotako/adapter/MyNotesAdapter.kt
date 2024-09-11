@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.HomeData
@@ -16,7 +17,7 @@ class MyNotesAdapter(private var data: List<NotesData>) : RecyclerView.Adapter<M
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
-        val Notes : RelativeLayout = view.findViewById(R.id.layout_notes)
+        val Notes : ConstraintLayout = view.findViewById(R.id.layout_notes)
         val contents: TextView = view.findViewById(R.id.contents)
     }
 

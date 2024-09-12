@@ -84,7 +84,7 @@
         android:backgroundTint="@color/background2"
         android:src="@drawable/baseline_check_24"
         app:cornerRadius="8dp"
-        app:icon="@drawable/baseline_share_24"
+        app:icon="@drawable/share"
         app:iconGravity="textEnd"
         app:iconSize="40sp"
         app:iconTint="@color/white"

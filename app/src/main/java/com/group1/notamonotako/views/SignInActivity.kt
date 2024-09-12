@@ -5,8 +5,10 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.group1.notamonotako.R
@@ -19,9 +21,12 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
+    private lateinit var progressBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         // Initialize TokenManager
         TokenManager.init(this)
@@ -40,11 +45,15 @@ class SignInActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         // Initialize UI elements
+        progressBar = findViewById(R.id.progressBar)
         btnSignup = findViewById(R.id.btnSignUp)
         etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
         btnForgot = findViewById(R.id.btnForgotPassword)
         btnLoginNow = findViewById(R.id.btnSignInNow)
+
+        // Making the progressbar Invisible
+        progressBar.visibility = View.INVISIBLE
 
         // Handle login button click
         btnLoginNow.setOnClickListener {
@@ -53,8 +62,12 @@ class SignInActivity : AppCompatActivity() {
 
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this@SignInActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.VISIBLE
+
             } else {
                 loginUser(username, password)
+                progressBar.visibility = View.VISIBLE
+
             }
         }
 

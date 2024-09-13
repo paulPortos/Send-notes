@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -18,16 +20,26 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var progressBar : ProgressBar
+    private lateinit var signout : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         TokenManager.init(this)
         setContentView(R.layout.activity_settings)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        val signout = findViewById<TextView>(R.id.tvsignout)
+         signout = findViewById(R.id.tvsignout)
+        progressBar = findViewById(R.id.progressBar)
+
+        // Making the progressbar Invisible
+        progressBar.visibility = View.INVISIBLE
+
 
         signout.setOnClickListener{
             logoutUser()
+            progressBar.visibility = View.VISIBLE
         }
     }
 
@@ -53,6 +65,7 @@ class SettingsActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
+                    progressBar.visibility = View.INVISIBLE
                     Toast.makeText(
                         this@SettingsActivity,
                         "Error: ${response.errorBody()?.string()}",
@@ -62,6 +75,7 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
+                progressBar.visibility = View.INVISIBLE
                 Toast.makeText(
                     this@SettingsActivity,
                     "Network error occurred: ${t.message}",

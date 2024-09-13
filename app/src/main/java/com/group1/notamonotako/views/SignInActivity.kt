@@ -75,6 +75,7 @@ class SignInActivity : AppCompatActivity() {
         btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+            progressBar.visibility = View.VISIBLE
         }
     }
 
@@ -98,11 +99,13 @@ class SignInActivity : AppCompatActivity() {
                         finish()  // Close SignInActivity
                     }
                 } else {
+                    progressBar.visibility = View.INVISIBLE
                     Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: retrofit2.Call<LoginResponse>, t: Throwable) {
+                progressBar.visibility = View.INVISIBLE
                 Toast.makeText(this@SignInActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
                 Log.d("tester", t.message.toString())
             }

@@ -36,8 +36,7 @@ class Flashcards : Fragment() {
         recyclerView.adapter = adapter
 
 
-        btn_right = view.findViewById(R.id.btn_right)
-        btn_left = view.findViewById(R.id.btn_left)
+
         btn_back = view.findViewById(R.id.btn_back)
 
 
@@ -50,19 +49,6 @@ class Flashcards : Fragment() {
         }
 
 
-
-        btn_right.setOnClickListener{
-            val nextPosition = layoutManager.findLastVisibleItemPosition() + 1
-            if (nextPosition < adapter.itemCount){
-                recyclerView.smoothScrollToPosition(nextPosition)
-            }
-        }
-        btn_left.setOnClickListener{
-            val previousPosition = layoutManager.findFirstVisibleItemPosition() - 1
-            if (previousPosition >= 0){
-                recyclerView.smoothScrollToPosition(previousPosition)
-            }
-        }
         return view
 
     }

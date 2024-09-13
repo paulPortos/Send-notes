@@ -4,8 +4,10 @@ import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import retrofit2.Callback
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var etConfirmPassword: EditText
     private lateinit var btnLoginNow: Button
     private lateinit var btnSignIn: Button
+    private lateinit var progressBar : ProgressBar
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +32,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         TokenManager.init(this)
         setContentView(R.layout.activity_sign_up)
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         this.etUsername = findViewById(R.id.etUsername)
@@ -35,6 +40,10 @@ class SignUpActivity : AppCompatActivity() {
         this.etConfirmPassword = findViewById(R.id.etConfirmPassword)
         this.btnLoginNow = findViewById(R.id.btnSignUpNow)
         this.btnSignIn = findViewById(R.id.btnSignIn)
+
+        progressBar = findViewById(R.id.progressBar)
+        progressBar.visibility = View.INVISIBLE
+
 
         this.btnLoginNow.setOnClickListener {
             val username = etUsername.text.toString()
@@ -45,6 +54,7 @@ class SignUpActivity : AppCompatActivity() {
             } else if (password == confirmPassword) {
                 if (username.length >= 3 && password.length >= 5) {
                     registerUser(username, password)
+                    progressBar.visibility = View.VISIBLE
                 } else if (username.length < 3){
                     Toast.makeText(this@SignUpActivity, "Username must be at least 3 characters", Toast.LENGTH_SHORT).show()
                 } else if (password.length < 5){
@@ -58,6 +68,7 @@ class SignUpActivity : AppCompatActivity() {
         this.btnSignIn.setOnClickListener{
             val intent = Intent(this,SignInActivity::class.java)
             startActivity(intent)
+            progressBar.visibility = View.VISIBLE
         }
     }
     private fun registerUser(username: String, password: String) {
@@ -96,6 +107,7 @@ class SignUpActivity : AppCompatActivity() {
                     }
                     else -> {
                         // Handle other errors with detailed error message
+                        progressBar.visibility = View.INVISIBLE
                         val errorMessage = response.errorBody()?.string() ?: "Unknown error"
                         Toast.makeText(this@SignUpActivity, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
                     }
@@ -103,6 +115,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             override fun onFailure(p0: Call<RegistrationResponses>, t: Throwable) {
+                progressBar.visibility = View.INVISIBLE
                 Toast.makeText(this@SignUpActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

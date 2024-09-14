@@ -1,5 +1,6 @@
 package com.group1.notamonotako.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,26 +11,28 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.NotesData
+import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.views.Mynotes
 
-class MyNotesAdapter(private var data: List<NotesData>) : RecyclerView.Adapter<MyNotesAdapter.ItemViewHolder>() {
+class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerView.Adapter<MyNotesAdapter.NotesViewHolder>() {
 
-    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.title)
-        val Notes : ConstraintLayout = view.findViewById(R.id.layout_notes)
-        val contents: TextView = view.findViewById(R.id.contents)
+    inner class NotesViewHolder(Noteview : View) : RecyclerView.ViewHolder(Noteview) {
+        val title: TextView = Noteview.findViewById(R.id.title)
+        val Notes : ConstraintLayout = Noteview.findViewById(R.id.layout_notes)
+        val contents: TextView = Noteview.findViewById(R.id.contents)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val inflatedView: View = LayoutInflater.from(parent.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
+        val Noteviewer: View = LayoutInflater.from(context)
             .inflate(R.layout.rv_mynotes_row, parent, false)
-        return ItemViewHolder(inflatedView)
+        return NotesViewHolder(Noteviewer)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = data[position]
+    override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
+        val item = notelist[position]
         holder.title.text = item.title
         holder.contents.text = item.contents
+
 
             holder.Notes.setOnClickListener {
             val intent = Intent(it.context, Mynotes::class.java)
@@ -41,5 +44,8 @@ class MyNotesAdapter(private var data: List<NotesData>) : RecyclerView.Adapter<M
         }
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int {
+        return notelist.size
+    }
+
 }

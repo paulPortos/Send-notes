@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/left" />
+
+        <ImageButton
+            android:id="@+id/doneButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/done" />
+
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/medium"
+            android:text="September 10, 2024"
+            android:textColor="#8f8f8f"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/header"
+        android:background="@drawable/second_bg_2"
+        android:layout_centerHorizontal="true"
+        android:radius="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/bold"
+            android:text="Lorem Ipsum"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/body"
+        android:layout_width="380dp"
+        android:layout_height="500dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/second_bg_2"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/medium"
+            android:gravity="left"
+            android:text="Lorem ipsum odor amet, consectetuer adipiscing elit. Eget consequat maecenas curabitur, convallis viverra hac dignissim feugiat tempus. Integer vel fringilla integer mollis quis luctus ornare ridiculus. Nostra morbi netus odio elementum hendrerit mauris sapien rhoncus vitae. Varius velit montes fusce laoreet hac interdum. Egestas dictumst feugiat congue justo massa penatibus leo posuere. Conubia diam morbi velit phasellus magnis elit. Sollicitudin et porttitor commodo magna auctor aptent ultricies curabitur. Et felis mauris inceptos neque leo massa ante. Torquent et taciti sapien neque; volutpat nam felis gravida torquent. Vitae turpis consequat dapibus platea commodo suscipit. Ornare a fermentum platea vivamus; porttitor nec elementum porttitor! Ex cras scelerisque placerat, dui pretium sit neque. Morbi sodales pellentesque orci class torquent nostra. Cras rhoncus risus ad, nascetur etiam fringilla class euismod."
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/body"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="30dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_bg"
+            android:src="@drawable/waste"
+            />
+
+
+        <ImageButton
+            android:id="@+id/share_button"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_bg"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/forward_arrow"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

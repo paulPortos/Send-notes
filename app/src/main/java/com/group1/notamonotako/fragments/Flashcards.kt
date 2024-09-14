@@ -7,75 +7,69 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageButton
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.FlashcardsData
-import com.group1.notamonotako.adapter.FlashcardsAdapter
+import com.group1.notamonotako.adapter.EditTextFragmentAdapter
 
 class Flashcards : Fragment() {
-    private lateinit var btn_left :ImageButton
-    private lateinit var btn_right :ImageButton
-    private lateinit var btn_back :ImageButton
-    private lateinit var layoutManager: LinearLayoutManager
 
+    private lateinit var viewPager: ViewPager2
+    private lateinit var btn_right: ImageButton
+    private lateinit var btn_back: ImageButton
+    private val dataList = mutableListOf<Pair<String, String>>()
+    private lateinit var adapter: EditTextFragmentAdapter
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_flashcards, container, false)
-        val recyclerView: RecyclerView = view.findViewById(R.id.rvflashcards)
-        recyclerView.setHasFixedSize(true)
-        layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
-        recyclerView.layoutManager = layoutManager
 
-        val adapter = FlashcardsAdapter(example())
-        recyclerView.adapter = adapter
-
-
-
+        viewPager = view.findViewById(R.id.viewPager)
+        btn_right = view.findViewById(R.id.btn_right)
         btn_back = view.findViewById(R.id.btn_back)
 
+        dataList.add(Pair("Title", "Content"))
 
-        btn_back.setOnClickListener{
-            val Home =Home()
+
+        adapter = EditTextFragmentAdapter(this, dataList)
+        viewPager.adapter = adapter
+
+        btn_right.setOnClickListener {
+            saveCurrentPageData()
+            val currentItem = viewPager.currentItem
+            // Add a new page if the current one is the last page
+            if (currentItem == adapter.itemCount - 1) {
+                dataList.add(Pair("", "")) // Add a new blank page
+                adapter.notifyDataSetChanged()
+            }
+            // Move to the next page
+            viewPager.currentItem = currentItem + 1
+        }
+
+        btn_back.setOnClickListener {
+            val home = Home()
             val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.frameLayout, Home)
+            transaction.replace(R.id.frameLayout, home)
             transaction.addToBackStack(null)
             transaction.commit()
         }
 
-
         return view
-
     }
 
-    private fun example(): List<FlashcardsData> {
-        val title = listOf(
-            "Title 1",
-            "Title 2",
-            "Title 3"
-        )
-        val contents = listOf(
-            "One",
-            "Two",
-            "Three"
-        )
-        val dataList = mutableListOf<FlashcardsData>()
-        for (i in title.indices) {
-            dataList.add(
-                FlashcardsData(title[i % title.size], contents[i % contents.size])
-            )
+    private fun saveCurrentPageData() {
+        val currentItem = viewPager.currentItem
+        val fragment = adapter.getFragment(currentItem)
+        if (fragment != null) {
+            dataList[currentItem] = Pair(fragment.getTitle(), fragment.getContents())
         }
-        return dataList
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
-
 }

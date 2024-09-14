@@ -69,7 +69,7 @@ class Home : Fragment() {
 
 
         flashcardsFabBtn.setOnClickListener {
-            val Flashcards =Flashcards()
+            val Flashcards = Flashcards()
             val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frameLayout, Flashcards)
             transaction.addToBackStack(null)

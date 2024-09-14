@@ -18,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
+    private  lateinit var  etEmail : EditText
     private lateinit var etUsername: EditText
     private lateinit var etPassword: EditText
     private lateinit var etConfirmPassword: EditText
@@ -40,12 +41,14 @@ class SignUpActivity : AppCompatActivity() {
         this.etConfirmPassword = findViewById(R.id.etConfirmPassword)
         this.btnLoginNow = findViewById(R.id.btnSignUpNow)
         this.btnSignIn = findViewById(R.id.btnSignIn)
+        this.etEmail = findViewById(R.id.etEmail)
 
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
 
 
         this.btnLoginNow.setOnClickListener {
+            val email = etEmail.text.toString()
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
             val confirmPassword = etConfirmPassword.text.toString()
@@ -53,7 +56,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this@SignUpActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
             } else if (password == confirmPassword) {
                 if (username.length >= 3 && password.length >= 5) {
-                    registerUser(username, password)
+                    registerUser(email, username, password)
                     progressBar.visibility = View.VISIBLE
                 } else if (username.length < 3){
                     Toast.makeText(this@SignUpActivity, "Username must be at least 3 characters", Toast.LENGTH_SHORT).show()
@@ -71,12 +74,12 @@ class SignUpActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
         }
     }
-    private fun registerUser(username: String, password: String) {
+    private fun registerUser(email:String,username: String, password: String) {
         // Create API service instance
         val apiService = RetrofitInstance.create(ApiService::class.java)
 
         // Create request body
-        val registrationRequest = RegisterRequests(username = username, password = password)
+        val registrationRequest = RegisterRequests(email = email, username = username, password = password)
 
         // Make the API call
         val call = apiService.register(registrationRequest)

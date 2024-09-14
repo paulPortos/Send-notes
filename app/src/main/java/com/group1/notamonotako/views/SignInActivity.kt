@@ -81,7 +81,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun loginUser(username: String, password: String) {
         val apiService = RetrofitInstance.create(ApiService::class.java)
-        val loginRequest = Login(username = username, password = password)
+        val loginRequest = Login(email = username, password = password)
         val call = apiService.login(loginRequest)
 
         call.enqueue(object : retrofit2.Callback<LoginResponse> {

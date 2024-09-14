@@ -2,7 +2,7 @@ package com.group1.notamonotako.api.requests_responses.signin
 
 
 data class Login(
-    val username: String,
+    val email: String,
     val password: String
 
 )
@@ -13,6 +13,6 @@ class LoginResponse(
 
 data class User(
     val id: Int,
-    val username: String
+    val email: String
 )
 

@@ -11,6 +11,7 @@
 
 
     <TextView
+        android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeMaxTextSize="1000sp"
@@ -92,8 +93,8 @@
                 android:layout_gravity="top|center"
                 android:contentDescription="@null"
                 android:src="@drawable/baseline_lock_24"
-                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintBottom_toBottomOf="@+id/guideline40"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@+id/guideline38"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="@+id/guideline37"
@@ -103,14 +104,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:autoSizeMaxTextSize="1000sp"
+                android:autoSizeMinTextSize="1sp"
+                android:autoSizeTextType="uniform"
                 android:hint="@string/password_signup"
                 android:textColorHint="@color/grey"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/black"
                 app:hintTextColor="@color/black"
-                android:autoSizeMaxTextSize="1000sp"
-                android:autoSizeMinTextSize="1sp"
-                android:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline28"
                 app:layout_constraintEnd_toStartOf="@+id/guideline23"
                 app:layout_constraintHorizontal_bias="0.487"
@@ -202,18 +203,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".44" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline38"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".56" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline39"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent=".05" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline40"
                 android:layout_width="wrap_content"
@@ -486,6 +490,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".096" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="301dp"
+        android:layout_height="58dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

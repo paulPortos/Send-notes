@@ -2,6 +2,7 @@ package com.group1.notamonotako.api.requests_responses.signup
 
 data class RegisterRequests(
     val username: String,
+    val email: String,
     val password: String
 )
 data class RegistrationResponses(

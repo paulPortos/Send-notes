@@ -17,6 +17,8 @@ import com.group1.notamonotako.api.requests_responses.FlashcardsData
 import com.group1.notamonotako.adapter.FlashcardsAdapter
 
 class Flashcards : Fragment() {
+    private lateinit var btn_left :ImageButton
+    private lateinit var btn_right :ImageButton
     private lateinit var btn_back :ImageButton
     private lateinit var layoutManager: LinearLayoutManager
 
@@ -45,7 +47,10 @@ class Flashcards : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+
+
         return view
+
     }
 
     private fun example(): List<FlashcardsData> {

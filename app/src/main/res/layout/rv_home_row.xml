@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     app:cardBackgroundColor="@color/cardview_light_background"
     app:cardCornerRadius="15dp"
+    app:cardElevation="8dp"
     style="@style/ScreenBackground"
-    android:layout_marginBottom="10dp">
-
+    android:layout_marginBottom="10dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -118,5 +118,4 @@
             app:layout_constraintGuide_percent="0.93" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

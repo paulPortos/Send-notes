@@ -6,9 +6,11 @@ import TokenManager.getToken
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,10 +22,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SettingsActivity : AppCompatActivity() {
-
+    private lateinit var mediaPlayer: MediaPlayer
     private lateinit var progressBar : ProgressBar
     private lateinit var signout : TextView
+    private lateinit var sounds : Switch
 
+    private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
+    private val SOUND_MUTED_KEY = "sound_muted"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         TokenManager.init(this)
@@ -31,17 +36,53 @@ class SettingsActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
          signout = findViewById(R.id.tvsignout)
+        sounds = findViewById(R.id.sounds)
         progressBar = findViewById(R.id.progressBar)
+        mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
+
 
         // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
 
+        // Load the saved sound preference state from SharedPreferences
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val soundIsMuted = sharedPreferences.getBoolean(SOUND_MUTED_KEY, false)
 
-        signout.setOnClickListener{
+        // Set the initial state of the switch and media player volume
+        sounds.isChecked = !soundIsMuted
+        updateMediaPlayerVolume(soundIsMuted)
+
+        // Handle switch toggle to save sound preference and update media volume
+        sounds.setOnCheckedChangeListener { _, isChecked ->
+            saveSoundPreference(!isChecked)
+            updateMediaPlayerVolume(!isChecked)
+        }
+
+        signout.setOnClickListener {
             logoutUser()
             progressBar.visibility = View.VISIBLE
+            mediaPlayer.start()
         }
     }
+
+    // Save the sound preference (muted or not) in SharedPreferences
+    private fun saveSoundPreference(isMuted: Boolean) {
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(SOUND_MUTED_KEY, isMuted)
+        editor.apply()
+    }
+
+    // Update the media player's volume based on the sound preference
+    private fun updateMediaPlayerVolume(isMuted: Boolean) {
+        if (isMuted) {
+            mediaPlayer.setVolume(0F, 0F)
+        } else
+        {
+            mediaPlayer.setVolume(1F, 1F)
+        }
+    }
+
 
     private fun logoutUser() {
         val token = getToken() ?: run {

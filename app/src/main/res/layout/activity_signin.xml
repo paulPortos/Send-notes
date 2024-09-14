@@ -49,8 +49,6 @@
         app:layout_constraintVertical_bias="0.955" />
 
 
-
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
@@ -167,7 +165,7 @@
                 android:autoSizeMaxTextSize="1000sp"
                 android:autoSizeMinTextSize="1sp"
                 android:autoSizeTextType="uniform"
-                android:hint="@string/username"
+                android:hint="Email"
                 android:textColorHint="@color/grey"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/black"
@@ -221,16 +219,6 @@
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline144"
-                app:layout_constraintEnd_toStartOf="@+id/guideline23"
-                app:layout_constraintStart_toStartOf="@+id/guideline22"
-                app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -381,7 +369,6 @@
                 app:layout_constraintGuide_percent="0.73" />
 
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
@@ -489,5 +476,46 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.93" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline170"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.46" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline121"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline129"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline173"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.845" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline173"
+        app:layout_constraintEnd_toStartOf="@+id/guideline121"
+        app:layout_constraintStart_toStartOf="@+id/guideline170"
+        app:layout_constraintTop_toTopOf="@+id/guideline129"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

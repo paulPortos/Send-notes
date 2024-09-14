@@ -41,7 +41,7 @@
                 style="@android:style/Widget.DeviceDefault.ImageButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/material_on_background_disabled"
+                android:background="#00FFFFFF"
                 android:scaleType="fitStart"
                 android:src="@drawable/btnback"
                 app:layout_constraintBottom_toBottomOf="@id/guideline88"
@@ -294,13 +294,15 @@
                         app:layout_constraintTop_toTopOf="@+id/guideline125" />
 
                     <Switch
-                        android:id="@+id/switch2"
+                        android:id="@+id/sounds"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline122"
                         app:layout_constraintEnd_toEndOf="@id/guideline105"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@id/guideline103"
                         app:layout_constraintTop_toTopOf="@+id/guideline119"
+                        app:layout_constraintVertical_bias="1.0"
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                     <androidx.constraintlayout.widget.Guideline
@@ -534,16 +536,6 @@
                         android:orientation="horizontal"
                         app:layout_constraintGuide_percent="0.61" />
 
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline120"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline101"
-                        app:layout_constraintStart_toStartOf="@+id/guideline100"
-                        app:layout_constraintTop_toTopOf="@+id/guideline117" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -729,8 +721,47 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.164" />
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline180"
+        app:layout_constraintEnd_toStartOf="@+id/guideline178"
+        app:layout_constraintStart_toStartOf="@+id/guideline177"
+        app:layout_constraintTop_toTopOf="@+id/guideline179" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline177"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline178"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline179"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline180"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.78    " />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

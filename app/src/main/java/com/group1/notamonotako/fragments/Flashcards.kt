@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.EditTextFragmentAdapter
 
-class Flashcards : Fragment() {
+class  Flashcards : Fragment() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var btn_right: ImageButton

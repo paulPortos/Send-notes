@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.group1.notamonotako.R
 
 import retrofit2.Call
@@ -24,7 +25,7 @@ import retrofit2.Response
 class SettingsActivity : AppCompatActivity() {
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var progressBar : ProgressBar
-    private lateinit var signout : TextView
+    private lateinit var btnsign_out : AppCompatButton
     private lateinit var sounds : Switch
 
     private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
@@ -35,7 +36,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-         signout = findViewById(R.id.tvsignout)
+        btnsign_out = findViewById(R.id.btnsign_out)
         sounds = findViewById(R.id.sounds)
         progressBar = findViewById(R.id.progressBar)
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
@@ -58,9 +59,8 @@ class SettingsActivity : AppCompatActivity() {
             updateMediaPlayerVolume(!isChecked)
         }
 
-        signout.setOnClickListener {
+        btnsign_out.setOnClickListener {
             logoutUser()
-
             progressBar.visibility = View.VISIBLE
             mediaPlayer.start()
         }

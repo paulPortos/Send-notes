@@ -3,6 +3,7 @@ package com.group1.notamonotako.views
 import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -23,6 +24,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var btnLoginNow: Button
     private lateinit var btnSignIn: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var mediaPlayer: MediaPlayer
 
     // Initialize ViewModel using the factory to provide ApiService
     private val signUpViewModel: SignUpViewModel by viewModels {
@@ -42,11 +44,13 @@ class SignUpActivity : AppCompatActivity() {
         btnLoginNow = findViewById(R.id.btnSignUpNow)
         btnSignIn = findViewById(R.id.btnSignIn)
         etEmail = findViewById(R.id.etEmail)
-
+        mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
 
+
         btnLoginNow.setOnClickListener {
+            mediaPlayer.start()
             val email = etEmail.text.toString()
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
@@ -71,7 +75,9 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE
+            mediaPlayer.start()
         }
+
 
         // Observe registration result
         signUpViewModel.registrationResult.observe(this) { result ->
@@ -93,4 +99,5 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
+
 }

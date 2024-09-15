@@ -3,6 +3,7 @@ package com.group1.notamonotako.views
 import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,6 +27,8 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
     private lateinit var progressBar : ProgressBar
+    private lateinit var mediaPlayer: MediaPlayer
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,19 +49,25 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signin)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
-        // Initialize UI elements
+        // Initialize UI elements\
+        SoundManager.initialize(this)
+
         progressBar = findViewById(R.id.progressBar)
         btnSignup = findViewById(R.id.btnSignUp)
         etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
         btnForgot = findViewById(R.id.btnForgotPassword)
         btnLoginNow = findViewById(R.id.btnSignInNow)
+        mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
+
+
 
         // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
 
         // Handle login button click
         btnLoginNow.setOnClickListener {
+            mediaPlayer.start()
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
 
@@ -72,6 +81,7 @@ class SignInActivity : AppCompatActivity() {
 
         // Handle sign-up button click
         btnSignup.setOnClickListener {
+            mediaPlayer.start()
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE

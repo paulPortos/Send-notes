@@ -25,7 +25,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
+import java.io.IOException
 
 class MyNotes : Fragment() {
     lateinit var btnSettings : ImageButton
@@ -84,14 +86,15 @@ class MyNotes : Fragment() {
                         Toast.makeText(requireContext(), "Failed to fetch notes", Toast.LENGTH_SHORT).show()
                     }
                 }
-            } catch (e: Exception) {
-                if (isAdded) {
-                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                    Log.e("MyNotesFragment", "Error fetching notes", e)
-                }
+            } catch (e: HttpException) {
+                Toast.makeText(requireContext(), "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: IOException) {
+                Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.d("addnotes", e.message.toString())
+            }
             }
         }
     }
 
-}
+
 

@@ -1,5 +1,7 @@
 import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
+import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
+import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
@@ -33,7 +35,7 @@ interface ApiService {
 
     // Create a new note
     @POST("notes")
-    fun createNote(@Body noteRequest: NoteRequest): Call<Note>
+    suspend fun createNote(@Body response: PostnotesRequest): Response<PostnotesResponse>
 
     // Update a note
     @PUT("notes/{id}")

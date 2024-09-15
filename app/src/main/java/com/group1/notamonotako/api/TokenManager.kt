@@ -1,5 +1,6 @@
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 object TokenManager {
     private const val PREFS_NAME = "user_prefs"
@@ -11,11 +12,14 @@ object TokenManager {
     }
 
     fun saveToken(token: String) {
+        Log.d("TokenManager", "Saving token: $token")
         preferences.edit().putString(TOKEN_KEY, token).apply()
     }
 
     fun getToken(): String? {
-        return preferences.getString(TOKEN_KEY, null)
+        val token = preferences.getString(TOKEN_KEY, null)
+        Log.d("TokenManager", "Retrieved token: $token")
+        return token
     }
 
     fun clearToken() {

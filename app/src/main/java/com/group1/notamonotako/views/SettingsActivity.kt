@@ -60,6 +60,7 @@ class SettingsActivity : AppCompatActivity() {
 
         signout.setOnClickListener {
             logoutUser()
+
             progressBar.visibility = View.VISIBLE
             mediaPlayer.start()
         }

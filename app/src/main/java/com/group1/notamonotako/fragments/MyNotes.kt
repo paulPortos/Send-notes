@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
@@ -19,6 +20,9 @@ import com.group1.notamonotako.adapter.MyNotesAdapter
 import com.group1.notamonotako.api.requests_responses.NotesData
 import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.views.SettingsActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,58 +59,39 @@ class MyNotes : Fragment() {
     }
 
     private fun fetchNotes() {
-        val apiService = RetrofitInstance.create(ApiService::class.java)
+        lifecycleScope.launch {
+            try {
+                // Network call should happen on IO thread
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val response = withContext(Dispatchers.IO) {
+                    apiService.getNotes().execute() // Using execute() for synchronous call
+                }
 
-        apiService.getNotes().enqueue(object : Callback<List<Note>> {
-            override fun onResponse(call: Call<List<Note>>, response: Response<List<Note>>) {
                 if (response.isSuccessful) {
-                    val notes = response.body()!!
+                    val notes = response.body()
 
-                    if (isAdded) {
+                    // Ensure fragment is still attached before updating UI
+                    if (isAdded && notes != null) {
                         myNotesAdapter = MyNotesAdapter(requireContext(), notes)
                         rv_mynotes.adapter = myNotesAdapter
+                    } else {
+                        if (isAdded) {
+                            Toast.makeText(requireContext(), "No notes available", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 } else {
                     if (isAdded) {
                         Toast.makeText(requireContext(), "Failed to fetch notes", Toast.LENGTH_SHORT).show()
                     }
                 }
-            }
-
-            override fun onFailure(call: Call<List<Note>>, t: Throwable) {
+            } catch (e: Exception) {
                 if (isAdded) {
-                    Toast.makeText(requireContext(), "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
-                    Log.d("MyNotesFragment", t.message.toString())
+                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("MyNotesFragment", "Error fetching notes", e)
                 }
             }
-        })
-    }
-
-
-   /* private fun example(): List<NotesData> {
-        val title = listOf(
-            "Title 1",
-            "Title 2",
-            "Title 3"
-        )
-        val contents = listOf(
-            "Lorem Ipsum dolor",
-            "Lorem Ipsum set amet",
-            "Lorem Ipsum"
-        )
-        val dataList = mutableListOf<NotesData>()
-        for (i in title.indices) {
-            dataList.add(
-                NotesData(title[i % title.size], contents[i % contents.size])
-            )
         }
-        return dataList
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    }*/
 
 }
 

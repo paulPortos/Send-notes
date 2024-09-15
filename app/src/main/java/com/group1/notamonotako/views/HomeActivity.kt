@@ -1,5 +1,6 @@
 package com.group1.notamonotako.views
 
+
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle

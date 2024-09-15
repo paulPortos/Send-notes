@@ -5,6 +5,7 @@ import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
 import com.group1.notamonotako.api.requests_responses.signup.RegistrationResponses
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -16,11 +17,11 @@ interface ApiService {
 
     // User registration
     @POST("register")
-    fun register(@Body registrationRequest: RegisterRequests): Call<RegistrationResponses>
+    suspend fun register(@Body request: RegisterRequests): Response<RegistrationResponses>
 
     // User login
     @POST("login")
-    fun login(@Body loginRequest: Login): Call<LoginResponse>
+    suspend fun login(@Body response: Login): Response<LoginResponse>
 
     // Logout
     @POST("logout")

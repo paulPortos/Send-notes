@@ -11,9 +11,13 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var btnSignup: Button
@@ -25,8 +29,6 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
         // Initialize TokenManager
         TokenManager.init(this)
@@ -62,12 +64,9 @@ class SignInActivity : AppCompatActivity() {
 
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this@SignInActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
-                progressBar.visibility = View.VISIBLE
-
             } else {
-                loginUser(username, password)
                 progressBar.visibility = View.VISIBLE
-
+                loginUser(username, password)
             }
         }
 
@@ -80,17 +79,20 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
-        val apiService = RetrofitInstance.create(ApiService::class.java)
-        val loginRequest = Login(email = email, password = password)
-        val call = apiService.login(loginRequest)
+        lifecycleScope.launch {
+            val apiService = RetrofitInstance.create(ApiService::class.java)
+            val loginRequest = Login(email = email, password = password)
 
-        call.enqueue(object : retrofit2.Callback<LoginResponse> {
-            override fun onResponse(call: retrofit2.Call<LoginResponse>, response: retrofit2.Response<LoginResponse>) {
+            try {
+                // Make the network call and get the response
+                val response = apiService.login(loginRequest)
+
                 if (response.isSuccessful) {
-                    val authResponse = response.body()
-                    authResponse?.let {
+                    // If the response is successful, get the LoginResponse body
+                    response.body()?.let { loginResponse ->
                         // Save the token
-                        TokenManager.saveToken(it.token)
+                        TokenManager.saveToken(loginResponse.token)
+
                         // Navigate to the HomeActivity
                         Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@SignInActivity, HomeActivity::class.java)
@@ -99,16 +101,19 @@ class SignInActivity : AppCompatActivity() {
                         finish()  // Close SignInActivity
                     }
                 } else {
+                    // Handle the error case (e.g., invalid credentials)
                     progressBar.visibility = View.INVISIBLE
                     Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }
-            }
-
-            override fun onFailure(call: retrofit2.Call<LoginResponse>, t: Throwable) {
+            } catch (e: HttpException) {
                 progressBar.visibility = View.INVISIBLE
-                Toast.makeText(this@SignInActivity, "Network error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.d("tester", t.message.toString())
+                Toast.makeText(this@SignInActivity, "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: IOException) {
+                progressBar.visibility = View.INVISIBLE
+                Toast.makeText(this@SignInActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.d("SignInActivity", e.message.toString())
             }
-        })
+        }
     }
+
 }

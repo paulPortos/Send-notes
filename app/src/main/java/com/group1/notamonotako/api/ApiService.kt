@@ -1,3 +1,4 @@
+import com.group1.notamonotako.api.requests_responses.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
@@ -40,6 +41,9 @@ interface ApiService {
     // Update a note
     @PUT("notes/{id}")
     fun updateNote(@Body noteRequest: NoteRequest): Call<Note>
+
+    @GET("flashcards")
+    suspend fun getFlashcards(): Response<List<GetFlashcards>>
 
     // Delete a note
     @DELETE("notes/{id}")

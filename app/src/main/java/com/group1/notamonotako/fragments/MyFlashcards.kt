@@ -1,70 +1,98 @@
 package com.group1.notamonotako.fragments
 
-import android.content.Context
+import ApiService
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.graphics.Rect
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.FlashcardsData
-import com.group1.notamonotako.views.GridSpacingMyFlashcards
 import com.group1.notamonotako.adapter.MyFlashcardsAdapter
 import com.group1.notamonotako.views.SettingsActivity
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 class MyFlashcards : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    private lateinit var btnSettings: ImageButton
+    private lateinit var myFlashcardsAdapter: MyFlashcardsAdapter
+    private lateinit var rv_myFlashcards: RecyclerView
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_my_flashcards, container, false)
+        btnSettings = view.findViewById(R.id.btnSettings)
+        rv_myFlashcards = view.findViewById(R.id.rv_myflashcards)
 
+        // Set up Grid layout with 2 columns
+        rv_myFlashcards.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        val btnSettings = view.findViewById<ImageButton>(R.id.btnSettings)
+        // Set up spacing between flashcards (16dp space between items)
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing) // Replace with a value in dimens.xml
+        rv_myFlashcards.addItemDecoration(SpacesItemDecoration(spacingInPixels))
+
         btnSettings.setOnClickListener {
-            val intent = Intent(requireContext(),SettingsActivity::class.java)
+            val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
         }
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.rv_myflashcards)
-        val spanCount = 2
-        val spacing = 25 // Space in pixels
-        val includeEdge = true
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), spanCount)
-        recyclerView.addItemDecoration(GridSpacingMyFlashcards(spanCount, spacing, includeEdge))
+        fetchFlashcards()
 
-        val adapter = MyFlashcardsAdapter(example())
-        recyclerView.adapter = adapter
         return view
     }
 
-    private fun example(): List<FlashcardsData> {
-        val title = listOf(
-            "Title 1",
-            "Title 2",
-            "Title 3"
-        )
-        val contents = listOf(
-            "Lorem Ipsum dolor",
-            "Lorem Ipsum set amet",
-            "Lorem Ipsum"
-        )
-        val dataList = mutableListOf<FlashcardsData>()
-        for (i in title.indices) {
-            dataList.add(
-                FlashcardsData(title[i % title.size], contents[i % contents.size])
-            )
+    private fun fetchFlashcards() {
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val response = withContext(Dispatchers.IO) {
+                    apiService.getFlashcards() // Using execute() for synchronous call
+                }
+
+                if (response.isSuccessful) {
+                    val flashcards = response.body()
+
+                    if (isAdded && flashcards != null) {
+                        myFlashcardsAdapter = MyFlashcardsAdapter(requireContext(), flashcards)
+                        rv_myFlashcards.adapter = myFlashcardsAdapter
+                    } else {
+                        if (isAdded) {
+                            Toast.makeText(requireContext(), "No flashcards available", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    if (isAdded) {
+                        Toast.makeText(requireContext(), "Failed to fetch flashcards", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: HttpException) {
+                Toast.makeText(requireContext(), "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: IOException) {
+                Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.d("flashcards", e.message.toString())
+            }
         }
-        return dataList
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    }
+    // Inner class to handle spacing between items in the grid
+    inner class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            val position = parent.getChildAdapterPosition(view)
 
+            outRect.left = space / 2
+            outRect.right = space / 2
+            outRect.bottom = space
+
+
+        }
+    }
 }

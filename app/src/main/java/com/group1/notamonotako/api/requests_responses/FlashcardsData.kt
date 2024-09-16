@@ -1,6 +1,10 @@
 package com.group1.notamonotako.api.requests_responses
 
-class FlashcardsData (
+class GetFlashcards (
     val title: String ,
-    val contents: String
+    val cards: List<String>,
+)
+class postFlashcards (
+    val title: String ,
+    val cards: List<String>,
 )

@@ -137,6 +137,21 @@
                         app:layout_constraintTop_toTopOf="@id/guideline107" />
 
                     <TextView
+                        android:id="@+id/tvemail"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="15sp"
+                        android:autoSizeTextType="uniform"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Email"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline101"
+                        app:layout_constraintStart_toStartOf="@+id/guideline99"
+                        app:layout_constraintTop_toTopOf="@+id/guideline140" />
+
+                    <TextView
                         android:id="@+id/tvusername"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -155,17 +170,33 @@
                         android:id="@+id/tvusername2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="10000sp"
+                        android:autoSizeMaxTextSize="35sp"
                         android:autoSizeMinTextSize="10sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppins_medium"
                         android:text="@string/username"
-                        android:textAlignment="textEnd"
                         android:textColor="@color/grey"
                         app:layout_constraintBottom_toBottomOf="@id/guideline111"
                         app:layout_constraintEnd_toEndOf="@id/guideline105"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@id/guideline102"
-                        app:layout_constraintTop_toTopOf="@id/guideline110" />
+                        app:layout_constraintTop_toTopOf="@id/guideline110"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/tvemail2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:autoSizeMaxTextSize="16sp"
+                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeTextType="uniform"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Email"
+                        android:textColor="@color/grey"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline105"
+                        app:layout_constraintStart_toStartOf="@+id/guideline102"
+                        app:layout_constraintTop_toTopOf="@+id/guideline140" />
 
                     <TextView
                         android:id="@+id/tvpassword"
@@ -225,6 +256,20 @@
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
                         app:layout_constraintTop_toTopOf="@id/guideline109"
+                        app:tint="@color/background2" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00FFFFFF"
+                        android:backgroundTint="#DBDADA"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/baseline_email_24"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline98"
+                        app:layout_constraintStart_toStartOf="@+id/guideline97"
+                        app:layout_constraintTop_toTopOf="@+id/guideline140"
                         app:tint="@color/background2" />
 
                     <ImageView
@@ -401,56 +446,56 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.18" />
+                        app:layout_constraintGuide_percent="0.26" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline110"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.20" />
+                        app:layout_constraintGuide_percent="0.26" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline111"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.26" />
+                        app:layout_constraintGuide_percent="0.32" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline112"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.26" />
+                        app:layout_constraintGuide_percent="0.32" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline113"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.3" />
+                        app:layout_constraintGuide_percent="0.34" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline114"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.32" />
+                        app:layout_constraintGuide_percent="0.34" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline115"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.38" />
+                        app:layout_constraintGuide_percent="0.4" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline116"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.38" />
+                        app:layout_constraintGuide_percent="0.4" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline117"
@@ -545,10 +590,10 @@
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/white_round"
                         android:clickable="true"
+                        android:elevation="400sp"
                         android:focusable="true"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Sign Out"
-                        android:elevation="400sp"
                         android:textAlignment="center"
                         android:textColor="#FF2828"
                         android:textSize="18sp"
@@ -560,8 +605,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/btnsignout"
                         android:elevation="200dp"
+                        android:src="@drawable/btnsignout"
                         app:layout_constraintBottom_toTopOf="@+id/guideline133"
                         app:layout_constraintEnd_toStartOf="@+id/guideline106"
                         app:layout_constraintStart_toStartOf="@+id/guideline98"
@@ -580,6 +625,20 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layout_constraintGuide_percent=".94" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline139"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.24" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline140"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.18" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

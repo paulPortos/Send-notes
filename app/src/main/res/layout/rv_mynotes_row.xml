@@ -24,6 +24,8 @@
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             android:textColor="@android:color/black"
+            android:fontFamily="@font/noto_sans"
+
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline160"
@@ -50,6 +52,8 @@
             android:text="Contents"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:fontFamily="@font/noto_sans"
+
             app:layout_constraintBottom_toTopOf="@+id/guideline165"
             app:layout_constraintEnd_toStartOf="@+id/guideline159"
             app:layout_constraintStart_toStartOf="@+id/guideline157"

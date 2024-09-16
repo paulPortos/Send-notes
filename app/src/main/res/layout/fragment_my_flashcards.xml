@@ -38,7 +38,7 @@
                 android:autoSizeMaxTextSize="10000sp"
                 android:autoSizeMinTextSize="10sp"
                 android:autoSizeTextType="uniform"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/noto_sans_semibold"
                 android:text="My FlashCards"
                 android:textColor="@color/black"
                 android:textSize="20sp"

@@ -57,6 +57,8 @@
                 android:autoSizeMaxTextSize="15sp"
                 android:autoSizeTextType="uniform"
                 android:textSize="12sp"
+                android:fontFamily="@font/noto_sans"
+
                 app:layout_constraintBottom_toTopOf="@+id/guideline61"
                 app:layout_constraintEnd_toStartOf="@+id/guideline58"
                 app:layout_constraintHorizontal_bias="0.0"

@@ -18,7 +18,7 @@
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/textview"
-        android:fontFamily="@font/lato_light"
+        android:fontFamily="@font/noto_sans"
         android:gravity="center"
         android:text="@string/title"
         android:textColor="@color/white"
@@ -38,7 +38,8 @@
         android:autoSizeMinTextSize="12sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/btn_purple_corner"
-        android:fontFamily="@font/poppins_extrabold"
+        android:fontFamily="@font/noto_sans_semibold"
+
         android:text="@string/signin"
         android:textColor="@color/background2"
         android:textSize="12sp"
@@ -57,7 +58,7 @@
         android:autoSizeMinTextSize="12sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/btn_purple"
-        android:fontFamily="@font/poppins_extrabold"
+        android:fontFamily="@font/noto_sans_semibold"
         android:text="@string/signup"
         android:textColor="@color/white"
         android:textSize="12sp"
@@ -311,6 +312,9 @@
 
     </FrameLayout>
 
+    <!-- responsiveness of the ui -->
+
+    <!-- vertical guidlines -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignUpNow"
         android:layout_width="0dp"
@@ -319,7 +323,7 @@
         android:autoSizeMinTextSize="18sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/btn_purple"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/noto_sans_semibold"
         android:text="@string/signup"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -329,11 +333,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline16"
         app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- responsiveness of the ui -->
-
-    <!-- vertical guidlines -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"

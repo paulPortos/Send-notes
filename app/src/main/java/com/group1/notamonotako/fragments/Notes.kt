@@ -75,36 +75,35 @@ class   Notes : Fragment() {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
-    private fun CreateData( title: String , contents : String ){
+    private fun CreateData(title: String, contents: String) {
         lifecycleScope.launch {
             val apiService = RetrofitInstance.create(ApiService::class.java)
-            val Postnotes = PostnotesRequest(title = title, contents = contents , public = false , to_public = false )
+            val postNotes = PostnotesRequest(title = title, contents = contents, public = false, to_public = false)
 
             try {
                 // Make the network call and get the response
-                val response = apiService.createNote(Postnotes)
-
+                val response = apiService.createNote(postNotes)
 
                 if (response.isSuccessful) {
-                    // If the response is successful, get the LoginResponse body
+                    // Navigate to the Mynotes activity only once
                     val intent = Intent(requireContext(), Mynotes::class.java)
                     intent.putExtra("title", title)
                     intent.putExtra("contents", contents)
+
+                    // Set the flags to clear the back stack
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
 
+                    // Finish the current activity or fragment to avoid going back
+                    activity?.finish()
+                } else {
+                    Toast.makeText(requireContext(), "Failed to create note", Toast.LENGTH_SHORT).show()
                 }
-
-
-
-
-
-
-
-            }catch (e: HttpException) {
+            } catch (e: HttpException) {
                 Toast.makeText(requireContext(), "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
                 Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.d("SignInActivity", e.message.toString())
+                Log.d("NotesFragment", e.message.toString())
             }
         }
     }

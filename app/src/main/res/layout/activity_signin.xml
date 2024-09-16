@@ -18,7 +18,7 @@
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/textview"
-        android:fontFamily="@font/poppins_extrabold"
+        android:fontFamily="@font/noto_sans"
         android:gravity="center"
         android:text="@string/title"
         android:textColor="@color/white"
@@ -30,6 +30,7 @@
         app:layout_constraintTop_toTopOf="@id/barrier"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignInNow"
         android:layout_width="0dp"
@@ -38,16 +39,16 @@
         android:autoSizeMinTextSize="18sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/btn_purple"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/noto_sans_semibold"
         android:text="@string/signin"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline32"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline31"
-        app:layout_constraintVertical_bias="0.955" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -94,7 +95,7 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/btn_purple"
-                android:fontFamily="@font/poppins_extrabold"
+                android:fontFamily="@font/noto_sans_semibold"
                 android:text="@string/signin"
                 android:textColor="@color/white"
                 android:textSize="112sp"
@@ -113,7 +114,7 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/btn_purple_corner"
-                android:fontFamily="@font/poppins_extrabold"
+                android:fontFamily="@font/noto_sans_semibold"
                 android:text="@string/signup"
                 android:textColor="@color/background2"
                 android:textSize="12sp"

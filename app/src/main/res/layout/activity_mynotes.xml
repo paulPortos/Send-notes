@@ -12,12 +12,14 @@
         android:id="@+id/Title"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/round"
-        android:backgroundTint="@color/white"
-        android:ems="10"
         android:autoSizeMaxTextSize="1000sp"
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/noto_sans"
+
+        android:ems="10"
         android:inputType="text"
         android:padding="10sp"
         android:text="Name"
@@ -26,9 +28,10 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline72"
         app:layout_constraintEnd_toStartOf="@+id/guideline64"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toTopOf="@+id/guideline71"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/Contents"
@@ -41,6 +44,7 @@
         android:backgroundTint="@color/white"
         android:ems="10"
         android:gravity="start"
+        android:fontFamily="@font/noto_sans"
         android:inputType="textMultiLine"
         android:lines="1000"
         android:maxLines="1000"
@@ -120,6 +124,8 @@
         android:autoSizeMaxTextSize="1000sp"
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
+        android:fontFamily="@font/noto_sans"
+
         android:text="Date"
         android:textAlignment="center"
         android:textSize="25sp"

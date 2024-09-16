@@ -51,10 +51,11 @@
                     android:autoSizeMaxTextSize="10000sp"
                     android:autoSizeMinTextSize="10sp"
                     android:autoSizeTextType="uniform"
-                    android:fontFamily="@font/poppins_bold"
                     android:text="@string/title"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+                    android:fontFamily="@font/noto_sans_semibold"
+
                     app:layout_constraintBottom_toTopOf="@+id/guideline44"
                     app:layout_constraintEnd_toStartOf="@+id/guideline41"
                     app:layout_constraintHorizontal_bias="0.108"

@@ -25,7 +25,6 @@ class HomeActivity : AppCompatActivity() {
         val token = TokenManager.getToken()
         Log.d("TOKENER", "Stored Token: $token")
 
-
         // Check if the user is logged in
         if (!TokenManager.isLoggedIn()) {
             // If not logged in, redirect to SignInActivity
@@ -42,8 +41,17 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Load the default fragment
-        replaceFragment(Home())
+        // Check for intent extras to determine which fragment to show
+        if (savedInstanceState == null) {
+            val showMyNotesFragment = intent.getBooleanExtra("showMyNotesFragment", false)
+            if (showMyNotesFragment) {
+                replaceFragment(MyNotes())
+                binding.bottomNavigationView.selectedItemId = R.id.btnnotes
+            } else {
+                replaceFragment(Home())
+                binding.bottomNavigationView.selectedItemId = R.id.btnhome
+            }
+        }
 
         // Set up bottom navigation listener
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
@@ -61,7 +69,7 @@ class HomeActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, fragment)
+        fragmentTransaction.addToBackStack(null)  // Optionally add to back stack if needed
         fragmentTransaction.commit()
     }
-
 }

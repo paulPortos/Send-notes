@@ -15,13 +15,8 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
-import com.group1.notamonotako.adapter.FlashcardsAdapter
-import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
-import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.views.Mynotes
 import kotlinx.coroutines.launch
 import retrofit2.HttpException

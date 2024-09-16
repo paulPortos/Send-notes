@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.signin.Login
-import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException

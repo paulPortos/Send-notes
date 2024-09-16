@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.GetFlashcards
+import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 
 class FlashcardsAdapter(private var data: List<GetFlashcards>)  : RecyclerView.Adapter<FlashcardsAdapter.ItemViewHolder>(){
 

@@ -1,9 +1,7 @@
 package com.group1.notamonotako.fragments
 
 import ApiService
-import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,16 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
-import com.group1.notamonotako.api.requests_responses.NotesData
-import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.views.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
 
 class MyNotes : Fragment() {

@@ -31,11 +31,13 @@ class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerV
         holder.title.text = item.title
         holder.contents.text = item.contents
 
+
             holder.Notes.setOnClickListener {
             val intent = Intent(it.context, Mynotes::class.java)
 
             intent.putExtra("title", item.title)
             intent.putExtra("contents", item.contents)
+            intent.putExtra("date", item.updated_at)
 
             it.context.startActivity(intent)
         }

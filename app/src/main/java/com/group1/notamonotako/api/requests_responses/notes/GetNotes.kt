@@ -7,6 +7,8 @@ data class Note(
     val id: Int,
     val title: String,
     val contents: String,
+    val updated_at : String
+
 )
 
 data class NoteRequest(

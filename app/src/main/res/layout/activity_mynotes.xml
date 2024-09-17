@@ -136,7 +136,7 @@
         app:layout_constraintVertical_bias="0.028" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/Update_Notes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:0"

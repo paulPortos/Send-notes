@@ -3,6 +3,7 @@ import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
+import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
@@ -41,7 +42,11 @@ interface ApiService {
 
     // Update a note
     @PUT("notes/{id}")
-    fun updateNote(@Body noteRequest: NoteRequest): Call<Note>
+    suspend fun updateNote(
+        @Header("Authorization") token: String,
+        @Path("id") noteId: Int,
+        @Body noteRequest: UpdateNotes // Add this to pass the updated note content
+    ): Response<Void>
 
     @GET("flashcards")
     suspend fun getFlashcards(): Response<List<GetFlashcards>>

@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.requests_responses.notes.Note
+import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,6 +26,7 @@ class Mynotes : AppCompatActivity() {
     private lateinit var Content: EditText
     private lateinit var Date: TextView
     private lateinit var deletebtn : Button
+    private lateinit var UpdateNotes : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,7 @@ class Mynotes : AppCompatActivity() {
         Title = findViewById(R.id.Title)
         Content = findViewById(R.id.Contents)
         deletebtn = findViewById(R.id.deletebtn)
+        UpdateNotes = findViewById(R.id.Update_Notes)
 
         val Intent = intent
         val Title = Intent.getStringExtra("title")
@@ -64,6 +69,13 @@ class Mynotes : AppCompatActivity() {
                 DeleteNote(Note_id)
 
             }
+        }
+        UpdateNotes.setOnClickListener {
+            if (Note_id != -1) {
+                update(Note_id)
+
+            }
+
 
         }
     }
@@ -74,7 +86,6 @@ class Mynotes : AppCompatActivity() {
             Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
             return
         }
-
         Log.d("DeleteNote", "Token: $token, Note ID: $noteId")
 
         lifecycleScope.launch {
@@ -95,6 +106,49 @@ class Mynotes : AppCompatActivity() {
                     Log.e("DeleteNote", "Error: ${response.code()}, Message: ${response.message()}")
                     Toast.makeText(this@Mynotes, "Failed to delete note: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@Mynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun update(noteId: Int) {
+        val token = TokenManager.getToken()
+        if (token == null) {
+            Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val updatedTitle = Title.text.toString()
+        val updatedContent = Content.text.toString()
+
+        if (updatedTitle.isEmpty() || updatedContent.isEmpty()) {
+            Toast.makeText(this, "Title or content cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        Log.d("UpdateNote", "Token: $token, Note ID: $noteId")
+
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val noteRequest = UpdateNotes(title = updatedTitle, contents = updatedContent)
+
+                val response = withContext(Dispatchers.IO) {
+                    apiService.updateNote("Bearer $token", noteId, noteRequest)  // Pass the updated note
+                }
+                if (response.isSuccessful) {
+                    Toast.makeText(this@Mynotes, "Note updated successfully", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@Mynotes, HomeActivity::class.java)
+                    intent.putExtra("showMyNotesFragment", true)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()  // Finish Mynotes activity to avoid returning to it
+                } else {
+                    Toast.makeText(this@Mynotes, "Failed to update note: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(this@Mynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()

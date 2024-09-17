@@ -96,7 +96,7 @@
                         android:autoSizeMaxTextSize="10000sp"
                         android:autoSizeMinTextSize="15sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/noto_sans"
                         android:text="Audio"
                         android:textColor="@color/grey"
                         android:textSize="15sp"
@@ -112,7 +112,7 @@
                         android:autoSizeMaxTextSize="10000sp"
                         android:autoSizeMinTextSize="15sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/noto_sans"
                         android:text="Information"
                         android:textColor="@color/grey"
                         app:layout_constraintBottom_toTopOf="@+id/guideline124"
@@ -127,7 +127,7 @@
                         android:autoSizeMaxTextSize="10000sp"
                         android:autoSizeMinTextSize="15sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/noto_sans"
                         android:text="Account Settings"
                         android:textColor="@color/grey"
                         android:textSize="15sp"
@@ -140,27 +140,28 @@
                         android:id="@+id/tvemail"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="15sp"
+                        android:autoSizeMaxTextSize="10000sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/noto_sans"
                         android:text="Email"
+                        android:textSize="12sp"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline141"
                         app:layout_constraintEnd_toStartOf="@+id/guideline101"
                         app:layout_constraintStart_toStartOf="@+id/guideline99"
-                        app:layout_constraintTop_toTopOf="@+id/guideline140" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline142" />
 
                     <TextView
                         android:id="@+id/tvusername"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/username"
                         android:textColor="@color/black"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@id/guideline111"
                         app:layout_constraintEnd_toEndOf="@id/guideline101"
                         app:layout_constraintStart_toStartOf="@id/guideline99"
@@ -170,10 +171,11 @@
                         android:id="@+id/tvusername2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="35sp"
-                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeMaxTextSize="10sp"
+                        android:autoSizeMinTextSize="8sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="8sp"
+                        android:fontFamily="@font/noto_sans"
                         android:text="@string/username"
                         android:textColor="@color/grey"
                         app:layout_constraintBottom_toBottomOf="@id/guideline111"
@@ -187,25 +189,27 @@
                         android:id="@+id/tvemail2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="16sp"
-                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeMaxTextSize="10sp"
+                        android:autoSizeMinTextSize="8sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="8sp"
+                        android:fontFamily="@font/noto_sans"
                         android:text="Email"
                         android:textColor="@color/grey"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline139"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline141"
                         app:layout_constraintEnd_toStartOf="@+id/guideline105"
                         app:layout_constraintStart_toStartOf="@+id/guideline102"
-                        app:layout_constraintTop_toTopOf="@+id/guideline140" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline142" />
 
                     <TextView
                         android:id="@+id/tvpassword"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="15sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/noto_sans"
                         android:text="@string/password"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="@id/guideline115"
@@ -218,7 +222,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="15sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Sounds"
@@ -233,7 +237,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppins_medium"
                         android:text="About"
@@ -260,8 +264,8 @@
 
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:background="#00FFFFFF"
                         android:backgroundTint="#DBDADA"
                         android:scaleType="centerInside"
@@ -383,21 +387,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.326" />
+                        app:layout_constraintGuide_percent="0.46" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline100"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.425" />
+                        app:layout_constraintGuide_percent="0.46" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline101"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.51" />
+                        app:layout_constraintGuide_percent="0.46" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline102"
@@ -453,14 +457,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.26" />
+                        app:layout_constraintGuide_percent="0.27" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline111"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.32" />
+                        app:layout_constraintGuide_percent="0.3" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline112"
@@ -481,14 +485,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.34" />
+                        app:layout_constraintGuide_percent="0.35" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline115"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.4" />
+                        app:layout_constraintGuide_percent="0.38" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline116"
@@ -558,28 +562,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.74" />
+                        app:layout_constraintGuide_percent="0.75" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline127"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.80" />
+                        app:layout_constraintGuide_percent="0.79" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline128"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.80" />
+                        app:layout_constraintGuide_percent="0.81" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline166"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.61" />
+                        app:layout_constraintGuide_percent="0.59" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnsign_out"
@@ -639,6 +643,20 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layout_constraintGuide_percent="0.18" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline141"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.22" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline142"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.19" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

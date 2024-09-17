@@ -125,7 +125,6 @@
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/noto_sans"
-
         android:text="Date"
         android:textAlignment="center"
         android:textSize="25sp"

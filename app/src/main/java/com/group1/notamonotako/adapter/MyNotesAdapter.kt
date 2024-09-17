@@ -38,6 +38,7 @@ class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerV
             intent.putExtra("title", item.title)
             intent.putExtra("contents", item.contents)
             intent.putExtra("date", item.updated_at)
+            intent.putExtra("note_id",item.id)
 
             it.context.startActivity(intent)
         }

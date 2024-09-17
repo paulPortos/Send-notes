@@ -15,6 +15,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.DELETE
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -47,6 +48,8 @@ interface ApiService {
 
     // Delete a note
     @DELETE("notes/{id}")
-    fun deleteNote(@Body noteRequest: NoteRequest): Call<Void>
-    abstract fun signUpUser(registrationRequest: RegisterRequests): Any
+    suspend fun deleteNote(
+        @Header("Authorization") token: String,
+        @Path("id") noteId: Int
+    ): Response<Void>
 }

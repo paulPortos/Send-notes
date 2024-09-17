@@ -84,6 +84,7 @@ class   Notes : Fragment() {
                     val intent = Intent(requireContext(), Mynotes::class.java)
                     intent.putExtra("title", title)
                     intent.putExtra("contents", contents)
+                    Toast.makeText(requireContext(), "Note created successfully", Toast.LENGTH_SHORT).show()
 
                     // Set the flags to clear the back stack
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

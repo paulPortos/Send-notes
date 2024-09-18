@@ -80,18 +80,30 @@ class   Notes : Fragment() {
                 val response = apiService.createNote(postNotes)
 
                 if (response.isSuccessful) {
-                    // Navigate to the Mynotes activity only once
-                    val intent = Intent(requireContext(), Mynotes::class.java)
-                    intent.putExtra("title", title)
-                    intent.putExtra("contents", contents)
-                    Toast.makeText(requireContext(), "Note created successfully", Toast.LENGTH_SHORT).show()
+                    // Get the newly created note's ID from the response
+                    val noteId = response.body()?.id
+                    val dateString = response.body()?.updated_at // Assuming this is available in the response
 
-                    // Set the flags to clear the back stack
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
+                    if (noteId != null) {
+                        // Navigate to the Mynotes activity with the created note's details
+                        val intent = Intent(requireContext(), Mynotes::class.java).apply {
+                            putExtra("title", title)
+                            putExtra("contents", contents)
+                            putExtra("note_id", noteId)
+                            putExtra("date", dateString) // Add date if it's available
+                        }
 
-                    // Finish the current activity or fragment to avoid going back
-                    activity?.finish()
+                        Toast.makeText(requireContext(), "Note created successfully", Toast.LENGTH_SHORT).show()
+
+                        // Set the flags to clear the back stack
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+
+                        // Finish the current activity or fragment to avoid going back
+                        activity?.finish()
+                    } else {
+                        Toast.makeText(requireContext(), "Note created but ID is missing", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Failed to create note", Toast.LENGTH_SHORT).show()
                 }

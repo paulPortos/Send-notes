@@ -11,6 +11,7 @@ data class PostnotesRequest(
 data class PostnotesResponse(
     val message: String,
     val id: Int,
-    val user_id: Int
-
+    val user_id: Int,
+    val updated_at: String
 )
+

@@ -13,6 +13,7 @@ class AddFlashcards : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var btnRight: ImageButton
+    private lateinit var btnLeft : ImageButton
     private lateinit var btnBack: ImageButton
     private val dataList = mutableListOf<Pair<String, String>>()
     private lateinit var adapter: EditTextFragmentAdapter
@@ -28,12 +29,22 @@ class AddFlashcards : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         btnRight = findViewById(R.id.btn_right)
         btnBack = findViewById(R.id.btn_back)
+        btnLeft = findViewById(R.id.btn_left)
 
         // Initialize data list with one blank card
         dataList.add(Pair("", ""))
 
         adapter = EditTextFragmentAdapter(this, dataList)
         viewPager.adapter = adapter
+        viewPager.setUserInputEnabled(false)
+        btnLeft.setOnClickListener {
+            saveCurrentPageData()
+            val currentItem =viewPager.currentItem
+
+            if(currentItem>0){
+                viewPager.currentItem = currentItem -1
+            }
+        }
 
         btnRight.setOnClickListener {
             saveCurrentPageData()

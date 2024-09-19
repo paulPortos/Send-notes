@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.group1.notamonotako.fragments.EditTextFragment
+import com.group1.notamonotako.views.AddFlashcards
 
-class EditTextFragmentAdapter(fragment: Fragment, private val dataList: MutableList<Pair<String, String>>)
+class EditTextFragmentAdapter(fragment: AddFlashcards, private val dataList: MutableList<Pair<String, String>>)
     : FragmentStateAdapter(fragment) {
 
     private val fragmentMap = mutableMapOf<Int, EditTextFragment>()
@@ -15,7 +16,6 @@ class EditTextFragmentAdapter(fragment: Fragment, private val dataList: MutableL
     override fun createFragment(position: Int): Fragment {
         val fragment = EditTextFragment()
         fragment.arguments = Bundle().apply {
-            putString("title", dataList[position].first)
             putString("contents", dataList[position].second)
         }
         fragmentMap[position] = fragment

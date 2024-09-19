@@ -8,7 +8,8 @@ data class Login(
 )
 class LoginResponse(
     val token: String,
-    val user: User
+    val user: User,
+    val email: String
 )
 
 data class User(

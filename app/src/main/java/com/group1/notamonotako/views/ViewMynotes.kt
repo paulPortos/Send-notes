@@ -6,27 +6,29 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
+import com.group1.notamonotako.fragments.MyFlashcards
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class Mynotes : AppCompatActivity() {
+class ViewMynotes : AppCompatActivity() {
 
     private lateinit var Title: EditText
     private lateinit var Content: EditText
     private lateinit var Date: TextView
     private lateinit var deletebtn : Button
     private lateinit var UpdateNotes : ImageView
+    private lateinit var  btnback : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class Mynotes : AppCompatActivity() {
         Title = findViewById(R.id.Title)
         Content = findViewById(R.id.Contents)
         deletebtn = findViewById(R.id.deletebtn)
+        btnback = findViewById(R.id.btnback)
         UpdateNotes = findViewById(R.id.Update_Notes)
 
         val Intent = intent
@@ -62,6 +65,10 @@ class Mynotes : AppCompatActivity() {
                 this.Date.text = "Invalid date"
             }
         }
+        btnback.setOnClickListener{
+            val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
 
         deletebtn.setOnClickListener{
@@ -80,6 +87,7 @@ class Mynotes : AppCompatActivity() {
         }
     }
 
+
     private fun DeleteNote(noteId: Int) {
         val token = TokenManager.getToken()
         if (token == null) {
@@ -96,19 +104,19 @@ class Mynotes : AppCompatActivity() {
                 }
 
                 if (response.isSuccessful) {
-                    Toast.makeText(this@Mynotes, "Note deleted successfully", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@Mynotes, HomeActivity::class.java)
+                    Toast.makeText(this@ViewMynotes, "Note deleted successfully", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
                     intent.putExtra("showMyNotesFragment", true)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()  // Finish Mynotes activity to avoid returning to it
                 } else {
                     Log.e("DeleteNote", "Error: ${response.code()}, Message: ${response.message()}")
-                    Toast.makeText(this@Mynotes, "Failed to delete note: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ViewMynotes, "Failed to delete note: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this@Mynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -139,19 +147,19 @@ class Mynotes : AppCompatActivity() {
                     apiService.updateNote("Bearer $token", noteId, noteRequest)  // Pass the updated note
                 }
                 if (response.isSuccessful) {
-                    Toast.makeText(this@Mynotes, "Note updated successfully", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@Mynotes, HomeActivity::class.java)
+                    Toast.makeText(this@ViewMynotes, "Note updated successfully", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
                     intent.putExtra("showMyNotesFragment", true)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()  // Finish Mynotes activity to avoid returning to it
                 } else {
-                    Toast.makeText(this@Mynotes, "Failed to update note: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ViewMynotes, "Failed to update note: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this@Mynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

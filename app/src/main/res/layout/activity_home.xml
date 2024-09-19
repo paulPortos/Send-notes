@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline169"
         app:flow_horizontalStyle="spread_inside"
-        app:labelVisibilityMode="selected"
+        app:labelVisibilityMode="labeled"
         app:itemRippleColor="@null"
 
         app:menu="@menu/menu" />

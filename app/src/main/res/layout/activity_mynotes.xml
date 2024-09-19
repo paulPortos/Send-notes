@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".views.Mynotes">
+    tools:context=".views.ViewMynotes">
 
     <EditText
         android:id="@+id/Title"
@@ -121,19 +121,20 @@
         android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeMaxTextSize="1000sp"
-        android:autoSizeMinTextSize="1sp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="16sp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/noto_sans"
         android:text="Date"
         android:textAlignment="center"
-        android:textSize="25sp"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline78"
-        app:layout_constraintEnd_toStartOf="@+id/guideline81"
-        app:layout_constraintStart_toStartOf="@+id/guideline82"
+        app:layout_constraintEnd_toStartOf="@+id/guideline69"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline65"
         app:layout_constraintTop_toTopOf="@+id/guideline77"
-        app:layout_constraintVertical_bias="0.028" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/Update_Notes"
@@ -167,7 +168,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.44" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline68"
@@ -181,7 +182,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.58" />
+        app:layout_constraintGuide_percent="0.65" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline70"
@@ -244,7 +245,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.09" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline79"

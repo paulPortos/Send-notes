@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.notes.Note
-import com.group1.notamonotako.views.Mynotes
+import com.group1.notamonotako.views.ViewMynotes
 
 class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerView.Adapter<MyNotesAdapter.NotesViewHolder>() {
 
@@ -33,7 +33,7 @@ class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerV
 
 
             holder.Notes.setOnClickListener {
-            val intent = Intent(it.context, Mynotes::class.java)
+            val intent = Intent(it.context, ViewMynotes::class.java)
 
             intent.putExtra("title", item.title)
             intent.putExtra("contents", item.contents)

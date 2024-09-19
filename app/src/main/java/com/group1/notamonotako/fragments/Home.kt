@@ -12,7 +12,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
 import com.group1.notamonotako.R
 import com.group1.notamonotako.views.SettingsActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.adapter.HomeAdapter
 import com.group1.notamonotako.api.requests_responses.home.HomeData
+import com.group1.notamonotako.views.AddFlashcards
+import com.group1.notamonotako.views.AddNotes
 
 class Home : Fragment() {
     lateinit var flashcardsFabBtn : FloatingActionButton
@@ -69,19 +70,14 @@ class Home : Fragment() {
 
 
         flashcardsFabBtn.setOnClickListener {
-            val Flashcards = Flashcards()
-            val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.frameLayout, Flashcards)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            val intent = Intent(requireContext(), AddFlashcards::class.java) // Create intent for Notes activity
+            startActivity(intent)
         }
 
         notesFabBtn.setOnClickListener {
-            val Notes =Notes()
-            val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.frameLayout, Notes)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            val intent = Intent(requireContext(), AddNotes::class.java) // Create intent for Notes activity
+            startActivity(intent)
+
         }
 
 

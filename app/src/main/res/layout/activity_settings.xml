@@ -141,7 +141,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="12sp"
+                        android:autoSizeMinTextSize="14sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/noto_sans"
                         android:text="Email"
@@ -157,7 +157,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="12sp"
+                        android:autoSizeMinTextSize="14sp"
                         android:autoSizeTextType="uniform"
                         android:text="@string/username"
                         android:textColor="@color/black"
@@ -171,7 +171,7 @@
                         android:id="@+id/tvusername2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="10sp"
+                        android:autoSizeMaxTextSize="12sp"
                         android:autoSizeMinTextSize="8sp"
                         android:autoSizeTextType="uniform"
                         android:textSize="8sp"
@@ -189,7 +189,7 @@
                         android:id="@+id/tvemail2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:autoSizeMaxTextSize="10sp"
+                        android:autoSizeMaxTextSize="12sp"
                         android:autoSizeMinTextSize="8sp"
                         android:autoSizeTextType="uniform"
                         android:textSize="8sp"
@@ -206,7 +206,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="12sp"
+                        android:autoSizeMinTextSize="14sp"
                         android:autoSizeTextType="uniform"
                         android:textSize="12sp"
                         android:fontFamily="@font/noto_sans"
@@ -222,7 +222,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="10000sp"
-                        android:autoSizeMinTextSize="12sp"
+                        android:autoSizeMinTextSize="14sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Sounds"
@@ -242,7 +242,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:text="About"
                         android:textColor="@color/black"
-                        android:textSize="10sp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline127"
                         app:layout_constraintEnd_toStartOf="@+id/guideline101"
                         app:layout_constraintStart_toStartOf="@id/guideline99"
@@ -326,10 +326,10 @@
                         android:layout_height="0dp"
                         android:background="#00FFFFFF"
                         android:src="@drawable/rightarrow_icon"
-                        app:layout_constraintBottom_toBottomOf="@id/guideline115"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline116"
                         app:layout_constraintEnd_toEndOf="@id/guideline105"
                         app:layout_constraintStart_toStartOf="@id/guideline104"
-                        app:layout_constraintTop_toTopOf="@id/guideline114" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline112" />
 
                     <ImageButton
                         android:id="@+id/rightarrow_icon2"
@@ -339,8 +339,10 @@
                         android:src="@drawable/rightarrow_icon"
                         app:layout_constraintBottom_toTopOf="@+id/guideline128"
                         app:layout_constraintEnd_toEndOf="@id/guideline105"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@id/guideline104"
-                        app:layout_constraintTop_toTopOf="@+id/guideline125" />
+                        app:layout_constraintTop_toTopOf="@+id/guideline125"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <Switch
                         android:id="@+id/sounds"
@@ -394,14 +396,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.46" />
+                        app:layout_constraintGuide_percent="0.55" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline101"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.46" />
+                        app:layout_constraintGuide_percent="0.55" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline102"
@@ -668,7 +670,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.0729927" />
+                app:layout_constraintGuide_percent="0.05" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline84"
@@ -689,7 +691,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.93" />
+                app:layout_constraintGuide_percent="0.95" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline87"

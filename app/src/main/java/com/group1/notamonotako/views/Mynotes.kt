@@ -27,7 +27,7 @@ class Mynotes : AppCompatActivity() {
     private lateinit var Date: TextView
     private lateinit var deletebtn : Button
     private lateinit var UpdateNotes : ImageView
-
+    private lateinit var sharebtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mynotes)
@@ -37,7 +37,7 @@ class Mynotes : AppCompatActivity() {
         Content = findViewById(R.id.Contents)
         deletebtn = findViewById(R.id.deletebtn)
         UpdateNotes = findViewById(R.id.Update_Notes)
-
+        sharebtn = findViewById(R.id.sharebtn)
         val Intent = intent
         val Title = Intent.getStringExtra("title")
         val Contents = Intent.getStringExtra("contents")
@@ -63,7 +63,6 @@ class Mynotes : AppCompatActivity() {
             }
         }
 
-
         deletebtn.setOnClickListener{
             if (Note_id != -1) {
                 DeleteNote(Note_id)
@@ -78,6 +77,10 @@ class Mynotes : AppCompatActivity() {
 
 
         }
+    }
+
+    private fun shareNote(){
+
     }
 
     private fun DeleteNote(noteId: Int) {

@@ -20,7 +20,6 @@ import com.group1.notamonotako.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.content.SharedPreferences
-import retrofit2.awaitResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

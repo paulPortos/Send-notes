@@ -6,6 +6,7 @@ import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
+import com.group1.notamonotako.api.requests_responses.signin.UserResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
 import com.group1.notamonotako.api.requests_responses.signup.RegistrationResponses
 import retrofit2.Call
@@ -57,4 +58,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") noteId: Int
     ): Response<Void>
+
+    // Get the email and username
+    @GET("user")
+    suspend fun getUserData(@Header("Authorization") token: String): Response<UserResponse>
+
 }

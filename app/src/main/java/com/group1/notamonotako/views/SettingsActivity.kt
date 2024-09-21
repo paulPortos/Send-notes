@@ -11,10 +11,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import android.content.SharedPreferences
+import retrofit2.awaitResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +30,10 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var progressBar : ProgressBar
     private lateinit var btnsign_out : AppCompatButton
     private lateinit var sounds : Switch
+    private lateinit var tvemail2: TextView
+    private lateinit var tvusername2: TextView
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var retrofitService: ApiService
 
     private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
     private val SOUND_MUTED_KEY = "sound_muted"
@@ -37,6 +47,9 @@ class SettingsActivity : AppCompatActivity() {
         sounds = findViewById(R.id.sounds)
         progressBar = findViewById(R.id.progressBar)
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
+        tvemail2 = findViewById(R.id.tvemail2)
+        tvusername2 = findViewById(R.id.tvusername2)
+        retrofitService = RetrofitInstance.create(ApiService::class.java)
 
 
         // Making the progressbar Invisible
@@ -55,6 +68,8 @@ class SettingsActivity : AppCompatActivity() {
             saveSoundPreference(!isChecked)
             updateMediaPlayerVolume(!isChecked)
         }
+
+        fetchUserData()
 
         btnsign_out.setOnClickListener {
             logoutUser()
@@ -79,6 +94,64 @@ class SettingsActivity : AppCompatActivity() {
         {
             mediaPlayer.setVolume(1F, 1F)
         }
+    }
+
+    // Getting the user data to show in Account Settings
+    private fun fetchUserData() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val token = getToken() ?: return@launch
+                val response = retrofitService.getUserData("Bearer $token")
+
+                if (response.isSuccessful) {
+                    val userResponse = response.body()
+                    userResponse?.let {
+                        saveEmail(it.email)
+                        saveUsername(it.username)
+                        launch(Dispatchers.Main) {
+                            showEmail()
+                            showUsername()
+                        }
+                    }
+                } else {
+                    val errorMessage = response.errorBody()?.string() ?: "Unknown error occurred"
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(this@SettingsActivity, errorMessage, Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                launch(Dispatchers.Main) {
+                    Toast.makeText(this@SettingsActivity, "An error occurred: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    // Saving the email
+    private fun saveEmail(email: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("email", email)
+        editor.apply()
+    }
+
+    // Saving the username
+    private fun saveUsername(username: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("username", username)
+        editor.apply()
+    }
+
+    // Showing the email in Account Settings
+    private fun showEmail() {
+        val storedEmail = sharedPreferences.getString("email", "")
+        tvemail2.text = storedEmail
+    }
+
+    // Showing the username in Account Settings
+    private fun showUsername() {
+        val storedUsername = sharedPreferences.getString("username", "")
+        tvusername2.text = storedUsername
     }
 
 

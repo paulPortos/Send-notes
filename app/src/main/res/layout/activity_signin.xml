@@ -18,7 +18,7 @@
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/textview"
-        android:fontFamily="@font/noto_sans"
+        android:fontFamily="@font/noto_sans_semibold"
         android:gravity="center"
         android:text="@string/title"
         android:textColor="@color/white"

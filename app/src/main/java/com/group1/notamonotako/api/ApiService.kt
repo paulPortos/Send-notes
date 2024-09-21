@@ -1,3 +1,5 @@
+import com.group1.notamonotako.api.requests_responses.admin.postToAdmin
+import com.group1.notamonotako.api.requests_responses.admin.responseToAdmin
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
@@ -26,11 +28,14 @@ interface ApiService {
 
     // User login
     @POST("login")
-    suspend fun login(@Body response: Login): Response<LoginResponse>
+    suspend fun login(@Body request: Login): Response<LoginResponse>
 
     // Logout
     @POST("logout")
     fun logout(@Header("Authorization") token: String): Call<Void>
+
+    @POST("admin")
+    suspend fun toAdmin(@Body request: postToAdmin): Response<responseToAdmin>
 
     // Get notes (with token-based auth)
     @GET("notes")

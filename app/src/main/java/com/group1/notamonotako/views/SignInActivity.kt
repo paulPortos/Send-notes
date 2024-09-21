@@ -28,7 +28,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var progressBar : ProgressBar
     private lateinit var mediaPlayer: MediaPlayer
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -113,6 +112,7 @@ class SignInActivity : AppCompatActivity() {
                     // Handle the error case (e.g., invalid credentials)
                     progressBar.visibility = View.INVISIBLE
                     Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+                    Log.e("Error", response.errorBody().toString())
                 }
             } catch (e: HttpException) {
                 progressBar.visibility = View.INVISIBLE

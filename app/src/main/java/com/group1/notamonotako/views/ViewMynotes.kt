@@ -34,6 +34,7 @@ class ViewMynotes : AppCompatActivity() {
     private lateinit var btnback : ImageButton
     private lateinit var sharebtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mynotes)
 
@@ -44,6 +45,7 @@ class ViewMynotes : AppCompatActivity() {
         btnback = findViewById(R.id.btnback)
         UpdateNotes = findViewById(R.id.Update_Notes)
         sharebtn = findViewById(R.id.sharebtn)
+
         val Intent = intent
         val Title = Intent.getStringExtra("title")
         val Contents = Intent.getStringExtra("contents")
@@ -53,6 +55,7 @@ class ViewMynotes : AppCompatActivity() {
         this.Title.setText(Title)
         this.Content.setText(Contents)
 
+        Log.d("Contents of Contents", Contents.toString())
         if (DateString != null) {
             // Define the input and output date formats
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.getDefault())
@@ -70,7 +73,8 @@ class ViewMynotes : AppCompatActivity() {
         }
         sharebtn.setOnClickListener{
             val titleOnNote = Title.toString()
-            val contentsOnNote = Content.toString()
+            val contentsOnNote = Contents.toString()
+            Log.i("Contents on note ", contentsOnNote)
             val public = false;
             shareNote(titleOnNote, contentsOnNote, public)
             val intent = Intent(this@ViewMynotes, HomeActivity::class.java)

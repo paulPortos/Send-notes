@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
@@ -72,9 +73,9 @@ class ViewMynotes : AppCompatActivity() {
 
 
         deletebtn.setOnClickListener{
+            deletebtn.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
             if (Note_id != -1) {
                 DeleteNote(Note_id)
-
             }
         }
         UpdateNotes.setOnClickListener {

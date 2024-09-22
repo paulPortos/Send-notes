@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -52,6 +53,7 @@ class SignInActivity : AppCompatActivity() {
         SoundManager.initialize(this)
 
         progressBar = findViewById(R.id.progressBar)
+
         btnSignup = findViewById(R.id.btnSignUp)
         etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
@@ -84,6 +86,10 @@ class SignInActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE
+        }
+        btnForgot.setOnClickListener {
+            val intent = Intent(this@SignInActivity, ForgotPassword_EmailVerification::class.java)
+            startActivity(intent)
         }
     }
 

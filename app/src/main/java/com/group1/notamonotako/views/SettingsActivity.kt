@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Switch
 import android.widget.Toast
@@ -24,6 +25,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var progressBar : ProgressBar
     private lateinit var btnsign_out : AppCompatButton
     private lateinit var sounds : Switch
+    private lateinit var btnBack : ImageButton
+
 
     private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
     private val SOUND_MUTED_KEY = "sound_muted"
@@ -34,6 +37,7 @@ class SettingsActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         btnsign_out = findViewById(R.id.btnsign_out)
+        btnBack = findViewById(R.id.btnBack)
         sounds = findViewById(R.id.sounds)
         progressBar = findViewById(R.id.progressBar)
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
@@ -50,6 +54,12 @@ class SettingsActivity : AppCompatActivity() {
         sounds.isChecked = !soundIsMuted
         updateMediaPlayerVolume(soundIsMuted)
 
+        btnBack.setOnClickListener{
+            val intent = Intent(this@SettingsActivity, HomeActivity::class.java)
+            startActivity(intent)
+            progressBar.visibility = View.VISIBLE
+        }
+
         // Handle switch toggle to save sound preference and update media volume
         sounds.setOnCheckedChangeListener { _, isChecked ->
             saveSoundPreference(!isChecked)
@@ -58,7 +68,6 @@ class SettingsActivity : AppCompatActivity() {
 
         btnsign_out.setOnClickListener {
             logoutUser()
-            progressBar.visibility = View.VISIBLE
             mediaPlayer.start()
         }
     }
@@ -102,6 +111,8 @@ class SettingsActivity : AppCompatActivity() {
                     val intent = Intent(this@SettingsActivity, SignInActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+                    progressBar.visibility = View.VISIBLE
+
                     finish()
                 } else {
                     progressBar.visibility = View.INVISIBLE

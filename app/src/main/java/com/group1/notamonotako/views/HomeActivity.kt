@@ -4,7 +4,11 @@ import TokenManager
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.group1.notamonotako.R
@@ -14,6 +18,7 @@ import com.group1.notamonotako.fragments.MyFlashcards
 import com.group1.notamonotako.fragments.MyNotes
 
 class HomeActivity : AppCompatActivity() {
+    private lateinit var progressBar : ProgressBar
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +46,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        progressBar = findViewById(R.id.progressBar)
+        progressBar.visibility = View.INVISIBLE
+
         // Check for intent extras to determine which fragment to show
         if (savedInstanceState == null) {
             val showMyNotesFragment = intent.getBooleanExtra("showMyNotesFragment", false)
@@ -59,7 +67,9 @@ class HomeActivity : AppCompatActivity() {
                 R.id.btnhome -> replaceFragment(Home())
                 R.id.btnnotes -> replaceFragment(MyNotes())
                 R.id.btnflashcards -> replaceFragment(MyFlashcards())
+
                 else -> {}
+
             }
             true
         }
@@ -69,7 +79,12 @@ class HomeActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, fragment)
-        fragmentTransaction.addToBackStack(null)  // Optionally add to back stack if needed
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+        progressBar.visibility = View.VISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+            progressBar.visibility = View.INVISIBLE
+        }, 500)
+
     }
 }

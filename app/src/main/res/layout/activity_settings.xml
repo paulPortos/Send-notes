@@ -37,7 +37,7 @@
                 app:tint="#01A3ED" />
 
             <ImageButton
-                android:id="@+id/btnback"
+                android:id="@+id/btnBack"
                 style="@android:style/Widget.DeviceDefault.ImageButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

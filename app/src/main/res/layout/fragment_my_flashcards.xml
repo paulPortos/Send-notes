@@ -29,9 +29,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="10dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/blue"
+                android:indeterminateTintMode="src_atop"
+                app:layout_constraintBottom_toTopOf="@+id/guideline216"
+                app:layout_constraintEnd_toStartOf="@+id/guideline214"
+                app:layout_constraintStart_toStartOf="@+id/guideline213"
+                app:layout_constraintTop_toTopOf="@+id/guideline215" />
 
             <TextView
-
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -66,10 +77,10 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline53"
-                app:layout_constraintHorizontal_bias="0.414"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline48"
                 app:layout_constraintTop_toTopOf="@+id/guideline52"
-                app:layout_constraintVertical_bias="0.476" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline48"
@@ -120,6 +131,33 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.95" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline213"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline214"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline215"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline216"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.55" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

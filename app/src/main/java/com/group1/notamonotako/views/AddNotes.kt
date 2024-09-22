@@ -4,8 +4,10 @@ import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,11 +18,11 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class AddNotes : AppCompatActivity() {
-
     private lateinit var leftButton: ImageButton
     private lateinit var doneButton: ImageButton
     private lateinit var title: EditText
     private lateinit var contents: EditText
+    private lateinit var progressBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,21 +31,27 @@ class AddNotes : AppCompatActivity() {
         doneButton = findViewById(R.id.doneButton)
         title  = findViewById(R.id.title)
         contents = findViewById(R.id.contents)
+        progressBar = findViewById(R.id.progressBar)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        progressBar.visibility = View.INVISIBLE
+
 
         leftButton.setOnClickListener {
             val intent = Intent(this@AddNotes, HomeActivity::class.java)
             startActivity(intent)
+            progressBar.visibility = View.VISIBLE
+
         }
 
         doneButton.setOnClickListener {
             val title = title.text.toString()
             val contents = contents.text.toString()
             CreateData(title, contents)
+            progressBar.visibility = View.VISIBLE
+
         }
     }
-
-
 
     private fun CreateData(title: String, contents: String) {
         lifecycleScope.launch {
@@ -75,14 +83,22 @@ class AddNotes : AppCompatActivity() {
                         finish()
                     } else {
                         Toast.makeText(this@AddNotes, "Note created but ID is missing", Toast.LENGTH_SHORT).show()
+                        progressBar.visibility = View.INVISIBLE
+
                     }
                 } else {
                     Toast.makeText(this@AddNotes, "Failed to create note", Toast.LENGTH_SHORT).show()
+                    progressBar.visibility = View.INVISIBLE
+
                 }
             } catch (e: HttpException) {
                 Toast.makeText(this@AddNotes, "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.INVISIBLE
+
             } catch (e: IOException) {
                 Toast.makeText(this@AddNotes, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.INVISIBLE
+
             }
         }
     }

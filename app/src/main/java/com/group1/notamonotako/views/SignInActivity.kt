@@ -31,23 +31,18 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize TokenManager
         TokenManager.init(this)
 
-        // Check if the user is already logged in
         if (TokenManager.isLoggedIn()) {
-            // If logged in, redirect to HomeActivity and finish this activity
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-            finish()  // Close SignInActivity
-            return  // Prevent further execution
+            finish()
+            return
         }
 
-        // If not logged in, continue with login process
         setContentView(R.layout.activity_signin)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
-        // Initialize UI elements\
         SoundManager.initialize(this)
 
         progressBar = findViewById(R.id.progressBar)
@@ -58,12 +53,8 @@ class SignInActivity : AppCompatActivity() {
         btnLoginNow = findViewById(R.id.btnSignInNow)
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
 
-
-
-        // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
 
-        // Handle login button click
         btnLoginNow.setOnClickListener {
             mediaPlayer.start()
             val username = etUsername.text.toString()
@@ -77,7 +68,6 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-        // Handle sign-up button click
         btnSignup.setOnClickListener {
             mediaPlayer.start()
             val intent = Intent(this, SignUpActivity::class.java)
@@ -92,24 +82,18 @@ class SignInActivity : AppCompatActivity() {
             val loginRequest = Login(email = email, password = password)
 
             try {
-                // Make the network call and get the response
                 val response = apiService.login(loginRequest)
 
                 if (response.isSuccessful) {
-                    // If the response is successful, get the LoginResponse body
                     response.body()?.let { loginResponse ->
-                        // Save the token
                         TokenManager.saveToken(loginResponse.token)
-
-                        // Navigate to the HomeActivity
                         Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@SignInActivity, HomeActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
-                        finish()  // Close SignInActivity
+                        finish()
                     }
                 } else {
-                    // Handle the error case (e.g., invalid credentials)
                     progressBar.visibility = View.INVISIBLE
                     Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                     Log.e("Error", response.errorBody().toString())

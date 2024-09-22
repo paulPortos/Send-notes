@@ -38,19 +38,14 @@ class SettingsActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
 
-
-        // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
 
-        // Load the saved sound preference state from SharedPreferences
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val soundIsMuted = sharedPreferences.getBoolean(SOUND_MUTED_KEY, false)
 
-        // Set the initial state of the switch and media player volume
         sounds.isChecked = !soundIsMuted
         updateMediaPlayerVolume(soundIsMuted)
 
-        // Handle switch toggle to save sound preference and update media volume
         sounds.setOnCheckedChangeListener { _, isChecked ->
             saveSoundPreference(!isChecked)
             updateMediaPlayerVolume(!isChecked)
@@ -63,7 +58,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    // Save the sound preference (muted or not) in SharedPreferences
     private fun saveSoundPreference(isMuted: Boolean) {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -71,7 +65,6 @@ class SettingsActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    // Update the media player's volume based on the sound preference
     private fun updateMediaPlayerVolume(isMuted: Boolean) {
         if (isMuted) {
             mediaPlayer.setVolume(0F, 0F)

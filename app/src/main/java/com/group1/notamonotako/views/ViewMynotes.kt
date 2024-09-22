@@ -49,28 +49,14 @@ class ViewMynotes : AppCompatActivity() {
         val Intent = intent
         val Title = Intent.getStringExtra("title")
         val Contents = Intent.getStringExtra("contents")
-        val DateString = Intent.getStringExtra("date")
         val Note_id = Intent.getIntExtra("note_id",-1)
 
         this.Title.setText(Title)
         this.Content.setText(Contents)
 
         Log.d("Contents of Contents", Contents.toString())
-        if (DateString != null) {
-            // Define the input and output date formats
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        getDate(Intent, Date)
 
-            try {
-                val date = inputFormat.parse(DateString)
-                val formattedDate = date?.let { outputFormat.format(it) }
-                this.Date.text = formattedDate
-            } catch (e: Exception) {
-                // Handle parsing exception
-                e.printStackTrace()
-                this.Date.text = "Invalid date"
-            }
-        }
         sharebtn.setOnClickListener{
             val titleOnNote = Title.toString()
             val contentsOnNote = Contents.toString()
@@ -95,7 +81,24 @@ class ViewMynotes : AppCompatActivity() {
             }
         }
     }
+    private fun getDate(intent: Intent, DateString: TextView){
+        val DateString = intent.getStringExtra("date")
+        if (DateString != null) {
+            // Define the input and output date formats
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
+            try {
+                val date = inputFormat.parse(DateString)
+                val formattedDate = date?.let { outputFormat.format(it) }
+                this.Date.text = formattedDate
+            } catch (e: Exception) {
+                // Handle parsing exception
+                e.printStackTrace()
+                this.Date.text = "Invalid date"
+            }
+        }
+    }
     private fun shareNote(title: String, content: String, public: Boolean) {
         lifecycleScope.launch {
             val apiService = RetrofitInstance.create(ApiService::class.java)

@@ -321,7 +321,7 @@
                         app:tint="@color/background2" />
 
                     <ImageButton
-                        android:id="@+id/rightarrow_icon1"
+                        android:id="@+id/btnChangePassword"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:background="#00FFFFFF"

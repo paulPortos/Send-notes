@@ -26,6 +26,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnsign_out : AppCompatButton
     private lateinit var sounds : Switch
     private lateinit var btnBack : ImageButton
+    private lateinit var btnChangePassword : ImageButton
 
 
     private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
@@ -40,6 +41,7 @@ class SettingsActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         sounds = findViewById(R.id.sounds)
         progressBar = findViewById(R.id.progressBar)
+        btnChangePassword = findViewById(R.id.btnChangePassword)
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
 
 
@@ -53,6 +55,11 @@ class SettingsActivity : AppCompatActivity() {
         // Set the initial state of the switch and media player volume
         sounds.isChecked = !soundIsMuted
         updateMediaPlayerVolume(soundIsMuted)
+
+        btnChangePassword.setOnClickListener {
+            val intent = Intent(this@SettingsActivity, ChangePassword::class.java)
+            startActivity(intent)
+        }
 
         btnBack.setOnClickListener{
             val intent = Intent(this@SettingsActivity, HomeActivity::class.java)

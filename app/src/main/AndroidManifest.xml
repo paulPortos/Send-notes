@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".views.ChangePassword"
+            android:exported="false" />
+        <activity
             android:name=".views.ForgotPassword_ResetPassword"
             android:exported="false" />
         <activity

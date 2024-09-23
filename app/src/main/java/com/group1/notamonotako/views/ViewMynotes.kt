@@ -11,16 +11,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.admin.postToAdmin
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.fragments.MyFlashcards
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -31,10 +29,9 @@ class ViewMynotes : AppCompatActivity() {
     private lateinit var Date: TextView
     private lateinit var deletebtn : Button
     private lateinit var UpdateNotes : ImageView
-    private lateinit var btnback : ImageButton
-    private lateinit var sharebtn: Button
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var  btnback : ImageButton
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mynotes)
 
@@ -44,45 +41,16 @@ class ViewMynotes : AppCompatActivity() {
         deletebtn = findViewById(R.id.deletebtn)
         btnback = findViewById(R.id.btnback)
         UpdateNotes = findViewById(R.id.Update_Notes)
-        sharebtn = findViewById(R.id.sharebtn)
 
         val Intent = intent
         val Title = Intent.getStringExtra("title")
         val Contents = Intent.getStringExtra("contents")
+        val DateString = Intent.getStringExtra("date")
         val Note_id = Intent.getIntExtra("note_id",-1)
 
         this.Title.setText(Title)
         this.Content.setText(Contents)
 
-        Log.d("Contents of Contents", Contents.toString())
-        getDate(Intent, Date)
-
-        sharebtn.setOnClickListener{
-            val titleOnNote = Title.toString()
-            val contentsOnNote = Contents.toString()
-            Log.i("Contents on note ", contentsOnNote)
-            val public = false;
-            shareNote(titleOnNote, contentsOnNote, public)
-            val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
-            startActivity(intent)
-        }
-        btnback.setOnClickListener{
-            val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
-            startActivity(intent)
-        }
-        deletebtn.setOnClickListener{
-            if (Note_id != -1) {
-                DeleteNote(Note_id)
-            }
-        }
-        UpdateNotes.setOnClickListener {
-            if (Note_id != -1) {
-                update(Note_id)
-            }
-        }
-    }
-    private fun getDate(intent: Intent, DateString: TextView){
-        val DateString = intent.getStringExtra("date")
         if (DateString != null) {
             // Define the input and output date formats
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.getDefault())
@@ -98,25 +66,29 @@ class ViewMynotes : AppCompatActivity() {
                 this.Date.text = "Invalid date"
             }
         }
-    }
-    private fun shareNote(title: String, content: String, public: Boolean) {
-        lifecycleScope.launch {
-            val apiService = RetrofitInstance.create(ApiService::class.java)
-            val admin = postToAdmin(title, content, public)
-            try {
-                val response = apiService.toAdmin(admin)
-                if (response.isSuccessful){
-                    Toast.makeText(this@ViewMynotes, "Shared! \nPending for approval", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@ViewMynotes, "Failed to share note: ${response.code()}", Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: HttpException){
-                Toast.makeText(this@ViewMynotes, "Error: ${e.message()}", Toast.LENGTH_SHORT).show()
-            } catch (e: IOException){
-                Toast.makeText(this@ViewMynotes, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+        btnback.setOnClickListener{
+            val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        deletebtn.setOnClickListener{
+            deletebtn.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
+            if (Note_id != -1) {
+                DeleteNote(Note_id)
             }
         }
+        UpdateNotes.setOnClickListener {
+            if (Note_id != -1) {
+                update(Note_id)
+
+            }
+
+
+        }
     }
+
+
     private fun DeleteNote(noteId: Int) {
         val token = TokenManager.getToken()
         if (token == null) {

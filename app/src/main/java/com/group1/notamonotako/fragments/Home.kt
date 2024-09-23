@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.views.SettingsActivity
@@ -29,6 +30,8 @@ class Home : Fragment() {
     lateinit var btnSettings :ImageButton
     lateinit var notesTV :TextView
     lateinit var flashcardsTV :TextView
+    private lateinit var progressBar : ProgressBar
+
 
     private val fromBottomFabAnim: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_fab)
@@ -60,9 +63,15 @@ class Home : Fragment() {
         mainFabBtn = view.findViewById(R.id.mainFabBtn)
         flashcardsFabBtn = view.findViewById(R.id.flashcardsFabBtn)
         btnSettings = view.findViewById(R.id.btnSettings)
+        progressBar = view.findViewById(R.id.progressBar)
+        progressBar.visibility = View.INVISIBLE
+
+
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(),SettingsActivity::class.java)
             startActivity(intent)
+            progressBar.visibility = View.VISIBLE
+
         }
 
         val recyclerView: RecyclerView = view.findViewById(R.id.rvhome)
@@ -72,16 +81,21 @@ class Home : Fragment() {
         flashcardsFabBtn.setOnClickListener {
             val intent = Intent(requireContext(), AddFlashcards::class.java) // Create intent for Notes activity
             startActivity(intent)
+            progressBar.visibility = View.INVISIBLE
+
         }
 
         notesFabBtn.setOnClickListener {
             val intent = Intent(requireContext(), AddNotes::class.java) // Create intent for Notes activity
             startActivity(intent)
+            progressBar.visibility = View.INVISIBLE
+
 
         }
 
 
         mainFabBtn.setOnClickListener {
+            progressBar.visibility = View.INVISIBLE
 
             if (areFabButtonsVisible) {
                 shrinkFab()

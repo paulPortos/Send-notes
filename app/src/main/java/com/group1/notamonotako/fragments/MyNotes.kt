@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,8 @@ class MyNotes : Fragment() {
     lateinit var myNotesAdapter: MyNotesAdapter
     lateinit var layoutManager: LinearLayoutManager
     lateinit var rv_mynotes: RecyclerView
+    private lateinit var progressBar : ProgressBar
+
 
 
 
@@ -38,14 +41,19 @@ class MyNotes : Fragment() {
         val view = inflater.inflate(R.layout.fragment_my_notes, container, false)
 
 
-
+        progressBar = view.findViewById(R.id.progressBar)
         rv_mynotes = view.findViewById(R.id.rv_mynotes)
         rv_mynotes.layoutManager = LinearLayoutManager(requireContext())
-
         btnSettings = view.findViewById(R.id.btnSettings)
+
+
+        progressBar.visibility = View.INVISIBLE
+
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
+            progressBar.visibility = View.VISIBLE
+
         }
         rv_mynotes.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.context)
@@ -72,18 +80,25 @@ class MyNotes : Fragment() {
                     } else {
                         if (isAdded) {
                             Toast.makeText(requireContext(), "No notes available", Toast.LENGTH_SHORT).show()
+                            progressBar.visibility = View.INVISIBLE
                         }
                     }
                 } else {
                     if (isAdded) {
                         Toast.makeText(requireContext(), "Failed to fetch notes", Toast.LENGTH_SHORT).show()
+                        progressBar.visibility = View.INVISIBLE
+
                     }
                 }
             } catch (e: HttpException) {
                 Toast.makeText(requireContext(), "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.INVISIBLE
+
             } catch (e: IOException) {
                 Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.d("addnotes", e.message.toString())
+                progressBar.visibility = View.INVISIBLE
+
             }
             }
         }

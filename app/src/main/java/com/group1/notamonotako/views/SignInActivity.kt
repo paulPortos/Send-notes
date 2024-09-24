@@ -90,19 +90,27 @@ class SignInActivity : AppCompatActivity() {
             try {
                 val response = apiService.login(loginRequest)
 
-                if (response.isSuccessful) {
-                    response.body()?.let { loginResponse ->
-                        TokenManager.saveToken(loginResponse.token)
-                        Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@SignInActivity, HomeActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
-                        finish()
-                    }
-                } else {
+                if(response.code() == 404){
+                    Toast.makeText(this@SignInActivity, "Email doesn't exist, Please check your email", Toast.LENGTH_SHORT).show()
                     progressBar.visibility = View.INVISIBLE
-                    Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
-                    Log.e("Error", response.errorBody().toString())
+                }else if(response.code() == 401){
+                    Toast.makeText(this@SignInActivity,"Incorrect Password",Toast.LENGTH_SHORT).show()
+                    progressBar.visibility = View.INVISIBLE
+                }else{
+                    if (response.isSuccessful) {
+                        response.body()?.let { loginResponse ->
+                            TokenManager.saveToken(loginResponse.token)
+                            Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@SignInActivity, HomeActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                            finish()
+                        }
+                    } else {
+                        progressBar.visibility = View.INVISIBLE
+                        Toast.makeText(this@SignInActivity, "Error: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+                        Log.e("Error", response.errorBody().toString())
+                    }
                 }
             } catch (e: HttpException) {
                 progressBar.visibility = View.INVISIBLE

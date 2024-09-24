@@ -58,6 +58,8 @@ class ChangePassword : AppCompatActivity() {
             val confirmpass = etConfirmNewPassword.text.toString()
             if (newPass != confirmpass) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            }else if(oldPass.isEmpty() && newPass.isEmpty()){
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 changePassword(oldPass, newPass)
             }

@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -33,6 +34,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         TokenManager.init(this)
+        AccountManager.init(this)
 
         if (TokenManager.isLoggedIn()) {
             val intent = Intent(this, HomeActivity::class.java)
@@ -99,7 +101,11 @@ class SignInActivity : AppCompatActivity() {
                 }else{
                     if (response.isSuccessful) {
                         response.body()?.let { loginResponse ->
+
+                           //gets the Token,email and username to the managers
                             TokenManager.saveToken(loginResponse.token)
+                            AccountManager.saveEmail(loginResponse.user.email)
+                            AccountManager.saveUsername(loginResponse.user.username)
                             Toast.makeText(this@SignInActivity, "Logged In", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@SignInActivity, HomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

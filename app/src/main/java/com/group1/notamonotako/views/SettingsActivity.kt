@@ -12,10 +12,12 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +28,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnsign_out : AppCompatButton
     private lateinit var sounds : Switch
     private lateinit var btnBack : ImageButton
+    private lateinit var etemail : TextView
+    private lateinit var etusername : TextView
     private lateinit var btnChangePassword : ImageButton
 
 
@@ -34,6 +38,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         TokenManager.init(this)
+        AccountManager.init(this)
         setContentView(R.layout.activity_settings)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -43,6 +48,8 @@ class SettingsActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         btnChangePassword = findViewById(R.id.btnChangePassword)
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
+        etemail = findViewById(R.id.tvemail2)
+        etusername = findViewById(R.id.tvusername2)
 
 
         // Making the progressbar Invisible
@@ -72,6 +79,9 @@ class SettingsActivity : AppCompatActivity() {
             saveSoundPreference(!isChecked)
             updateMediaPlayerVolume(!isChecked)
         }
+
+        etemail.text = AccountManager.getEmail()
+        etusername.text = AccountManager.getUsername()
 
         btnsign_out.setOnClickListener {
             logoutUser()

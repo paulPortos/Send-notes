@@ -8,6 +8,7 @@ import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
+import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
@@ -53,6 +54,14 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") noteId: Int,
         @Body noteRequest: UpdateNotes // Add this to pass the updated note content
+    ): Response<Void>
+
+    // Update a note "To_public{
+    @PUT("notes/{id}")
+    suspend fun updateNotesToPublic(
+        @Header("Authorization") token: String,
+        @Path("id") noteId: Int,
+        @Body noteRequest: UpdateToPublicNotes // Add this to pass the updated note content
     ): Response<Void>
 
     @GET("flashcards")

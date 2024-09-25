@@ -14,8 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager.getEmail
+import com.group1.notamonotako.api.AccountManager.getUsername
 import com.group1.notamonotako.api.requests_responses.admin.postToAdmin
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
+import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
 import com.group1.notamonotako.fragments.MyFlashcards
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,8 +55,6 @@ class ViewMynotes : AppCompatActivity() {
         val Contents = Intent.getStringExtra("contents")
         val DateString = Intent.getStringExtra("date")
         val Note_id = Intent.getIntExtra("note_id",-1)
-        val public = true
-        val creator = "Hello"
 
         this.Title.setText(Title)
         this.Content.setText(Contents)
@@ -74,11 +75,12 @@ class ViewMynotes : AppCompatActivity() {
             }
         }
         sharebtn.setOnClickListener{
-            val Title = Title.toString()
-            val creator = creator.toString()
-            val Contents = Content.text.toString()
-            val public = true
-            shareNote(Title, creator, Contents, public)
+            val title = Title.toString()
+            val contents = Content.text.toString()
+            val public = false
+            val creator = getUsername().toString()
+            shareNote(title, creator, contents, public)
+            setToPublicIntoTrue(Note_id)
         }
 
         btnback.setOnClickListener{
@@ -195,6 +197,34 @@ class ViewMynotes : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setToPublicIntoTrue(noteId: Int){
+        val token = TokenManager.getToken()
+        if (token == null) {
+            Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val updatedTitle = Title.text.toString()
+        val updatedContent = Content.text.toString()
+
+        val toPublic = true
+        if (updatedTitle.isEmpty() || updatedContent.isEmpty()) {
+            Toast.makeText(this, "Title or content cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val noteRequest = UpdateToPublicNotes(title = updatedTitle, contents = updatedContent, toPublic = toPublic)
+                val response = withContext(Dispatchers.IO) {
+                    apiService.updateNotesToPublic("Bearer $token", noteId, noteRequest)
+                }
+            } catch (e: Exception){
+                e.printStackTrace()
             }
         }
     }

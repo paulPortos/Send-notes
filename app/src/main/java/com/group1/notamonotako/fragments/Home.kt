@@ -1,5 +1,6 @@
 package com.group1.notamonotako.fragments
 
+import ApiService
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -13,15 +14,21 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
 import com.group1.notamonotako.views.SettingsActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.adapter.HomeAdapter
-import com.group1.notamonotako.api.requests_responses.home.HomeData
 import com.group1.notamonotako.views.AddFlashcards
 import com.group1.notamonotako.views.AddNotes
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 class Home : Fragment() {
     lateinit var flashcardsFabBtn : FloatingActionButton
@@ -31,7 +38,8 @@ class Home : Fragment() {
     lateinit var notesTV :TextView
     lateinit var flashcardsTV :TextView
     private lateinit var progressBar : ProgressBar
-
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var rvhome: RecyclerView
 
     private val fromBottomFabAnim: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_fab)
@@ -65,7 +73,8 @@ class Home : Fragment() {
         btnSettings = view.findViewById(R.id.btnSettings)
         progressBar = view.findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
-
+        rvhome = view.findViewById(R.id.rvhome)
+        rvhome.layoutManager = LinearLayoutManager(requireContext())
 
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(),SettingsActivity::class.java)
@@ -73,10 +82,6 @@ class Home : Fragment() {
             progressBar.visibility = View.VISIBLE
 
         }
-
-        val recyclerView: RecyclerView = view.findViewById(R.id.rvhome)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
 
         flashcardsFabBtn.setOnClickListener {
             val intent = Intent(requireContext(), AddFlashcards::class.java) // Create intent for Notes activity
@@ -89,27 +94,45 @@ class Home : Fragment() {
             val intent = Intent(requireContext(), AddNotes::class.java) // Create intent for Notes activity
             startActivity(intent)
             progressBar.visibility = View.INVISIBLE
-
-
         }
-
 
         mainFabBtn.setOnClickListener {
             progressBar.visibility = View.INVISIBLE
-
             if (areFabButtonsVisible) {
                 shrinkFab()
             } else {
                 expandFab()
             }
-
         }
 
-        val adapter = HomeAdapter(example())
-        recyclerView.adapter = adapter
+        rvhome.setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(this.context)
+        fetchPublicNotes()
         return view
     }
 
+    private fun fetchPublicNotes(){
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val response = withContext(Dispatchers.IO) {
+                    apiService.getPublicNotes()
+                }
+                if (response.isSuccessful){
+                    val publicNotes = response.body()
+                    if (isAdded && publicNotes != null){
+                        val adapter = HomeAdapter(requireContext(), publicNotes)
+                        rvhome.adapter = adapter
+                    }
+                }
+            } catch (e: HttpException){
+                Toast.makeText(requireContext(), "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: IOException){
+                Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
     private fun shrinkFab() {
 
         mainFabBtn.startAnimation(rotateAntiClockWiseFabAnim)
@@ -130,27 +153,6 @@ class Home : Fragment() {
     }
 
 
-
-
-    private fun example(): List<HomeData> {
-        val title = listOf(
-            "Title 1",
-            "Title 2",
-            "Title 3"
-        )
-        val contents = listOf(
-            "Lorem Ipsum dolor",
-            "Lorem Ipsum set amet",
-            "Lorem Ipsum"
-        )
-        val dataList = mutableListOf<HomeData>()
-        for (i in title.indices) {
-            dataList.add(
-                HomeData(title[i % title.size], contents[i % contents.size])
-            )
-        }
-        return dataList
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

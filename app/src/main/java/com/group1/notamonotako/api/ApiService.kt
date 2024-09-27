@@ -9,6 +9,7 @@ import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
+import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
@@ -76,4 +77,7 @@ interface ApiService {
 
     @PUT("ChangePass")
     suspend fun PassChange(@Body changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse>
+
+    @GET("public_notes")
+    suspend fun getPublicNotes(): Response<List<getPublicNotes>>
 }

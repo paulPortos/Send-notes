@@ -1,18 +1,22 @@
 package com.group1.notamonotako.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.home.HomeData
+import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
+import com.group1.notamonotako.views.ViewMynotes
 
-class HomeAdapter(private var data: List<HomeData>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val contents: TextView = view.findViewById(R.id.contents)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -25,7 +29,17 @@ class HomeAdapter(private var data: List<HomeData>) : RecyclerView.Adapter<HomeA
         val item = data[position]
         holder.title.text = item.title
         holder.contents.text = item.contents
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, ViewMynotes::class.java)
+            intent.putExtra("title", item.title)
+            intent.putExtra("contents", item.contents)
+            it.context.startActivity(intent)
+        }
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int {
+        return data.size
+    }
+
 }
+

@@ -13,6 +13,7 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.AccountManager
@@ -29,6 +30,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var btnLoginNow: Button
     private lateinit var progressBar : ProgressBar
     private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var btnSignIn : AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +57,13 @@ class SignInActivity : AppCompatActivity() {
         etPassword = findViewById(R.id.etPassword)
         btnForgot = findViewById(R.id.btnForgotPassword)
         btnLoginNow = findViewById(R.id.btnSignInNow)
+        btnSignIn = findViewById(R.id.btnSignIn)
+
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
+        GradientText.setGradientText(btnSignIn,this)
+        GradientText.setGradientText(btnLoginNow,this)
+
+
 
         progressBar.visibility = View.INVISIBLE
 

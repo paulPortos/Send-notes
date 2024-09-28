@@ -25,6 +25,8 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
         etConfirmPassword = findViewById( R.id.etConfirmPassword)
         btnConfirmResetPassword = findViewById(R.id.btnConfirmResetPassword)
 
+        GradientText.setGradientText(btnConfirmResetPassword,this)
+
         btnBack.setOnClickListener {
             val intent = Intent(this@ForgotPassword_ResetPassword, SignInActivity::class.java)
             startActivity(intent)

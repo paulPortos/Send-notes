@@ -3,6 +3,7 @@ package com.group1.notamonotako.views
 import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.LinearGradient
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.group1.notamonotako.R
 import com.group1.notamonotako.coroutines.signup.SignUpViewModel
 import com.group1.notamonotako.coroutines.signup.SignUpViewModelFactory
@@ -24,6 +26,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var etConfirmPassword: EditText
     private lateinit var btnLoginNow: Button
     private lateinit var btnSignIn: Button
+    private lateinit var btnSignUp : AppCompatButton
     private lateinit var progressBar: ProgressBar
     private lateinit var mediaPlayer: MediaPlayer
 
@@ -41,6 +44,7 @@ class SignUpActivity : AppCompatActivity() {
 
         etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
+        btnSignUp = findViewById(R.id.btnSignUp)
         etConfirmPassword = findViewById(R.id.etConfirmPassword)
         btnLoginNow = findViewById(R.id.btnSignUpNow)
         btnSignIn = findViewById(R.id.btnSignIn)
@@ -48,6 +52,10 @@ class SignUpActivity : AppCompatActivity() {
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
+
+        GradientText.setGradientText(btnSignUp,this)
+        GradientText.setGradientText(btnLoginNow,this)
+
 
 
         btnLoginNow.setOnClickListener {
@@ -71,6 +79,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         btnSignIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
@@ -100,6 +109,8 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d("TESTER", "Error: ${error.message}")
             }
         }
+
+
     }
 
 }

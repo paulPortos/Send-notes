@@ -24,6 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.adapter.HomeAdapter
 import com.group1.notamonotako.views.AddFlashcards
 import com.group1.notamonotako.views.AddNotes
+import com.group1.notamonotako.views.GradientText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,6 +41,7 @@ class Home : Fragment() {
     private lateinit var progressBar : ProgressBar
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var rvhome: RecyclerView
+    private lateinit var tvSendNotes : TextView
 
     private val fromBottomFabAnim: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_fab)
@@ -74,6 +76,7 @@ class Home : Fragment() {
         progressBar = view.findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
         rvhome = view.findViewById(R.id.rvhome)
+        tvSendNotes = view.findViewById(R.id.tvSendNotes)
         rvhome.layoutManager = LinearLayoutManager(requireContext())
 
         btnSettings.setOnClickListener {
@@ -82,6 +85,8 @@ class Home : Fragment() {
             progressBar.visibility = View.VISIBLE
 
         }
+
+
 
         flashcardsFabBtn.setOnClickListener {
             val intent = Intent(requireContext(), AddFlashcards::class.java) // Create intent for Notes activity
@@ -104,6 +109,7 @@ class Home : Fragment() {
                 expandFab()
             }
         }
+        GradientText.setGradientText(tvSendNotes, requireContext())
 
         rvhome.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.context)

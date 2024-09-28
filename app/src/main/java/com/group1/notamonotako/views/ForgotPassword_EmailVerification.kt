@@ -30,7 +30,8 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
         btnConfirmVerification = findViewById(R.id.btnConfirmVerification)
 
         textInputLayout.visibility = View.INVISIBLE
-
+        GradientText.setGradientText(btnGetOTP,this)
+        GradientText.setGradientText(btnConfirmVerification,this)
 
         btnGetOTP.setOnClickListener {
             textInputLayout.visibility = View.VISIBLE

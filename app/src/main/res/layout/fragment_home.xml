@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline43" />
 
             <TextView
-
+                android:id="@+id/tvSendNotes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:autoSizeMaxTextSize="10000sp"

@@ -69,8 +69,11 @@
                 android:src="@drawable/btn_settings"
                 app:layout_constraintBottom_toTopOf="@+id/guideline67"
                 app:layout_constraintEnd_toStartOf="@+id/guideline53"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline51"
-                app:layout_constraintTop_toTopOf="@+id/guideline49" />
+                app:layout_constraintTop_toTopOf="@+id/guideline49"
+                app:layout_constraintVertical_bias="0.0"
+                app:tint="@color/white" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mynotes"

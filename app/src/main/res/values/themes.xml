@@ -15,11 +15,7 @@
 
 <!-- Define your custom SearchView style -->
     <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
-        <!-- Customize the search text appearance -->
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">16sp</item> <!-- Optional: change text size -->
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">#FFFFFF</item>
     </style>
-
-
-
 </resources>

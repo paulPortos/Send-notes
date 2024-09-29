@@ -33,10 +33,10 @@ class ViewMynotes : AppCompatActivity() {
     private lateinit var Title: EditText
     private lateinit var Content: EditText
     private lateinit var Date: TextView
-    private lateinit var deletebtn : Button
+    private lateinit var deletebtn : ImageButton
     private lateinit var UpdateNotes : ImageView
     private lateinit var btnback : ImageButton
-    private lateinit var sharebtn : Button
+    private lateinit var sharebtn : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

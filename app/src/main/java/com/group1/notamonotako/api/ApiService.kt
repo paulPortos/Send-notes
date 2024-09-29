@@ -2,6 +2,7 @@ import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordR
 import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordResponse
 import com.group1.notamonotako.api.requests_responses.admin.postToAdmin
 import com.group1.notamonotako.api.requests_responses.admin.responseToAdmin
+import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
@@ -67,6 +68,9 @@ interface ApiService {
 
     @GET("flashcards")
     suspend fun getFlashcards(): Response<List<GetFlashcards>>
+
+    @POST("flashcards")
+    suspend fun postFlashcards(@Body request: GetFlashcards): Response<FlashcardsResponse>
 
     // Delete a note
     @DELETE("notes/{id}")

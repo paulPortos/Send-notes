@@ -74,7 +74,6 @@ class MyFlashcards : Fragment() {
                         if (isAdded) {
                             Toast.makeText(requireContext(), "No flashcards available", Toast.LENGTH_SHORT).show()
                             progressBar.visibility = View.INVISIBLE
-
                         }
                     }
                 } else {

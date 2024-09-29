@@ -4,6 +4,7 @@ import com.group1.notamonotako.api.requests_responses.admin.postToAdmin
 import com.group1.notamonotako.api.requests_responses.admin.responseToAdmin
 import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
+import com.group1.notamonotako.api.requests_responses.flashcards.PostFlashcards
 import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
@@ -70,7 +71,7 @@ interface ApiService {
     suspend fun getFlashcards(): Response<List<GetFlashcards>>
 
     @POST("flashcards")
-    suspend fun postFlashcards(@Body request: GetFlashcards): Response<FlashcardsResponse>
+    suspend fun postFlashcards(@Body request: PostFlashcards): Response<FlashcardsResponse>
 
     // Delete a note
     @DELETE("notes/{id}")

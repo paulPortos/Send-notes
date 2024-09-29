@@ -87,7 +87,7 @@ class HomeActivity : AppCompatActivity() {
         // Replace the fragment and use a unique tag for each fragment
         fragmentTransaction.replace(R.id.frameLayout, fragment, tag)
 
-        // Only add the fragment to the back stack if it's not "Home"
+        // Always add the fragment to the back stack except for Home
         if (tag != "Home") {
             fragmentTransaction.addToBackStack(tag)
         }
@@ -102,18 +102,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         val fragmentManager = supportFragmentManager
-        val currentFragment = fragmentManager.findFragmentById(R.id.frameLayout)
 
-        // If current fragment is Home and there's no back stack entry, exit the app
-        if (currentFragment is Home && fragmentManager.backStackEntryCount == 0) {
-            // Exit the app
-            finishAffinity() // Closes the app and clears all activities
-            return
-        }
-
-        // If there are fragments in the back stack, pop the stack
+        // Check if there are fragments in the back stack
         if (fragmentManager.backStackEntryCount > 0) {
             fragmentManager.popBackStack()
 
@@ -130,8 +121,13 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         } else {
-            // If there's no more back stack, finish the activity (exit the app)
-            finish()
+            // If there are no fragments in the back stack and the current fragment is Home, exit the app
+            val currentFragment = fragmentManager.findFragmentById(R.id.frameLayout)
+            if (currentFragment is Home) {
+                finishAffinity() // Exit the app
+            } else {
+                super.onBackPressed()
+            }
         }
     }
 

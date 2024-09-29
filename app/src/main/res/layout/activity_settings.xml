@@ -28,7 +28,7 @@
                 android:id="@+id/imageViewSettings"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/background2"
+                android:background="@drawable/gradient_color"
                 app:layout_constraintBottom_toBottomOf="@id/guideline93"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:background="@drawable/round_settings"
+                android:background="#4D545C"
                 android:elevation="4dp"
                 app:layout_constraintBottom_toBottomOf="@id/guideline90"
                 app:layout_constraintEnd_toEndOf="@id/guideline86"
@@ -98,7 +98,7 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/noto_sans"
                         android:text="Audio"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline118"
                         app:layout_constraintEnd_toStartOf="@+id/guideline106"
@@ -114,7 +114,7 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/noto_sans"
                         android:text="Information"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         app:layout_constraintBottom_toTopOf="@+id/guideline124"
                         app:layout_constraintEnd_toEndOf="@id/guideline106"
                         app:layout_constraintStart_toStartOf="@id/guideline95"
@@ -129,7 +129,7 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/noto_sans"
                         android:text="Account Settings"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="@id/guideline108"
                         app:layout_constraintEnd_toStartOf="@+id/guideline100"
@@ -145,8 +145,8 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/noto_sans"
                         android:text="Email"
+                        android:textColor="@color/white"
                         android:textSize="12sp"
-                        android:textColor="@color/black"
                         app:layout_constraintBottom_toTopOf="@+id/guideline141"
                         app:layout_constraintEnd_toStartOf="@+id/guideline101"
                         app:layout_constraintStart_toStartOf="@+id/guideline99"
@@ -160,7 +160,7 @@
                         android:autoSizeMinTextSize="14sp"
                         android:autoSizeTextType="uniform"
                         android:text="@string/username"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@id/guideline111"
                         app:layout_constraintEnd_toEndOf="@id/guideline101"
@@ -174,10 +174,10 @@
                         android:autoSizeMaxTextSize="12sp"
                         android:autoSizeMinTextSize="8sp"
                         android:autoSizeTextType="uniform"
-                        android:textSize="8sp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/username"
                         android:textColor="@color/grey"
+                        android:textSize="8sp"
                         app:layout_constraintBottom_toBottomOf="@id/guideline111"
                         app:layout_constraintEnd_toEndOf="@id/guideline105"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -192,10 +192,10 @@
                         android:autoSizeMaxTextSize="12sp"
                         android:autoSizeMinTextSize="8sp"
                         android:autoSizeTextType="uniform"
-                        android:textSize="8sp"
                         android:fontFamily="@font/noto_sans"
                         android:text="Email"
                         android:textColor="@color/grey"
+                        android:textSize="8sp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline141"
                         app:layout_constraintEnd_toStartOf="@+id/guideline105"
                         app:layout_constraintStart_toStartOf="@+id/guideline102"
@@ -208,10 +208,10 @@
                         android:autoSizeMaxTextSize="10000sp"
                         android:autoSizeMinTextSize="14sp"
                         android:autoSizeTextType="uniform"
-                        android:textSize="12sp"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/password"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@id/guideline115"
                         app:layout_constraintEnd_toEndOf="@id/guideline101"
                         app:layout_constraintStart_toStartOf="@id/guideline99"
@@ -226,7 +226,7 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Sounds"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         app:layout_constraintBottom_toTopOf="@+id/guideline166"
                         app:layout_constraintEnd_toStartOf="@+id/guideline101"
                         app:layout_constraintStart_toStartOf="@id/guideline99"
@@ -241,7 +241,7 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppins_medium"
                         android:text="About"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toTopOf="@+id/guideline127"
                         app:layout_constraintEnd_toStartOf="@+id/guideline101"
@@ -260,7 +260,7 @@
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
                         app:layout_constraintTop_toTopOf="@id/guideline109"
-                        app:tint="@color/background2" />
+                        app:tint="@color/white" />
 
 
                     <ImageView
@@ -274,7 +274,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/guideline98"
                         app:layout_constraintStart_toStartOf="@+id/guideline97"
                         app:layout_constraintTop_toTopOf="@+id/guideline140"
-                        app:tint="@color/background2" />
+                        app:tint="@color/white" />
 
                     <ImageView
                         android:id="@+id/pass_icon"
@@ -286,9 +286,11 @@
                         android:src="@drawable/pass_icon"
                         app:layout_constraintBottom_toBottomOf="@id/guideline116"
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
                         app:layout_constraintTop_toTopOf="@id/guideline113"
-                        app:tint="@color/background2" />
+                        app:layout_constraintVertical_bias="1.0"
+                        app:tint="@color/white" />
 
                     <ImageView
                         android:id="@+id/sounds_icon"
@@ -300,9 +302,11 @@
                         android:src="@drawable/sound_icon"
                         app:layout_constraintBottom_toTopOf="@+id/guideline122"
                         app:layout_constraintEnd_toEndOf="@id/guideline98"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@id/guideline97"
                         app:layout_constraintTop_toTopOf="@+id/guideline119"
-                        app:tint="@color/background2" />
+                        app:layout_constraintVertical_bias="0.0"
+                        app:tint="@color/white" />
 
                     <ImageView
                         android:id="@+id/about_icon"
@@ -318,7 +322,7 @@
                         app:layout_constraintStart_toStartOf="@id/guideline97"
                         app:layout_constraintTop_toTopOf="@+id/guideline125"
                         app:layout_constraintVertical_bias="0.0"
-                        app:tint="@color/background2" />
+                        app:tint="@color/white" />
 
                     <ImageButton
                         android:id="@+id/btnChangePassword"
@@ -594,7 +598,7 @@
                         android:autoSizeMaxTextSize="16sp"
                         android:autoSizeMinTextSize="14sp"
                         android:autoSizeTextType="uniform"
-                        android:background="@drawable/white_round"
+                        android:background="#4D545C"
                         android:clickable="true"
                         android:elevation="400sp"
                         android:focusable="true"
@@ -741,6 +745,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.164" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline94"
                 android:layout_width="wrap_content"

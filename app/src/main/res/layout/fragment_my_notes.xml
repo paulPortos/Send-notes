@@ -44,7 +44,7 @@
 
             <TextView
 
-                android:id="@+id/textView2"
+                android:id="@+id/tvMyNotes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:autoSizeMaxTextSize="10000sp"

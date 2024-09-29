@@ -40,7 +40,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="@color/background2"
+        android:background="#BF0C131B"
         app:elevation="10dp"
         app:flow_horizontalStyle="spread_inside"
         app:itemIconTint="@color/white"
@@ -52,7 +52,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline169"
-
         app:menu="@menu/menu" />
 
     <androidx.constraintlayout.widget.Guideline

@@ -10,12 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
+import com.group1.notamonotako.views.GradientText
 import com.group1.notamonotako.views.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +31,7 @@ class MyNotes : Fragment() {
     lateinit var layoutManager: LinearLayoutManager
     lateinit var rv_mynotes: RecyclerView
     private lateinit var progressBar : ProgressBar
+    private lateinit var tvMyNotes : TextView
 
 
 
@@ -45,9 +48,11 @@ class MyNotes : Fragment() {
         rv_mynotes = view.findViewById(R.id.rv_mynotes)
         rv_mynotes.layoutManager = LinearLayoutManager(requireContext())
         btnSettings = view.findViewById(R.id.btnSettings)
+        tvMyNotes = view.findViewById(R.id.tvMyNotes)
 
 
         progressBar.visibility = View.INVISIBLE
+        GradientText.setGradientText(tvMyNotes, requireContext())
 
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)

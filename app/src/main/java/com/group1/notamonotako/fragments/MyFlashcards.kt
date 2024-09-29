@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyFlashcardsAdapter
+import com.group1.notamonotako.views.GradientText
 import com.group1.notamonotako.views.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +31,7 @@ class MyFlashcards : Fragment() {
     private lateinit var progressBar : ProgressBar
     private lateinit var myFlashcardsAdapter: MyFlashcardsAdapter
     private lateinit var rv_myFlashcards: RecyclerView
+    private lateinit var tvMyFlashcards: TextView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,10 +39,13 @@ class MyFlashcards : Fragment() {
         btnSettings = view.findViewById(R.id.btnSettings)
         rv_myFlashcards = view.findViewById(R.id.rv_myflashcards)
         progressBar = view.findViewById(R.id.progressBar)
+        tvMyFlashcards = view.findViewById(R.id.tvMyFlashcards)
         progressBar.visibility = View.INVISIBLE
+
 
         // Set up Grid layout with 2 columns
         rv_myFlashcards.layoutManager = GridLayoutManager(requireContext(), 2)
+        GradientText.setGradientText(tvMyFlashcards,requireContext())
 
         // Set up spacing between flashcards (16dp space between items)
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing) // Replace with a value in dimens.xml

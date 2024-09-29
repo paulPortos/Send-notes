@@ -18,4 +18,6 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textColorHint">#FFFFFF</item>
     </style>
+
+
 </resources>

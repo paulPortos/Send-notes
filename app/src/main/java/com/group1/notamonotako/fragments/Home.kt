@@ -110,7 +110,6 @@ class Home : Fragment() {
             }
         }
         GradientText.setGradientText(tvSendNotes, requireContext())
-
         rvhome.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.context)
         fetchPublicNotes()

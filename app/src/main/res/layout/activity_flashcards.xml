@@ -38,7 +38,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    app:tint="@color/white" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -49,7 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans"
-                android:text="Date"
+                android:hint="Date"
+                android:textColorHint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,14 +62,14 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/edittext"
+                android:background="@drawable/white_round"
                 android:fontFamily="@font/noto_sans"
                 android:hint="Title"
                 android:inputType="text"
                 android:textAlignment="center"
-                android:textColor="@color/black"
-
+                android:textColor="@color/white"
                 android:textSize="25dp"
+                android:textColorHint="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/guideline171"
                 app:layout_constraintEnd_toStartOf="@+id/guideline59"
                 app:layout_constraintHorizontal_bias="0.495"
@@ -80,7 +82,7 @@
                 android:id="@+id/contents"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/edittext"
+                android:background="@drawable/white_round"
                 android:fontFamily="@font/noto_sans"
                 android:gravity="top"
                 android:hint="Contents"
@@ -89,7 +91,8 @@
                 android:maxLines="1000"
                 android:minLines="1"
                 android:paddingTop="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="14sp"
                 android:ems="10"
                 android:paddingStart="10dp"
@@ -109,7 +112,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/guideline61"
                 app:layout_constraintEnd_toStartOf="@+id/guideline62"
                 app:layout_constraintStart_toStartOf="@+id/guideline57"
-                app:layout_constraintTop_toTopOf="@+id/guideline56" />
+                app:layout_constraintTop_toTopOf="@+id/guideline56"
+                app:tint="@color/white" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -119,7 +123,7 @@
                 android:autoSizeMaxTextSize="15sp"
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeTextType="uniform"
-                android:background="@drawable/btn_white"
+                android:background="@drawable/btn_white_gradient"
                 android:fontFamily="@font/noto_sans"
                 android:text="CREATE"
                 android:textColor="@color/white"
@@ -139,6 +143,8 @@
                 android:layout_height="0dp"
                 android:backgroundTint="#00000000"
                 android:src="@drawable/arrow_right"
+                app:tint="@color/white"
+
                 app:layout_constraintBottom_toTopOf="@+id/guideline55"
                 app:layout_constraintEnd_toStartOf="@+id/guideline58"
                 app:layout_constraintStart_toStartOf="@+id/guideline59"
@@ -150,6 +156,7 @@
                 android:layout_height="0dp"
                 android:backgroundTint="#00000000"
                 android:src="@drawable/arrow_left"
+                app:tint="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/guideline55"
                 app:layout_constraintEnd_toStartOf="@+id/guideline62"
                 app:layout_constraintStart_toStartOf="@+id/guideline57"

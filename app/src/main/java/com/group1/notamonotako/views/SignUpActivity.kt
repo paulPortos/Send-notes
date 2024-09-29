@@ -54,7 +54,6 @@ class SignUpActivity : AppCompatActivity() {
         progressBar.visibility = View.INVISIBLE
 
         GradientText.setGradientText(btnSignUp,this)
-        GradientText.setGradientText(btnLoginNow,this)
 
 
 

@@ -61,7 +61,6 @@ class SignInActivity : AppCompatActivity() {
 
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         GradientText.setGradientText(btnSignIn,this)
-        GradientText.setGradientText(btnLoginNow,this)
 
 
 

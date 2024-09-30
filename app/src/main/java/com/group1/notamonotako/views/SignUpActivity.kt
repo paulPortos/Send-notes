@@ -7,6 +7,7 @@ import android.graphics.LinearGradient
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -88,6 +89,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
 
+
         // Observe registration result
         signUpViewModel.registrationResult.observe(this) { result ->
             progressBar.visibility = View.INVISIBLE
@@ -110,6 +112,17 @@ class SignUpActivity : AppCompatActivity() {
         }
 
 
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+    //block the back button of the phone
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return if (keyCode == KeyEvent.KEYCODE_BACK) {
+            true
+        } else {
+            super.onKeyDown(keyCode, event)
+        }
     }
 
 }

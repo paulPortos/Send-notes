@@ -40,7 +40,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="#171E26"
+        android:background="#BF171E26"
         app:elevation="10dp"
         app:flow_horizontalStyle="spread_inside"
         app:itemIconTint="@drawable/menu_checker"

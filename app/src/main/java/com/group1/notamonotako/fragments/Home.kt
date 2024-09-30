@@ -42,6 +42,7 @@ class Home : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var rvhome: RecyclerView
     private lateinit var tvSendNotes : TextView
+    private lateinit var viewBlur : View
 
     private val fromBottomFabAnim: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_fab)
@@ -78,6 +79,10 @@ class Home : Fragment() {
         rvhome = view.findViewById(R.id.rvhome)
         tvSendNotes = view.findViewById(R.id.tvSendNotes)
         rvhome.layoutManager = LinearLayoutManager(requireContext())
+        viewBlur = view.findViewById(R.id.viewBlur)
+        viewBlur.visibility = View.GONE
+
+
 
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(),SettingsActivity::class.java)
@@ -146,6 +151,8 @@ class Home : Fragment() {
         notesTV.startAnimation(toBottomFabAnim)
         flashcardsTV.startAnimation(toBottomFabAnim)
         areFabButtonsVisible = !areFabButtonsVisible
+        viewBlur.visibility = View.GONE
+
     }
 
     private fun expandFab() {
@@ -155,6 +162,7 @@ class Home : Fragment() {
         notesTV.startAnimation(fromBottomFabAnim)
         flashcardsTV.startAnimation(fromBottomFabAnim)
         areFabButtonsVisible = !areFabButtonsVisible
+        viewBlur.visibility = View.VISIBLE
     }
 
 

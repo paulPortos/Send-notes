@@ -152,8 +152,9 @@
                 android:autoSizeTextType="uniform"
                 android:hint="Email"
                 android:textColorHint="@color/grey"
+                android:background="@color/transparent"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/black"
+                app:endIconTint="@color/white"
                 app:hintTextColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/guideline26"
                 app:layout_constraintEnd_toStartOf="@+id/guideline15"
@@ -170,7 +171,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"
                     android:inputType="text"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,6 +187,7 @@
                 android:textColorHint="@color/grey"
                 app:endIconMode="password_toggle"
                 app:hintTextColor="@color/white"
+                android:background="@color/transparent"
                 app:layout_constraintBottom_toTopOf="@+id/guideline28"
                 app:layout_constraintEnd_toEndOf="@id/guideline15"
                 app:layout_constraintHorizontal_bias="0.543"
@@ -203,7 +205,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"
                     android:inputType="textPassword"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

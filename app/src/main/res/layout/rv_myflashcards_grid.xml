@@ -27,6 +27,7 @@
             android:autoSizeMinTextSize="1sp"
             android:autoSizeTextType="uniform"
             android:text="Title"
+            android:ellipsize="end"
             android:fontFamily="@font/noto_sans"
 
             android:textAlignment="center"
@@ -56,6 +57,8 @@
             android:textColor="@color/white"
             android:textSize="15sp"
             android:fontFamily="@font/noto_sans"
+            android:ellipsize="end"
+
             app:layout_constraintBottom_toTopOf="@+id/guideline156"
             app:layout_constraintEnd_toStartOf="@+id/guideline152"
             app:layout_constraintHorizontal_bias="0.526"
@@ -67,14 +70,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline148"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_percent="0.9" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline149"

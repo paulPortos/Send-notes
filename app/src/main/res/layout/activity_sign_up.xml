@@ -92,9 +92,11 @@
                 android:autoSizeMinTextSize="1sp"
                 android:autoSizeTextType="uniform"
                 android:hint="@string/username"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/grey"
+                android:background="@color/transparent"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
-
                 app:layout_constraintEnd_toStartOf="@+id/guideline23"
                 app:layout_constraintStart_toStartOf="@+id/guideline24"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -106,7 +108,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"
                     android:inputType="text"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -119,7 +121,10 @@
                 android:autoSizeMinTextSize="1sp"
                 android:autoSizeTextType="uniform"
                 android:hint="Email"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/grey"
+                android:background="@color/transparent"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintEnd_toStartOf="@+id/guideline23"
                 app:layout_constraintStart_toStartOf="@+id/guideline24"
@@ -133,7 +138,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"
                     android:inputType="text"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -147,9 +152,11 @@
                 android:hint="@string/password_signup"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/white"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/grey"
                 app:startIconDrawable="@drawable/baseline_lock_24"
                 app:startIconTint="@color/white"
+                android:background="@color/transparent"
+
                 app:layout_constraintBottom_toTopOf="@+id/guideline28"
                 app:layout_constraintEnd_toStartOf="@+id/guideline23"
                 app:layout_constraintHorizontal_bias="0.487"
@@ -163,7 +170,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"
                     android:inputType="textPassword"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -176,9 +183,10 @@
                 android:hint="@string/confirm_password"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/white"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/grey"
                 app:startIconDrawable="@drawable/baseline_lock_24"
                 app:startIconTint="@color/white"
+                android:background="@color/transparent"
                 app:layout_constraintBottom_toTopOf="@+id/guideline26"
                 app:layout_constraintEnd_toStartOf="@+id/guideline23"
                 app:layout_constraintStart_toStartOf="@+id/guideline24"
@@ -189,9 +197,10 @@
                     android:id="@+id/etConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     android:background="@drawable/btn_white_corner"
                     android:inputType="textPassword"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.Guideline

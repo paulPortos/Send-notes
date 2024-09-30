@@ -20,6 +20,7 @@ import retrofit2.HttpException
 
 class AddFlashcards : AppCompatActivity() {
     private val contentsList: MutableList<String> = mutableListOf()
+    private var currentIndex: Int = 0  // Track the current index, starting at -1
     private lateinit var viewPager: ViewPager2
     private lateinit var btnRight: ImageButton
     private lateinit var btnLeft : ImageButton
@@ -43,10 +44,7 @@ class AddFlashcards : AppCompatActivity() {
         btnCheck = findViewById(R.id.btn_check)
 
         viewPager.setUserInputEnabled(false)
-        btnLeft.setOnClickListener {
-            //Log contents list
-            Log.d("ContentsList", contentsList.toString())
-        }
+        btnLeft.isEnabled = currentIndex > 0
 
         btnCheck.setOnClickListener {
             val title = title.text.toString()
@@ -56,11 +54,44 @@ class AddFlashcards : AppCompatActivity() {
             val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
             startActivity(intent)
         }
+        //1 2 3
+        btnLeft.setOnClickListener {
 
+            if (currentIndex > 0) {  // Ensure currentIndex doesn't go below 0
+                currentIndex--
+                  // Move to the previous index
+                contents.setText(contentsList[currentIndex])  // Show the previous item for editing
+                btnLeft.isEnabled = currentIndex > 0  // Disable left button if no more previous items
+            } else {
+                Toast.makeText(this, "No previous item.", Toast.LENGTH_SHORT).show()
+                btnLeft.isEnabled = false  // Disable the button if we're at the first item
+            }
+        }
+
+        //0 1 2 3
         btnRight.setOnClickListener {
             val content = contents.text.toString()
-            addToContentsList(content)
-            contents.text.clear()
+
+            if (content.isNotBlank()) {
+                if (currentIndex == contentsList.size) {
+                    // If currentIndex is at the end, add a new content item
+                    addToContentsList(content)
+                    contents.text.clear()  // Clear the input field after adding
+                    currentIndex++  // Move to the next index
+                } else if (currentIndex < contentsList.size) {
+                    // If currentIndex is still within the list, move to the next item
+                    contentsList[currentIndex] = content  // Update the current item with new content
+                    currentIndex++  // Move to the next index
+                    if (currentIndex < contentsList.size) {
+                        contents.setText(contentsList[currentIndex])  // Load the next item for editing
+                    } else {
+                        contents.text.clear()  // Clear the input if no more items
+                    }
+                }
+                btnLeft.isEnabled = currentIndex > 0  // Enable the left button if applicable
+            } else {
+                Toast.makeText(this, "Card is blank.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btnBack.setOnClickListener {
@@ -68,6 +99,7 @@ class AddFlashcards : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private fun createData(title: String, cards: MutableList<String>, public: Boolean, toPublic: Boolean) {
         lifecycleScope.launch {
             val apiService = RetrofitInstance.create(ApiService::class.java)

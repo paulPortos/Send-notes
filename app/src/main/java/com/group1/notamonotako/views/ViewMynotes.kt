@@ -76,10 +76,12 @@ class ViewMynotes : AppCompatActivity() {
         }
         sharebtn.setOnClickListener{
             val title = Title.toString()
+            val creatorsUsername = getUsername().toString()
+            val creatorsEmail = getEmail().toString()
             val contents = Content.text.toString()
             val public = false
-            val creator = getUsername().toString()
-            shareNote(title, creator, contents, public)
+
+            shareNote(title, creatorsUsername, creatorsEmail, contents, public)
             setToPublicIntoTrue(Note_id)
         }
 
@@ -102,11 +104,11 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun shareNote(title: String, creator: String, contents: String, public: Boolean){
+    private fun shareNote(title: String, creatorUsername: String, creatorEmail: String, contents: String,  public: Boolean){
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
-                val postToAdmin = postToAdmin(title, creator, contents, public)
+                val postToAdmin = postToAdmin(title, creatorUsername, creatorEmail, contents, public)
                 val response = apiService.toAdmin(postToAdmin)
 
                 if (response.isSuccessful) {

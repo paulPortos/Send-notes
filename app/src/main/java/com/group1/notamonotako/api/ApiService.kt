@@ -90,10 +90,10 @@ interface ApiService {
     @GET("public_notes")
     suspend fun getPublicNotes(): Response<List<getPublicNotes>>
 
-    @POST("/api/forgot")
+    @POST("forgot")
     suspend fun forgotPassword(@Body request: forgot_Password): Response<forgot_PasswordResponse>
 
-    @POST("/api/reset")
-    fun resetPassword(@Body request: reset_Password): Response<ResetPasswordResponse>
+    @POST("reset")
+    suspend fun resetPassword(@Body request: reset_Password): Response<ResetPasswordResponse>
 
 }

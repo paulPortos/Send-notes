@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputLayout
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.ResetToken
 import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_Password
 import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_PasswordResponse
 import kotlinx.coroutines.launch
@@ -28,12 +29,16 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
 
 
     // Variable to store the token received from the server
-    private var token: String? = null
+    private var OTP: String? = null
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password_email_verification)
+
+        ResetToken.init(this)
 
         etEmail = findViewById(R.id.etEmail)
         etOTP = findViewById(R.id.etOTP)
@@ -60,7 +65,13 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
                         val response = apiService.forgotPassword(forgotPassword)
                         val responseBody = response.body()
 
-                        token = responseBody?.token
+                        OTP = responseBody?.OTP
+
+                        OTP?.let { OtpForget ->
+                            ResetToken.saveForgotOTP(OtpForget)
+                            ResetToken.saveEmail(email)
+                        }
+
                         if(response.isSuccessful){
                             Toast.makeText(this@ForgotPassword_EmailVerification, "OTP sent", Toast.LENGTH_SHORT).show()
                             textInputLayout.visibility = View.VISIBLE
@@ -84,7 +95,7 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
             if (otp.isEmpty()){
                 Toast.makeText(this@ForgotPassword_EmailVerification, "Please enter your OTP", Toast.LENGTH_SHORT).show()
             }else{
-               if(otp == token){
+               if(otp == OTP){
                    val intent = Intent(this@ForgotPassword_EmailVerification, ForgotPassword_ResetPassword::class.java)
                    startActivity(intent)
 

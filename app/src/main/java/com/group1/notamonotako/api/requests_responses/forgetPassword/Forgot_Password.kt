@@ -6,7 +6,7 @@ data class forgot_Password(
 
 data class forgot_PasswordResponse(
     val message: String,
-    val token: String
+    val OTP: String
 )
 
 

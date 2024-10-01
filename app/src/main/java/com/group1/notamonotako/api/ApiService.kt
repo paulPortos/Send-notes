@@ -5,6 +5,7 @@ import com.group1.notamonotako.api.requests_responses.admin.responseToAdmin
 import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.flashcards.PostFlashcards
+import com.group1.notamonotako.api.requests_responses.flashcards.UpdateFlashcards
 import com.group1.notamonotako.api.requests_responses.forgetPassword.ResetPasswordResponse
 import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_Password
 import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_PasswordResponse
@@ -76,6 +77,13 @@ interface ApiService {
 
     @POST("flashcards")
     suspend fun postFlashcards(@Body request: PostFlashcards): Response<FlashcardsResponse>
+
+    @PUT("flashcards/{id}")
+    suspend fun updateFlashcards(
+        @Header("Authorization") token: String,
+        @Path("id") noteId: Int,
+        @Body flashcardRequest: UpdateFlashcards // Add this to pass the updated note content
+    ): Response<Void>
 
     // Delete a note
     @DELETE("notes/{id}")

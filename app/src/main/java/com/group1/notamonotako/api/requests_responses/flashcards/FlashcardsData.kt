@@ -19,3 +19,8 @@ data class FlashcardsResponse(
     val to_public: Boolean,
     val updated_at: String
 )
+
+data class UpdateFlashcards(
+    val title: String,
+    val cards: List<String>
+)

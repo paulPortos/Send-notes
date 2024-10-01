@@ -5,6 +5,10 @@ import com.group1.notamonotako.api.requests_responses.admin.responseToAdmin
 import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.flashcards.PostFlashcards
+import com.group1.notamonotako.api.requests_responses.forgetPassword.ResetPasswordResponse
+import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_Password
+import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_PasswordResponse
+import com.group1.notamonotako.api.requests_responses.forgetPassword.reset_Password
 import com.group1.notamonotako.api.requests_responses.notes.Note
 import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
@@ -85,4 +89,11 @@ interface ApiService {
 
     @GET("public_notes")
     suspend fun getPublicNotes(): Response<List<getPublicNotes>>
+
+    @POST("forgot")
+    suspend fun forgotPassword(@Body request: forgot_Password): Response<forgot_PasswordResponse>
+
+    @POST("reset")
+    suspend fun resetPassword(@Body request: reset_Password): Response<ResetPasswordResponse>
+
 }

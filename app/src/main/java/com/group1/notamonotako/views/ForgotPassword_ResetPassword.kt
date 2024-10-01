@@ -1,15 +1,21 @@
 package com.group1.notamonotako.views
 
+import ApiService
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.ResetToken
+import com.group1.notamonotako.api.requests_responses.forgetPassword.reset_Password
+import kotlinx.coroutines.launch
 
 class ForgotPassword_ResetPassword : AppCompatActivity() {
     private lateinit var btnBack : ImageButton
@@ -20,6 +26,7 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password_reset_password)
 
+        ResetToken.init(this)
         btnBack = findViewById( R.id.btnBack)
         etPassword = findViewById(R.id.etPassword)
         etConfirmPassword = findViewById( R.id.etConfirmPassword)
@@ -33,8 +40,35 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
         }
 
         btnConfirmResetPassword.setOnClickListener {
-            val intent = Intent(this@ForgotPassword_ResetPassword, SignInActivity::class.java)
-            startActivity(intent)
+            val password = etPassword.text.toString()
+            val confirmPassword = etConfirmPassword.text.toString()
+            val OTP = ResetToken.getOTP().toString()
+            val email = ResetToken.getEmail().toString()
+
+            if(password.isEmpty()) {
+                Toast.makeText(this@ForgotPassword_ResetPassword, "Please enter your password", Toast.LENGTH_SHORT).show()
+            } else if(password == confirmPassword) {
+                try {
+                    lifecycleScope.launch {
+                        val apiService = RetrofitInstance.create(ApiService::class.java)
+                        val newPassword = reset_Password(password = password, token = OTP, email = email)
+                        val response = apiService.resetPassword(newPassword)
+
+                        if(response.isSuccessful) {
+                            Toast.makeText(this@ForgotPassword_ResetPassword, "Password changed successfully", Toast.LENGTH_SHORT).show()
+
+                            // Navigate to SignInActivity
+                            val intent = Intent(this@ForgotPassword_ResetPassword, SignInActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Prevent going back
+                            startActivity(intent)
+                        }
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(this@ForgotPassword_ResetPassword, "Something went wrong", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this@ForgotPassword_ResetPassword, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            }
         }
 
 

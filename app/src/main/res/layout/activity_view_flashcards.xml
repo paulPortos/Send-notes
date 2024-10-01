@@ -6,7 +6,7 @@
     android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.AddFlashcards">
+    tools:context=".views.ViewFlashcards">
 
 
     <FrameLayout
@@ -124,10 +124,9 @@
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/btn_white_gradient"
                 android:fontFamily="@font/noto_sans"
-                android:text="CREATE"
+                android:text="UPDATE"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-
                 app:layout_constraintBottom_toTopOf="@+id/guideline61"
                 app:layout_constraintEnd_toStartOf="@+id/guideline58"
                 app:layout_constraintHorizontal_bias="0.0"

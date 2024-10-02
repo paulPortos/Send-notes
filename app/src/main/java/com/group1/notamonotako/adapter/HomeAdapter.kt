@@ -36,6 +36,10 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
             it.context.startActivity(intent)
         }
     }
+    fun setFilteredList(data: List<getPublicNotes>){
+        this.data = data
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int {
         return data.size

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
+import com.group1.notamonotako.views.ViewHome
 import com.group1.notamonotako.views.ViewMynotes
 
 class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
@@ -30,7 +31,7 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
         holder.title.text = item.title
         holder.contents.text = item.contents
         holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, ViewMynotes::class.java)
+            val intent = Intent(it.context, ViewHome::class.java)
             intent.putExtra("title", item.title)
             intent.putExtra("contents", item.contents)
             it.context.startActivity(intent)

@@ -71,6 +71,8 @@ class Home : Fragment() {
     }
 
     private var areFabButtonsVisible = false
+    private var hasShownNoDataToast = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
@@ -93,13 +95,14 @@ class Home : Fragment() {
 
 
         svSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextChange(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextSubmit(newText: String?): Boolean {
+            override fun onQueryTextChange(newText: String?): Boolean {
                 filterList(newText)
                 return true
+
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
 
 
@@ -154,6 +157,7 @@ class Home : Fragment() {
                 if (response.isSuccessful){
                     val publicNotes = response.body()
                     if (isAdded && publicNotes != null){
+                        data = publicNotes // Store in data to put in datalist
                         val adapter = HomeAdapter(requireContext(), publicNotes)
                         rvhome.adapter = adapter
                     }
@@ -167,7 +171,6 @@ class Home : Fragment() {
         }
     }
     private fun shrinkFab() {
-
         mainFabBtn.startAnimation(rotateAntiClockWiseFabAnim)
         notesFabBtn.startAnimation(toBottomFabAnim)
         flashcardsFabBtn.startAnimation(toBottomFabAnim)
@@ -175,7 +178,6 @@ class Home : Fragment() {
         flashcardsTV.startAnimation(toBottomFabAnim)
         areFabButtonsVisible = !areFabButtonsVisible
         viewBlur.visibility = View.GONE
-
     }
 
     private fun expandFab() {
@@ -188,36 +190,26 @@ class Home : Fragment() {
         viewBlur.visibility = View.VISIBLE
     }
 
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
-
     private fun filterList(query: String?) {
-
         if (query != null && query.isNotEmpty()) {
-            val filteredList = ArrayList <getPublicNotes>()
-            for (i in data) {
-                if (i.title.toLowerCase(Locale.ROOT).contains(query)){
-                    filteredList.add(i)
+            val filteredList = data.filter { it.title.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT)) }
 
-                }
-
-            }
-            if (filteredList.isEmpty()) {
-                Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show()            }
-            else {
+            if (filteredList.isEmpty() && !hasShownNoDataToast) {
+                Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show()
+                hasShownNoDataToast = true
+                (rvhome.adapter as HomeAdapter).setFilteredList(emptyList())
+            } else if (filteredList.isNotEmpty()) {
+                hasShownNoDataToast = false
                 (rvhome.adapter as HomeAdapter).setFilteredList(filteredList)
-
             }
-        }
-        else{
+        } else {
             (rvhome.adapter as HomeAdapter).setFilteredList(data)
-
+            hasShownNoDataToast = false
         }
-
     }
 
 }

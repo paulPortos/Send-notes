@@ -19,8 +19,6 @@ class ViewHome : AppCompatActivity() {
         btnLike = findViewById(R.id.btnLike)
         btnDisLike = findViewById(R.id.btnDisLike)
         btnComment = findViewById(R.id.btnComment)
-
-
         btnLike.setOnClickListener {
 
         }

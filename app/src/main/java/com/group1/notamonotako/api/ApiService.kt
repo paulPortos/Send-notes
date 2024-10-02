@@ -81,7 +81,7 @@ interface ApiService {
     @PUT("flashcards/{id}")
     suspend fun updateFlashcards(
         @Header("Authorization") token: String,
-        @Path("id") noteId: Int,
+        @Path("id") flashcardsID: Int,
         @Body flashcardRequest: UpdateFlashcards // Add this to pass the updated note content
     ): Response<Void>
 

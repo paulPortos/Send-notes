@@ -29,6 +29,7 @@ class MyFlashcardsAdapter(
                 val intent = Intent(context, ViewFlashcards::class.java).apply {
                     putExtra("title", item.title)
                     putStringArrayListExtra("cards", ArrayList(item.cards)) // Pass cards as an ArrayList
+                    putExtra("flashcard_id", item.id)
                 }
                 context.startActivity(intent) // Start the activity
             }

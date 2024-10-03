@@ -4,13 +4,16 @@ import ApiService
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
@@ -37,6 +40,16 @@ class ViewMynotes : AppCompatActivity() {
     private lateinit var UpdateNotes : ImageView
     private lateinit var btnback : ImageButton
     private lateinit var sharebtn : ImageButton
+    private lateinit var flDelete : FrameLayout
+    private lateinit var viewBlur : View
+    private lateinit var btnCancel : AppCompatButton
+    private lateinit var btnDelete : AppCompatButton
+    private lateinit var btnCancelShare : AppCompatButton
+    private lateinit var btnShare : AppCompatButton
+    private lateinit var flShare : FrameLayout
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +62,13 @@ class ViewMynotes : AppCompatActivity() {
         btnback = findViewById(R.id.btnback)
         UpdateNotes = findViewById(R.id.Update_Notes)
         sharebtn = findViewById(R.id.sharebtn)
+        flDelete = findViewById(R.id.flDelete)
+        viewBlur = findViewById(R.id.viewBlur)
+        btnCancel = findViewById(R.id.btnCancel)
+        btnDelete = findViewById(R.id.btnDelete)
+        flShare = findViewById(R.id.flShare)
+        btnCancelShare = findViewById(R.id.btnCancelShare)
+        btnShare = findViewById(R.id.btnShare)
 
         val Intent = intent
         val Title = Intent.getStringExtra("title")
@@ -74,7 +94,27 @@ class ViewMynotes : AppCompatActivity() {
                 this.Date.text = "Invalid date"
             }
         }
+
+        flDelete.visibility = View.GONE
+        flShare.visibility = View.GONE
+        viewBlur.visibility = View.GONE
+
+
+
+
         sharebtn.setOnClickListener{
+            flShare.visibility = View.VISIBLE
+            viewBlur.visibility = View.VISIBLE
+            flShare.setOnTouchListener { _, _ -> true }
+            viewBlur.setOnTouchListener { _, _ -> true }
+
+        }
+        btnCancelShare.setOnClickListener{
+            flShare.visibility = View.GONE
+            viewBlur.visibility = View.GONE
+        }
+
+        btnShare.setOnClickListener {
             val title = Title.toString()
             val creatorsUsername = getUsername().toString()
             val creatorsEmail = getEmail().toString()
@@ -85,18 +125,33 @@ class ViewMynotes : AppCompatActivity() {
             setToPublicIntoTrue(Note_id)
         }
 
+
+
+        deletebtn.setOnClickListener{
+            flDelete.visibility = View.VISIBLE
+            viewBlur.visibility = View.VISIBLE
+            flDelete.setOnTouchListener { _, _ -> true }
+            viewBlur.setOnTouchListener { _, _ -> true }
+        }
+        btnDelete.setOnClickListener {
+            btnDelete.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
+            if (Note_id != -1) {
+                DeleteNote(Note_id)
+            }
+        }
+        btnCancel.setOnClickListener {
+            flDelete.visibility = View.GONE
+            viewBlur.visibility = View.GONE
+        }
+
+
+
         btnback.setOnClickListener{
             val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
             startActivity(intent)
         }
 
 
-        deletebtn.setOnClickListener{
-            deletebtn.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
-            if (Note_id != -1) {
-                DeleteNote(Note_id)
-            }
-        }
         UpdateNotes.setOnClickListener {
             if (Note_id != -1) {
                 update(Note_id)

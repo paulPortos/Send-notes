@@ -3,7 +3,7 @@ package com.group1.notamonotako.api
 import android.content.Context
 import android.content.SharedPreferences
 
-object ResetToken {
+object ResetOtp {
     private const val PREFS_NAME = "user_prefs"
     private const val EMAIL_KEY = "email"
     private const val OTP_KEY = "otp"

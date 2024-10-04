@@ -6,14 +6,11 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.ResetToken
+import com.group1.notamonotako.api.ResetOtp
 import com.group1.notamonotako.api.requests_responses.forgetPassword.reset_Password
 import kotlinx.coroutines.launch
 
@@ -26,7 +23,7 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password_reset_password)
 
-        ResetToken.init(this)
+        ResetOtp.init(this)
         btnBack = findViewById( R.id.btnBack)
         etPassword = findViewById(R.id.etPassword)
         etConfirmPassword = findViewById( R.id.etConfirmPassword)
@@ -42,8 +39,8 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
         btnConfirmResetPassword.setOnClickListener {
             val password = etPassword.text.toString()
             val confirmPassword = etConfirmPassword.text.toString()
-            val OTP = ResetToken.getOTP().toString()
-            val email = ResetToken.getEmail().toString()
+            val OTP = ResetOtp.getOTP().toString()
+            val email = ResetOtp.getEmail().toString()
 
             if(password.isEmpty()) {
                 Toast.makeText(this@ForgotPassword_ResetPassword, "Please enter your password", Toast.LENGTH_SHORT).show()

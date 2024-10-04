@@ -2,16 +2,19 @@ package com.group1.notamonotako.fragments
 
 import ApiService
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +22,7 @@ import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
 import com.group1.notamonotako.views.GradientText
 import com.group1.notamonotako.views.SettingsActivity
+import io.reactivex.Notification
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,6 +36,10 @@ class MyNotes : Fragment() {
     lateinit var rv_mynotes: RecyclerView
     private lateinit var progressBar : ProgressBar
     private lateinit var tvMyNotes : TextView
+    private lateinit var btnNotification : ImageButton
+    private lateinit var btnBackNotification: ImageButton
+    private lateinit var rvNotification: RecyclerView
+    private lateinit var cvNotification: CardView
 
 
 
@@ -49,10 +57,24 @@ class MyNotes : Fragment() {
         rv_mynotes.layoutManager = LinearLayoutManager(requireContext())
         btnSettings = view.findViewById(R.id.btnSettings)
         tvMyNotes = view.findViewById(R.id.tvMyNotes)
+        btnNotification = view.findViewById(R.id.btnNotification)
+       // btnBackNotification = view.findViewById(R.id.btnBackNotification)
+        // cvNotification = view.findViewById(R.id.cvNotification)
 
 
         progressBar.visibility = View.INVISIBLE
+        //cvNotification.visibility = View.GONE
         GradientText.setGradientText(tvMyNotes, requireContext())
+
+        // btnNotification.setOnClickListener {
+        // cvNotification.visibility = View.VISIBLE
+        //cvNotification.setOnTouchListener { _, _ -> true }
+        // rvNotification.visibility = View.VISIBLE
+        //}
+        //btnBackNotification.setOnClickListener {
+        // cvNotification.visibility = View.GONE
+        //  rvNotification.visibility = View.GONE
+        //}
 
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)

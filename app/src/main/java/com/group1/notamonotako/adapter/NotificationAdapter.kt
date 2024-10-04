@@ -8,43 +8,29 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.requests_responses.notification.GetNotification
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.views.ViewHome
-import com.group1.notamonotako.views.ViewMynotes
 
-class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+class NotificationAdapter(val context: Context, private var data: List<GetNotification>) : RecyclerView.Adapter<NotificationAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.title)
-        val contents: TextView = view.findViewById(R.id.contents)
-
+        val notification_type: TextView = view.findViewById(R.id.notification_type)
+        val email: TextView = view.findViewById(R.id.email)
+        val message: TextView = view.findViewById(R.id.message)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflatedView: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.rv_home_row, parent, false)
+            .inflate(R.layout.rv_notification, parent, false)
         return ItemViewHolder(inflatedView)
     }
-
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
-        holder.title.text = item.title
-        holder.contents.text = item.contents
-        holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, ViewHome::class.java)
-            intent.putExtra("title", item.title)
-            intent.putExtra("contents", item.contents)
-            it.context.startActivity(intent)
-        }
+        holder.notification_type.text = item.notification_type
+        holder.email.text = item.email
+        holder.message.text = item.message
     }
-    fun setFilteredList(data: List<getPublicNotes>){
-        this.data = data
-        notifyDataSetChanged()
-    }
-
     override fun getItemCount(): Int {
         return data.size
     }
-
 }
-

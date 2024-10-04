@@ -84,7 +84,7 @@
 
 
             <SearchView
-                android:id="@+id/svsearchView"
+                android:id="@+id/svSearchView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/search"

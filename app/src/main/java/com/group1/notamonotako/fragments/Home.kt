@@ -13,6 +13,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -22,14 +23,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.adapter.HomeAdapter
+import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.views.AddFlashcards
 import com.group1.notamonotako.views.AddNotes
 import com.group1.notamonotako.views.GradientText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.Locale
 
 class Home : Fragment() {
     lateinit var flashcardsFabBtn : FloatingActionButton
@@ -43,6 +47,9 @@ class Home : Fragment() {
     private lateinit var rvhome: RecyclerView
     private lateinit var tvSendNotes : TextView
     private lateinit var viewBlur : View
+    private lateinit var svSearchView :SearchView
+    private var data: List<getPublicNotes> = listOf()
+
 
     private val fromBottomFabAnim: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_fab)
@@ -64,6 +71,8 @@ class Home : Fragment() {
     }
 
     private var areFabButtonsVisible = false
+    private var hasShownNoDataToast = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
@@ -81,6 +90,23 @@ class Home : Fragment() {
         rvhome.layoutManager = LinearLayoutManager(requireContext())
         viewBlur = view.findViewById(R.id.viewBlur)
         viewBlur.visibility = View.GONE
+        svSearchView = view.findViewById(R.id.svSearchView)
+
+
+
+        svSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+
+        })
 
 
 
@@ -131,6 +157,7 @@ class Home : Fragment() {
                 if (response.isSuccessful){
                     val publicNotes = response.body()
                     if (isAdded && publicNotes != null){
+                        data = publicNotes // Store in data to put in datalist
                         val adapter = HomeAdapter(requireContext(), publicNotes)
                         rvhome.adapter = adapter
                     }
@@ -144,7 +171,6 @@ class Home : Fragment() {
         }
     }
     private fun shrinkFab() {
-
         mainFabBtn.startAnimation(rotateAntiClockWiseFabAnim)
         notesFabBtn.startAnimation(toBottomFabAnim)
         flashcardsFabBtn.startAnimation(toBottomFabAnim)
@@ -152,7 +178,6 @@ class Home : Fragment() {
         flashcardsTV.startAnimation(toBottomFabAnim)
         areFabButtonsVisible = !areFabButtonsVisible
         viewBlur.visibility = View.GONE
-
     }
 
     private fun expandFab() {
@@ -165,11 +190,26 @@ class Home : Fragment() {
         viewBlur.visibility = View.VISIBLE
     }
 
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+    private fun filterList(query: String?) {
+        if (query != null && query.isNotEmpty()) {
+            val filteredList = data.filter { it.title.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT)) }
+
+            if (filteredList.isEmpty() && !hasShownNoDataToast) {
+                Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show()
+                hasShownNoDataToast = true
+                (rvhome.adapter as HomeAdapter).setFilteredList(emptyList())
+            } else if (filteredList.isNotEmpty()) {
+                hasShownNoDataToast = false
+                (rvhome.adapter as HomeAdapter).setFilteredList(filteredList)
+            }
+        } else {
+            (rvhome.adapter as HomeAdapter).setFilteredList(data)
+            hasShownNoDataToast = false
+        }
     }
 
 }

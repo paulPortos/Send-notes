@@ -134,6 +134,25 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline56"
                 app:layout_constraintVertical_bias="0.0" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_delete"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autoSizeMaxTextSize="15sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/btn_white_gradient"
+                android:fontFamily="@font/noto_sans"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline167"
+                app:layout_constraintEnd_toStartOf="@+id/guideline58"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline63"
+                app:layout_constraintTop_toBottomOf="@+id/btn_check"
+                app:layout_constraintVertical_bias="0.0" />
+
 
             <ImageButton
                 android:id="@+id/btn_right"

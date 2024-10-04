@@ -52,11 +52,15 @@ class HomeActivity : AppCompatActivity() {
         // Check for intent extras to determine which fragment to show
         if (savedInstanceState == null) {
             val showMyNotesFragment = intent.getBooleanExtra("showMyNotesFragment", false)
+            val showMyFlashcardFragment = intent.getBooleanExtra("showFlashcardFragment", false)
             if (showMyNotesFragment) {
                 replaceFragment(MyNotes(), "Notes")
                 binding.bottomNavigationView.selectedItemId = R.id.btnnotes
+            } else if (showMyFlashcardFragment) { // Corrected to check for true
+                replaceFragment(MyFlashcards(), "Flashcards")
+                binding.bottomNavigationView.selectedItemId = R.id.btnflashcards
             } else {
-                replaceFragment(Home(),"Home")
+                replaceFragment(Home(), "Home")
                 binding.bottomNavigationView.selectedItemId = R.id.btnhome
             }
         }

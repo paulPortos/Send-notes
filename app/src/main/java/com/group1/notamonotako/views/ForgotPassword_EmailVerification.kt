@@ -13,9 +13,8 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputLayout
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.ResetToken
+import com.group1.notamonotako.api.ResetOtp
 import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_Password
-import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_PasswordResponse
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -38,7 +37,7 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password_email_verification)
 
-        ResetToken.init(this)
+        ResetOtp.init(this)
 
         etEmail = findViewById(R.id.etEmail)
         etOTP = findViewById(R.id.etOTP)
@@ -68,8 +67,8 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
                         OTP = responseBody?.OTP
 
                         OTP?.let { OtpForget ->
-                            ResetToken.saveForgotOTP(OtpForget)
-                            ResetToken.saveEmail(email)
+                            ResetOtp.saveForgotOTP(OtpForget)
+                            ResetOtp.saveEmail(email)
                         }
 
                         if(response.isSuccessful){

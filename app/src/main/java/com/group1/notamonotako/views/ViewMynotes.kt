@@ -87,6 +87,7 @@ class ViewMynotes : AppCompatActivity() {
 
         btnback.setOnClickListener{
             val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+            intent.putExtra("showMyNotesFragment", true)
             startActivity(intent)
         }
 

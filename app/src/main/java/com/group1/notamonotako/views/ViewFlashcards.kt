@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.group1.notamonotako.R
@@ -32,6 +33,7 @@ class ViewFlashcards : AppCompatActivity() {
     private lateinit var btnLeft: ImageButton
     private lateinit var btnBack: ImageButton //
     private lateinit var viewPager: ViewPager2
+    private lateinit var btnDelete : AppCompatButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_flashcards)
@@ -44,6 +46,7 @@ class ViewFlashcards : AppCompatActivity() {
         btnBack = findViewById(R.id.btn_back) //
         timestamp = findViewById(R.id.timestamp)
         viewPager = findViewById(R.id.viewPager)
+        btnDelete = findViewById(R.id.btnDelete)
         viewPager.setUserInputEnabled(true)
         val flashcardsId = intent.getIntExtra("flashcard_id", -1)
         // logg flashcards ID

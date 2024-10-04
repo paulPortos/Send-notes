@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     style="@style/ScreenBackground"
-
     android:layout_height="match_parent"
     tools:context=".fragments.MyNotes">
 
@@ -28,6 +27,96 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
+
+
+            <ImageButton
+                android:id="@+id/btnNotification"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/transparent"
+                android:src="@drawable/baseline_notifications_24"
+                app:layout_constraintBottom_toTopOf="@+id/guideline67"
+                app:layout_constraintEnd_toStartOf="@+id/guideline247"
+                app:layout_constraintStart_toStartOf="@+id/guideline246"
+                app:layout_constraintTop_toTopOf="@+id/guideline49" />
+
+           <!-- <androidx.cardview.widget.CardView
+                android:id="@+id/cvNotification"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardBackgroundColor="#101010"
+                app:cardElevation="15dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/guideline250"
+                app:layout_constraintEnd_toStartOf="@+id/guideline51"
+                app:layout_constraintStart_toStartOf="@+id/guideline248"
+                app:layout_constraintTop_toTopOf="@+id/guideline249">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnBackNotification"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@drawable/btn_white_gradient"
+                        android:text="Back"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline256"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline253"
+                        app:layout_constraintStart_toStartOf="@+id/guideline254"
+                        app:layout_constraintTop_toTopOf="@+id/guideline255" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvNotification"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/guideline252" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline252"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.15" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline253"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.25" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline254"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.05" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline255"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.02" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline256"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView> -->
+
+
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -79,6 +168,7 @@
                 android:id="@+id/rv_mynotes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:elevation="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline53"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -119,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent=".8" />
+                app:layout_constraintGuide_percent="0.84" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline52"
@@ -163,8 +253,55 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.55" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline246"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.65" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline247"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline248"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline249"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline250"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline251"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="20dp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
+
+
+
+
+
 
 </FrameLayout>

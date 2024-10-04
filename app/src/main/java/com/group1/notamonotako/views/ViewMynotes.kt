@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
@@ -19,10 +18,9 @@ import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.AccountManager.getEmail
 import com.group1.notamonotako.api.AccountManager.getUsername
-import com.group1.notamonotako.api.requests_responses.admin.postToAdmin
+import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
-import com.group1.notamonotako.fragments.MyFlashcards
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -120,8 +118,7 @@ class ViewMynotes : AppCompatActivity() {
             val creatorsEmail = getEmail().toString()
             val contents = Content.text.toString()
             val public = false
-
-            shareNote(title, creatorsUsername, creatorsEmail, contents, public)
+            shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, public)
             setToPublicIntoTrue(Note_id)
         }
 
@@ -133,18 +130,18 @@ class ViewMynotes : AppCompatActivity() {
             flDelete.setOnTouchListener { _, _ -> true }
             viewBlur.setOnTouchListener { _, _ -> true }
         }
+
         btnDelete.setOnClickListener {
             btnDelete.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
             if (Note_id != -1) {
                 DeleteNote(Note_id)
             }
         }
+
         btnCancel.setOnClickListener {
             flDelete.visibility = View.GONE
             viewBlur.visibility = View.GONE
         }
-
-
 
         btnback.setOnClickListener{
             val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
@@ -160,11 +157,11 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun shareNote(title: String, creatorUsername: String, creatorEmail: String, contents: String,  public: Boolean){
+    private fun shareNote(notesId: Int,title: String, creatorUsername: String, creatorEmail: String, contents: String, public: Boolean = false){
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
-                val postToAdmin = postToAdmin(title, creatorUsername, creatorEmail, contents, public)
+                val postToAdmin = PostToAdmin(notesId, title, creatorUsername, creatorEmail, contents, public)
                 val response = apiService.toAdmin(postToAdmin)
 
                 if (response.isSuccessful) {

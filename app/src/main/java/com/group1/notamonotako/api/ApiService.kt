@@ -1,7 +1,7 @@
 import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordRequest
 import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordResponse
-import com.group1.notamonotako.api.requests_responses.admin.postToAdmin
-import com.group1.notamonotako.api.requests_responses.admin.responseToAdmin
+import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
+import com.group1.notamonotako.api.requests_responses.admin.ResponseToAdmin
 import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.flashcards.PostFlashcards
@@ -46,7 +46,7 @@ interface ApiService {
     fun logout(@Header("Authorization") token: String): Call<Void>
 
     @POST("admin")
-    suspend fun toAdmin(@Body request: postToAdmin): Response<responseToAdmin>
+    suspend fun toAdmin(@Body request: PostToAdmin): Response<ResponseToAdmin>
 
     // Get notes (with token-based auth)
     @GET("notes")
@@ -91,6 +91,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") noteId: Int
     ): Response<Void>
+    // Delete a flashcard
+    @DELETE("flashcards/{id}")
+    suspend fun deleteFlashcards(
+        @Header("Authorization") token: String,
+        @Path("id") flashcardsID: Int
+    ): Response<Void>
 
     @PUT("ChangePass")
     suspend fun PassChange(@Body changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse>
@@ -103,5 +109,4 @@ interface ApiService {
 
     @POST("reset")
     suspend fun resetPassword(@Body request: reset_Password): Response<ResetPasswordResponse>
-
 }

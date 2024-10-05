@@ -59,8 +59,10 @@ class SignInActivity : AppCompatActivity() {
         btnLoginNow = findViewById(R.id.btnSignInNow)
         btnSignIn = findViewById(R.id.btnSignIn)
 
+
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         GradientText.setGradientText(btnSignIn,this)
+
 
 
 
@@ -70,6 +72,7 @@ class SignInActivity : AppCompatActivity() {
             mediaPlayer.start()
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
+            //Log username and password
 
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this@SignInActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
@@ -95,6 +98,7 @@ class SignInActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val apiService = RetrofitInstance.create(ApiService::class.java)
             val loginRequest = Login(email = email, password = password)
+            //Log login request
 
             try {
                 val response = apiService.login(loginRequest)

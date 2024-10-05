@@ -58,23 +58,23 @@ class MyNotes : Fragment() {
         btnSettings = view.findViewById(R.id.btnSettings)
         tvMyNotes = view.findViewById(R.id.tvMyNotes)
         btnNotification = view.findViewById(R.id.btnNotification)
-       // btnBackNotification = view.findViewById(R.id.btnBackNotification)
-        // cvNotification = view.findViewById(R.id.cvNotification)
+//      btnBackNotification = view.findViewById(R.id.btnBackNotification)
+//        cvNotification = view.findViewById(R.id.cvNotification)
 
 
         progressBar.visibility = View.INVISIBLE
-        //cvNotification.visibility = View.GONE
+//     cvNotification.visibility = View.GONE
         GradientText.setGradientText(tvMyNotes, requireContext())
 
-        // btnNotification.setOnClickListener {
-        // cvNotification.visibility = View.VISIBLE
-        //cvNotification.setOnTouchListener { _, _ -> true }
-        // rvNotification.visibility = View.VISIBLE
-        //}
-        //btnBackNotification.setOnClickListener {
-        // cvNotification.visibility = View.GONE
-        //  rvNotification.visibility = View.GONE
-        //}
+     btnNotification.setOnClickListener {
+//         cvNotification.visibility = View.VISIBLE
+//        cvNotification.setOnTouchListener { _, _ -> true }
+//       rvNotification.visibility = View.VISIBLE
+       }
+//        btnBackNotification.setOnClickListener {
+//        cvNotification.visibility = View.GONE
+//         rvNotification.visibility = View.GONE
+//     }
 
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)

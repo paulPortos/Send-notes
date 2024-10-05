@@ -129,8 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#99181818"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
 
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton

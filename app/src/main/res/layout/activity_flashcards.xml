@@ -68,7 +68,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="25dp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/grey"
                 app:layout_constraintBottom_toTopOf="@+id/guideline171"
                 app:layout_constraintEnd_toStartOf="@+id/guideline59"
                 app:layout_constraintHorizontal_bias="0.495"
@@ -83,7 +83,6 @@
                 android:layout_height="0dp"
                 android:background="@drawable/white_round"
                 android:fontFamily="@font/noto_sans"
-                android:gravity="top"
                 android:hint="Contents"
                 android:inputType="textMultiLine"
                 android:lines="1000"
@@ -91,8 +90,9 @@
                 android:minLines="1"
                 android:paddingTop="20dp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/grey"
                 android:textSize="14sp"
+                android:gravity="center|top"
                 android:ems="10"
                 android:paddingStart="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline173"
@@ -106,8 +106,8 @@
                 android:id="@+id/btn_back"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:backgroundTint="#00000000"
-                android:src="@drawable/arrow_left_small"
+                android:background="@drawable/btn_white_gradient"
+                android:src="@drawable/btnback"
                 app:layout_constraintBottom_toTopOf="@+id/guideline61"
                 app:layout_constraintEnd_toStartOf="@+id/guideline62"
                 app:layout_constraintStart_toStartOf="@+id/guideline57"
@@ -217,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.15" />
+                app:layout_constraintGuide_percent="0.2" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline63"

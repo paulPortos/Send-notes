@@ -42,15 +42,14 @@
 
            <!-- <androidx.cardview.widget.CardView
                 android:id="@+id/cvNotification"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="250dp"
+                android:layout_height="300dp"
                 app:cardBackgroundColor="#101010"
-                app:cardElevation="15dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/guideline250"
-                app:layout_constraintEnd_toStartOf="@+id/guideline51"
-                app:layout_constraintStart_toStartOf="@+id/guideline248"
-                app:layout_constraintTop_toTopOf="@+id/guideline249">
+                app:cardElevation="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

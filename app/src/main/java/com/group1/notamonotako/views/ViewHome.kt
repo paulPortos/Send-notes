@@ -1,7 +1,11 @@
 package com.group1.notamonotako.views
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,6 +16,8 @@ class ViewHome : AppCompatActivity() {
     private lateinit var btnLike : ImageButton
     private lateinit var btnDisLike : ImageButton
     private lateinit var btnComment : ImageButton
+    private lateinit var flComment : FrameLayout
+    private lateinit var btnClose : ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_home)
@@ -19,35 +25,28 @@ class ViewHome : AppCompatActivity() {
         btnLike = findViewById(R.id.btnLike)
         btnDisLike = findViewById(R.id.btnDisLike)
         btnComment = findViewById(R.id.btnComment)
+        flComment = findViewById(R.id.flComment)
+        btnClose = findViewById(R.id.btnClose)
+
+        flComment.visibility - View.GONE
         btnLike.setOnClickListener {
 
         }
 
 
 
-//        btnComment.setOnClickListener {
-//            // Get the comment layout
-//            val commentLayout = findViewById<LinearLayout>(R.id.commentLayout)
-//
-//            // Check if the comment layout is already visible
-//            if (commentLayout.visibility == View.GONE) {
-//                // Show the comment layout with an animation
-//                commentLayout.visibility = View.VISIBLE
-//                commentLayout.translationY = commentLayout.height.toFloat() // Start from below
-//                commentLayout.animate()
-//                    .translationY(0f) // Move to original position
-//                    .setDuration(300)
-//                    .start()
-//            } else {
-//                // Hide the comment layout with an animation
-//                commentLayout.animate()
-//                    .translationY(commentLayout.height.toFloat()) // Move down
-//                    .setDuration(300)
-//                    .withEndAction {
-//                        commentLayout.visibility = View.GONE // Set visibility after animation
-//                    }
-//                    .start()
-//            }
-//        }
+        btnComment.setOnClickListener {
+            // Show the comment frame with a slide-up animation
+            flComment.visibility = View.VISIBLE
+            flComment.animate().translationY(0f).setDuration(300).start()
+        }
+
+        btnClose.setOnClickListener {
+            // Hide the comment frame with a slide-down animation
+            flComment.animate().translationY(flComment.height.toFloat()).setDuration(300).withEndAction {
+                flComment.visibility = View.GONE // Set visibility to GONE after the animation
+            }.start()
+        }
     }
+
 }

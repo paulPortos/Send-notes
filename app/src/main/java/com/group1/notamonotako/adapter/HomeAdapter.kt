@@ -2,6 +2,7 @@ package com.group1.notamonotako.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,15 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
         holder.contents.text = item.contents
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewHome::class.java)
-            intent.putExtra("title", item.title)
-            intent.putExtra("contents", item.contents)
+            val updatedAtDate = item.updated_at?.substringBefore("T") ?: "No Date"
+            intent.putExtra("admin_id", item.adminId ?: -1)
+            intent.putExtra("note_id", item.notesId ?: -1)
+            intent.putExtra("title", item.title ?: "No Title")
+            intent.putExtra("creator_username", item.creator_username ?: "Unknown")
+            intent.putExtra("creator_email", item.creator_email ?: "unknown@example.com")
+            intent.putExtra("contents", item.contents ?: "No Contents")
+            intent.putExtra("public", item.public ?: false)
+            intent.putExtra("updated_at", updatedAtDate)
             it.context.startActivity(intent)
         }
     }

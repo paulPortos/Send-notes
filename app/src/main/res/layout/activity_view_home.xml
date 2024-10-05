@@ -9,7 +9,7 @@
     tools:context=".views.ViewHome">
 
     <TextView
-        android:id="@+id/Title"
+        android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeMaxTextSize="1000sp"
@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/Contents"
+        android:id="@+id/tvContents"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/white_round"
@@ -66,7 +66,7 @@
         app:tint="@color/white" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/tvDate"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeMaxTextSize="20sp"

@@ -20,6 +20,9 @@
             android:name=".views.ViewFlashcards"
             android:exported="false" />
         <activity
+            android:name=".views.ViewHome"
+            android:exported="false" />
+        <activity
             android:name=".views.ChangePassword"
             android:exported="false" />
         <activity
@@ -33,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".views.AddNotes"
-            android:exported="false" />
-        <activity
-            android:name=".views.Test"
             android:exported="false" />
         <activity
             android:name=".views.ViewMynotes"

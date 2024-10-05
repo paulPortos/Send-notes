@@ -1,7 +1,9 @@
 package com.group1.notamonotako.views
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,6 +14,10 @@ class ViewHome : AppCompatActivity() {
     private lateinit var btnLike : ImageButton
     private lateinit var btnDisLike : ImageButton
     private lateinit var btnComment : ImageButton
+    private lateinit var tvTitle : TextView
+    private lateinit var tvContents : TextView
+    private lateinit var tvDate : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_home)
@@ -19,35 +25,29 @@ class ViewHome : AppCompatActivity() {
         btnLike = findViewById(R.id.btnLike)
         btnDisLike = findViewById(R.id.btnDisLike)
         btnComment = findViewById(R.id.btnComment)
+        tvTitle = findViewById(R.id.tvTitle)
+        tvContents = findViewById(R.id.tvContents)
+        tvDate = findViewById(R.id.tvDate)
+
+        val adminId = intent.getIntExtra("admin_id", -1)
+        val noteId = intent.getIntExtra("note_id", -1)
+        val title = intent.getStringExtra("title")
+        val creatorUsername = intent.getStringExtra("creator_username")
+        val creatorEmail = intent.getStringExtra("creator_email")
+        val contents = intent.getStringExtra("contents")
+        val public = intent.getBooleanExtra("public", false)
+        val updatedAt = intent.getStringExtra("updated_at")
+
+        //log all
+        Log.d("ViewHome", "adminId: $adminId, noteId: $noteId, title: $title, creatorUsername: $creatorUsername, creatorEmail: $creatorEmail, contents: $contents, public: $public, updatedAt: $updatedAt")
+        tvTitle.text = title ?: "No title"
+        tvContents.text = contents ?: "No contents"
+        tvDate.text = updatedAt ?: "No date"
+
+
+
         btnLike.setOnClickListener {
 
         }
-
-
-
-//        btnComment.setOnClickListener {
-//            // Get the comment layout
-//            val commentLayout = findViewById<LinearLayout>(R.id.commentLayout)
-//
-//            // Check if the comment layout is already visible
-//            if (commentLayout.visibility == View.GONE) {
-//                // Show the comment layout with an animation
-//                commentLayout.visibility = View.VISIBLE
-//                commentLayout.translationY = commentLayout.height.toFloat() // Start from below
-//                commentLayout.animate()
-//                    .translationY(0f) // Move to original position
-//                    .setDuration(300)
-//                    .start()
-//            } else {
-//                // Hide the comment layout with an animation
-//                commentLayout.animate()
-//                    .translationY(commentLayout.height.toFloat()) // Move down
-//                    .setDuration(300)
-//                    .withEndAction {
-//                        commentLayout.visibility = View.GONE // Set visibility after animation
-//                    }
-//                    .start()
-//            }
-//        }
     }
 }

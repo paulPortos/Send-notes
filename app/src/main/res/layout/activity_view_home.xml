@@ -54,9 +54,9 @@
         style="@android:style/Widget.DeviceDefault.ImageButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#00FFFFFF"
+        android:background="@drawable/btn_white_gradient"
         android:src="@drawable/btnback"
-        app:layout_constraintBottom_toTopOf="@+id/guideline71"
+        app:layout_constraintBottom_toTopOf="@+id/guideline254"
         app:layout_constraintDimensionRatio="1:0"
         app:layout_constraintEnd_toStartOf="@+id/guideline79"
         app:layout_constraintHorizontal_bias="1.0"
@@ -87,9 +87,9 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/white_round"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:background="@drawable/white_round"
         app:layout_constraintBottom_toTopOf="@+id/guideline226"
         app:layout_constraintEnd_toStartOf="@+id/guideline64"
         app:layout_constraintStart_toStartOf="@+id/guideline35"
@@ -99,11 +99,11 @@
             android:id="@+id/btnLike"
             android:layout_width="120dp"
             android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/white_round"
             android:elevation="10dp"
             android:scaleType="centerInside"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="5dp"
             android:src="@drawable/baseline_thumb_up_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.207"
@@ -113,11 +113,11 @@
             android:id="@+id/btnDisLike"
             android:layout_width="120dp"
             android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/white_round"
             android:elevation="10dp"
             android:scaleType="centerInside"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="5dp"
             android:src="@drawable/baseline_thumb_down_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
@@ -128,16 +128,172 @@
             android:id="@+id/btnComment"
             android:layout_width="120dp"
             android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/white_round"
             android:elevation="10dp"
             android:scaleType="centerInside"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="5dp"
             android:src="@drawable/baseline_comment_24"
             tools:layout_editor_absoluteX="302dp"
             tools:layout_editor_absoluteY="629dp" />
 
     </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/flComment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:visibility="gone"
+        android:elevation="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnClose"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#FF0000"
+                android:src="@drawable/baseline_close_24"
+                app:layout_constraintBottom_toTopOf="@+id/guideline261"
+                app:layout_constraintEnd_toStartOf="@+id/guideline258"
+                app:layout_constraintTop_toTopOf="@+id/guideline260"
+                app:layout_constraintVertical_bias="1.0"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autoSizeMaxTextSize="10000sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:text="Comments"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline261"
+                app:layout_constraintEnd_toStartOf="@+id/guideline259"
+                app:layout_constraintStart_toStartOf="@+id/guideline257"
+                app:layout_constraintTop_toTopOf="@+id/guideline260" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline256"
+                app:layout_constraintEnd_toStartOf="@+id/guideline258"
+                app:layout_constraintStart_toStartOf="@+id/guideline257"
+                app:layout_constraintTop_toTopOf="@+id/guideline255" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autoSizeMaxTextSize="1000sp"
+                android:autoSizeMinTextSize="1sp"
+                android:autoSizeTextType="uniform"
+                android:background="@color/grey"
+                app:endIconCheckable="true"
+                app:endIconDrawable="@drawable/baseline_arrow_upward_24"
+                app:endIconTint="@color/white"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
+                app:layout_constraintBottom_toTopOf="@+id/guideline264"
+                app:layout_constraintEnd_toStartOf="@+id/guideline258"
+                app:layout_constraintStart_toStartOf="@+id/guideline257"
+                app:layout_constraintTop_toTopOf="@+id/guideline265">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/grey_corner"
+                    android:hint="Add Comment..."
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/grey" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline255"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline256"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline257"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline258"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline259"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.27" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline260"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline261"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.08" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline264"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline265"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline266"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.89" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline35"
@@ -200,7 +356,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.035" />
+        app:layout_constraintGuide_percent="0.04" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline78"
@@ -214,7 +370,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.16" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline225"
@@ -230,8 +386,29 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.96" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline254"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
 
-   <!-- <FrameLayout
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline262"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline263"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+
+    <!-- <FrameLayout
         android:id="@+id/commentLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"

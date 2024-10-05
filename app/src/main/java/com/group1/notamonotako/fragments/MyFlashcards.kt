@@ -63,7 +63,6 @@ class MyFlashcards : Fragment() {
 
     private fun fetchFlashcards() {
         lifecycleScope.launch {
-            progressBar.visibility = View.VISIBLE  // Show progress bar while loading
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = withContext(Dispatchers.IO) {
@@ -76,21 +75,31 @@ class MyFlashcards : Fragment() {
                         // Create and set the adapter without click listener since it is handled in the adapter
                         myFlashcardsAdapter = MyFlashcardsAdapter(requireContext(), flashcards)
                         rv_myFlashcards.adapter = myFlashcardsAdapter
+                        progressBar.visibility = View.VISIBLE  // Hide progress bar
+
                     } else {
                         if (isAdded) {
                             Toast.makeText(requireContext(), "No flashcards available", Toast.LENGTH_SHORT).show()
+                            progressBar.visibility = View.INVISIBLE  // Hide progress bar
+
                         }
                     }
                 } else {
                     if (isAdded) {
                         Toast.makeText(requireContext(), "Failed to fetch flashcards", Toast.LENGTH_SHORT).show()
+                        progressBar.visibility = View.INVISIBLE  // Hide progress bar
+
                     }
                 }
             } catch (e: HttpException) {
                 Toast.makeText(requireContext(), "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.INVISIBLE  // Hide progress bar
+
             } catch (e: IOException) {
                 Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.d("flashcards", e.message.toString())
+                progressBar.visibility = View.INVISIBLE  // Hide progress bar
+
             } finally {
                 progressBar.visibility = View.INVISIBLE  // Hide progress bar
             }

@@ -150,12 +150,12 @@
                 android:autoSizeMaxTextSize="1000sp"
                 android:autoSizeMinTextSize="1sp"
                 android:autoSizeTextType="uniform"
-                android:hint="Email"
-                android:textColorHint="@color/grey"
+
                 android:background="@color/transparent"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/white"
-                app:hintTextColor="@color/white"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/guideline26"
                 app:layout_constraintEnd_toStartOf="@+id/guideline15"
                 app:layout_constraintHorizontal_bias="0.54"
@@ -167,6 +167,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsername"
+                    android:hint="Email"
+                    android:textColorHint="@color/grey"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"
@@ -183,11 +185,11 @@
                 android:autoSizeMaxTextSize="1000sp"
                 android:autoSizeMinTextSize="1sp"
                 android:autoSizeTextType="uniform"
-                android:hint="@string/password"
-                android:textColorHint="@color/grey"
+                android:background="@color/transparent"
+                app:hintAnimationEnabled="false"
                 app:endIconMode="password_toggle"
                 app:hintTextColor="@color/white"
-                android:background="@color/transparent"
+                app:hintEnabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/guideline28"
                 app:layout_constraintEnd_toEndOf="@id/guideline15"
                 app:layout_constraintHorizontal_bias="0.543"
@@ -201,6 +203,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
+                    android:hint="@string/password"
+                    android:textColorHint="@color/grey"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"

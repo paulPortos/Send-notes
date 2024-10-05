@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 
 object RetrofitInstance {
 
-    private const val BASE_URL = "http://192.168.0.102:8000/api/"
+    private const val BASE_URL = "http://192.168.147.159:8000/api/"
 
     // Add the logging interceptor
     private val logging = HttpLoggingInterceptor().apply {

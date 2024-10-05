@@ -47,9 +47,13 @@ class AddNotes : AppCompatActivity() {
         doneButton.setOnClickListener {
             val title = title.text.toString()
             val contents = contents.text.toString()
-            CreateData(title, contents)
-            progressBar.visibility = View.VISIBLE
-
+            if (title.isEmpty() || contents.isEmpty()) {
+                // Show an error message or take appropriate action
+                Toast.makeText(this, "Title and Contents must not be empty", Toast.LENGTH_SHORT).show()
+            } else {
+                CreateData(title, contents)
+                progressBar.visibility = View.VISIBLE
+            }
         }
     }
 

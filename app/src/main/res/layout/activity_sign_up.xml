@@ -142,10 +142,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_white_corner"
+                    android:hint="Email"
                     android:inputType="text"
                     android:textColor="@color/white"
-                    android:hint="Email"
-                    android:textColorHint="@color/grey"/>
+                    android:textColorHint="@color/grey" />
             </com.google.android.material.textfield.TextInputLayout>
 
 

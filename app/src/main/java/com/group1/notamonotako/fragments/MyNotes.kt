@@ -58,23 +58,24 @@ class MyNotes : Fragment() {
         btnSettings = view.findViewById(R.id.btnSettings)
         tvMyNotes = view.findViewById(R.id.tvMyNotes)
         btnNotification = view.findViewById(R.id.btnNotification)
-//      btnBackNotification = view.findViewById(R.id.btnBackNotification)
+//         btnBackNotification = view.findViewById(R.id.btnBackNotification)
 //        cvNotification = view.findViewById(R.id.cvNotification)
 
 
         progressBar.visibility = View.INVISIBLE
-//     cvNotification.visibility = View.GONE
+//        cvNotification.visibility = View.GONE
         GradientText.setGradientText(tvMyNotes, requireContext())
 
-     btnNotification.setOnClickListener {
+         btnNotification.setOnClickListener {
 //         cvNotification.visibility = View.VISIBLE
-//        cvNotification.setOnTouchListener { _, _ -> true }
-//       rvNotification.visibility = View.VISIBLE
-       }
+//             setupRecyclerView()
+//             cvNotification.setOnTouchListener { _, _ -> true }
+//         cvNotification.visibility = View.VISIBLE
+             //         }
 //        btnBackNotification.setOnClickListener {
-//        cvNotification.visibility = View.GONE
+//         cvNotification.visibility = View.GONE
 //         rvNotification.visibility = View.GONE
-//     }
+    }
 
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)
@@ -127,8 +128,14 @@ class MyNotes : Fragment() {
                 progressBar.visibility = View.INVISIBLE
 
             }
+
+
             }
+
         }
+    private fun setupRecyclerView() {
+        rvNotification.layoutManager = LinearLayoutManager(context)
+    }
     }
 
 

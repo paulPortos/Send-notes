@@ -31,6 +31,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var etemail : TextView
     private lateinit var etusername : TextView
     private lateinit var btnChangePassword : ImageButton
+    private lateinit var btnAbout : ImageButton
 
     private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
     private val SOUND_MUTED_KEY = "sound_muted"
@@ -50,6 +51,7 @@ class SettingsActivity : AppCompatActivity() {
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         etemail = findViewById(R.id.tvemail2)
         etusername = findViewById(R.id.tvusername2)
+        btnAbout = findViewById(R.id.btnAbout)
 
         // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
@@ -69,6 +71,13 @@ class SettingsActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener {
             val intent = Intent(this@SettingsActivity, HomeActivity::class.java)
+            startActivity(intent)
+            progressBar.visibility = View.VISIBLE
+            finish() // Remove this activity from the stack when going back
+        }
+
+        btnAbout.setOnClickListener {
+            val intent = Intent(this@SettingsActivity, AboutActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE
             finish() // Remove this activity from the stack when going back

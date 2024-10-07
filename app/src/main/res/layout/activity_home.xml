@@ -38,7 +38,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#BF171E26"
         app:elevation="10dp"
@@ -48,9 +48,9 @@
         app:itemTextColor="@drawable/menu_checker"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="@+id/guideline170"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline312"
+        app:layout_constraintEnd_toStartOf="@id/guideline313"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline169"
         app:menu="@menu/menu" />
 
@@ -60,6 +60,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline313"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".99" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline312"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.0" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline169"

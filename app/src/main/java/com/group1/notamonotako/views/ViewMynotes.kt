@@ -147,6 +147,7 @@ class ViewMynotes : AppCompatActivity() {
             val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
             intent.putExtra("showMyNotesFragment", true)
             startActivity(intent)
+            finish()
         }
 
 
@@ -167,7 +168,9 @@ class ViewMynotes : AppCompatActivity() {
                 if (response.isSuccessful) {
                     Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+                    intent.putExtra("showMyNotesFragment", true)
                     startActivity(intent)
+                    finish()
                 } else if(response.code() == 409){
                     Toast.makeText(this@ViewMynotes, "Note already shared and pending", Toast.LENGTH_SHORT).show()
                 }else {

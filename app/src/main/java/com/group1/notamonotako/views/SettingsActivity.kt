@@ -68,8 +68,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-            val intent = Intent(this@SettingsActivity, HomeActivity::class.java)
-            startActivity(intent)
+          
             progressBar.visibility = View.VISIBLE
             finish() // Remove this activity from the stack when going back
         }

@@ -113,7 +113,7 @@ class Home : Fragment() {
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(),SettingsActivity::class.java)
             startActivity(intent)
-            progressBar.visibility = View.VISIBLE
+
 
         }
 

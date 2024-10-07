@@ -107,32 +107,17 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val fragmentManager = supportFragmentManager
+        val currentFragment = fragmentManager.findFragmentById(R.id.frameLayout)
 
-        // Check if there are fragments in the back stack
-        if (fragmentManager.backStackEntryCount > 0) {
-            fragmentManager.popBackStack()
-
-            // Use a handler to wait until the fragment transaction is complete
-            Handler(Looper.getMainLooper()).post {
-                // Get the new current fragment after popping the stack
-                val newCurrentFragment = fragmentManager.findFragmentById(R.id.frameLayout)
-
-                // Update bottom navigation to reflect the new current fragment
-                when (newCurrentFragment) {
-                    is Home -> binding.bottomNavigationView.selectedItemId = R.id.btnhome
-                    is MyNotes -> binding.bottomNavigationView.selectedItemId = R.id.btnnotes
-                    is MyFlashcards -> binding.bottomNavigationView.selectedItemId = R.id.btnflashcards
-                }
-            }
+        // Check if the current fragment is the Home fragment
+        if (currentFragment is Home) {
+            finishAffinity()
         } else {
-            // If there are no fragments in the back stack and the current fragment is Home, exit the app
-            val currentFragment = fragmentManager.findFragmentById(R.id.frameLayout)
-            if (currentFragment is Home) {
-                finishAffinity() // Exit the app
-            } else {
-                super.onBackPressed()
-            }
+            // If it's not Home, navigate back to Home fragment
+            replaceFragment(Home(), "Home")
+            binding.bottomNavigationView.selectedItemId = R.id.btnhome
         }
     }
+
 
 }

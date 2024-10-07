@@ -168,7 +168,9 @@ class ViewMynotes : AppCompatActivity() {
                     Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
                     startActivity(intent)
-                } else {
+                } else if(response.code() == 409){
+                    Toast.makeText(this@ViewMynotes, "Note already shared and pending", Toast.LENGTH_SHORT).show()
+                }else {
                     Toast.makeText(this@ViewMynotes, "Failed to share note: ${response.code()}", Toast.LENGTH_SHORT).show()
                     Log.e("ShareNote", "Error: ${response.code()}, Message: ${response.message()}")
                 }

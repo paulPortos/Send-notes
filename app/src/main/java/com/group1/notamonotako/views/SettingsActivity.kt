@@ -32,9 +32,9 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var etusername : TextView
     private lateinit var btnChangePassword : ImageButton
 
-
     private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
     private val SOUND_MUTED_KEY = "sound_muted"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         TokenManager.init(this)
@@ -50,7 +50,6 @@ class SettingsActivity : AppCompatActivity() {
         mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         etemail = findViewById(R.id.tvemail2)
         etusername = findViewById(R.id.tvusername2)
-
 
         // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
@@ -68,10 +67,11 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnBack.setOnClickListener{
+        btnBack.setOnClickListener {
             val intent = Intent(this@SettingsActivity, HomeActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE
+            finish() // Remove this activity from the stack when going back
         }
 
         // Handle switch toggle to save sound preference and update media volume
@@ -101,12 +101,10 @@ class SettingsActivity : AppCompatActivity() {
     private fun updateMediaPlayerVolume(isMuted: Boolean) {
         if (isMuted) {
             mediaPlayer.setVolume(0F, 0F)
-        } else
-        {
+        } else {
             mediaPlayer.setVolume(1F, 1F)
         }
     }
-
 
     private fun logoutUser() {
         val token = getToken() ?: run {
@@ -152,6 +150,8 @@ class SettingsActivity : AppCompatActivity() {
         })
     }
 
-
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish() // Remove this activity from the stack when back button is pressed
+    }
 }

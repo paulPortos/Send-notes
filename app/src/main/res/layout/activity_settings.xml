@@ -335,7 +335,7 @@
                         app:layout_constraintTop_toTopOf="@+id/guideline112" />
 
                     <ImageButton
-                        android:id="@+id/rightarrow_icon2"
+                        android:id="@+id/btnAbout"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:background="#00FFFFFF"

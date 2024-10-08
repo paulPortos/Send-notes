@@ -70,6 +70,8 @@ class SignUpActivity : AppCompatActivity() {
                 if (username.length >= 3 && password.length >= 5) {
                     signUpViewModel.registerUser(email, username, password)
                     progressBar.visibility = View.VISIBLE
+                    btnLoginNow.isClickable = false
+
                 } else if (username.length < 3) {
                     Toast.makeText(this@SignUpActivity, "Username must be at least 3 characters", Toast.LENGTH_SHORT).show()
                 } else if (password.length < 5) {

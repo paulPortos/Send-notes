@@ -94,6 +94,7 @@ class SettingsActivity : AppCompatActivity() {
         btnsign_out.setOnClickListener {
             logoutUser()
             mediaPlayer.start()
+            btnsign_out.isClickable = false
         }
     }
 

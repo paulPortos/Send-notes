@@ -35,7 +35,7 @@ class ViewMynotes : AppCompatActivity() {
     private lateinit var Content: EditText
     private lateinit var Date: TextView
     private lateinit var deletebtn : ImageButton
-    private lateinit var UpdateNotes : ImageView
+    private lateinit var UpdateNotes : AppCompatButton
     private lateinit var btnback : ImageButton
     private lateinit var sharebtn : ImageButton
     private lateinit var flDelete : FrameLayout
@@ -154,6 +154,7 @@ class ViewMynotes : AppCompatActivity() {
         UpdateNotes.setOnClickListener {
             if (Note_id != -1) {
                 update(Note_id)
+                UpdateNotes.isClickable = false
             }
         }
     }

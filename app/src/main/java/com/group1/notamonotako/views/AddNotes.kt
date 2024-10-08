@@ -53,6 +53,7 @@ class AddNotes : AppCompatActivity() {
             } else {
                 CreateData(title, contents)
                 progressBar.visibility = View.VISIBLE
+                doneButton.isClickable = false
             }
         }
     }

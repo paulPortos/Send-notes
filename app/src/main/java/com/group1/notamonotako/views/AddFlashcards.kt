@@ -47,16 +47,26 @@ class AddFlashcards : AppCompatActivity() {
         btnLeft.isEnabled = currentIndex > 0
 
         btnCheck.setOnClickListener {
-            val title = title.text.toString()
-            val public = false
-            val toPublic = false
-            createData(title, contentsList, public, toPublic)
-            val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
-            startActivity(intent)
+            val content = contents.text.toString()
+            addToContentsList(content)
+            //log content
+            Log.d("AddFlashcards", "Content List: $contentsList")
+            if(title.text.toString().isNotBlank() && contentsList.isNotEmpty()){
+                if (content.isNotBlank()) {
+
+                }
+                val title = title.text.toString()
+                val public = false
+                val toPublic = false
+                createData(title, contentsList, public, toPublic)
+                val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Title and cards are required", Toast.LENGTH_SHORT).show()
+            }
         }
         //1 2 3
         btnLeft.setOnClickListener {
-
             if (currentIndex > 0) {  // Ensure currentIndex doesn't go below 0
                 currentIndex--
                   // Move to the previous index

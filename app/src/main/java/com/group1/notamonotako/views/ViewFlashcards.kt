@@ -52,7 +52,11 @@
             val flashcardsId = intent.getIntExtra("flashcard_id", -1)
             val flashcardTitle = intent.getStringExtra("title")
             contentsList = intent.getStringArrayListExtra("cards")?.toMutableList() ?: mutableListOf()
-    
+            val flashcardsUpdatedAt = intent.getStringExtra("updated_at")
+
+            // Set the timestamp text
+            timestamp.text = flashcardsUpdatedAt
+
             //Log the contentsList
             Log.d("ViewFlashcards", "Contents List: $contentsList")
     

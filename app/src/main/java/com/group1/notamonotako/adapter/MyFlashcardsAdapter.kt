@@ -27,9 +27,11 @@ class MyFlashcardsAdapter(
             itemView.setOnClickListener {
                 // Create an intent to navigate to ViewFlashcards
                 val intent = Intent(context, ViewFlashcards::class.java).apply {
+                    val updatedAtDate = item.updatedAt?.substringBefore("T")
                     putExtra("title", item.title)
                     putStringArrayListExtra("cards", ArrayList(item.cards)) // Pass cards as an ArrayList
                     putExtra("flashcard_id", item.id)
+                    putExtra("updated_at", updatedAtDate)
                 }
                 context.startActivity(intent) // Start the activity
             }

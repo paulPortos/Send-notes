@@ -21,6 +21,7 @@ import com.group1.notamonotako.R
 import com.group1.notamonotako.views.SettingsActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.adapter.HomeAdapter
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
@@ -41,6 +42,7 @@ class Home : Fragment() {
     lateinit var notesFabBtn :FloatingActionButton
     lateinit var btnSettings :ImageButton
     lateinit var notesTV :TextView
+    lateinit var swiperefresh : SwipeRefreshLayout
     lateinit var flashcardsTV :TextView
     private lateinit var progressBar : ProgressBar
     private lateinit var layoutManager: LinearLayoutManager
@@ -91,6 +93,7 @@ class Home : Fragment() {
         viewBlur = view.findViewById(R.id.viewBlur)
         viewBlur.visibility = View.GONE
         svSearchView = view.findViewById(R.id.svSearchView)
+        swiperefresh = view.findViewById(R.id.swipeRefreshHome)
 
 
 
@@ -124,6 +127,10 @@ class Home : Fragment() {
             startActivity(intent)
             progressBar.visibility = View.INVISIBLE
 
+        }
+        swiperefresh.setOnRefreshListener {
+            fetchPublicNotes()
+            swiperefresh.isRefreshing = false
         }
 
         notesFabBtn.setOnClickListener {

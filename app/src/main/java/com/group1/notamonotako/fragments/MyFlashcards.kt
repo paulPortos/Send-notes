@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyFlashcardsAdapter
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
@@ -34,13 +35,14 @@ class MyFlashcards : Fragment() {
     private lateinit var myFlashcardsAdapter: MyFlashcardsAdapter
     private lateinit var rv_myFlashcards: RecyclerView
     private lateinit var tvMyFlashcards: TextView
-
+    private lateinit var swiperefresh : SwipeRefreshLayout
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_my_flashcards, container, false)
         btnSettings = view.findViewById(R.id.btnSettings)
         rv_myFlashcards = view.findViewById(R.id.rv_myflashcards)
         progressBar = view.findViewById(R.id.progressBar)
         tvMyFlashcards = view.findViewById(R.id.tvMyFlashcards)
+        swiperefresh = view.findViewById(R.id.swipeRefreshFlashcards)
         progressBar.visibility = View.INVISIBLE
 
         // Set up Grid layout with 2 columns
@@ -54,6 +56,10 @@ class MyFlashcards : Fragment() {
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
+        }
+        swiperefresh.setOnRefreshListener {
+            fetchFlashcards()
+            swiperefresh.isRefreshing = false
         }
 
         fetchFlashcards()

@@ -103,16 +103,22 @@
                 app:layout_constraintVertical_bias="0.0" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvhome"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshHome"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline50"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline36"
                 app:layout_constraintTop_toTopOf="@+id/guideline47"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvhome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fabConstraint"

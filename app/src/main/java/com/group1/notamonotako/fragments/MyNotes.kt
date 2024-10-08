@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
 import com.group1.notamonotako.views.GradientText
@@ -40,6 +41,7 @@ class MyNotes : Fragment() {
     private lateinit var btnBackNotification: ImageButton
     private lateinit var rvNotification: RecyclerView
     private lateinit var cvNotification: CardView
+    private lateinit var swiperefresh : SwipeRefreshLayout
 
 
 
@@ -58,6 +60,8 @@ class MyNotes : Fragment() {
         btnSettings = view.findViewById(R.id.btnSettings)
         tvMyNotes = view.findViewById(R.id.tvMyNotes)
         btnNotification = view.findViewById(R.id.btnNotification)
+        swiperefresh = view.findViewById(R.id.swipeRefreshMyNotes)
+
 //         btnBackNotification = view.findViewById(R.id.btnBackNotification)
 //        cvNotification = view.findViewById(R.id.cvNotification)
 
@@ -83,6 +87,12 @@ class MyNotes : Fragment() {
 
 
         }
+        swiperefresh.setOnRefreshListener {
+            fetchNotes()
+            swiperefresh.isRefreshing = false
+        }
+
+
         rv_mynotes.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.context)
         fetchNotes()

@@ -73,16 +73,26 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline51"
                 app:layout_constraintTop_toTopOf="@+id/guideline49" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_myflashcards"
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshFlashcards"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline53"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline48"
-                app:layout_constraintTop_toTopOf="@+id/guideline52"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="@+id/guideline52">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_myflashcards"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline48"

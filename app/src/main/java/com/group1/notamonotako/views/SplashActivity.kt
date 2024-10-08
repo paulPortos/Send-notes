@@ -24,11 +24,8 @@ class SplashActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
        videoView = findViewById(R.id.videoView)
-        val mediaController = MediaController(this)
-        mediaController.setAnchorView(videoView)
 
         val uri: Uri = Uri.parse("android.resource://$packageName/${R.raw.intro}")
-        videoView.setMediaController(mediaController)
         videoView.setVideoURI(uri)
         videoView.requestFocus()
         videoView.start()

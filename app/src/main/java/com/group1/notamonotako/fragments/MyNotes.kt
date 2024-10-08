@@ -22,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
 import com.group1.notamonotako.views.GradientText
+import com.group1.notamonotako.views.NotificationActivity
 import com.group1.notamonotako.views.SettingsActivity
 import io.reactivex.Notification
 import kotlinx.coroutines.Dispatchers
@@ -38,9 +39,7 @@ class MyNotes : Fragment() {
     private lateinit var progressBar : ProgressBar
     private lateinit var tvMyNotes : TextView
     private lateinit var btnNotification : ImageButton
-    private lateinit var btnBackNotification: ImageButton
-    private lateinit var rvNotification: RecyclerView
-    private lateinit var cvNotification: CardView
+
     private lateinit var swiperefresh : SwipeRefreshLayout
 
 
@@ -62,24 +61,15 @@ class MyNotes : Fragment() {
         btnNotification = view.findViewById(R.id.btnNotification)
         swiperefresh = view.findViewById(R.id.swipeRefreshMyNotes)
 
-//         btnBackNotification = view.findViewById(R.id.btnBackNotification)
-//        cvNotification = view.findViewById(R.id.cvNotification)
 
 
         progressBar.visibility = View.INVISIBLE
-//        cvNotification.visibility = View.GONE
         GradientText.setGradientText(tvMyNotes, requireContext())
 
-         btnNotification.setOnClickListener {
-//         cvNotification.visibility = View.VISIBLE
-//             setupRecyclerView()
-//             cvNotification.setOnTouchListener { _, _ -> true }
-//         cvNotification.visibility = View.VISIBLE
-             //         }
-//        btnBackNotification.setOnClickListener {
-//         cvNotification.visibility = View.GONE
-//         rvNotification.visibility = View.GONE
-    }
+        btnNotification.setOnClickListener {
+            val intent = Intent(requireContext(), NotificationActivity::class.java)
+            startActivity(intent)
+        }
 
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)
@@ -143,9 +133,7 @@ class MyNotes : Fragment() {
             }
 
         }
-    private fun setupRecyclerView() {
-        rvNotification.layoutManager = LinearLayoutManager(context)
-    }
+
     }
 
 

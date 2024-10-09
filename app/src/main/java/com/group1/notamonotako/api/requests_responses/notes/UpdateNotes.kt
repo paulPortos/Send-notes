@@ -4,7 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 data class UpdateNotes(
     val title: String,
-    val contents: String
+    val contents: String,
+    @SerializedName("to_public")
+    val toPublic: Boolean,
+    val public: Boolean
 )
 data class UpdateToPublicNotes(
     val title: String,

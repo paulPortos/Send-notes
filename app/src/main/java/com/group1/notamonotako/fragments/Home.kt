@@ -174,9 +174,9 @@ class Home : Fragment() {
             } catch (e: IOException){
                 Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
+
     private fun shrinkFab() {
         mainFabBtn.startAnimation(rotateAntiClockWiseFabAnim)
         notesFabBtn.startAnimation(toBottomFabAnim)

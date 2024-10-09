@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
         TokenManager.init(this)
         // Log the token to Logcat
         val token = TokenManager.getToken()
-        Log.d("TOKENER", "Stored Token: $token")
+        Log.d("TOKEN", "Stored Token: $token")
 
         // Check if the user is logged in
         if (!TokenManager.isLoggedIn()) {

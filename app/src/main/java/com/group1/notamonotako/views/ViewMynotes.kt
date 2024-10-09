@@ -74,6 +74,9 @@ class ViewMynotes : AppCompatActivity() {
         val DateString = Intent.getStringExtra("date")
         val Note_id = Intent.getIntExtra("note_id",-1)
 
+        val recentTitle = Title.toString()
+        val recentContents = Contents.toString()
+
         this.Title.setText(Title)
         this.Content.setText(Contents)
 
@@ -152,8 +155,16 @@ class ViewMynotes : AppCompatActivity() {
 
 
         UpdateNotes.setOnClickListener {
+            val title = Title.toString()
+            val contents = Content.text.toString()
             if (Note_id != -1) {
-                update(Note_id)
+                if (recentTitle != title || recentContents != contents) {
+                    update(Note_id)
+                } else {
+                    Toast.makeText(this, "No changes detected", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Note ID is missing", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -238,7 +249,7 @@ class ViewMynotes : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
-                val noteRequest = UpdateNotes(title = updatedTitle, contents = updatedContent)
+                val noteRequest = UpdateNotes(title = updatedTitle, contents = updatedContent, toPublic = false, public = false)
 
                 val response = withContext(Dispatchers.IO) {
                     apiService.updateNote("Bearer $token", noteId, noteRequest)  // Pass the updated note

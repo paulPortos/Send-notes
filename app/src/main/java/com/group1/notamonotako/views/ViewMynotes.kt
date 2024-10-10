@@ -73,6 +73,11 @@ class ViewMynotes : AppCompatActivity() {
         val Contents = Intent.getStringExtra("contents")
         val DateString = Intent.getStringExtra("date")
         val Note_id = Intent.getIntExtra("note_id",-1)
+        val publicize = Intent.getBooleanExtra("public",false) ?: false
+        val toPublic = Intent.getBooleanExtra("to_public", false) ?: false
+        //log public and to public
+        Log.d("public", publicize.toString())
+        Log.d("toPublic", toPublic.toString())
 
         val recentTitle = Title.toString()
         val recentContents = Contents.toString()
@@ -121,11 +126,17 @@ class ViewMynotes : AppCompatActivity() {
             val creatorsEmail = getEmail().toString()
             val contents = Content.text.toString()
             val public = false
-            shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, public)
-            setToPublicIntoTrue(Note_id)
+            if (publicize) {
+                Toast.makeText(this, "Note is already public", Toast.LENGTH_SHORT).show()
+            } else {
+                shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, public)
+                setToPublicIntoTrue(Note_id)
+                val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+                intent.putExtra("showMyNotesFragment", true)
+                startActivity(intent)
+                finish()
+            }
         }
-
-
 
         deletebtn.setOnClickListener{
             flDelete.visibility = View.VISIBLE
@@ -137,7 +148,7 @@ class ViewMynotes : AppCompatActivity() {
         btnDelete.setOnClickListener {
             btnDelete.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
             if (Note_id != -1) {
-                DeleteNote(Note_id)
+                deleteNote(Note_id)
             }
         }
 
@@ -157,9 +168,18 @@ class ViewMynotes : AppCompatActivity() {
         UpdateNotes.setOnClickListener {
             val title = Title.toString()
             val contents = Content.text.toString()
+            val creatorsUsername = getUsername().toString()
+            val creatorsEmail = getEmail().toString()
             if (Note_id != -1) {
                 if (recentTitle != title || recentContents != contents) {
-                    update(Note_id)
+                    if (publicize){
+                        shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, false)
+                        setToPublicIntoTrue(Note_id)
+                        updateNote(Note_id)
+                    } else {
+                        updateNote(Note_id)
+                    }
+
                 } else {
                     Toast.makeText(this, "No changes detected", Toast.LENGTH_SHORT).show()
                 }
@@ -178,10 +198,6 @@ class ViewMynotes : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
-                    intent.putExtra("showMyNotesFragment", true)
-                    startActivity(intent)
-                    finish()
                 } else if(response.code() == 409){
                     Toast.makeText(this@ViewMynotes, "Note already shared and pending", Toast.LENGTH_SHORT).show()
                 }else {
@@ -196,7 +212,7 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun DeleteNote(noteId: Int) {
+    private fun deleteNote(noteId: Int) {
         val token = TokenManager.getToken()
         if (token == null) {
             Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
@@ -229,7 +245,7 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun update(noteId: Int) {
+    private fun updateNote(noteId: Int) {
         val token = TokenManager.getToken()
         if (token == null) {
             Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
@@ -270,6 +286,7 @@ class ViewMynotes : AppCompatActivity() {
             }
         }
     }
+
 
     private fun setToPublicIntoTrue(noteId: Int){
         val token = TokenManager.getToken()

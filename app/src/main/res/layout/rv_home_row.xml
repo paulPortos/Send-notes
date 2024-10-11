@@ -45,7 +45,6 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline159"
             app:layout_constraintStart_toStartOf="@+id/guideline157"
             app:layout_constraintTop_toTopOf="@+id/guideline162" />
-
         <TextView
             android:id="@+id/contents"
             android:layout_width="0dp"
@@ -59,7 +58,6 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline159"
             app:layout_constraintStart_toStartOf="@+id/guideline157"
             app:layout_constraintTop_toTopOf="@+id/guideline164" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline157"
             android:layout_width="wrap_content"

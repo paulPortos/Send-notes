@@ -31,7 +31,7 @@ import java.util.Locale
 
 class ViewMynotes : AppCompatActivity() {
 
-    private lateinit var Title: EditText
+    private lateinit var Titles: EditText
     private lateinit var Content: EditText
     private lateinit var Date: TextView
     private lateinit var deletebtn : ImageButton
@@ -54,7 +54,7 @@ class ViewMynotes : AppCompatActivity() {
         setContentView(R.layout.activity_mynotes)
 
         Date = findViewById(R.id.date)
-        Title = findViewById(R.id.Title)
+        Titles = findViewById(R.id.Title)
         Content = findViewById(R.id.Contents)
         deletebtn = findViewById(R.id.deletebtn)
         btnback = findViewById(R.id.btnback)
@@ -82,7 +82,7 @@ class ViewMynotes : AppCompatActivity() {
         val recentTitle = Title.toString()
         val recentContents = Contents.toString()
 
-        this.Title.setText(Title)
+        this.Titles.setText(Title)
         this.Content.setText(Contents)
 
         if (DateString != null) {
@@ -121,7 +121,7 @@ class ViewMynotes : AppCompatActivity() {
         }
 
         btnShare.setOnClickListener {
-            val title = Title.toString()
+            val title = Titles.text.toString()
             val creatorsUsername = getUsername().toString()
             val creatorsEmail = getEmail().toString()
             val contents = Content.text.toString()
@@ -131,6 +131,7 @@ class ViewMynotes : AppCompatActivity() {
             } else {
                 shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, public)
                 setToPublicIntoTrue(Note_id)
+                Toast.makeText(this, "Note shared successfully", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
                 intent.putExtra("showMyNotesFragment", true)
                 startActivity(intent)
@@ -166,7 +167,7 @@ class ViewMynotes : AppCompatActivity() {
 
 
         UpdateNotes.setOnClickListener {
-            val title = Title.toString()
+            val title = Titles.text.toString()
             val contents = Content.text.toString()
             val creatorsUsername = getUsername().toString()
             val creatorsEmail = getEmail().toString()
@@ -175,9 +176,12 @@ class ViewMynotes : AppCompatActivity() {
                     if (publicize){
                         shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, false)
                         setToPublicIntoTrue(Note_id)
+                        Toast.makeText(this@ViewMynotes, "Note is shared and pending", Toast.LENGTH_SHORT).show()
                         updateNote(Note_id)
                     } else {
+                        Toast.makeText(this@ViewMynotes, "Note update successfully", Toast.LENGTH_SHORT).show()
                         updateNote(Note_id)
+
                     }
 
                 } else {
@@ -197,7 +201,8 @@ class ViewMynotes : AppCompatActivity() {
                 val response = apiService.toAdmin(postToAdmin)
 
                 if (response.isSuccessful) {
-                    Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
+                    //Log response
+                    Log.e("ShareNote", "Response: ${response.body()}")
                 } else if(response.code() == 409){
                     Toast.makeText(this@ViewMynotes, "Note already shared and pending", Toast.LENGTH_SHORT).show()
                 }else {
@@ -252,7 +257,7 @@ class ViewMynotes : AppCompatActivity() {
             return
         }
 
-        val updatedTitle = Title.text.toString()
+        val updatedTitle = Titles.text.toString()
         val updatedContent = Content.text.toString()
 
         if (updatedTitle.isEmpty() || updatedContent.isEmpty()) {
@@ -271,7 +276,6 @@ class ViewMynotes : AppCompatActivity() {
                     apiService.updateNote("Bearer $token", noteId, noteRequest)  // Pass the updated note
                 }
                 if (response.isSuccessful) {
-                    Toast.makeText(this@ViewMynotes, "Note updated successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
                     intent.putExtra("showMyNotesFragment", true)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -294,7 +298,7 @@ class ViewMynotes : AppCompatActivity() {
             Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
             return
         }
-        val updatedTitle = Title.text.toString()
+        val updatedTitle = Titles.text.toString()
         val updatedContent = Content.text.toString()
 
         val toPublic = true

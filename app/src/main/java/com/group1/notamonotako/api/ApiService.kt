@@ -2,6 +2,8 @@ import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordR
 import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordResponse
 import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.admin.ResponseToAdmin
+import com.group1.notamonotako.api.requests_responses.comments.CommentPostRequest
+import com.group1.notamonotako.api.requests_responses.comments.CommentPostResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.flashcards.PostFlashcards
@@ -109,4 +111,10 @@ interface ApiService {
 
     @POST("reset")
     suspend fun resetPassword(@Body request: reset_Password): Response<ResetPasswordResponse>
+
+    @POST("comments")
+    suspend fun postComment(
+        @Header("Authorization") token: String, // assuming you're using token-based authentication
+        @Body commentData: CommentPostRequest
+    ): Response<CommentPostResponse>
 }

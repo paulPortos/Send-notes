@@ -34,11 +34,8 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewHome::class.java)
             val updatedAtDate = item.updated_at?.substringBefore("T") ?: "No Date"
-            intent.putExtra("admin_id", item.adminId ?: -1)
             intent.putExtra("note_id", item.notesId ?: -1)
             intent.putExtra("title", item.title ?: "No Title")
-            intent.putExtra("creator_username", item.creator_username ?: "Unknown")
-            intent.putExtra("creator_email", item.creator_email ?: "unknown@example.com")
             intent.putExtra("contents", item.contents ?: "No Contents")
             intent.putExtra("public", item.public ?: false)
             intent.putExtra("updated_at", updatedAtDate)

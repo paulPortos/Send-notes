@@ -1,6 +1,9 @@
 package com.group1.notamonotako.views
 
+import ApiService
+import TokenManager
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -17,8 +20,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager
+import com.group1.notamonotako.api.requests_responses.comments.CommentPostRequest
+import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
+import kotlinx.coroutines.launch
 
 class ViewHome : AppCompatActivity() {
     private lateinit var btnLike : ImageButton
@@ -33,9 +41,13 @@ class ViewHome : AppCompatActivity() {
     private lateinit var rvcomments : RecyclerView
     private lateinit var tvComments : TextView
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_home)
+        AccountManager.init(this)
+        TokenManager.init(this)
+
 
         btnLike = findViewById(R.id.btnLike)
         btnDisLike = findViewById(R.id.btnDisLike)
@@ -47,17 +59,14 @@ class ViewHome : AppCompatActivity() {
         rvcomments = findViewById(R.id.rvcomments)
         tvComments = findViewById(R.id.tvComments)
 
-        val adminId = intent.getIntExtra("admin_id", -1)
         val noteId = intent.getIntExtra("note_id", -1)
         val title = intent.getStringExtra("title")
-        val creatorUsername = intent.getStringExtra("creator_username")
-        val creatorEmail = intent.getStringExtra("creator_email")
         val contents = intent.getStringExtra("contents")
         val public = intent.getBooleanExtra("public", false)
         val updatedAt = intent.getStringExtra("updated_at")
 
         //log all
-        Log.d("ViewHome", "adminId: $adminId, noteId: $noteId, title: $title, creatorUsername: $creatorUsername, creatorEmail: $creatorEmail, contents: $contents, public: $public, updatedAt: $updatedAt")
+        Log.d("ViewHometester", "noteId: $noteId, title: $title,  contents: $contents, public: $public, updatedAt: $updatedAt")
         tvTitle.text = title ?: "No title"
         tvContents.text = contents ?: "No contents"
         tvDate.text = updatedAt ?: "No date"
@@ -111,6 +120,7 @@ class ViewHome : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP) {
                 // Check if the drawableEnd was clicked
                 if (event.rawX >= (etAddComment.right - etAddComment.compoundDrawables[2].bounds.width())) {
+
                     // Handle submission of the edit text content
                     submitComment(etAddComment.text.toString())
                     return@setOnTouchListener true
@@ -123,13 +133,41 @@ class ViewHome : AppCompatActivity() {
 
     private fun submitComment(comment: String) {
         if (comment.isNotBlank()) {
-            Toast.makeText(this, "Comment Submitted", Toast.LENGTH_SHORT).show()
-            etAddComment.text?.clear()
-        }
-        else{
-            Toast.makeText(this, "Please Input Your Comment", Toast.LENGTH_SHORT).show()
+            val noteId = intent.getIntExtra("note_id", -1)
+            val username = AccountManager.getUsername().toString() // This should be dynamic
+            val token = TokenManager.getToken() // Assume token is stored in TokenManager
+            if (token == null) {
+                Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
+                return
+            }else{  lifecycleScope.launch {
+                try {
+                    val apiService = RetrofitInstance.create(ApiService::class.java)
+                    val commentRequest = CommentPostRequest(username = username, notes_id = noteId, comment = comment)
+                    val response = apiService.postComment("Bearer $token", commentRequest)
+
+                    if (response.isSuccessful) {
+                        // Handle successful comment submission
+                        Toast.makeText(this@ViewHome, "Comment Submitted", Toast.LENGTH_SHORT).show()
+                        etAddComment.text?.clear()
+                    } else {
+                        // Log and handle API failure
+                        val errorBody = response.code()?: "Unknown error"
+                        Log.e("CommentError", "Failed to submit comment: $errorBody")
+                        Toast.makeText(this@ViewHome, "Failed to submit comment", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    // Handle network or other errors
+                    Log.e("CommentException", "Error: ${e.message}")
+                    Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }}
+
+        } else {
+            Toast.makeText(this, "Please input your comment", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
 
 }

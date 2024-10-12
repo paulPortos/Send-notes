@@ -68,30 +68,30 @@ class ViewMynotes : AppCompatActivity() {
         btnCancelShare = findViewById(R.id.btnCancelShare)
         btnShare = findViewById(R.id.btnShare)
 
-        val Intent = intent
-        val Title = Intent.getStringExtra("title")
-        val Contents = Intent.getStringExtra("contents")
-        val DateString = Intent.getStringExtra("date")
-        val Note_id = Intent.getIntExtra("note_id",-1)
-        val publicize = Intent.getBooleanExtra("public",false) ?: false
-        val toPublic = Intent.getBooleanExtra("to_public", false) ?: false
+        val intent = intent
+        val title = intent.getStringExtra("title")
+        val contents = intent.getStringExtra("contents")
+        val dateString = intent.getStringExtra("date")
+        val noteId = intent.getIntExtra("note_id",-1)
+        val publicize = intent.getBooleanExtra("public",false) ?: false
+        val toPublic = intent.getBooleanExtra("to_public", false) ?: false
         //log public and to public
         Log.d("public", publicize.toString())
         Log.d("toPublic", toPublic.toString())
 
-        val recentTitle = Title.toString()
-        val recentContents = Contents.toString()
+        val recentTitle = title.toString()
+        val recentContents = contents.toString()
 
-        this.etTitle.setText(Title)
-        this.Content.setText(Contents)
+        this.etTitle.setText(title)
+        this.Content.setText(contents)
 
-        if (DateString != null) {
+        if (dateString != null) {
             // Define the input and output date formats
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.getDefault())
             val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
             try {
-                val date = inputFormat.parse(DateString)
+                val date = inputFormat.parse(dateString)
                 val formattedDate = date?.let { outputFormat.format(it) }
                 this.Date.text = formattedDate
             } catch (e: Exception) {
@@ -112,28 +112,21 @@ class ViewMynotes : AppCompatActivity() {
             viewBlur.setOnTouchListener { _, _ -> true }
 
         }
+
         btnCancelShare.setOnClickListener{
             flShare.visibility = View.GONE
             viewBlur.visibility = View.GONE
         }
 
         btnShare.setOnClickListener {
-            val title = etTitle.text.toString()
+            val titleString = etTitle.text.toString()
             val creatorsUsername = getUsername().toString()
             val creatorsEmail = getEmail().toString()
-            val contents = Content.text.toString()
-            val public = false
-            if (publicize) {
-                Toast.makeText(this, "Note is already public", Toast.LENGTH_SHORT).show()
-            } else {
-                shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, public)
-                setToPublicIntoTrue(Note_id)
-                Toast.makeText(this, "Note shared successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
-                intent.putExtra("showMyNotesFragment", true)
-                startActivity(intent)
-                finish()
-            }
+            val contentsString = Content.text.toString()
+            val publicDefaultValue = false
+            shareNote(noteId, titleString, creatorsUsername, creatorsEmail, contentsString, publicDefaultValue, publicize)
+            flShare.visibility = View.INVISIBLE
+            viewBlur.visibility = View.INVISIBLE
         }
 
         deletebtn.setOnClickListener{
@@ -145,8 +138,8 @@ class ViewMynotes : AppCompatActivity() {
 
         btnDelete.setOnClickListener {
             btnDelete.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
-            if (Note_id != -1) {
-                deleteNote(Note_id)
+            if (noteId != -1) {
+                deleteNote(noteId)
             }
         }
 
@@ -162,22 +155,18 @@ class ViewMynotes : AppCompatActivity() {
             finish()
         }
 
-
         UpdateNotes.setOnClickListener {
-            val title = etTitle.text.toString()
-            val contents = Content.text.toString()
+            val titleString = etTitle.text.toString()
+            val contentsString = Content.text.toString()
             val creatorsUsername = getUsername().toString()
             val creatorsEmail = getEmail().toString()
-            if (Note_id != -1) {
-                if (recentTitle != title || recentContents != contents) {
+            if (noteId != -1) {
+                if (recentTitle != titleString || recentContents != contentsString) {
                     if (publicize){
-                        shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, false)
-                        setToPublicIntoTrue(Note_id)
-                        Toast.makeText(this@ViewMynotes, "Note is shared and pending", Toast.LENGTH_SHORT).show()
-                        updateNote(Note_id)
+                        shareNote(noteId, titleString, creatorsUsername, creatorsEmail, contentsString, false, publicize)
+                        updateNote(noteId, publicize)
                     } else {
-                        Toast.makeText(this@ViewMynotes, "Note update successfully", Toast.LENGTH_SHORT).show()
-                        updateNote(Note_id)
+                        updateNote(noteId, publicize)
                     }
                 } else {
                     Toast.makeText(this, "No changes detected", Toast.LENGTH_SHORT).show()
@@ -188,7 +177,7 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun shareNote(notesId: Int,title: String, creatorUsername: String, creatorEmail: String, contents: String, public: Boolean = false){
+    private fun shareNote(notesId: Int,title: String, creatorUsername: String, creatorEmail: String, contents: String, public: Boolean, publicize: Boolean){
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
@@ -196,7 +185,12 @@ class ViewMynotes : AppCompatActivity() {
                 val response = apiService.toAdmin(postToAdmin)
 
                 if (response.isSuccessful) {
-                    //Log response
+                    if (publicize) {
+                        setToPublicIntoTrue(notesId)
+                        Toast.makeText(this@ViewMynotes, "Note already public", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
+                    }
                     Log.e("ShareNote", "Response: ${response.body()}")
                 } else if(response.code() == 409){
                     Toast.makeText(this@ViewMynotes, "Note already shared and pending", Toast.LENGTH_SHORT).show()
@@ -244,21 +238,18 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun updateNote(noteId: Int) {
+    private fun updateNote(noteId: Int, publicize: Boolean) {
         val token = TokenManager.getToken()
         if (token == null) {
             Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
             return
         }
-
         val updatedTitle = etTitle.text.toString()
         val updatedContent = Content.text.toString()
-
         if (updatedTitle.isEmpty() || updatedContent.isEmpty()) {
             Toast.makeText(this, "Title or content cannot be empty", Toast.LENGTH_SHORT).show()
             return
         }
-
         Log.d("UpdateNote", "Token: $token, Note ID: $noteId")
 
         lifecycleScope.launch {
@@ -270,11 +261,21 @@ class ViewMynotes : AppCompatActivity() {
                     apiService.updateNote("Bearer $token", noteId, noteRequest)  // Pass the updated note
                 }
                 if (response.isSuccessful) {
-                    val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
-                    intent.putExtra("showMyNotesFragment", true)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()  // Finish Mynotes activity to avoid returning to it
+                    if (publicize){
+                        Toast.makeText(this@ViewMynotes, "Note is shared and pending", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+                        intent.putExtra("showMyNotesFragment", true)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this@ViewMynotes, "Note updated successfully", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+                        intent.putExtra("showMyNotesFragment", true)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+                    }
                 } else {
                     Toast.makeText(this@ViewMynotes, "Failed to update note: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
@@ -284,8 +285,6 @@ class ViewMynotes : AppCompatActivity() {
             }
         }
     }
-
-
     private fun setToPublicIntoTrue(noteId: Int){
         val token = TokenManager.getToken()
         if (token == null) {
@@ -294,13 +293,11 @@ class ViewMynotes : AppCompatActivity() {
         }
         val updatedTitle = etTitle.text.toString()
         val updatedContent = Content.text.toString()
-
         val toPublic = true
         if (updatedTitle.isEmpty() || updatedContent.isEmpty()) {
             Toast.makeText(this, "Title or content cannot be empty", Toast.LENGTH_SHORT).show()
             return
         }
-
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)

@@ -19,6 +19,7 @@ import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
 import com.group1.notamonotako.api.requests_responses.notification.GetNotification
+import com.group1.notamonotako.api.requests_responses.notification.PostPendingNotification
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
@@ -121,4 +122,7 @@ interface ApiService {
         @Header("Authorization") token: String, // assuming you're using token-based authentication
         @Body commentData: CommentPostRequest
     ): Response<CommentPostResponse>
+
+    @POST("notePending")
+    suspend fun postNotePending(@Body request: PostPendingNotification): Response<GetNotification>
 }

@@ -42,9 +42,6 @@ class MyNotes : Fragment() {
 
     private lateinit var swiperefresh : SwipeRefreshLayout
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

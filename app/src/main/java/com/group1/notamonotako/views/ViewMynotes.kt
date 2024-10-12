@@ -21,6 +21,7 @@ import com.group1.notamonotako.api.AccountManager.getUsername
 import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
+import com.group1.notamonotako.api.requests_responses.notification.PostPendingNotification
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -189,6 +190,7 @@ class ViewMynotes : AppCompatActivity() {
                         setToPublicIntoTrue(notesId)
                         Toast.makeText(this@ViewMynotes, "Note already public", Toast.LENGTH_SHORT).show()
                     } else {
+                        postPendingNotif(notesId, creatorEmail, "Your note $title has been shared")
                         Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
                     }
                     Log.e("ShareNote", "Response: ${response.body()}")
@@ -307,6 +309,27 @@ class ViewMynotes : AppCompatActivity() {
                 }
             } catch (e: Exception){
                 e.printStackTrace()
+            }
+        }
+    }
+
+    private fun postPendingNotif(notesId: Int, email: String, message: String){
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val post = PostPendingNotification(notesId, email, message)
+                val response = apiService.postNotePending(post)
+                if (response.isSuccessful){
+                    Log.e("PostPendingNotif", "Response: ${response.body()}")
+                } else {
+                    Log.e("PostPendingNotif", "Error: ${response.code()}, Message: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("PostPendingNotif", "Error: ${e.message}", e)
+            } catch (e: HttpException){
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("PostPendingNotif", "Error: ${e.message}", e)
             }
         }
     }

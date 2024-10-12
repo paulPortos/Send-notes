@@ -52,9 +52,6 @@ class AddFlashcards : AppCompatActivity() {
             //log content
             Log.d("AddFlashcards", "Content List: $contentsList")
             if(title.text.toString().isNotBlank() && contentsList.isNotEmpty()){
-                if (content.isNotBlank()) {
-
-                }
                 val title = title.text.toString()
                 val public = false
                 val toPublic = false

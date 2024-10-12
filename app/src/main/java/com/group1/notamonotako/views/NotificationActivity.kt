@@ -11,6 +11,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.NotificationAdapter
@@ -25,7 +26,9 @@ class NotificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
         rvNotification = findViewById(R.id.rvNotification)
+        rvNotification.layoutManager = LinearLayoutManager(this@NotificationActivity)
         fetchNotifications()
+
     }
 
     private fun fetchNotifications(){
@@ -34,15 +37,12 @@ class NotificationActivity : AppCompatActivity() {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = apiService.showNotification()
                 if (response.isSuccessful) {
-                    val notifications = response.body()
-                    if (notifications != null){
-                        myNotificationsAdapter = NotificationAdapter (this@NotificationActivity, notifications)
-                        rvNotification.adapter = myNotificationsAdapter
-                    }
-                    Log.d("notifications", notifications.toString())
-                    Toast.makeText(this@NotificationActivity, "Notifications fetched successfully", Toast.LENGTH_SHORT).show()
+                    val notifications = response.body() ?: emptyList()
+                    myNotificationsAdapter = NotificationAdapter (this@NotificationActivity, notifications)
+                    rvNotification.adapter = myNotificationsAdapter
+                    Log.d("getNotifications", notifications.toString())
                 } else {
-                    Log.d("notifications", "Failed to fetch notifications")
+                    Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                     Log.d("notifications", "Response code: ${response.code()}") // Log the response code
                     Log.d("notifications", "Error body: ${response.errorBody()?.string()}") // Log error body
                     Log.d("notifications", response.message())

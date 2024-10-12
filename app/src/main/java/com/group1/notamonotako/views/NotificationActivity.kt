@@ -24,7 +24,7 @@ class NotificationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
-
+        rvNotification = findViewById(R.id.rvNotification)
         fetchNotifications()
     }
 
@@ -40,15 +40,21 @@ class NotificationActivity : AppCompatActivity() {
                         rvNotification.adapter = myNotificationsAdapter
                     }
                     Log.d("notifications", notifications.toString())
+                    Toast.makeText(this@NotificationActivity, "Notifications fetched successfully", Toast.LENGTH_SHORT).show()
                 } else {
                     Log.d("notifications", "Failed to fetch notifications")
+                    Log.d("notifications", "Response code: ${response.code()}") // Log the response code
+                    Log.d("notifications", "Error body: ${response.errorBody()?.string()}") // Log error body
+                    Log.d("notifications", response.message())
+                    Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                 }
              } catch (e: Exception) {
                  Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
+                Log.d("notifications", e.message.toString())
 
             } catch (e: HttpException){
                 Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
-                Log.d("addnotes", e.message.toString())
+                Log.d("notifications", e.message.toString())
             }
         }
     }

@@ -113,7 +113,7 @@ interface ApiService {
     @POST("reset")
     suspend fun resetPassword(@Body request: reset_Password): Response<ResetPasswordResponse>
 
-    @GET("showNotif")
+    @GET("shownotif")
     suspend fun showNotification(): Response<List<GetNotification>>
 
     @POST("comments")

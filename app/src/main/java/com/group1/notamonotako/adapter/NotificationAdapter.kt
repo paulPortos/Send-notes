@@ -15,7 +15,7 @@ import com.group1.notamonotako.views.ViewHome
 class NotificationAdapter(val context: Context, private var data: List<GetNotification>) : RecyclerView.Adapter<NotificationAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val notification_type: TextView = view.findViewById(R.id.notification_type)
+        val notificationType: TextView = view.findViewById(R.id.notification_type)
         val email: TextView = view.findViewById(R.id.email)
         val message: TextView = view.findViewById(R.id.message)
     }
@@ -26,7 +26,7 @@ class NotificationAdapter(val context: Context, private var data: List<GetNotifi
     }
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
-        holder.notification_type.text = item.notification_type
+        holder.notificationType.text = item.notificationType
         holder.email.text = item.email
         holder.message.text = item.message
     }

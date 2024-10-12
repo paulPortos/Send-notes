@@ -18,6 +18,7 @@ import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
+import com.group1.notamonotako.api.requests_responses.notification.GetNotification
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
@@ -111,6 +112,9 @@ interface ApiService {
 
     @POST("reset")
     suspend fun resetPassword(@Body request: reset_Password): Response<ResetPasswordResponse>
+
+    @GET("showNotif")
+    suspend fun showNotification(): Response<List<GetNotification>>
 
     @POST("comments")
     suspend fun postComment(

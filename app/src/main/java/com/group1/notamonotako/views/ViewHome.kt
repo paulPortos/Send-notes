@@ -4,6 +4,7 @@ import ApiService
 import TokenManager
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -37,11 +38,8 @@ class ViewHome : AppCompatActivity() {
     private lateinit var tvTitle : TextView
     private lateinit var tvContents : TextView
     private lateinit var tvDate : TextView
-    private lateinit var etAddComment : EditText
-    private lateinit var rvcomments : RecyclerView
-    private lateinit var tvComments : TextView
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_home)
@@ -55,9 +53,7 @@ class ViewHome : AppCompatActivity() {
         tvTitle = findViewById(R.id.tvTitle)
         tvContents = findViewById(R.id.tvContents)
         tvDate = findViewById(R.id.tvDate)
-        etAddComment = findViewById(R.id.etAddComment)
-        rvcomments = findViewById(R.id.rvcomments)
-        tvComments = findViewById(R.id.tvComments)
+
 
         val noteId = intent.getIntExtra("note_id", -1)
         val title = intent.getStringExtra("title")
@@ -70,10 +66,9 @@ class ViewHome : AppCompatActivity() {
         tvTitle.text = title ?: "No title"
         tvContents.text = contents ?: "No contents"
         tvDate.text = updatedAt ?: "No date"
-        flComment = findViewById(R.id.flComment)
-        btnClose = findViewById(R.id.btnClose)
 
-        flComment.visibility - View.GONE
+
+
         var isLiked = false
         btnLike.setOnClickListener {
             if (isLiked) {
@@ -101,73 +96,29 @@ class ViewHome : AppCompatActivity() {
             isLiked = !isLiked
 
         }
-        
+
         btnComment.setOnClickListener {
-            btnComment.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.mixcolor))
-            // Show the comment frame with a slide-up animation
-            flComment.visibility = View.VISIBLE
-            flComment.animate().translationY(0f).setDuration(300).start()
-        }
-
-        btnClose.setOnClickListener {
-            // Hide the comment frame with a slide-down animation
+            // Change the button tint back to white
             btnComment.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-            flComment.animate().translationY(flComment.height.toFloat()).setDuration(300).withEndAction {
-                flComment.visibility = View.GONE // Set visibility to GONE after the animation
-            }.start()
-        }
-        etAddComment.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                // Check if the drawableEnd was clicked
-                if (event.rawX >= (etAddComment.right - etAddComment.compoundDrawables[2].bounds.width())) {
 
-                    // Handle submission of the edit text content
-                    submitComment(etAddComment.text.toString())
-                    return@setOnTouchListener true
-                }
-            }
-            false
+            // Navigate to CommentActivity directly
+            val intent = Intent(this, CommentActivity::class.java)
+
+            // Pass data to the CommentActivity if needed (e.g., note_id)
+            intent.putExtra("note_id", noteId)  // Example of passing note_id
+
+            startActivity(intent)
+
+            // Add a transition animation between activities
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
+
+
+
     }
-    // Function to handle comment submission
-
-    private fun submitComment(comment: String) {
-        if (comment.isNotBlank()) {
-            val noteId = intent.getIntExtra("note_id", -1)
-            val username = AccountManager.getUsername().toString() // This should be dynamic
-            val token = TokenManager.getToken() // Assume token is stored in TokenManager
-            if (token == null) {
-                Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
-                return
-            }else{  lifecycleScope.launch {
-                try {
-                    val apiService = RetrofitInstance.create(ApiService::class.java)
-                    val commentRequest = CommentPostRequest(username = username, notes_id = noteId, comment = comment)
-                    val response = apiService.postComment("Bearer $token", commentRequest)
-
-                    if (response.isSuccessful) {
-                        // Handle successful comment submission
-                        Toast.makeText(this@ViewHome, "Comment Submitted", Toast.LENGTH_SHORT).show()
-                        etAddComment.text?.clear()
-                    } else {
-                        // Log and handle API failure
-                        val errorBody = response.code()?: "Unknown error"
-                        Log.e("CommentError", "Failed to submit comment: $errorBody")
-                        Toast.makeText(this@ViewHome, "Failed to submit comment", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: Exception) {
-                    // Handle network or other errors
-                    Log.e("CommentException", "Error: ${e.message}")
-                    Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }}
-
-        } else {
-            Toast.makeText(this, "Please input your comment", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-
-
 
 }
+
+
+
+

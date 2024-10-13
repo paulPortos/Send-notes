@@ -125,7 +125,11 @@ class ViewMynotes : AppCompatActivity() {
             val creatorsEmail = getEmail().toString()
             val contentsString = Content.text.toString()
             val publicDefaultValue = false
-            shareNote(noteId, titleString, creatorsUsername, creatorsEmail, contentsString, publicDefaultValue, publicize)
+            if (publicize){
+                Toast.makeText(this, "Note already public", Toast.LENGTH_SHORT).show()
+            } else {
+                shareNote(noteId, titleString, creatorsUsername, creatorsEmail, contentsString, publicDefaultValue, publicize)
+            }
             flShare.visibility = View.INVISIBLE
             viewBlur.visibility = View.INVISIBLE
         }
@@ -186,11 +190,10 @@ class ViewMynotes : AppCompatActivity() {
                 val response = apiService.toAdmin(postToAdmin)
 
                 if (response.isSuccessful) {
-                    if (publicize) {
+                    if (!publicize) {
                         setToPublicIntoTrue(notesId)
-                        Toast.makeText(this@ViewMynotes, "Note already public", Toast.LENGTH_SHORT).show()
-                    } else {
                         postPendingNotif(notesId, creatorEmail, "Your note $title has been shared")
+                        Toast.makeText(this@ViewMynotes, "Note already public", Toast.LENGTH_SHORT).show()
                         Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
                     }
                     Log.e("ShareNote", "Response: ${response.body()}")

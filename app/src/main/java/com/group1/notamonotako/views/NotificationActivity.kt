@@ -51,7 +51,6 @@ class NotificationActivity : AppCompatActivity() {
              } catch (e: Exception) {
                  Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                 Log.d("notifications", e.message.toString())
-
             } catch (e: HttpException){
                 Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                 Log.d("notifications", e.message.toString())

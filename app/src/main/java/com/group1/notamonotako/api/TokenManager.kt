@@ -30,4 +30,10 @@ object TokenManager {
         val token = getToken()
         return !token.isNullOrEmpty()  // Checks if a token exists
     }
+    fun isTokenValid(): Boolean {
+        val token = getToken()
+        // You can add additional validation criteria here
+        // For example: checking for a specific format, expiration, etc.
+        return !token.isNullOrEmpty() // Basic check for null or empty
+    }
 }

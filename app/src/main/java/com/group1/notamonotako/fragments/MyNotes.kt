@@ -97,7 +97,6 @@ class MyNotes : Fragment() {
                 val response = withContext(Dispatchers.IO) {
                     apiService.getNotes().execute() // Using execute() for synchronous call
                 }
-
                 if (response.isSuccessful) {
                     val notes = response.body()
 
@@ -107,6 +106,7 @@ class MyNotes : Fragment() {
                         rv_mynotes.adapter = myNotesAdapter
                     } else {
                         if (isAdded) {
+
                             Toast.makeText(requireContext(), "No notes available", Toast.LENGTH_SHORT).show()
                             progressBar.visibility = View.INVISIBLE
                         }
@@ -115,7 +115,6 @@ class MyNotes : Fragment() {
                     if (isAdded) {
                         Toast.makeText(requireContext(), "Failed to fetch notes", Toast.LENGTH_SHORT).show()
                         progressBar.visibility = View.INVISIBLE
-
                     }
                 }
             } catch (e: HttpException) {
@@ -126,15 +125,12 @@ class MyNotes : Fragment() {
                 Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.d("addnotes", e.message.toString())
                 progressBar.visibility = View.INVISIBLE
-
             }
-
-
-            }
-
         }
 
     }
+
+}
 
 
 

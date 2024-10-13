@@ -6,14 +6,11 @@ import com.google.gson.GsonBuilder
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-
     private const val BASE_URL = "http://192.168.100.167:8000/api/"
-
     // Add the logging interceptor
     private val logging = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
-
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(10,TimeUnit.SECONDS)
         .readTimeout(10,TimeUnit.SECONDS)
@@ -27,11 +24,9 @@ object RetrofitInstance {
             }
             chain.proceed(requestBuilder.build())
         }.build()
-
     private val gson = GsonBuilder()
         .setLenient() // Allows lenient parsing of JSON
         .create()
-
     private val retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -39,7 +34,6 @@ object RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
-
     fun <T> create(service: Class<T>): T {
         return retrofit.create(service)
     }

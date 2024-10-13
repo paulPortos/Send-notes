@@ -26,6 +26,8 @@ class CommentsAdapter(private val context: Context, private val comments: Mutabl
         val comment = comments[position]
         holder.username.text = comment.username
         holder.message.text = comment.message
+
+        
     }
 
     override fun getItemCount(): Int {

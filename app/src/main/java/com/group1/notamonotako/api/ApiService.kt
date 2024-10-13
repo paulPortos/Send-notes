@@ -4,6 +4,7 @@ import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.admin.ResponseToAdmin
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostRequest
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostResponse
+import com.group1.notamonotako.api.requests_responses.comments.getComments
 import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.api.requests_responses.flashcards.PostFlashcards
@@ -117,4 +118,9 @@ interface ApiService {
         @Header("Authorization") token: String, // assuming you're using token-based authentication
         @Body commentData: CommentPostRequest
     ): Response<CommentPostResponse>
+
+    @GET("comments/note/{note_id}")
+    suspend fun getComment(
+        @Path ("note_id") noteId: Int
+    ): Response<List<getComments>>
 }

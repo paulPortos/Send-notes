@@ -34,7 +34,7 @@ class ViewHome : AppCompatActivity() {
     private lateinit var btnDisLike : ImageButton
     private lateinit var btnComment : ImageButton
     private lateinit var flComment : FrameLayout
-    private lateinit var btnClose : ImageButton
+    private lateinit var btnback : ImageButton
     private lateinit var tvTitle : TextView
     private lateinit var tvContents : TextView
     private lateinit var tvDate : TextView
@@ -46,7 +46,7 @@ class ViewHome : AppCompatActivity() {
         AccountManager.init(this)
         TokenManager.init(this)
 
-
+        btnback = findViewById(R.id.btnback)
         btnLike = findViewById(R.id.btnLike)
         btnDisLike = findViewById(R.id.btnDisLike)
         btnComment = findViewById(R.id.btnComment)
@@ -66,6 +66,11 @@ class ViewHome : AppCompatActivity() {
         tvTitle.text = title ?: "No title"
         tvContents.text = contents ?: "No contents"
         tvDate.text = updatedAt ?: "No date"
+
+
+        btnback.setOnClickListener{
+            finish()
+        }
 
 
 

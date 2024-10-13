@@ -109,15 +109,11 @@
                 if(flashcardsId != -1){
                     updateFlashcards(flashcardsId)
                 }
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.putExtra("showFlashcardFragment", true)
-                startActivity(intent)
+              finish()
             }
 
             btnBack.setOnClickListener {
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.putExtra("showFlashcardFragment", true)
-                startActivity(intent)
+              finish()
             }
 
             btnDelete.setOnClickListener {

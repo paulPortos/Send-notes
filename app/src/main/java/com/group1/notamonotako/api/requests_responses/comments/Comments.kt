@@ -1,8 +1,8 @@
 package com.group1.notamonotako.api.requests_responses.comments
 
-data class Comments(
+data class getComments(
     val username: String,
-    val message: String
+    val comment: String
 )
 
 data class CommentPostRequest(

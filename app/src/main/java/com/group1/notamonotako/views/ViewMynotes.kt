@@ -129,9 +129,6 @@ class ViewMynotes : AppCompatActivity() {
                 shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, public)
                 setToPublicIntoTrue(Note_id)
                 Toast.makeText(this, "Note shared successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
-                intent.putExtra("showMyNotesFragment", true)
-                startActivity(intent)
                 finish()
             }
         }

@@ -8,5 +8,7 @@ data class getPublicNotes(
     val title: String,
     val contents: String,
     val public: Boolean,
-    val updated_at : String
+    val updated_at : String,
+    val user_id: Int
+
 )

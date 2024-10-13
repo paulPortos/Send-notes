@@ -9,25 +9,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.requests_responses.comments.getComments
 
-class CommentsAdapter (val context: Context, private var data: List<getComments>) : RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
 
-    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val username: TextView = view.findViewById(R.id.username)
-        val message: TextView = view.findViewById(R.id.message)
+class CommentsAdapter(private val comments: List<getComments>) : RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>() {
+
+    inner class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val username: TextView = itemView.findViewById(R.id.username)
+        val message: TextView = itemView.findViewById(R.id.message)
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val inflatedView: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.rv_comment, parent, false)
-        return ItemViewHolder(inflatedView)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_comment, parent, false)
+        return CommentViewHolder(view)
     }
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = data[position]
-        holder.username.text = item.username
-        holder.message.text = item.comment
+
+    override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
+        val comment = comments[position]
+        holder.username.text = comment.username
+        holder.message.text = comment.comment
     }
-    override fun getItemCount(): Int {
-        return data.size
-    }
+
+    override fun getItemCount(): Int = comments.size
 }
-
-

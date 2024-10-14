@@ -11,7 +11,8 @@ class PostToAdmin(
     @SerializedName("creator_email")
     val creatorEmail: String,
     val contents: String,
-    val public: Boolean
+    val public: Boolean,
+
 )
 
 class ResponseToAdmin(
@@ -22,5 +23,5 @@ class ResponseToAdmin(
     val creator_email: String,
     val contents: String,
     val public: Boolean,
-    val updated_at : String
+    val updated_at : String,
 )

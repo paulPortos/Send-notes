@@ -129,6 +129,9 @@ class ViewMynotes : AppCompatActivity() {
                 shareNote(Note_id, title, creatorsUsername, creatorsEmail, contents, public)
                 setToPublicIntoTrue(Note_id)
                 Toast.makeText(this, "Note shared successfully", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("showMyNotesFragment", true)
+                startActivity(intent)
                 finish()
             }
         }
@@ -185,11 +188,12 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun shareNote(notesId: Int,title: String, creatorUsername: String, creatorEmail: String, contents: String, public: Boolean = false){
+    private fun shareNote(notesId: Int,title: String, creatorUsername: String, creatorEmail: String, contents: String, public: Boolean = false
+    ){
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
-                val postToAdmin = PostToAdmin(notesId, title, creatorUsername, creatorEmail, contents, public)
+                val postToAdmin = PostToAdmin(notesId, title, creatorUsername, creatorEmail, contents, public, )
                 val response = apiService.toAdmin(postToAdmin)
 
                 if (response.isSuccessful) {

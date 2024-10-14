@@ -8,6 +8,8 @@ object AccountManager {
     private const val PREFS_NAME = "user_prefs"
     private const val EMAIL_KEY = "email"
     private const val USERNAME_KEY = "username"
+    private const val USER_ID_KEY = "user_id" // Add key for user ID
+
     private lateinit var preferences: SharedPreferences
     // Initialize the AccountManager with context
     fun init(context: Context) {
@@ -22,6 +24,17 @@ object AccountManager {
     fun saveUsername(username: String) {
         Log.d("AccountManager", "Saving username: $username")
         preferences.edit().putString(USERNAME_KEY, username).apply()
+    }
+    fun saveUserId(userId: Int) {
+        Log.d("AccountManager", "Saving user ID: $userId")
+        preferences.edit().putInt(USER_ID_KEY, userId).apply()
+    }
+    fun getUserId(): Int? {
+        return if (preferences.contains(USER_ID_KEY)) {
+            preferences.getInt(USER_ID_KEY, -1)
+        } else {
+            null
+        }
     }
     // Retrieve the stored email
     fun getEmail(): String? {

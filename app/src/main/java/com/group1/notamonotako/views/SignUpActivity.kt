@@ -71,9 +71,9 @@ class SignUpActivity : AppCompatActivity() {
                     signUpViewModel.registerUser(email, username, password)
                     progressBar.visibility = View.VISIBLE
                 } else if (username.length < 5) {
-                    Toast.makeText(this@SignUpActivity, "Username must be at least 3 characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignUpActivity, "Username must be at least 5 characters", Toast.LENGTH_SHORT).show()
                 } else if (password.length < 8) {
-                    Toast.makeText(this@SignUpActivity, "Password must be at least 5 characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignUpActivity, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()

@@ -193,7 +193,6 @@ class ViewMynotes : AppCompatActivity() {
                     if (!publicize) {
                         setToPublicIntoTrue(notesId)
                         postPendingNotif(notesId, creatorEmail, "Your note $title has been shared")
-                        Toast.makeText(this@ViewMynotes, "Note already public", Toast.LENGTH_SHORT).show()
                         Toast.makeText(this@ViewMynotes, "Note shared successfully", Toast.LENGTH_SHORT).show()
                     }
                     Log.e("ShareNote", "Response: ${response.body()}")
@@ -205,6 +204,7 @@ class ViewMynotes : AppCompatActivity() {
                 }
             } catch (e: HttpException){
                 Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ShareNote", "Error: ${e.message}", e)
             } catch (e: IOException) {
                 Toast.makeText(this@ViewMynotes, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
@@ -283,10 +283,11 @@ class ViewMynotes : AppCompatActivity() {
                     }
                 } else {
                     Toast.makeText(this@ViewMynotes, "Failed to update note: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.e("UpdateNote", "Error: ${response.code()}, Message: ${response.message()}")
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
                 Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("UpdateNote", "Error: ${e.message}", e)
             }
         }
     }

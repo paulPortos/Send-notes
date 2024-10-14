@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +30,7 @@ class AddFlashcards : AppCompatActivity() {
     private lateinit var title : EditText
     private lateinit var contents : EditText
     private lateinit var btnCheck : Button
+    private lateinit var gestureDetector: GestureDetector
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flashcards) // Use your activity layout
@@ -46,9 +49,65 @@ class AddFlashcards : AppCompatActivity() {
         viewPager.setUserInputEnabled(false)
         btnLeft.isEnabled = currentIndex > 0
 
+        // Initialize the gesture detector using an anonymous class
+        gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onFling(
+                e1: MotionEvent?,  // Make both e1 and e2 nullable
+                e2: MotionEvent,
+                velocityX: Float,
+                velocityY: Float
+            ): Boolean {
+                if (e1 != null && e2 != null) {  // Safely check if both are non-null
+                    val diffX = e2.x - e1.x
+                    val diffY = e2.y - e1.y
+                    if (Math.abs(diffX) > Math.abs(diffY)) {
+                        // Detect left or right swipe
+                        if (diffX > 0) {
+                            if (currentIndex > 0) {  // Ensure currentIndex doesn't go below 0
+                                currentIndex--
+                                // Move to the previous index
+                                contents.setText(contentsList[currentIndex])  // Show the previous item for editing
+                                btnLeft.isEnabled = currentIndex > 0  // Disable left button if no more previous items
+                            } else {
+                                Toast.makeText(this@AddFlashcards, "No previous item.", Toast.LENGTH_SHORT).show()
+                                btnLeft.isEnabled = false  // Disable the button if we're at the first item
+                            }
+                        } else {
+                            val content = contents.text.toString()
+
+                            if (content.isNotBlank()) {
+                                if (currentIndex == contentsList.size) {
+                                    // If currentIndex is at the end, add a new content item
+                                    addToContentsList(content)
+                                    contents.text.clear()  // Clear the input field after adding
+                                    currentIndex++  // Move to the next index
+                                } else if (currentIndex < contentsList.size) {
+                                    // If currentIndex is still within the list, move to the next item
+                                    contentsList[currentIndex] = content  // Update the current item with new content
+                                    currentIndex++  // Move to the next index
+                                    if (currentIndex < contentsList.size) {
+                                        contents.setText(contentsList[currentIndex])  // Load the next item for editing
+                                    } else {
+                                        contents.text.clear()  // Clear the input if no more items
+                                    }
+                                }
+                                btnLeft.isEnabled = currentIndex > 0  // Enable the left button if applicable
+                            } else {
+                                Toast.makeText(this@AddFlashcards, "Card is blank.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        return true
+                    }
+                }
+                return false
+            }
+        })
+
         btnCheck.setOnClickListener {
             val content = contents.text.toString()
-            addToContentsList(content)
+            if (content.isNotBlank()) {
+                addToContentsList(content)
+            }
             //log content
             Log.d("AddFlashcards", "Content List: $contentsList")
             if(title.text.toString().isNotBlank() && contentsList.isNotEmpty()){
@@ -62,49 +121,18 @@ class AddFlashcards : AppCompatActivity() {
                 Toast.makeText(this, "Title and cards are required", Toast.LENGTH_SHORT).show()
             }
         }
-        //1 2 3
-        btnLeft.setOnClickListener {
-            if (currentIndex > 0) {  // Ensure currentIndex doesn't go below 0
-                currentIndex--
-                  // Move to the previous index
-                contents.setText(contentsList[currentIndex])  // Show the previous item for editing
-                btnLeft.isEnabled = currentIndex > 0  // Disable left button if no more previous items
-            } else {
-                Toast.makeText(this, "No previous item.", Toast.LENGTH_SHORT).show()
-                btnLeft.isEnabled = false  // Disable the button if we're at the first item
-            }
-        }
-
-        //0 1 2 3
-        btnRight.setOnClickListener {
-            val content = contents.text.toString()
-
-            if (content.isNotBlank()) {
-                if (currentIndex == contentsList.size) {
-                    // If currentIndex is at the end, add a new content item
-                    addToContentsList(content)
-                    contents.text.clear()  // Clear the input field after adding
-                    currentIndex++  // Move to the next index
-                } else if (currentIndex < contentsList.size) {
-                    // If currentIndex is still within the list, move to the next item
-                    contentsList[currentIndex] = content  // Update the current item with new content
-                    currentIndex++  // Move to the next index
-                    if (currentIndex < contentsList.size) {
-                        contents.setText(contentsList[currentIndex])  // Load the next item for editing
-                    } else {
-                        contents.text.clear()  // Clear the input if no more items
-                    }
-                }
-                btnLeft.isEnabled = currentIndex > 0  // Enable the left button if applicable
-            } else {
-                Toast.makeText(this, "Card is blank.", Toast.LENGTH_SHORT).show()
-            }
-        }
 
         btnBack.setOnClickListener {
            val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        event?.let {
+            gestureDetector.onTouchEvent(it)
+        }
+        return super.onTouchEvent(event)
     }
 
     private fun createData(title: String, cards: MutableList<String>, public: Boolean, toPublic: Boolean) {
@@ -126,6 +154,7 @@ class AddFlashcards : AppCompatActivity() {
             }
         }
     }
+
     private fun addToContentsList(contents: String) {
         contentsList.add(contents)
     }

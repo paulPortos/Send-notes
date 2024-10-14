@@ -48,8 +48,7 @@ class ChangePassword : AppCompatActivity() {
         btnConfirmResetPassword = findViewById(R.id.btnConfirmResetPassword)
 
         btnBack.setOnClickListener {
-            val intent = Intent(this@ChangePassword, SettingsActivity::class.java)
-            startActivity(intent)
+         finish()
         }
 
         btnConfirmResetPassword.setOnClickListener {

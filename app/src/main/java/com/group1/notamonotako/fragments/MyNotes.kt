@@ -31,7 +31,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-class MyNotes : Fragment() {
+class  MyNotes : Fragment() {
     lateinit var btnSettings : ImageButton
     lateinit var myNotesAdapter: MyNotesAdapter
     lateinit var layoutManager: LinearLayoutManager
@@ -66,6 +66,7 @@ class MyNotes : Fragment() {
         btnNotification.setOnClickListener {
             val intent = Intent(requireContext(), NotificationActivity::class.java)
             startActivity(intent)
+            Log.d("Notification", "Notification button clicked")
         }
 
         btnSettings.setOnClickListener {

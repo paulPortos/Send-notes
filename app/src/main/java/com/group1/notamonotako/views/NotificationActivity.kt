@@ -29,6 +29,11 @@ class NotificationActivity : AppCompatActivity() {
         rvNotification.layoutManager = LinearLayoutManager(this@NotificationActivity)
         fetchNotifications()
 
+        btnClose = findViewById(R.id.btnClose)
+
+        btnClose.setOnClickListener{
+            finish()
+        }
     }
 
     private fun fetchNotifications(){

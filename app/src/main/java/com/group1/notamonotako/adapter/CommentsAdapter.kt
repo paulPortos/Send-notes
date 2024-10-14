@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
-import com.group1.notamonotako.api.requests_responses.comments.Comments
+import com.group1.notamonotako.api.requests_responses.comments.getComments
 
-class CommentsAdapter (val context: Context, private var data: List<Comments>) : RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
+class CommentsAdapter (val context: Context, private var data: List<getComments>) : RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val username: TextView = view.findViewById(R.id.username)
@@ -23,9 +23,11 @@ class CommentsAdapter (val context: Context, private var data: List<Comments>) :
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
         holder.username.text = item.username
-        holder.message.text = item.message
+        holder.message.text = item.comment
     }
     override fun getItemCount(): Int {
         return data.size
     }
 }
+
+

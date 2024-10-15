@@ -148,9 +148,9 @@ class AddFlashcards : AppCompatActivity() {
                     Toast.makeText(this@AddFlashcards, "Failed to create flashcards", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e("AddFlashcards", "Error: ${e.message}", e)
             } catch (e: HttpException){
-                e.printStackTrace()
+                Log.e("AddFlashcards", "HTTP Error: ${e.message()}", e)
             }
         }
     }

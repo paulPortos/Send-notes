@@ -5,6 +5,8 @@
     import android.content.Intent
     import android.os.Bundle
     import android.util.Log
+    import android.view.GestureDetector
+    import android.view.MotionEvent
     import android.widget.Button
     import android.widget.EditText
     import android.widget.ImageButton
@@ -15,7 +17,6 @@
     import androidx.viewpager2.widget.ViewPager2
     import com.group1.notamonotako.R
     import com.group1.notamonotako.api.requests_responses.flashcards.UpdateFlashcards
-    import com.group1.notamonotako.fragments.MyFlashcards
     import kotlinx.coroutines.Dispatchers
     import kotlinx.coroutines.launch
     import kotlinx.coroutines.withContext
@@ -33,6 +34,7 @@
         private lateinit var btnBack: ImageButton //
         private lateinit var viewPager: ViewPager2
         private lateinit var btnDelete: Button
+        private lateinit var gestureDetector: GestureDetector
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_view_flashcards)
@@ -47,7 +49,7 @@
             btnDelete = findViewById(R.id.btn_delete)
             viewPager = findViewById(R.id.viewPager)
             viewPager.setUserInputEnabled(true)
-
+            viewPager.isUserInputEnabled = false
             // Safely retrieve extras
             val flashcardsId = intent.getIntExtra("flashcard_id", -1)
             val flashcardTitle = intent.getStringExtra("title")
@@ -66,36 +68,61 @@
             } else {
                 Log.e("ViewFlashcards", "No title received in intent")
             }
-    
-            btnLeft.setOnClickListener {
-                if (currentIndex > 0) {
-                    currentIndex--
-                    contents.setText(contentsList[currentIndex]) // Show previous item
-                    btnLeft.isEnabled = currentIndex > 0 // Disable if at the first item
-                } else {
-                    Toast.makeText(this, "No previous item.", Toast.LENGTH_SHORT).show()
-                    btnLeft.isEnabled = false // Disable left button if we're at the first item
-                }
-            }
-    
-            btnRight.setOnClickListener {
-                val content = contents.text.toString()
-                if (content.isNotBlank()) {
-                    if (currentIndex < contentsList.size - 1) {
-                        contentsList[currentIndex] = content // Update the current item
-                        currentIndex++ // Move to the next index
-                        contents.setText(contentsList[currentIndex]) // Load next item
-                    } else {
-                        // Add new content
-                        addToContentsList(content)
-                        contents.text.clear() // Clear input
-                        currentIndex++ // Move to the next index
+
+            gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+                override fun onFling(
+                    e1: MotionEvent?,  // Make both e1 and e2 nullable
+                    e2: MotionEvent,
+                    velocityX: Float,
+                    velocityY: Float
+                ): Boolean {
+                    if (e1 != null && e2 != null) {  // Safely check if both are non-null
+                        val diffX = e2.x - e1.x
+                        val diffY = e2.y - e1.y
+                        if (Math.abs(diffX) > Math.abs(diffY)) {
+                            // Detect left or right swipe
+                            if (diffX > 0) {
+                                Toast.makeText(this@ViewFlashcards, "Swipe right detected.", Toast.LENGTH_SHORT).show()
+                                if (currentIndex > 0) {  // Ensure currentIndex doesn't go below 0
+                                    currentIndex--
+                                    // Move to the previous index
+                                    contents.setText(contentsList[currentIndex])  // Show the previous item for editing
+                                    btnLeft.isEnabled = currentIndex > 0  // Disable left button if no more previous items
+                                } else {
+                                    Toast.makeText(this@ViewFlashcards, "No previous item.", Toast.LENGTH_SHORT).show()
+                                    btnLeft.isEnabled = false  // Disable the button if we're at the first item
+                                }
+                            } else {
+                                Toast.makeText(this@ViewFlashcards, "Swipe left detected.", Toast.LENGTH_SHORT).show()
+                                val content = contents.text.toString()
+
+                                if (content.isNotBlank()) {
+                                    if (currentIndex == contentsList.size) {
+                                        // If currentIndex is at the end, add a new content item
+                                        addToContentsList(content)
+                                        contents.text.clear()  // Clear the input field after adding
+                                        currentIndex++  // Move to the next index
+                                    } else if (currentIndex < contentsList.size) {
+                                        // If currentIndex is still within the list, move to the next item
+                                        contentsList[currentIndex] = content  // Update the current item with new content
+                                        currentIndex++  // Move to the next index
+                                        if (currentIndex < contentsList.size) {
+                                            contents.setText(contentsList[currentIndex])  // Load the next item for editing
+                                        } else {
+                                            contents.text.clear()  // Clear the input if no more items
+                                        }
+                                    }
+                                    btnLeft.isEnabled = currentIndex > 0  // Enable the left button if applicable
+                                } else {
+                                    Toast.makeText(this@ViewFlashcards, "Card is blank.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            return true
+                        }
                     }
-                    btnLeft.isEnabled = currentIndex > 0 // Enable left button if applicable
-                } else {
-                    Toast.makeText(this, "Card is blank.", Toast.LENGTH_SHORT).show()
+                    return false
                 }
-            }
+            })
 
             btnCheck.setOnClickListener {
                 // Ensure to update the current index in the contentsList
@@ -122,7 +149,7 @@
                 }
             }
         }
-    
+
         private fun updateFlashcards(flashcardsId: Int){
             val token = TokenManager.getToken()
     
@@ -203,5 +230,12 @@
         }
         private fun addToContentsList(contents: String) {
             contentsList.add(contents)
+        }
+
+        override fun onTouchEvent(event: MotionEvent?): Boolean {
+            event?.let {
+                gestureDetector.onTouchEvent(it)
+            }
+            return super.onTouchEvent(event)
         }
     }

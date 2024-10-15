@@ -29,8 +29,6 @@
         private lateinit var title: EditText
         private lateinit var contents: EditText
         private lateinit var btnCheck: Button //
-        private lateinit var btnRight: ImageButton
-        private lateinit var btnLeft: ImageButton
         private lateinit var btnBack: ImageButton //
         private lateinit var viewPager: ViewPager2
         private lateinit var btnDelete: Button
@@ -42,8 +40,6 @@
             title = findViewById(R.id.title)
             contents = findViewById(R.id.contents)
             btnCheck = findViewById(R.id.btn_check)
-            btnRight = findViewById(R.id.btn_right)
-            btnLeft = findViewById(R.id.btn_left)
             btnBack = findViewById(R.id.btn_back)
             timestamp = findViewById(R.id.timestamp)
             btnDelete = findViewById(R.id.btn_delete)
@@ -55,7 +51,6 @@
             val flashcardTitle = intent.getStringExtra("title")
             contentsList = intent.getStringArrayListExtra("cards")?.toMutableList() ?: mutableListOf()
             val flashcardsUpdatedAt = intent.getStringExtra("updated_at")
-
             // Set the timestamp text
             timestamp.text = flashcardsUpdatedAt
 
@@ -82,20 +77,15 @@
                         if (Math.abs(diffX) > Math.abs(diffY)) {
                             // Detect left or right swipe
                             if (diffX > 0) {
-                                Toast.makeText(this@ViewFlashcards, "Swipe right detected.", Toast.LENGTH_SHORT).show()
                                 if (currentIndex > 0) {  // Ensure currentIndex doesn't go below 0
                                     currentIndex--
                                     // Move to the previous index
                                     contents.setText(contentsList[currentIndex])  // Show the previous item for editing
-                                    btnLeft.isEnabled = currentIndex > 0  // Disable left button if no more previous items
                                 } else {
                                     Toast.makeText(this@ViewFlashcards, "No previous item.", Toast.LENGTH_SHORT).show()
-                                    btnLeft.isEnabled = false  // Disable the button if we're at the first item
                                 }
                             } else {
-                                Toast.makeText(this@ViewFlashcards, "Swipe left detected.", Toast.LENGTH_SHORT).show()
                                 val content = contents.text.toString()
-
                                 if (content.isNotBlank()) {
                                     if (currentIndex == contentsList.size) {
                                         // If currentIndex is at the end, add a new content item
@@ -112,7 +102,6 @@
                                             contents.text.clear()  // Clear the input if no more items
                                         }
                                     }
-                                    btnLeft.isEnabled = currentIndex > 0  // Enable the left button if applicable
                                 } else {
                                     Toast.makeText(this@ViewFlashcards, "Card is blank.", Toast.LENGTH_SHORT).show()
                                 }
@@ -130,11 +119,14 @@
                 if (currentIndex < contentsList.size) {
                     contentsList[currentIndex] = currentContent // Update the list with the new content
                 }
-    
                 //log flashcards id
                 Log.d("ViewFlashcards", "Flashcards ID: $flashcardsId")
                 if(flashcardsId != -1){
-                    updateFlashcards(flashcardsId)
+                    val updatedTitle = title.text.toString()
+                    val updatedContentList: MutableList<String> = contentsList.map { it.trim() }.toMutableList()
+                    Log.d("ViewFlashcards", "Updated Title: $updatedTitle")
+                    Log.d("ViewFlashcards", "Updated Content List: $updatedContentList")
+                    updateFlashcards(flashcardsId, updatedTitle, updatedContentList)
                 }
               finish()
             }
@@ -150,11 +142,8 @@
             }
         }
 
-        private fun updateFlashcards(flashcardsId: Int){
+        private fun updateFlashcards(flashcardsId: Int, updatedTitle: String, updatedContentList: MutableList<String>){
             val token = TokenManager.getToken()
-    
-            val updatedTitle = title.text.toString()
-            val updatedContentList: MutableList<String> = contentsList.map { it.trim() }.toMutableList()
     
             if (updatedContentList.isEmpty()) {
                 Toast.makeText(this, "Content list is empty.", Toast.LENGTH_SHORT).show()

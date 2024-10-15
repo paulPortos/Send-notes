@@ -24,8 +24,6 @@ class AddFlashcards : AppCompatActivity() {
     private val contentsList: MutableList<String> = mutableListOf()
     private var currentIndex: Int = 0  // Track the current index, starting at -1
     private lateinit var viewPager: ViewPager2
-    private lateinit var btnRight: ImageButton
-    private lateinit var btnLeft : ImageButton
     private lateinit var btnBack: ImageButton
     private lateinit var title : EditText
     private lateinit var contents : EditText
@@ -40,14 +38,11 @@ class AddFlashcards : AppCompatActivity() {
 
         viewPager = findViewById(R.id.viewPager)
         btnBack = findViewById(R.id.btn_back)
-        btnRight = findViewById(R.id.btn_right)
-        btnLeft = findViewById(R.id.btn_left)
         title = findViewById(R.id.title)
         contents = findViewById(R.id.contents)
         btnCheck = findViewById(R.id.btn_check)
 
         viewPager.setUserInputEnabled(false)
-        btnLeft.isEnabled = currentIndex > 0
 
         // Initialize the gesture detector using an anonymous class
         gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
@@ -67,10 +62,8 @@ class AddFlashcards : AppCompatActivity() {
                                 currentIndex--
                                 // Move to the previous index
                                 contents.setText(contentsList[currentIndex])  // Show the previous item for editing
-                                btnLeft.isEnabled = currentIndex > 0  // Disable left button if no more previous items
                             } else {
                                 Toast.makeText(this@AddFlashcards, "No previous item.", Toast.LENGTH_SHORT).show()
-                                btnLeft.isEnabled = false  // Disable the button if we're at the first item
                             }
                         } else {
                             val content = contents.text.toString()
@@ -91,7 +84,6 @@ class AddFlashcards : AppCompatActivity() {
                                         contents.text.clear()  // Clear the input if no more items
                                     }
                                 }
-                                btnLeft.isEnabled = currentIndex > 0  // Enable the left button if applicable
                             } else {
                                 Toast.makeText(this@AddFlashcards, "Card is blank.", Toast.LENGTH_SHORT).show()
                             }

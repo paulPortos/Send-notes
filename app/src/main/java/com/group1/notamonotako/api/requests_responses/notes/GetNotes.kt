@@ -12,7 +12,8 @@ data class Note(
     @SerializedName("to_public")
     val toPublic: Boolean
 
-)
+) {
+}
 
 data class NoteRequest(
     val title: String,

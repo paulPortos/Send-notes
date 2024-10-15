@@ -22,6 +22,7 @@ class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerV
         val notes : ConstraintLayout = noteView.findViewById(R.id.layout_notes)
         val contents: TextView = noteView.findViewById(R.id.contents)
         val public : TextView = noteView.findViewById(R.id.tvPublic)
+        val pending : TextView = noteView.findViewById(R.id.tvPending)
 
 
     }
@@ -49,6 +50,16 @@ class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerV
             intent.putExtra("note_id",item.id)
             intent.putExtra("to_public", item.toPublic)
             it.context.startActivity(intent)
+        }
+
+        if (item.public == true && item.toPublic == false) {
+            holder.public.visibility = View.VISIBLE
+        } else if(item.toPublic == true && item.public == false) {
+            holder.pending.visibility = View.VISIBLE
+        } else{
+            holder.pending.visibility = View.GONE
+            holder.public.visibility = View.GONE
+
         }
 
 

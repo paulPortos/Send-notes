@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -23,12 +25,15 @@ import retrofit2.HttpException
 class AddFlashcards : AppCompatActivity() {
     private val contentsList: MutableList<String> = mutableListOf()
     private var currentIndex: Int = 0  // Track the current index, starting at -1
-    private lateinit var viewPager: ViewPager2
     private lateinit var btnBack: ImageButton
     private lateinit var title : EditText
     private lateinit var contents : EditText
     private lateinit var btnCheck : Button
+    private lateinit var btnAbout : ImageButton
+    private lateinit var tvAbout : TextView
+    private lateinit var viewBlur: View
     private lateinit var gestureDetector: GestureDetector
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flashcards) // Use your activity layout
@@ -36,13 +41,13 @@ class AddFlashcards : AppCompatActivity() {
         // Lock orientation
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        viewPager = findViewById(R.id.viewPager)
         btnBack = findViewById(R.id.btn_back)
+        btnAbout = findViewById(R.id.btnAbout)
+        tvAbout = findViewById(R.id.tvAbout)
         title = findViewById(R.id.title)
         contents = findViewById(R.id.contents)
         btnCheck = findViewById(R.id.btn_check)
-
-        viewPager.setUserInputEnabled(false)
+        viewBlur = findViewById(R.id.viewBlur)
 
         // Initialize the gesture detector using an anonymous class
         gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
@@ -118,6 +123,19 @@ class AddFlashcards : AppCompatActivity() {
            val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
             startActivity(intent)
         }
+        btnAbout.setOnClickListener {
+            if (tvAbout.visibility == TextView.VISIBLE) {
+                tvAbout.visibility = TextView.GONE
+                viewBlur.visibility = View.GONE
+
+            } else {
+                tvAbout.visibility = TextView.VISIBLE
+                viewBlur.visibility = View.VISIBLE
+                tvAbout.setOnTouchListener { _, _ -> true }
+                viewBlur.setOnTouchListener { _, _ -> true }
+
+            }
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -151,3 +169,4 @@ class AddFlashcards : AppCompatActivity() {
         contentsList.add(contents)
     }
 }
+

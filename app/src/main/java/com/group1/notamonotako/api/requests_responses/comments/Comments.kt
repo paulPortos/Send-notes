@@ -3,9 +3,10 @@ package com.group1.notamonotako.api.requests_responses.comments
 data class getComments(
     val username: String,
     val comment: String,
+    val id: Int,
+    val notes_id: Int
 
-) {
-}
+)
 
 data class CommentPostRequest(
     val notes_id: Int,

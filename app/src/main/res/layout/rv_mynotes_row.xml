@@ -22,7 +22,6 @@
             android:layout_height="0dp"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
-
             android:autoSizeTextType="uniform"
             android:ellipsize="end"
             android:fontFamily="@font/noto_sans"
@@ -45,9 +44,10 @@
             android:layout_height="0dp"
             android:background="@color/background"
             app:layout_constraintBottom_toTopOf="@+id/guideline163"
-            app:layout_constraintEnd_toStartOf="@+id/guideline159"
+            app:layout_constraintEnd_toStartOf="@+id/guideline158"
             app:layout_constraintStart_toStartOf="@+id/guideline157"
             app:layout_constraintTop_toTopOf="@+id/guideline162" />
+
 
         <TextView
             android:id="@+id/contents"
@@ -60,7 +60,7 @@
 
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline165"
-            app:layout_constraintEnd_toStartOf="@+id/guideline159"
+            app:layout_constraintEnd_toStartOf="@+id/guideline158"
             app:layout_constraintStart_toStartOf="@+id/guideline157"
             app:layout_constraintTop_toTopOf="@+id/guideline164" />
 
@@ -81,20 +81,22 @@
             app:layout_constraintStart_toStartOf="@+id/guideline159"
             app:layout_constraintTop_toTopOf="@+id/guideline161" />
 
-        <CheckBox
-            android:id="@+id/note_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:buttonTint="@color/white"
+        <TextView
+            android:id="@+id/tvPending"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="Pending"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/guideline165"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.98"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline161"
-            app:layout_constraintVertical_bias="0.88" />
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline160"
+            app:layout_constraintEnd_toEndOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/guideline159"
+            app:layout_constraintTop_toTopOf="@+id/guideline161" />
+
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline157"
@@ -115,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85" />
+            app:layout_constraintGuide_percent="0.8" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline160"

@@ -6,19 +6,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
+import com.group1.notamonotako.api.requests_responses.signin.User
 import com.group1.notamonotako.views.ViewHome
-import com.group1.notamonotako.views.ViewMynotes
 
 class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val contents: TextView = view.findViewById(R.id.contents)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -31,6 +33,10 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
         val item = data[position]
         holder.title.text = item.title
         holder.contents.text = item.contents
+
+        // Get the current user's ID
+
+
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewHome::class.java)
             val updatedAtDate = item.updated_at?.substringBefore("T") ?: "No Date"
@@ -41,8 +47,12 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
             intent.putExtra("updated_at", updatedAtDate)
             it.context.startActivity(intent)
         }
+
+
+
     }
-    fun setFilteredList(data: List<getPublicNotes>){
+
+    fun setFilteredList(data: List<getPublicNotes>) {
         this.data = data
         notifyDataSetChanged()
     }
@@ -50,6 +60,4 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
     override fun getItemCount(): Int {
         return data.size
     }
-
 }
-

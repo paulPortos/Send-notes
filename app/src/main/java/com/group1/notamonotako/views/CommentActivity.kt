@@ -107,10 +107,11 @@ class CommentActivity : AppCompatActivity() {
             val noteId = intent.getIntExtra("note_id", -1)
             val username = AccountManager.getUsername().toString() // This should be dynamic
             val token = TokenManager.getToken() // Assume token is stored in TokenManager
+
             if (token == null) {
                 Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
                 return
-            }else{
+            } else {
                 lifecycleScope.launch {
                     try {
                         val apiService = RetrofitInstance.create(ApiService::class.java)
@@ -121,25 +122,25 @@ class CommentActivity : AppCompatActivity() {
                             // Handle successful comment submission
                             Toast.makeText(this@CommentActivity, "Comment Submitted", Toast.LENGTH_SHORT).show()
                             etAddComment.text?.clear()
-                            fetchComments()
-
+                            fetchComments() // Refresh comments
                         } else {
                             // Log and handle API failure
-                            val errorBody = response.code()?: "Unknown error"
+                            val errorBody = response.errorBody()?.string() ?: "Unknown error"
                             Log.e("CommentError", "Failed to submit comment: $errorBody")
-                            Toast.makeText(this@CommentActivity, "Failed to submit comment", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@CommentActivity, "Failed to submit comment: $errorBody", Toast.LENGTH_SHORT).show()
                         }
                     } catch (e: Exception) {
                         // Handle network or other errors
                         Log.e("CommentException", "Error: ${e.message}")
                         Toast.makeText(this@CommentActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
-                }}
-
+                }
+            }
         } else {
             Toast.makeText(this, "Please input your comment", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 
 

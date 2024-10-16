@@ -7,11 +7,23 @@
     android:orientation="vertical"
     android:background="@drawable/white_round"
     android:layout_marginBottom="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:weightSum="57"
+        >
+        <TextView
+            android:layout_width="0.1dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            />
 
     <TextView
         android:id="@+id/username"
-        android:layout_width="350dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:autoSizeMaxTextSize="20sp"
         android:autoSizeMinTextSize="16sp"
         android:autoSizeTextType="uniform"
@@ -22,30 +34,76 @@
         android:textSize="16sp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-
+        android:layout_weight="28"
         android:textStyle="bold" />
+        <ImageView
+
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:src="@drawable/baseline_delete_24"
+            android:layout_marginTop="10dp"
+            android:paddingStart="100dp"
+            android:layout_weight="28"
+
+            android:buttonTint="@color/white" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="30">
+        <TextView
+            android:layout_width="0.1dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            />
 
     <TextView
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="2dp"
+        android:layout_weight="28"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-
         android:background="@color/white" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+          />
+    </LinearLayout>
 
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="30">
+        <TextView
+            android:layout_width="0.1dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            />
     <TextView
         android:id="@+id/message"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:fontFamily="@font/noto_sans"
         android:hint="message"
-        android:layout_marginStart="10dp"
+        android:layout_weight="28"
         android:layout_marginTop="10dp"
         android:textColorHint="@color/grey"
         android:textSize="12sp" />
 
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            />
+    </LinearLayout>
 </LinearLayout>

@@ -171,7 +171,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="12sp"
-                        android:autoSizeMinTextSize="9sp"
+                        android:autoSizeMinTextSize="7sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/noto_sans"
                         android:text="@string/username"
@@ -189,7 +189,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:autoSizeMaxTextSize="12sp"
-                        android:autoSizeMinTextSize="9sp"
+                        android:autoSizeMinTextSize="7sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/noto_sans"
                         android:text="Email"
@@ -413,7 +413,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.6" />
+                        app:layout_constraintGuide_percent="0.55" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline103"

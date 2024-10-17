@@ -50,6 +50,8 @@ class Home : Fragment() {
     private lateinit var tvSendNotes : TextView
     private lateinit var viewBlur : View
     private lateinit var svSearchView :SearchView
+    private lateinit var tvNoNotes : TextView
+    private lateinit var tvNoInternet : TextView
     private var data: List<getPublicNotes> = listOf()
 
 
@@ -94,6 +96,8 @@ class Home : Fragment() {
         viewBlur.visibility = View.GONE
         svSearchView = view.findViewById(R.id.svSearchView)
         swiperefresh = view.findViewById(R.id.swipeRefreshHome)
+        tvNoNotes = view.findViewById(R.id.tvNoNotes)
+        tvNoInternet = view.findViewById(R.id.tvNoInternet)
 
 
 
@@ -157,22 +161,37 @@ class Home : Fragment() {
     private fun fetchPublicNotes(){
         lifecycleScope.launch {
             try {
+                rvhome.visibility = View.VISIBLE
+                tvNoInternet.visibility = View.GONE
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = withContext(Dispatchers.IO) {
                     apiService.getPublicNotes()
                 }
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val publicNotes = response.body()
-                    if (isAdded && publicNotes != null){
-                        data = publicNotes // Store in data to put in datalist
-                        val adapter = HomeAdapter(requireContext(), publicNotes)
-                        rvhome.adapter = adapter
+                    if (isAdded && publicNotes != null) {
+                        if (publicNotes.isEmpty()) {
+                            // No notes available
+                            rvhome.visibility = View.GONE
+                            tvNoNotes.visibility = View.VISIBLE
+                        } else {
+                            // Notes available
+                            data = publicNotes // Store in data to put in datalist
+                            val adapter = HomeAdapter(requireContext(), publicNotes)
+                            rvhome.adapter = adapter
+                            rvhome.visibility = View.VISIBLE
+                            tvNoNotes.visibility = View.GONE
+                        }
                     }
                 }
             } catch (e: HttpException){
                 Toast.makeText(requireContext(), "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
+
             } catch (e: IOException){
                 Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+                rvhome.visibility = View.GONE
+                tvNoInternet.visibility = View.VISIBLE
+
             }
         }
     }

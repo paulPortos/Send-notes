@@ -39,7 +39,8 @@ class  MyNotes : Fragment() {
     private lateinit var progressBar : ProgressBar
     private lateinit var tvMyNotes : TextView
     private lateinit var btnNotification : ImageButton
-
+    private lateinit var tvNoNotes : TextView
+    private lateinit var tvNoInternet : TextView
     private lateinit var swiperefresh : SwipeRefreshLayout
 
     override fun onCreateView(
@@ -57,7 +58,8 @@ class  MyNotes : Fragment() {
         tvMyNotes = view.findViewById(R.id.tvMyNotes)
         btnNotification = view.findViewById(R.id.btnNotification)
         swiperefresh = view.findViewById(R.id.swipeRefreshMyNotes)
-
+        tvNoNotes = view.findViewById(R.id.tvNoNotes)
+        tvNoInternet = view.findViewById(R.id.tvNoInternet)
 
 
         progressBar.visibility = View.INVISIBLE
@@ -90,6 +92,9 @@ class  MyNotes : Fragment() {
     private fun fetchNotes() {
         lifecycleScope.launch {
             try {
+                rv_mynotes.visibility = View.VISIBLE
+                tvNoInternet.visibility = View.GONE
+                tvNoNotes.visibility = View.GONE
                 // Network call should happen on IO thread
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = withContext(Dispatchers.IO) {
@@ -102,6 +107,13 @@ class  MyNotes : Fragment() {
                     if (isAdded && notes != null) {
                         myNotesAdapter = MyNotesAdapter(requireContext(), notes)
                         rv_mynotes.adapter = myNotesAdapter
+
+                        if (notes.isEmpty()) {
+                            // No notes available
+                            rv_mynotes.visibility = View.GONE
+                            tvNoNotes.visibility = View.VISIBLE
+                        }
+
                     } else {
                         if (isAdded) {
 
@@ -123,6 +135,9 @@ class  MyNotes : Fragment() {
                 Toast.makeText(requireContext(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.d("addnotes", e.message.toString())
                 progressBar.visibility = View.INVISIBLE
+                rv_mynotes.visibility = View.GONE
+                tvNoInternet.visibility = View.VISIBLE
+                tvNoNotes.visibility = View.GONE
             }
         }
 

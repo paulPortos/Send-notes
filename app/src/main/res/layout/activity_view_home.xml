@@ -132,6 +132,45 @@
         app:layout_constraintVertical_bias="0.0"
          />
 
+    <TextView
+        android:id="@+id/tvLikeCount"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/background2"
+        android:text="0"
+        android:gravity="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline225"
+        app:layout_constraintEnd_toStartOf="@+id/guideline65"
+        app:layout_constraintStart_toStartOf="@+id/guideline35"
+        app:layout_constraintTop_toTopOf="@+id/guideline74" />
+
+    <TextView
+        android:id="@+id/tvDisLikeCount"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/background2"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnDisLike"
+        app:layout_constraintEnd_toStartOf="@+id/guideline267"
+        app:layout_constraintStart_toStartOf="@+id/guideline268"
+        app:layout_constraintTop_toTopOf="@+id/guideline74" />
+
+    <TextView
+        android:id="@+id/tvCommentsCount"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/background2"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnComment"
+        app:layout_constraintEnd_toStartOf="@+id/guideline64"
+        app:layout_constraintStart_toStartOf="@+id/guideline69"
+        app:layout_constraintTop_toTopOf="@+id/guideline74" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline35"
@@ -215,14 +254,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.92" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline226"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="0.98" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline254"

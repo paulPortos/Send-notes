@@ -5,6 +5,7 @@ import TokenManager
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -53,6 +54,7 @@ class ViewHome : AppCompatActivity() {
         tvTitle = findViewById(R.id.tvTitle)
         tvContents = findViewById(R.id.tvContents)
         tvDate = findViewById(R.id.tvDate)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
 
         val noteId = intent.getIntExtra("note_id", -1)

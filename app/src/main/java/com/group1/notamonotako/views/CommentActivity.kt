@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import ApiService
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -36,6 +37,7 @@ class CommentActivity : AppCompatActivity() {
         rvcomments = findViewById(R.id.rvcomments)
         tvComments = findViewById(R.id.tvComments)
         btnClose = findViewById(R.id.btnClose)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
 
 

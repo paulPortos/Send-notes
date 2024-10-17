@@ -6,6 +6,7 @@ import TokenManager
 import TokenManager.clearToken
 import TokenManager.getToken
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -32,6 +33,8 @@ class ChangePassword : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
         TokenManager.init(this)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
         if (!TokenManager.isLoggedIn()) {
             // If not logged in, redirect to SignInActivity
             val intent = Intent(this@ChangePassword, SignInActivity::class.java)

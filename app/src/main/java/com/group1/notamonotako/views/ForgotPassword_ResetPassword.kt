@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import ApiService
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
@@ -28,6 +29,7 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
         etPassword = findViewById(R.id.etPassword)
         etConfirmPassword = findViewById( R.id.etConfirmPassword)
         btnConfirmResetPassword = findViewById(R.id.btnConfirmResetPassword)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         GradientText.setGradientText(btnConfirmResetPassword,this)
 

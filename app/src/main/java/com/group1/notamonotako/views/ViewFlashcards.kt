@@ -3,6 +3,7 @@
     import ApiService
     import TokenManager
     import android.content.Intent
+    import android.content.pm.ActivityInfo
     import android.os.Bundle
     import android.util.Log
     import android.view.GestureDetector
@@ -36,7 +37,8 @@
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_view_flashcards)
-    
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
             title = findViewById(R.id.title)
             contents = findViewById(R.id.contents)
             btnCheck = findViewById(R.id.btn_check)

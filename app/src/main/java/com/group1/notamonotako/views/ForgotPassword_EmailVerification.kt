@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import ApiService
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -87,6 +88,7 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
             }
 
         }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         btnConfirmVerification.setOnClickListener{
             val otp = etOTP.text.toString()

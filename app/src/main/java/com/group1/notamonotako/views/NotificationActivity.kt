@@ -1,6 +1,7 @@
 package com.group1.notamonotako.views
 
 import ApiService
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
@@ -26,6 +27,8 @@ class NotificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
         rvNotification = findViewById(R.id.rvNotification)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
         rvNotification.layoutManager = LinearLayoutManager(this@NotificationActivity)
         fetchNotifications()
 

@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import ApiService
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -68,6 +69,8 @@ class ViewMynotes : AppCompatActivity() {
         flShare = findViewById(R.id.flShare)
         btnCancelShare = findViewById(R.id.btnCancelShare)
         btnShare = findViewById(R.id.btnShare)
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         val intent = intent
         val title = intent.getStringExtra("title")

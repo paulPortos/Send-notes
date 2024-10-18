@@ -37,63 +37,32 @@ import java.io.IOException
 import java.util.Locale
 
 class Home : Fragment() {
-    lateinit var flashcardsFabBtn : FloatingActionButton
-    lateinit var mainFabBtn : FloatingActionButton
-    lateinit var notesFabBtn :FloatingActionButton
+
     lateinit var btnSettings :ImageButton
-    lateinit var notesTV :TextView
     lateinit var swiperefresh : SwipeRefreshLayout
-    lateinit var flashcardsTV :TextView
     private lateinit var progressBar : ProgressBar
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var rvhome: RecyclerView
     private lateinit var tvSendNotes : TextView
-    private lateinit var viewBlur : View
     private lateinit var svSearchView :SearchView
     private lateinit var tvNoNotes : TextView
     private lateinit var tvNoInternet : TextView
     private var data: List<getPublicNotes> = listOf()
 
-
-    private val fromBottomFabAnim: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_fab)
-    }
-    private val toBottomFabAnim: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_fab)
-    }
-    private val rotateClockWiseFabAnim: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_clock_wise)
-    }
-    private val rotateAntiClockWiseFabAnim: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_anti_clock_wise)
-    }
-    private val fromBottomBgAnim: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim)
-    }
-    private val toBottomBgAnim: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim)
-    }
-
-    private var areFabButtonsVisible = false
     private var hasShownNoDataToast = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        notesTV =view.findViewById(R.id.notesTV)
-        flashcardsTV =view.findViewById(R.id.flashcardsTV)
-        notesFabBtn = view.findViewById(R.id.notesFabBtn)
-        mainFabBtn = view.findViewById(R.id.mainFabBtn)
-        flashcardsFabBtn = view.findViewById(R.id.flashcardsFabBtn)
+
         btnSettings = view.findViewById(R.id.btnSettings)
         progressBar = view.findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
         rvhome = view.findViewById(R.id.rvhome)
         tvSendNotes = view.findViewById(R.id.tvSendNotes)
         rvhome.layoutManager = LinearLayoutManager(requireContext())
-        viewBlur = view.findViewById(R.id.viewBlur)
-        viewBlur.visibility = View.GONE
+
         svSearchView = view.findViewById(R.id.svSearchView)
         swiperefresh = view.findViewById(R.id.swipeRefreshHome)
         tvNoNotes = view.findViewById(R.id.tvNoNotes)
@@ -126,31 +95,11 @@ class Home : Fragment() {
 
 
 
-        flashcardsFabBtn.setOnClickListener {
-            val intent = Intent(requireContext(), AddFlashcards::class.java) // Create intent for Notes activity
-            startActivity(intent)
-            progressBar.visibility = View.INVISIBLE
-
-        }
         swiperefresh.setOnRefreshListener {
             fetchPublicNotes()
             swiperefresh.isRefreshing = false
         }
 
-        notesFabBtn.setOnClickListener {
-            val intent = Intent(requireContext(), AddNotes::class.java) // Create intent for Notes activity
-            startActivity(intent)
-            progressBar.visibility = View.INVISIBLE
-        }
-
-        mainFabBtn.setOnClickListener {
-            progressBar.visibility = View.INVISIBLE
-            if (areFabButtonsVisible) {
-                shrinkFab()
-            } else {
-                expandFab()
-            }
-        }
         GradientText.setGradientText(tvSendNotes, requireContext())
         rvhome.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this.context)
@@ -196,25 +145,7 @@ class Home : Fragment() {
         }
     }
 
-    private fun shrinkFab() {
-        mainFabBtn.startAnimation(rotateAntiClockWiseFabAnim)
-        notesFabBtn.startAnimation(toBottomFabAnim)
-        flashcardsFabBtn.startAnimation(toBottomFabAnim)
-        notesTV.startAnimation(toBottomFabAnim)
-        flashcardsTV.startAnimation(toBottomFabAnim)
-        areFabButtonsVisible = !areFabButtonsVisible
-        viewBlur.visibility = View.GONE
-    }
 
-    private fun expandFab() {
-       mainFabBtn.startAnimation(rotateClockWiseFabAnim)
-       notesFabBtn.startAnimation(fromBottomFabAnim)
-        flashcardsFabBtn.startAnimation(fromBottomFabAnim)
-        notesTV.startAnimation(fromBottomFabAnim)
-        flashcardsTV.startAnimation(fromBottomFabAnim)
-        areFabButtonsVisible = !areFabButtonsVisible
-        viewBlur.visibility = View.VISIBLE
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

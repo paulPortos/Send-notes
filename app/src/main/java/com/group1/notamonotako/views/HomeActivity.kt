@@ -8,9 +8,13 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.R
 import com.group1.notamonotako.databinding.ActivityHomeBinding
 import com.group1.notamonotako.fragments.Home
@@ -20,6 +24,32 @@ import com.group1.notamonotako.fragments.MyNotes
 class HomeActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var binding: ActivityHomeBinding
+    lateinit var flashcardsTV : TextView
+    lateinit var notesTV : TextView
+    lateinit var flashcardsFabBtn : FloatingActionButton
+    lateinit var mainFabBtn : FloatingActionButton
+    lateinit var notesFabBtn : FloatingActionButton
+    private lateinit var viewBlur : View
+    private val fromBottomFabAnim: Animation by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.from_bottom_fab)
+    }
+    private val toBottomFabAnim: Animation by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.to_bottom_fab)
+    }
+    private val rotateClockWiseFabAnim: Animation by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.rotate_clock_wise)
+    }
+    private val rotateAntiClockWiseFabAnim: Animation by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.rotate_anti_clock_wise)
+    }
+    private val fromBottomBgAnim: Animation by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim)
+    }
+    private val toBottomBgAnim: Animation by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim)
+    }
+
+    private var areFabButtonsVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +75,13 @@ class HomeActivity : AppCompatActivity() {
         // Initialize binding first
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        notesTV =findViewById(R.id.notesTV)
+        flashcardsTV =findViewById(R.id.flashcardsTV)
+        notesFabBtn = findViewById(R.id.notesFabBtn)
+        mainFabBtn = findViewById(R.id.mainFabBtn)
+        flashcardsFabBtn =findViewById(R.id.flashcardsFabBtn)
+        viewBlur = findViewById(R.id.viewBlur)
+        viewBlur.visibility = View.GONE
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
 
@@ -56,12 +92,37 @@ class HomeActivity : AppCompatActivity() {
             if (showMyNotesFragment) {
                 replaceFragment(MyNotes(), "Notes")
                 binding.bottomNavigationView.selectedItemId = R.id.btnnotes
+
             } else if (showMyFlashcardFragment) { // Corrected to check for true
                 replaceFragment(MyFlashcards(), "Flashcards")
                 binding.bottomNavigationView.selectedItemId = R.id.btnflashcards
+
             } else {
                 replaceFragment(Home(), "Home")
                 binding.bottomNavigationView.selectedItemId = R.id.btnhome
+
+            }
+        }
+
+        flashcardsFabBtn.setOnClickListener {
+            val intent = Intent(this,AddFlashcards::class.java) // Create intent for Notes activity
+            startActivity(intent)
+            progressBar.visibility = View.INVISIBLE
+
+        }
+
+        notesFabBtn.setOnClickListener {
+            val intent = Intent(this, AddNotes::class.java) // Create intent for Notes activity
+            startActivity(intent)
+            progressBar.visibility = View.INVISIBLE
+        }
+
+        mainFabBtn.setOnClickListener {
+            progressBar.visibility = View.INVISIBLE
+            if (areFabButtonsVisible) {
+                shrinkFab()
+            } else {
+                expandFab()
             }
         }
 
@@ -71,7 +132,11 @@ class HomeActivity : AppCompatActivity() {
                 R.id.btnhome -> replaceFragment(Home(), "Home")
                 R.id.btnnotes -> replaceFragment(MyNotes(), "Notes")
                 R.id.btnflashcards -> replaceFragment(MyFlashcards(), "Flashcards")
-                else -> {}
+
+                else -> {
+                }
+
+
             }
             true
         }
@@ -103,6 +168,29 @@ class HomeActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             progressBar.visibility = View.INVISIBLE
         }, 500)
+
+        if (areFabButtonsVisible) {
+            shrinkFab()
+        }
+    }
+    private fun shrinkFab() {
+        mainFabBtn.startAnimation(rotateAntiClockWiseFabAnim)
+        notesFabBtn.startAnimation(toBottomFabAnim)
+        flashcardsFabBtn.startAnimation(toBottomFabAnim)
+        notesTV.startAnimation(toBottomFabAnim)
+        flashcardsTV.startAnimation(toBottomFabAnim)
+        areFabButtonsVisible = !areFabButtonsVisible
+        viewBlur.visibility = View.GONE
+    }
+
+    private fun expandFab() {
+        mainFabBtn.startAnimation(rotateClockWiseFabAnim)
+        notesFabBtn.startAnimation(fromBottomFabAnim)
+        flashcardsFabBtn.startAnimation(fromBottomFabAnim)
+        notesTV.startAnimation(fromBottomFabAnim)
+        flashcardsTV.startAnimation(fromBottomFabAnim)
+        areFabButtonsVisible = !areFabButtonsVisible
+        viewBlur.visibility = View.VISIBLE
     }
 
     override fun onBackPressed() {
@@ -118,6 +206,7 @@ class HomeActivity : AppCompatActivity() {
             binding.bottomNavigationView.selectedItemId = R.id.btnhome
         }
     }
+
 
 
 }

@@ -54,9 +54,6 @@ class SettingsActivity : AppCompatActivity() {
         // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
 
-
-
-
         btnChangePassword.setOnClickListener {
             mediaPlayer.start()
             val intent = Intent(this@SettingsActivity, ChangePassword::class.java)

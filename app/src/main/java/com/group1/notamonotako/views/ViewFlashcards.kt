@@ -17,6 +17,8 @@
     import androidx.lifecycle.lifecycleScope
     import androidx.viewpager2.widget.ViewPager2
     import com.group1.notamonotako.R
+    import com.group1.notamonotako.api.AccountManager
+    import com.group1.notamonotako.api.SoundManager
     import com.group1.notamonotako.api.requests_responses.flashcards.UpdateFlashcards
     import kotlinx.coroutines.Dispatchers
     import kotlinx.coroutines.launch
@@ -34,6 +36,8 @@
         private lateinit var viewPager: ViewPager2
         private lateinit var btnDelete: Button
         private lateinit var gestureDetector: GestureDetector
+        private lateinit var soundManager: SoundManager
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_view_flashcards)
@@ -49,6 +53,11 @@
             viewPager.setUserInputEnabled(true)
             viewPager.isUserInputEnabled = false
             // Safely retrieve extras
+
+            soundManager = SoundManager(this) // Initialize SoundManager
+            val isMuted = AccountManager.isMuted
+            soundManager.updateMediaPlayerVolume(isMuted)
+
             val flashcardsId = intent.getIntExtra("flashcard_id", -1)
             val flashcardTitle = intent.getStringExtra("title")
             contentsList = intent.getStringArrayListExtra("cards")?.toMutableList() ?: mutableListOf()
@@ -116,6 +125,8 @@
             })
 
             btnCheck.setOnClickListener {
+                soundManager.playSoundEffect()
+
                 // Ensure to update the current index in the contentsList
                 val currentContent = contents.text.toString().trim()
                 if (currentIndex < contentsList.size) {
@@ -134,10 +145,14 @@
             }
 
             btnBack.setOnClickListener {
-              finish()
+                soundManager.playSoundEffect()
+
+                finish()
             }
 
             btnDelete.setOnClickListener {
+                soundManager.playSoundEffect()
+
                 if(flashcardsId != -1){
                     deleteFlashcards(flashcardsId)
                 }
@@ -228,5 +243,9 @@
                 gestureDetector.onTouchEvent(it)
             }
             return super.onTouchEvent(event)
+        }
+        override fun onDestroy() {
+            super.onDestroy()
+            soundManager.release() // Release media player when done
         }
     }

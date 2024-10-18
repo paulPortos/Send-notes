@@ -23,6 +23,116 @@
 
     </FrameLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fabConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="4dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout">
+
+        <View
+            android:id="@+id/viewBlur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99181818"
+            android:visibility="gone" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mainFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#27A1AF"
+            android:contentDescription="@null"
+            android:elevation="10dp"
+            android:maxWidth="100dp"
+            android:minWidth="1dp"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/btn_add" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/notesFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="#27A1AF"
+            android:elevation="10dp"
+            android:maxWidth="100dp"
+            android:minWidth="1dp"
+            android:tint="@color/beige"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/mainFabBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/notes"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/notesTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="112dp"
+            android:autoSizeMaxTextSize="1000sp"
+            android:autoSizeMinTextSize="1sp"
+            android:autoSizeTextType="uniform"
+            android:background="#00FFFFFF"
+            android:elevation="8dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/notes"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/notesFabBtn" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/flashcardsFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#27A1AF"
+            android:maxWidth="100dp"
+            android:minWidth="1dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/notesFabBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/btn_flashcards"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/flashcardsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="192dp"
+            android:autoSizeMaxTextSize="1000sp"
+            android:autoSizeMinTextSize="1sp"
+            android:autoSizeTextType="uniform"
+            android:background="#00FFFFFF"
+            android:elevation="8dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/flashcards"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/flashcardsFabBtn"
+            tools:ignore="RtlSymmetry" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="0dp"

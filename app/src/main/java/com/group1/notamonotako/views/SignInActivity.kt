@@ -30,7 +30,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
     private lateinit var progressBar : ProgressBar
-    private lateinit var mediaPlayer: MediaPlayer
     private lateinit var btnSignIn : AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +48,6 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signin)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
-        SoundManager.initialize(this)
 
         progressBar = findViewById(R.id.progressBar)
 
@@ -61,7 +59,6 @@ class SignInActivity : AppCompatActivity() {
         btnSignIn = findViewById(R.id.btnSignIn)
 
 
-        mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         GradientText.setGradientText(btnSignIn,this)
 
 
@@ -70,7 +67,6 @@ class SignInActivity : AppCompatActivity() {
         progressBar.visibility = View.INVISIBLE
 
         btnLoginNow.setOnClickListener {
-            mediaPlayer.start()
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
             //Log username and password
@@ -84,7 +80,6 @@ class SignInActivity : AppCompatActivity() {
         }
 
         btnSignup.setOnClickListener {
-            mediaPlayer.start()
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE

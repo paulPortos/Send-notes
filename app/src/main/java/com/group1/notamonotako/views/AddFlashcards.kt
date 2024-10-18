@@ -3,6 +3,7 @@ package com.group1.notamonotako.views
 import ApiService
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
@@ -18,6 +19,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.flashcards.PostFlashcards
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -33,10 +36,12 @@ class AddFlashcards : AppCompatActivity() {
     private lateinit var tvAbout : TextView
     private lateinit var viewBlur: View
     private lateinit var gestureDetector: GestureDetector
+    private lateinit var soundManager: SoundManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flashcards) // Use your activity layout
+        soundManager = SoundManager(this) // Initialize SoundManager
 
         // Lock orientation
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -48,6 +53,11 @@ class AddFlashcards : AppCompatActivity() {
         contents = findViewById(R.id.contents)
         btnCheck = findViewById(R.id.btn_check)
         viewBlur = findViewById(R.id.viewBlur)
+
+
+        // Initialize AccountManager and load sound preference
+        val isMuted = AccountManager.isMuted
+        soundManager.updateMediaPlayerVolume(isMuted)
 
         // Initialize the gesture detector using an anonymous class
         gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
@@ -101,6 +111,8 @@ class AddFlashcards : AppCompatActivity() {
         })
 
         btnCheck.setOnClickListener {
+            soundManager.playSoundEffect()
+
             val content = contents.text.toString()
             if (content.isNotBlank()) {
                 addToContentsList(content)
@@ -120,10 +132,14 @@ class AddFlashcards : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-           val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
+            val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
             startActivity(intent)
+            soundManager.playSoundEffect()
+
         }
         btnAbout.setOnClickListener {
+            soundManager.playSoundEffect()
+
             if (tvAbout.visibility == TextView.VISIBLE) {
                 tvAbout.visibility = TextView.GONE
                 viewBlur.visibility = View.GONE
@@ -168,5 +184,10 @@ class AddFlashcards : AppCompatActivity() {
     private fun addToContentsList(contents: String) {
         contentsList.add(contents)
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release() // Release media player when done
+    }
+
 }
 

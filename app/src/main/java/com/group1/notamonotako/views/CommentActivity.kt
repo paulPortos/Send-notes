@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.CommentsAdapter
 import com.group1.notamonotako.api.AccountManager
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostRequest
 import com.group1.notamonotako.api.requests_responses.comments.getComments
 import kotlinx.coroutines.launch
@@ -26,23 +27,27 @@ class CommentActivity : AppCompatActivity() {
     private lateinit var tvComments: TextView
     private lateinit var btnClose: ImageButton
     private lateinit var commentAdapter: CommentsAdapter
+    private lateinit var soundManager: SoundManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
-
         etAddComment = findViewById(R.id.etAddComment)
         rvcomments = findViewById(R.id.rvcomments)
         tvComments = findViewById(R.id.tvComments)
         btnClose = findViewById(R.id.btnClose)
-
         rvcomments.setHasFixedSize(true)
         rvcomments.layoutManager = LinearLayoutManager(this)
         fetchComments()
 
+        soundManager = SoundManager(this) // Initialize SoundManager
+        val isMuted = AccountManager.isMuted
+        soundManager.updateMediaPlayerVolume(isMuted)
+
         btnClose.setOnClickListener {
             // Navigate to CommentActivity directly
             finish()
+            soundManager.playSoundEffect()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
@@ -132,5 +137,9 @@ class CommentActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Please input your comment", Toast.LENGTH_SHORT).show()
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release() // Release media player when done
     }
 }

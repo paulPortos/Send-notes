@@ -30,6 +30,7 @@ import com.group1.notamonotako.api.requests_responses.comments.CommentPostReques
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import com.group1.notamonotako.api.SoundManager
 
 class ViewHome : AppCompatActivity() {
     private lateinit var btnLike : ImageButton
@@ -43,7 +44,7 @@ class ViewHome : AppCompatActivity() {
     private lateinit var tvLikeCount : TextView
     private lateinit var tvDisLikeCount : TextView
     private lateinit var tvCommentsCount : TextView
-
+    private lateinit var soundManager: SoundManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +62,9 @@ class ViewHome : AppCompatActivity() {
         tvLikeCount = findViewById(R.id.tvLikeCount)
         tvDisLikeCount = findViewById(R.id.tvDisLikeCount)
         tvCommentsCount = findViewById(R.id.tvCommentsCount)
+        soundManager = com.group1.notamonotako.views.SoundManager(this) // Initialize SoundManager
+        val isMuted = AccountManager.isMuted
+        soundManager.updateMediaPlayerVolume(isMuted)
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
@@ -80,10 +84,14 @@ class ViewHome : AppCompatActivity() {
 
         btnback.setOnClickListener{
             finish()
+            soundManager.playSoundEffect()
         }
+
+
 
         var isLiked = false
         btnLike.setOnClickListener {
+            soundManager.playSoundEffect()
             if (isLiked) {
                 // If already liked, remove the color and reset
                 btnLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
@@ -97,6 +105,7 @@ class ViewHome : AppCompatActivity() {
 
         }
         btnDisLike.setOnClickListener {
+            soundManager.playSoundEffect()
             if (isLiked) {
                 // If already liked, remove the color and reset
                 btnDisLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
@@ -111,6 +120,7 @@ class ViewHome : AppCompatActivity() {
         }
 
         btnComment.setOnClickListener {
+            soundManager.playSoundEffect()
             // Change the button tint back to white
             btnComment.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
 
@@ -126,8 +136,12 @@ class ViewHome : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
-
         fetchReactions(noteId)
+
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release() // Release media player when done
     }
 
     private fun fetchReactions(noteId: Int){

@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -23,6 +25,7 @@ class AddNotes : AppCompatActivity() {
     private lateinit var title: EditText
     private lateinit var contents: EditText
     private lateinit var progressBar : ProgressBar
+    private lateinit var soundManager: SoundManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +36,13 @@ class AddNotes : AppCompatActivity() {
         contents = findViewById(R.id.contents)
         progressBar = findViewById(R.id.progressBar)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
+        soundManager = SoundManager(this) // Initialize SoundManager
         progressBar.visibility = View.INVISIBLE
-
+        val isMuted = AccountManager.isMuted
+        soundManager.updateMediaPlayerVolume(isMuted)
 
         leftButton.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(this@AddNotes, HomeActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE
@@ -45,6 +50,8 @@ class AddNotes : AppCompatActivity() {
         }
 
         doneButton.setOnClickListener {
+            soundManager.playSoundEffect()
+
             val title = title.text.toString()
             val contents = contents.text.toString()
             if (title.isEmpty() || contents.isEmpty()) {
@@ -105,5 +112,9 @@ class AddNotes : AppCompatActivity() {
 
             }
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release() // Release media player when done
     }
 }

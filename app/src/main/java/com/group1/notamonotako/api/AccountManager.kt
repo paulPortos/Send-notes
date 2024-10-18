@@ -9,7 +9,7 @@ object AccountManager {
     private const val EMAIL_KEY = "email"
     private const val USERNAME_KEY = "username"
     private const val USER_ID_KEY = "user_id" // Add key for user ID
-
+    private const val SOUND_MUTED_KEY_PREFIX = "sound_muted_" // Prefix for sound muted state by user
     private lateinit var preferences: SharedPreferences
     // Initialize the AccountManager with context
     fun init(context: Context) {
@@ -47,5 +47,26 @@ object AccountManager {
         val username = preferences.getString(USERNAME_KEY, null)
         Log.d("AccountManager", "Retrieved username: $username")
         return username
+    }
+    private fun getSoundMutedKeyForUser(userId: Int?): String {
+        return "$SOUND_MUTED_KEY_PREFIX$userId"
+    }
+
+    // Check if the sound is muted for the current user
+    var isMuted: Boolean
+        get() {
+            val userId = getUserId()
+            val soundMutedKey = getSoundMutedKeyForUser(userId)
+            return preferences.getBoolean(soundMutedKey, false)
+        }
+        set(value) {
+            val userId = getUserId()
+            val soundMutedKey = getSoundMutedKeyForUser(userId)
+            preferences.edit().putBoolean(soundMutedKey, value).apply()
+        }
+
+    // Toggle the sound preference for the current user
+    fun toggleSound() {
+        isMuted = !isMuted
     }
 }

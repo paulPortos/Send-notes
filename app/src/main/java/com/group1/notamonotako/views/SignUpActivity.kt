@@ -107,7 +107,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }.onFailure { error ->
                 // Handle registration errors
-                Toast.makeText(this@SignUpActivity, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SignUpActivity, "Invalid Email", Toast.LENGTH_SHORT).show()
                 Log.d("TESTER", "Error: ${error.message}")
             }
         }

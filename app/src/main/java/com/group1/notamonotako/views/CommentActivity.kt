@@ -1,8 +1,7 @@
 package com.group1.notamonotako.views
 
 import ApiService
-import android.content.Intent
-import android.content.pm.ActivityInfo
+import TokenManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -28,7 +27,6 @@ class CommentActivity : AppCompatActivity() {
     private lateinit var btnClose: ImageButton
     private lateinit var commentAdapter: CommentsAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
@@ -37,9 +35,6 @@ class CommentActivity : AppCompatActivity() {
         rvcomments = findViewById(R.id.rvcomments)
         tvComments = findViewById(R.id.tvComments)
         btnClose = findViewById(R.id.btnClose)
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-
-
 
         rvcomments.setHasFixedSize(true)
         rvcomments.layoutManager = LinearLayoutManager(this)
@@ -49,10 +44,6 @@ class CommentActivity : AppCompatActivity() {
             // Navigate to CommentActivity directly
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-
-
-
-
         }
 
         etAddComment.setOnTouchListener { v, event ->
@@ -87,7 +78,8 @@ class CommentActivity : AppCompatActivity() {
                     val commentsList = response.body()
 
                     if (commentsList != null && commentsList.isNotEmpty()) {
-                        val commentsAdapter = CommentsAdapter(this@CommentActivity, commentsList)
+                        // Passing `this@CommentActivity` as the `lifecycleOwner`
+                        val commentsAdapter = CommentsAdapter(this@CommentActivity, commentsList, this@CommentActivity)
                         rvcomments.adapter = commentsAdapter
                     } else {
                         Toast.makeText(this@CommentActivity, "No comments found", Toast.LENGTH_SHORT).show()
@@ -102,7 +94,6 @@ class CommentActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun submitComment(comment: String) {
         if (comment.isNotBlank()) {
@@ -142,8 +133,4 @@ class CommentActivity : AppCompatActivity() {
             Toast.makeText(this, "Please input your comment", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
-
 }

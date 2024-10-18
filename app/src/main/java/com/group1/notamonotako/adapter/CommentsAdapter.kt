@@ -1,5 +1,7 @@
 package com.group1.notamonotako.adapter
 
+import ApiService
+import TokenManager
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +11,17 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.AccountManager
 import com.group1.notamonotako.api.requests_responses.comments.getComments
+import kotlinx.coroutines.launch
 
 
-class CommentsAdapter (val context: Context, private var data: List<getComments>) : RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
+class CommentsAdapter (val context: Context, private var data: List<getComments>,  private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val btnDelete: ImageView = view.findViewById(R.id.btnDelete)
@@ -28,6 +34,8 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
         return ItemViewHolder(inflatedView)
     }
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        TokenManager.init(this.context)
+
         val item = data[position]
         holder.username.text = item.username
         holder.message.text = item.comment
@@ -54,7 +62,11 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
             }
         }
 
+        holder.btnDelete.setOnClickListener {
+           deleteItem(item.id,item.notes_id)
+        }
     }
+
 
 
 
@@ -64,4 +76,35 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
     override fun getItemCount(): Int {
         return data.size
     }
+    private fun deleteItem(commentId: Int, noteId: Int) {
+        val token = TokenManager.getToken()
+        if (token == null) {
+            Toast.makeText(this.context, "Authorization token missing", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        lifecycleOwner.lifecycleScope.launch {
+            try {
+                // Call the API to delete the comment
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val response = apiService.deleteComment("Bearer $token", noteId, commentId)
+
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "Comment deleted successfully", Toast.LENGTH_SHORT).show()
+
+                    // Optionally: Remove the deleted comment from the adapter's data and refresh the view
+                    data = data.filter { it.id != commentId }
+                    notifyDataSetChanged()
+                } else {
+                    val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                    Toast.makeText(context, "Failed to delete comment: $errorMessage", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                // Catch and log any exceptions that occur during the network request
+                Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
+                e.printStackTrace() // Log the full stack trace to understand the issue
+            }
+        }
+    }
+
 }

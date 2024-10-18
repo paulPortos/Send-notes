@@ -129,6 +129,13 @@ interface ApiService {
         @Path ("note_id") noteId: Int
     ): Response<List<getComments>>
 
+    @DELETE("notes/{note_id}/comments/{comment_id}")
+    suspend fun deleteComment(
+        @Header("Authorization") token: String,
+        @Path("note_id") notesId: Int,
+        @Path("comment_id") commentId: Int
+    ): Response<Void>
+
     @POST("notePending")
     suspend fun postNotePending(@Body request: PostPendingNotification): Response<GetNotification>
 }

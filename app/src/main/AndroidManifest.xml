@@ -20,7 +20,6 @@
             android:name=".views.CommentActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".views.NotificationActivity"
             android:exported="false" />

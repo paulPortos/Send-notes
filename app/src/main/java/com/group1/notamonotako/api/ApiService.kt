@@ -22,6 +22,7 @@ import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
 import com.group1.notamonotako.api.requests_responses.notification.GetNotification
 import com.group1.notamonotako.api.requests_responses.notification.PostPendingNotification
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
+import com.group1.notamonotako.api.requests_responses.reactions.showReactions
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
@@ -138,4 +139,10 @@ interface ApiService {
 
     @POST("notePending")
     suspend fun postNotePending(@Body request: PostPendingNotification): Response<GetNotification>
+
+    @GET("showReactions/{note_id}")
+    suspend fun getReactions(
+        @Path("note_id") noteId: Int
+    ): Response<showReactions> // Return a single object, not a list
+
 }

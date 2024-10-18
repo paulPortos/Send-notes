@@ -29,6 +29,7 @@ import com.group1.notamonotako.api.AccountManager
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostRequest
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class ViewHome : AppCompatActivity() {
     private lateinit var btnLike : ImageButton
@@ -39,6 +40,9 @@ class ViewHome : AppCompatActivity() {
     private lateinit var tvTitle : TextView
     private lateinit var tvContents : TextView
     private lateinit var tvDate : TextView
+    private lateinit var tvLikeCount : TextView
+    private lateinit var tvDisLikeCount : TextView
+    private lateinit var tvCommentsCount : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +58,10 @@ class ViewHome : AppCompatActivity() {
         tvTitle = findViewById(R.id.tvTitle)
         tvContents = findViewById(R.id.tvContents)
         tvDate = findViewById(R.id.tvDate)
+        tvLikeCount = findViewById(R.id.tvLikeCount)
+        tvDisLikeCount = findViewById(R.id.tvDisLikeCount)
+        tvCommentsCount = findViewById(R.id.tvCommentsCount)
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
 
@@ -73,8 +81,6 @@ class ViewHome : AppCompatActivity() {
         btnback.setOnClickListener{
             finish()
         }
-
-
 
         var isLiked = false
         btnLike.setOnClickListener {
@@ -121,7 +127,34 @@ class ViewHome : AppCompatActivity() {
         }
 
 
+        fetchReactions(noteId)
+    }
 
+    private fun fetchReactions(noteId: Int){
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val response = apiService.getReactions(noteId)
+                if (response.isSuccessful) {
+                    val reactions = response.body()
+                    if (reactions != null) {
+                        val likes = reactions.likes
+                        val dislikes = reactions.dislikes
+                        tvLikeCount.text = likes.toString()
+                        tvDisLikeCount.text = dislikes.toString()
+                        Log.d("ViewHome", "Likes: $likes, Dislikes: $dislikes")
+                    }
+                } else {
+                    Log.e("ViewHome", "Error: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ViewHome", "Exception: ${e.message}")
+            } catch (e: HttpException){
+                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ViewHome", "HttpException: ${e.message}")
+            }
+        }
     }
 
 }

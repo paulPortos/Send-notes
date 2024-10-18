@@ -78,7 +78,6 @@ class SignUpActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
-
         }
 
 

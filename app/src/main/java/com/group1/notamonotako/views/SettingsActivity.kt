@@ -33,8 +33,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnChangePassword : ImageButton
     private lateinit var btnAbout : ImageButton
 
-    private val PREFS_NAME = "com.group1.notamonotako.PREFERENCES"
-    private val SOUND_MUTED_KEY = "sound_muted"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,15 +54,11 @@ class SettingsActivity : AppCompatActivity() {
         // Making the progressbar Invisible
         progressBar.visibility = View.INVISIBLE
 
-        // Load the saved sound preference state from SharedPreferences
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val soundIsMuted = sharedPreferences.getBoolean(SOUND_MUTED_KEY, false)
 
-        // Set the initial state of the switch and media player volume
-        sounds.isChecked = !soundIsMuted
-        updateMediaPlayerVolume(soundIsMuted)
+
 
         btnChangePassword.setOnClickListener {
+            mediaPlayer.start()
             val intent = Intent(this@SettingsActivity, ChangePassword::class.java)
             startActivity(intent)
         }
@@ -73,6 +67,9 @@ class SettingsActivity : AppCompatActivity() {
           
             progressBar.visibility = View.VISIBLE
             finish() // Remove this activity from the stack when going back
+            mediaPlayer.start()
+
+
         }
 
         btnAbout.setOnClickListener {
@@ -80,12 +77,20 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
             progressBar.visibility = View.VISIBLE
             finish() // Remove this activity from the stack when going back
+            mediaPlayer.start()
+
         }
+
+        val soundIsMuted = AccountManager.isMuted
+
+        // Set the initial state of the switch and media player volume
+        sounds.isChecked = !soundIsMuted
+        updateMediaPlayerVolume(soundIsMuted)
 
         // Handle switch toggle to save sound preference and update media volume
         sounds.setOnCheckedChangeListener { _, isChecked ->
-            saveSoundPreference(!isChecked)
-            updateMediaPlayerVolume(!isChecked)
+            AccountManager.toggleSound()
+            updateMediaPlayerVolume(AccountManager.isMuted)
         }
 
         etemail.text = AccountManager.getEmail()
@@ -96,16 +101,7 @@ class SettingsActivity : AppCompatActivity() {
             mediaPlayer.start()
         }
     }
-
     // Save the sound preference (muted or not) in SharedPreferences
-    private fun saveSoundPreference(isMuted: Boolean) {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(SOUND_MUTED_KEY, isMuted)
-        editor.apply()
-    }
-
-    // Update the media player's volume based on the sound preference
     private fun updateMediaPlayerVolume(isMuted: Boolean) {
         if (isMuted) {
             mediaPlayer.setVolume(0F, 0F)

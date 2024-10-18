@@ -17,8 +17,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.AccountManager
 import com.group1.notamonotako.api.AccountManager.getEmail
 import com.group1.notamonotako.api.AccountManager.getUsername
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
@@ -47,6 +49,7 @@ class ViewMynotes : AppCompatActivity() {
     private lateinit var btnCancelShare : AppCompatButton
     private lateinit var btnShare : AppCompatButton
     private lateinit var flShare : FrameLayout
+    private lateinit var soundManager: SoundManager
 
 
 
@@ -69,6 +72,10 @@ class ViewMynotes : AppCompatActivity() {
         flShare = findViewById(R.id.flShare)
         btnCancelShare = findViewById(R.id.btnCancelShare)
         btnShare = findViewById(R.id.btnShare)
+
+        soundManager = SoundManager(this) // Initialize SoundManager
+        val isMuted = AccountManager.isMuted
+        soundManager.updateMediaPlayerVolume(isMuted)
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
@@ -114,15 +121,21 @@ class ViewMynotes : AppCompatActivity() {
             viewBlur.visibility = View.VISIBLE
             flShare.setOnTouchListener { _, _ -> true }
             viewBlur.setOnTouchListener { _, _ -> true }
+            soundManager.playSoundEffect()
+
 
         }
 
         btnCancelShare.setOnClickListener{
             flShare.visibility = View.GONE
             viewBlur.visibility = View.GONE
+            soundManager.playSoundEffect()
+
         }
 
         btnShare.setOnClickListener {
+            soundManager.playSoundEffect()
+
             val titleString = etTitle.text.toString()
             val creatorsUsername = getUsername().toString()
             val creatorsEmail = getEmail().toString()
@@ -138,6 +151,8 @@ class ViewMynotes : AppCompatActivity() {
         }
 
         deletebtn.setOnClickListener{
+            soundManager.playSoundEffect()
+
             flDelete.visibility = View.VISIBLE
             viewBlur.visibility = View.VISIBLE
             flDelete.setOnTouchListener { _, _ -> true }
@@ -145,6 +160,8 @@ class ViewMynotes : AppCompatActivity() {
         }
 
         btnDelete.setOnClickListener {
+            soundManager.playSoundEffect()
+
             btnDelete.backgroundTintList= ContextCompat.getColorStateList(this, R.color.new_background_color)
             if (noteId != -1) {
                 deleteNote(noteId)
@@ -154,16 +171,21 @@ class ViewMynotes : AppCompatActivity() {
         btnCancel.setOnClickListener {
             flDelete.visibility = View.GONE
             viewBlur.visibility = View.GONE
+            soundManager.playSoundEffect()
         }
 
         btnback.setOnClickListener{
+
             val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
             intent.putExtra("showMyNotesFragment", true)
             startActivity(intent)
-            finish()
+            soundManager.playSoundEffect()
+
         }
 
         UpdateNotes.setOnClickListener {
+            soundManager.playSoundEffect()
+
             val titleString = etTitle.text.toString()
             val contentsString = Content.text.toString()
             val creatorsUsername = getUsername().toString()
@@ -263,7 +285,7 @@ class ViewMynotes : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
-                val noteRequest = UpdateNotes(title = updatedTitle, contents = updatedContent, toPublic = false, public = false)
+                val noteRequest = UpdateNotes(title = updatedTitle, contents = updatedContent, toPublic = true, public = false)
 
                 val response = withContext(Dispatchers.IO) {
                     apiService.updateNote("Bearer $token", noteId, noteRequest)  // Pass the updated note
@@ -344,9 +366,16 @@ class ViewMynotes : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("showMyNotesFragment", true)  // Pass data to indicate the Home fragment should be shown
+        intent.putExtra(
+            "showMyNotesFragment",
+            true
+        )  // Pass data to indicate the Home fragment should be shown
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()  // Finish Mynotes activity to avoid going back to it
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release() // Release media player when done
     }
 }

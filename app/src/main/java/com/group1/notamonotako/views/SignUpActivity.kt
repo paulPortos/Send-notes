@@ -29,7 +29,6 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var btnSignIn: Button
     private lateinit var btnSignUp : AppCompatButton
     private lateinit var progressBar: ProgressBar
-    private lateinit var mediaPlayer: MediaPlayer
 
     // Initialize ViewModel using the factory to provide ApiService
     private val signUpViewModel: SignUpViewModel by viewModels {
@@ -50,16 +49,12 @@ class SignUpActivity : AppCompatActivity() {
         btnLoginNow = findViewById(R.id.btnSignUpNow)
         btnSignIn = findViewById(R.id.btnSignIn)
         etEmail = findViewById(R.id.etEmail)
-        mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
 
         GradientText.setGradientText(btnSignUp,this)
 
-
-
         btnLoginNow.setOnClickListener {
-            mediaPlayer.start()
             val email = etEmail.text.toString()
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
@@ -86,7 +81,6 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             progressBar.visibility = View.VISIBLE
-            mediaPlayer.start()
         }
 
 

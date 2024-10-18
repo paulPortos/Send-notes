@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.NotificationAdapter
+import com.group1.notamonotako.api.AccountManager
+import com.group1.notamonotako.api.SoundManager
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -23,10 +25,17 @@ class NotificationActivity : AppCompatActivity() {
     private lateinit var btnClose : ImageButton
     private lateinit var rvNotification : RecyclerView
     private lateinit var myNotificationsAdapter: NotificationAdapter
+    private lateinit var soundManager: SoundManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
         rvNotification = findViewById(R.id.rvNotification)
+
+        soundManager = SoundManager(this) // Initialize SoundManager
+        val isMuted = AccountManager.isMuted
+        soundManager.updateMediaPlayerVolume(isMuted)
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         rvNotification.layoutManager = LinearLayoutManager(this@NotificationActivity)
@@ -36,6 +45,8 @@ class NotificationActivity : AppCompatActivity() {
 
         btnClose.setOnClickListener{
             finish()
+            soundManager.playSoundEffect()
+
         }
     }
 
@@ -64,5 +75,9 @@ class NotificationActivity : AppCompatActivity() {
                 Log.d("notifications", e.message.toString())
             }
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release() // Release media player when done
     }
 }

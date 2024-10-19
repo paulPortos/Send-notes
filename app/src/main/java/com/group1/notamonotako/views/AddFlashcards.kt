@@ -109,7 +109,10 @@ class AddFlashcards : AppCompatActivity() {
                 return false
             }
         })
-
+        contents.setOnTouchListener { v, event ->
+            gestureDetector.onTouchEvent(event)
+            false  // Return false so EditText retains its default behavior (text editing)
+        }
         btnCheck.setOnClickListener {
             soundManager.playSoundEffect()
 

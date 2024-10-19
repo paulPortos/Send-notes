@@ -68,7 +68,7 @@ class SignInActivity : AppCompatActivity() {
 
         btnLoginNow.setOnClickListener {
             val username = etUsername.text.toString()
-            val password = etPassword.text.toString()
+            val password = etPassword.text.toString().trim()
             //Log username and password
 
             if (username.isEmpty() || password.isEmpty()) {

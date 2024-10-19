@@ -62,7 +62,7 @@ class ViewHome : AppCompatActivity() {
         tvLikeCount = findViewById(R.id.tvLikeCount)
         tvDisLikeCount = findViewById(R.id.tvDisLikeCount)
         tvCommentsCount = findViewById(R.id.tvCommentsCount)
-        soundManager = com.group1.notamonotako.views.SoundManager(this) // Initialize SoundManager
+        soundManager = com.group1.notamonotako.api.SoundManager(this) // Initialize SoundManager
         val isMuted = AccountManager.isMuted
         soundManager.updateMediaPlayerVolume(isMuted)
 

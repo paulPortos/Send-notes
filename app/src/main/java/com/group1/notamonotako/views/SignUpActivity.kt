@@ -57,8 +57,8 @@ class SignUpActivity : AppCompatActivity() {
         btnLoginNow.setOnClickListener {
             val email = etEmail.text.toString()
             val username = etUsername.text.toString()
-            val password = etPassword.text.toString()
-            val confirmPassword = etConfirmPassword.text.toString()
+            val password = etPassword.text.toString().trim()
+            val confirmPassword = etConfirmPassword.text.toString().trim()
             if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this@SignUpActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
             } else if (password == confirmPassword) {

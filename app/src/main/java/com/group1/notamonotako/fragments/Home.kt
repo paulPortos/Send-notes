@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNote
 import com.group1.notamonotako.views.AddFlashcards
 import com.group1.notamonotako.views.AddNotes
 import com.group1.notamonotako.views.GradientText
+import com.group1.notamonotako.views.NotificationActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
@@ -37,7 +39,6 @@ import java.io.IOException
 import java.util.Locale
 
 class Home : Fragment() {
-
     lateinit var btnSettings :ImageButton
     lateinit var swiperefresh : SwipeRefreshLayout
     private lateinit var progressBar : ProgressBar
@@ -47,14 +48,12 @@ class Home : Fragment() {
     private lateinit var svSearchView :SearchView
     private lateinit var tvNoNotes : TextView
     private lateinit var tvNoInternet : TextView
+    private lateinit var  btnNotification :ImageButton
     private var data: List<getPublicNotes> = listOf()
-
     private var hasShownNoDataToast = false
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
 
         btnSettings = view.findViewById(R.id.btnSettings)
         progressBar = view.findViewById(R.id.progressBar)
@@ -62,7 +61,7 @@ class Home : Fragment() {
         rvhome = view.findViewById(R.id.rvhome)
         tvSendNotes = view.findViewById(R.id.tvSendNotes)
         rvhome.layoutManager = LinearLayoutManager(requireContext())
-
+        btnNotification = view.findViewById(R.id.btnNotification)
         svSearchView = view.findViewById(R.id.svSearchView)
         swiperefresh = view.findViewById(R.id.swipeRefreshHome)
         tvNoNotes = view.findViewById(R.id.tvNoNotes)
@@ -91,6 +90,12 @@ class Home : Fragment() {
             startActivity(intent)
 
 
+        }
+
+        btnNotification.setOnClickListener {
+            val intent = Intent(requireContext(), NotificationActivity::class.java)
+            startActivity(intent)
+            Log.d("Notification", "Notification button clicked")
         }
 
 

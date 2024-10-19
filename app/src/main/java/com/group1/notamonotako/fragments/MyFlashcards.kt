@@ -21,6 +21,7 @@ import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyFlashcardsAdapter
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.views.GradientText
+import com.group1.notamonotako.views.NotificationActivity
 import com.group1.notamonotako.views.SettingsActivity
 import com.group1.notamonotako.views.ViewFlashcards
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +39,8 @@ class MyFlashcards : Fragment() {
     private lateinit var swiperefresh : SwipeRefreshLayout
     private lateinit var tvNoFlashcards : TextView
     private lateinit var tvNoInternet : TextView
+    private lateinit var btnNotification : ImageButton
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_my_flashcards, container, false)
         btnSettings = view.findViewById(R.id.btnSettings)
@@ -47,6 +50,7 @@ class MyFlashcards : Fragment() {
         swiperefresh = view.findViewById(R.id.swipeRefreshFlashcards)
         tvNoFlashcards = view.findViewById(R.id.tvNoFlashcards)
         tvNoInternet = view.findViewById(R.id.tvNoInternet)
+        btnNotification = view.findViewById(R.id.btnNotification)
         progressBar.visibility = View.INVISIBLE
 
         // Set up Grid layout with 2 columns
@@ -60,6 +64,11 @@ class MyFlashcards : Fragment() {
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
+        }
+        btnNotification.setOnClickListener {
+            val intent = Intent(requireContext(), NotificationActivity::class.java)
+            startActivity(intent)
+            Log.d("Notification", "Notification button clicked")
         }
         swiperefresh.setOnRefreshListener {
             fetchFlashcards()

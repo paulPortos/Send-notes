@@ -4,7 +4,9 @@ import ApiService
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,11 +28,14 @@ class NotificationActivity : AppCompatActivity() {
     private lateinit var rvNotification : RecyclerView
     private lateinit var myNotificationsAdapter: NotificationAdapter
     private lateinit var soundManager: SoundManager
-
+    private lateinit var tvNoNotifications : TextView
+    private lateinit var tvNoInternet : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
         rvNotification = findViewById(R.id.rvNotification)
+        tvNoNotifications = findViewById(R.id.tvNoNotifications)
+        tvNoInternet = findViewById(R.id.tvNoInternet)
 
         soundManager = SoundManager(this) // Initialize SoundManager
         val isMuted = AccountManager.isMuted
@@ -53,13 +58,22 @@ class NotificationActivity : AppCompatActivity() {
     private fun fetchNotifications(){
         lifecycleScope.launch {
             try {
+                rvNotification.visibility = View.VISIBLE
+                tvNoInternet.visibility = View.GONE
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = apiService.showNotification()
+
                 if (response.isSuccessful) {
+
                     val notifications = response.body() ?: emptyList()
                     myNotificationsAdapter = NotificationAdapter (this@NotificationActivity, notifications)
                     rvNotification.adapter = myNotificationsAdapter
                     Log.d("getNotifications", notifications.toString())
+                    if (notifications.isEmpty()) {
+                        rvNotification.visibility = View.GONE
+                        tvNoNotifications.visibility = View.VISIBLE
+                        }
+
                 } else {
                     Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                     Log.d("notifications", "Response code: ${response.code()}") // Log the response code
@@ -70,6 +84,9 @@ class NotificationActivity : AppCompatActivity() {
              } catch (e: Exception) {
                  Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                 Log.d("notifications", e.message.toString())
+                rvNotification.visibility = View.GONE
+                tvNoInternet.visibility = View.VISIBLE
+
             } catch (e: HttpException){
                 Toast.makeText(this@NotificationActivity, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                 Log.d("notifications", e.message.toString())

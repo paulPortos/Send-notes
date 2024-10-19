@@ -54,7 +54,7 @@
         style="@android:style/Widget.DeviceDefault.ImageButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/btn_white_gradient"
+        android:background="@color/transparent"
         android:src="@drawable/btnback"
         app:layout_constraintBottom_toTopOf="@+id/guideline254"
         app:layout_constraintDimensionRatio="1:0"
@@ -78,12 +78,11 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline254"
-        app:layout_constraintEnd_toStartOf="@+id/guideline69"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline65"
+        app:layout_constraintEnd_toStartOf="@+id/guideline330"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline329"
         app:layout_constraintTop_toTopOf="@+id/guideline77"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/btnLike"
@@ -112,8 +111,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline267"
         app:layout_constraintHorizontal_bias="0.984"
         app:layout_constraintStart_toStartOf="@+id/guideline268"
-        app:layout_constraintTop_toTopOf="@+id/guideline225"
-         />
+        app:layout_constraintTop_toTopOf="@+id/guideline225" />
 
 
     <ImageButton
@@ -129,16 +127,15 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline69"
         app:layout_constraintTop_toTopOf="@+id/guideline225"
-        app:layout_constraintVertical_bias="0.0"
-         />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvLikeCount"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/background2"
-        android:text="0"
         android:gravity="center"
+        android:text="0"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline225"
         app:layout_constraintEnd_toStartOf="@+id/guideline65"
@@ -271,7 +268,6 @@
         app:layout_constraintGuide_percent="0.08" />
 
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline267"
         android:layout_width="wrap_content"
@@ -286,55 +282,21 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.35" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline329"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.22" />
 
-    <!-- <FrameLayout
-        android:id="@+id/commentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:background="@android:color/white"
-        android:elevation="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Title">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline330"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.78" />
 
-            <TextView
-                android:id="@+id/tvCommentHeader"
-                android:layout_width="326dp"
-                android:layout_height="27dp"
-                android:text="Add a comment"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="57dp"
-                tools:layout_editor_absoluteY="417dp" />
 
-            <EditText
-                android:id="@+id/etComment"
-                android:layout_width="368dp"
-                android:layout_height="35dp"
-                android:background="@drawable/white_round"
-                android:hint="Write a comment..."
-                android:padding="10dp"
-                tools:layout_editor_absoluteX="37dp"
-                tools:layout_editor_absoluteY="458dp" />
 
-            <Button
-                android:id="@+id/btnSubmitComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="@drawable/white_round"
-                android:text="Submit"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.949"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.832" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout> -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

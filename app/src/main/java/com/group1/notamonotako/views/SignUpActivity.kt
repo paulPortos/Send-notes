@@ -52,11 +52,10 @@ class SignUpActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.INVISIBLE
 
-        GradientText.setGradientText(btnSignUp,this)
 
         btnLoginNow.setOnClickListener {
-            val email = etEmail.text.toString()
-            val username = etUsername.text.toString()
+            val email = etEmail.text.toString().trim()
+            val username = etUsername.text.toString().trim()
             val password = etPassword.text.toString().trim()
             val confirmPassword = etConfirmPassword.text.toString().trim()
             if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
@@ -87,6 +86,8 @@ class SignUpActivity : AppCompatActivity() {
         // Observe registration result
         signUpViewModel.registrationResult.observe(this) { result ->
             progressBar.visibility = View.INVISIBLE
+            btnLoginNow.isClickable = true
+
             result.onSuccess { response ->
                 // Handle successful registration
                 response?.let {
@@ -94,6 +95,7 @@ class SignUpActivity : AppCompatActivity() {
                     val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+                    btnLoginNow.isClickable = false
                     finish()
                 } ?: run {
                     Toast.makeText(this@SignUpActivity, "Response is null", Toast.LENGTH_SHORT).show()
@@ -102,6 +104,8 @@ class SignUpActivity : AppCompatActivity() {
                 // Handle registration errors
                 Toast.makeText(this@SignUpActivity, "Invalid Email", Toast.LENGTH_SHORT).show()
                 Log.d("TESTER", "Error: ${error.message}")
+                btnLoginNow.isClickable = true
+
             }
         }
 

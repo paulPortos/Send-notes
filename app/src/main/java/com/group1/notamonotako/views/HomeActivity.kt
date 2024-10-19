@@ -105,7 +105,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         flashcardsFabBtn.setOnClickListener {
-            val intent = Intent(this,AddFlashcards::class.java) // Create intent for Notes activity
+            val intent = Intent(this, AddFlashcards::class.java) // Create intent for Notes activity
             startActivity(intent)
             progressBar.visibility = View.INVISIBLE
 

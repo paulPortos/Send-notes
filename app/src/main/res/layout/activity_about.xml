@@ -27,6 +27,18 @@
         app:layout_constraintTop_toTopOf="@+id/guideline263"
         app:layout_constraintVertical_bias="0.044" />
 
+    <ImageButton
+        android:id="@+id/btnback"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/btnback"
+        android:background="@color/transparent"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline262"
+        app:layout_constraintEnd_toStartOf="@+id/guideline270"
+        app:layout_constraintStart_toStartOf="@+id/guideline273"
+        app:layout_constraintTop_toTopOf="@+id/guideline335" />
+
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -80,7 +92,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline278"
                 app:layout_constraintStart_toStartOf="@+id/guideline277"
                 app:layout_constraintTop_toTopOf="@+id/guideline283" />
-
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -159,9 +170,9 @@
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/noto_sans_semibold"
         android:text="Our Team Behind Send Notes"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline285"
         app:layout_constraintEnd_toStartOf="@+id/guideline274"
         app:layout_constraintHorizontal_bias="0.495"
@@ -195,13 +206,13 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/circle"
                 android:src="@drawable/ezekiel"
 
                 app:layout_constraintBottom_toTopOf="@+id/guideline291"
                 app:layout_constraintEnd_toStartOf="@+id/guideline289"
                 app:layout_constraintStart_toStartOf="@+id/guideline295"
                 app:layout_constraintTop_toTopOf="@+id/guideline290" />
+
 
             <ImageView
                 android:layout_width="0dp"
@@ -645,6 +656,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.51" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline335"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,10 +42,10 @@
             android:layout_height="0dp"
             android:hint="email"
             android:textColorHint="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/message"
+            app:layout_constraintBottom_toTopOf="@+id/guideline163"
             app:layout_constraintEnd_toStartOf="@+id/guideline159"
             app:layout_constraintStart_toStartOf="@+id/guideline157"
-            app:layout_constraintTop_toBottomOf="@+id/notification_type" />
+            app:layout_constraintTop_toTopOf="@+id/guideline162" />
 
         <TextView
             android:id="@+id/message"
@@ -101,14 +101,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.36" />
+            app:layout_constraintGuide_percent="0.3" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline163"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.37" />
+            app:layout_constraintGuide_percent="0.48" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline164"

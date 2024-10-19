@@ -108,6 +108,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun logoutUser() {
+        btnsign_out.isClickable = true
         val token = getToken() ?: run {
             Toast.makeText(this@SettingsActivity, "No token found", Toast.LENGTH_SHORT).show()
             return
@@ -128,10 +129,14 @@ class SettingsActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     progressBar.visibility = View.VISIBLE
+                    btnsign_out.isClickable = false
+
 
                     finish()
                 } else {
                     progressBar.visibility = View.INVISIBLE
+                    btnsign_out.isClickable = true
+
                     Toast.makeText(
                         this@SettingsActivity,
                         "Error: ${response.errorBody()?.string()}",
@@ -142,6 +147,7 @@ class SettingsActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 progressBar.visibility = View.INVISIBLE
+                btnsign_out.isClickable = true
                 Toast.makeText(
                     this@SettingsActivity,
                     "Network error occurred: ${t.message}",

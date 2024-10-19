@@ -31,8 +31,6 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
         btnConfirmResetPassword = findViewById(R.id.btnConfirmResetPassword)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
-        GradientText.setGradientText(btnConfirmResetPassword,this)
-
         btnBack.setOnClickListener {
             val intent = Intent(this@ForgotPassword_ResetPassword, SignInActivity::class.java)
             startActivity(intent)
@@ -43,9 +41,12 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
             val confirmPassword = etConfirmPassword.text.toString()
             val OTP = ResetOtp.getOTP().toString()
             val email = ResetOtp.getEmail().toString()
+            btnConfirmResetPassword.isClickable = true
 
             if(password.isEmpty()) {
                 Toast.makeText(this@ForgotPassword_ResetPassword, "Please enter your password", Toast.LENGTH_SHORT).show()
+                btnConfirmResetPassword.isClickable = true
+
             } else if(password == confirmPassword) {
                 try {
                     lifecycleScope.launch {
@@ -55,7 +56,7 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
 
                         if(response.isSuccessful) {
                             Toast.makeText(this@ForgotPassword_ResetPassword, "Password changed successfully", Toast.LENGTH_SHORT).show()
-
+                            btnConfirmResetPassword.isClickable = false
                             // Navigate to SignInActivity
                             val intent = Intent(this@ForgotPassword_ResetPassword, SignInActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Prevent going back
@@ -63,9 +64,11 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
                         }
                     }
                 } catch (e: Exception) {
+                    btnConfirmResetPassword.isClickable = true
                     Toast.makeText(this@ForgotPassword_ResetPassword, "Something went wrong", Toast.LENGTH_SHORT).show()
                 }
             } else {
+                btnConfirmResetPassword.isClickable = true
                 Toast.makeText(this@ForgotPassword_ResetPassword, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
         }

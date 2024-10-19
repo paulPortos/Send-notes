@@ -61,17 +61,28 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
+                android:id="@+id/btnNotification"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/transparent"
+                android:src="@drawable/baseline_notifications_24"
+                app:layout_constraintBottom_toTopOf="@+id/guideline67"
+                app:layout_constraintEnd_toStartOf="@+id/guideline334"
+                app:layout_constraintStart_toStartOf="@+id/guideline333"
+                app:layout_constraintTop_toTopOf="@+id/guideline49" />
+
+            <ImageButton
                 android:id="@+id/btnSettings"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:backgroundTint="#00FFFFFF"
-                app:tint="@color/white"
-
                 android:src="@drawable/btn_settings"
+
                 app:layout_constraintBottom_toTopOf="@+id/guideline67"
                 app:layout_constraintEnd_toStartOf="@+id/guideline53"
                 app:layout_constraintStart_toStartOf="@+id/guideline51"
-                app:layout_constraintTop_toTopOf="@+id/guideline49" />
+                app:layout_constraintTop_toTopOf="@+id/guideline49"
+                app:tint="@color/white" />
 
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -107,6 +118,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline53"
                 app:layout_constraintStart_toStartOf="@+id/guideline48"
                 app:layout_constraintTop_toTopOf="@+id/swipeRefreshFlashcards" />
+
             <TextView
                 android:id="@+id/tvNoInternet"
                 android:layout_width="0dp"
@@ -197,6 +209,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.55" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".65" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline334"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".75" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

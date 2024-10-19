@@ -25,7 +25,7 @@ import java.io.IOException
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var btnSignup: Button
-    private lateinit var etUsername: EditText
+    private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
     private lateinit var btnForgot: Button
     private lateinit var btnLoginNow: Button
@@ -52,7 +52,7 @@ class SignInActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
 
         btnSignup = findViewById(R.id.btnSignUp)
-        etUsername = findViewById(R.id.etUsername)
+        etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btnForgot = findViewById(R.id.btnForgotPassword)
         btnLoginNow = findViewById(R.id.btnSignInNow)
@@ -67,15 +67,15 @@ class SignInActivity : AppCompatActivity() {
         progressBar.visibility = View.INVISIBLE
 
         btnLoginNow.setOnClickListener {
-            val username = etUsername.text.toString()
+            val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
             //Log username and password
 
-            if (username.isEmpty() || password.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this@SignInActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
             } else {
                 progressBar.visibility = View.VISIBLE
-                loginUser(username, password)
+                loginUser(email, password)
             }
         }
 
@@ -92,6 +92,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun loginUser(email: String, password: String) {
         lifecycleScope.launch {
+            btnLoginNow.isClickable = true
             val apiService = RetrofitInstance.create(ApiService::class.java)
             val loginRequest = Login(email = email, password = password)
             //Log login request
@@ -102,9 +103,13 @@ class SignInActivity : AppCompatActivity() {
                 if(response.code() == 404){
                     Toast.makeText(this@SignInActivity, "Email doesn't exist, Please check your email", Toast.LENGTH_SHORT).show()
                     progressBar.visibility = View.INVISIBLE
+                    btnLoginNow.isClickable = true
+
                 }else if(response.code() == 401){
                     Toast.makeText(this@SignInActivity,"Incorrect Password",Toast.LENGTH_SHORT).show()
                     progressBar.visibility = View.INVISIBLE
+                    btnLoginNow.isClickable = true
+
                 }else{
                     if (response.isSuccessful) {
                         response.body()?.let { loginResponse ->
@@ -120,6 +125,7 @@ class SignInActivity : AppCompatActivity() {
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                             finish()
+                            btnLoginNow.isClickable = false
                         }
                     } else {
                         progressBar.visibility = View.INVISIBLE
@@ -129,11 +135,13 @@ class SignInActivity : AppCompatActivity() {
                 }
             } catch (e: HttpException) {
                 progressBar.visibility = View.INVISIBLE
+                btnLoginNow.isClickable = true
                 Toast.makeText(this@SignInActivity, "HTTP error: ${e.message}", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
                 progressBar.visibility = View.INVISIBLE
                 Toast.makeText(this@SignInActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.d("SignInActivity", e.message.toString())
+                btnLoginNow.isClickable = true
             }
         }
     }

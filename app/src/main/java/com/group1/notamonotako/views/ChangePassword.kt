@@ -78,6 +78,7 @@ class ChangePassword : AppCompatActivity() {
         }
         lifecycleScope.launch {
             try {
+                btnConfirmResetPassword.isClickable = true
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = apiService.PassChange(ChangePasswordRequest(oldPass, newPass))
 
@@ -87,6 +88,8 @@ class ChangePassword : AppCompatActivity() {
                         "Password changed successfully",
                         Toast.LENGTH_SHORT
                     ).show()
+                    btnConfirmResetPassword.isClickable = false
+
                     logoutUser()
                     Log.d("ChangePassword", "Success: ${response.body()?.message}")
 
@@ -95,6 +98,8 @@ class ChangePassword : AppCompatActivity() {
                     // Handle the error
                     val errorBody = response.errorBody()?.string()
                     if(response.code() == 422){
+                        btnConfirmResetPassword.isClickable = true
+
                         // Specific message when old password doesn't match
                         Toast.makeText(
                             this@ChangePassword,
@@ -102,6 +107,8 @@ class ChangePassword : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }else{
+                        btnConfirmResetPassword.isClickable = true
+
                         Log.e("ChangePassword", "Error: $errorBody")
                         Toast.makeText(
                             this@ChangePassword,
@@ -111,9 +118,13 @@ class ChangePassword : AppCompatActivity() {
 
                 }
             } catch (e: HttpException) {
+                btnConfirmResetPassword.isClickable = true
+
                 Log.e("ChangePassword", "HttpException: ${e.message}")
                 Toast.makeText(this@ChangePassword, "Something went wrong", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
+                btnConfirmResetPassword.isClickable = true
+
                 Log.e("ChangePassword", "Exception: ${e.message}")
                 Toast.makeText(this@ChangePassword, "Something went wrong", Toast.LENGTH_SHORT).show()
             }

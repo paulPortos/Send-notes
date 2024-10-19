@@ -48,11 +48,11 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
         btnConfirmVerification = findViewById(R.id.btnConfirmVerification)
 
         textInputLayout.visibility = View.INVISIBLE
-        GradientText.setGradientText(btnGetOTP,this)
-        GradientText.setGradientText(btnConfirmVerification,this)
+
 
         btnGetOTP.setOnClickListener {
             lifecycleScope.launch {
+                btnConfirmVerification.isClickable = true
                 val email = etEmail.text.toString()
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val forgotPassword = forgot_Password(email = email)
@@ -60,28 +60,37 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
 
                 if (email.isEmpty()){
                     Toast.makeText(this@ForgotPassword_EmailVerification, "Please enter your email", Toast.LENGTH_SHORT).show()
+                    btnConfirmVerification.isClickable = true
+
                 }else{
                     try {
+
                         val response = apiService.forgotPassword(forgotPassword)
                         val responseBody = response.body()
 
                         OTP = responseBody?.OTP
-
                         OTP?.let { OtpForget ->
                             ResetOtp.saveForgotOTP(OtpForget)
                             ResetOtp.saveEmail(email)
                         }
 
                         if(response.isSuccessful){
+                            btnConfirmVerification.isClickable = false
                             Toast.makeText(this@ForgotPassword_EmailVerification, "OTP sent", Toast.LENGTH_SHORT).show()
                             textInputLayout.visibility = View.VISIBLE
                             OTPcountdown()
                         }else if(response.code() == 404){
+                            btnConfirmVerification.isClickable = true
+
                             Toast.makeText(this@ForgotPassword_EmailVerification, "email not found", Toast.LENGTH_SHORT).show()
                         }else{
+                            btnConfirmVerification.isClickable = true
+
                             Toast.makeText(this@ForgotPassword_EmailVerification, "Something went wrong", Toast.LENGTH_SHORT).show()
                         }
                     }   catch (e: IOException){
+                        btnConfirmVerification.isClickable = true
+
                         Toast.makeText(this@ForgotPassword_EmailVerification, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }

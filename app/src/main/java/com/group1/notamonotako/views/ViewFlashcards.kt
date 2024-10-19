@@ -31,10 +31,9 @@
         private lateinit var timestamp: TextView
         private lateinit var title: EditText
         private lateinit var contents: EditText
-        private lateinit var btnCheck: Button //
+        private lateinit var btnCheck: ImageButton //
         private lateinit var btnBack: ImageButton //
-        private lateinit var viewPager: ViewPager2
-        private lateinit var btnDelete: Button
+        private lateinit var btnDelete: ImageButton
         private lateinit var gestureDetector: GestureDetector
         private lateinit var soundManager: SoundManager
 
@@ -49,10 +48,7 @@
             btnBack = findViewById(R.id.btn_back)
             timestamp = findViewById(R.id.timestamp)
             btnDelete = findViewById(R.id.btn_delete)
-            viewPager = findViewById(R.id.viewPager)
-            viewPager.setUserInputEnabled(true)
-            viewPager.isUserInputEnabled = false
-            // Safely retrieve extras
+
 
             soundManager = SoundManager(this) // Initialize SoundManager
             val isMuted = AccountManager.isMuted

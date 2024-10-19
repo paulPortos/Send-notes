@@ -45,6 +45,9 @@ class ViewHome : AppCompatActivity() {
     private lateinit var tvDisLikeCount : TextView
     private lateinit var tvCommentsCount : TextView
     private lateinit var soundManager: SoundManager
+    private var ifLiked: Boolean = false
+    private var ifDisliked: Boolean = false
+    private var firstRun: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,49 +77,43 @@ class ViewHome : AppCompatActivity() {
         val contents = intent.getStringExtra("contents")
         val public = intent.getBooleanExtra("public", false)
         val updatedAt = intent.getStringExtra("updated_at")
-
+        firstRun = false
         //log all
         Log.d("ViewHometester", "noteId: $noteId, title: $title,  contents: $contents, public: $public, updatedAt: $updatedAt")
         tvTitle.text = title ?: "No title"
         tvContents.text = contents ?: "No contents"
         tvDate.text = updatedAt ?: "No date"
-
+        fetchReactions(noteId)
+        fetchSpecificNote(noteId)
+        Log.d("ViewHome onCreate", "has_liked: $ifLiked, has_disliked: $ifDisliked")
 
         btnback.setOnClickListener{
             finish()
             soundManager.playSoundEffect()
         }
 
-
-
-        var isLiked = false
         btnLike.setOnClickListener {
             soundManager.playSoundEffect()
-            if (isLiked) {
-                // If already liked, remove the color and reset
-                btnLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                btnDisLike.isClickable = true // Re-enable btnDisLike
-            } else {
-                // If not liked, apply the color and disable btnDisLike
-                btnLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.mixcolor))
-                btnDisLike.isClickable = false // Disable btnDisLike
-            }
-            isLiked = !isLiked
 
+            // Immediately update the state locally before making the API call
+            ifLiked = !ifLiked
+            ifDisliked = false // Reset dislike if like is clicked
+            updateLikeDislikeUI() // Update the UI immediately
+
+            // Call the API to like the post
+            likePostNotes(noteId)
         }
+
         btnDisLike.setOnClickListener {
             soundManager.playSoundEffect()
-            if (isLiked) {
-                // If already liked, remove the color and reset
-                btnDisLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
-                btnLike.isClickable = true
-            } else {
-                // If not liked, apply the color and disable btnDisLike
-                btnDisLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.mixcolor))
-                btnLike.isClickable = false
-            }
-            isLiked = !isLiked
 
+            // Immediately update the state locally before making the API call
+            ifDisliked = !ifDisliked
+            ifLiked = false // Reset like if dislike is clicked
+            updateLikeDislikeUI() // Update the UI immediately
+
+            // Call the API to dislike the post
+            dislikePostNote(noteId)
         }
 
         btnComment.setOnClickListener {
@@ -136,12 +133,122 @@ class ViewHome : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
-        fetchReactions(noteId)
 
     }
     override fun onDestroy() {
         super.onDestroy()
         soundManager.release() // Release media player when done
+    }
+
+    private fun likePostNotes(noteId: Int){
+        lifecycleScope.launch {
+            try {
+
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val token = TokenManager.getToken()
+                val authToken = "Bearer $token"
+
+                if (token != null) {
+                    Log.d("ViewHome", "Token not null")
+                    val response = apiService.likePost(authToken, noteId)
+
+                    if (response.isSuccessful) {
+                        // Handle successful like response
+                        fetchReactions(noteId)
+                        Log.d("ViewHome", "Post liked successfully.")
+                    } else {
+                        // Handle error response
+                        Log.e("ViewHome", "Failed to like post: ${response.code()}")
+                        Log.e("ViewHome", "Failed to like post: ${response.errorBody()?.string()} ")
+                    }
+                } else {
+                    Log.d("ViewHome", "Token is null")
+                }
+        } catch (e: Exception) {
+            Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("ViewHome", "Exception: ${e.message}")
+        } catch (e: HttpException){
+            Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("ViewHome", "HttpException: ${e.message}")
+            }
+        }
+    }
+
+    private fun dislikePostNote(noteId: Int){
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val token = TokenManager.getToken()
+                val authToken = "Bearer $token"
+
+                if (token != null) {
+                    Log.d("ViewHome", "Token not null")
+                    val response = apiService.dislikePost(authToken, noteId)
+
+                    if (response.isSuccessful) {
+                        fetchReactions(noteId)
+                        Log.d("ViewHome", "Post dislike successfully.")
+                    } else {
+                        // Handle error response
+                        Log.e("ViewHome", "Failed to dislike post: ${response.code()}")
+                        Log.e("ViewHome", "Failed to dislike post: ${response.errorBody()?.string()} ")
+                    }
+                } else {
+                    Log.d("ViewHome", "Token is null")
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ViewHome", "Exception: ${e.message}")
+            } catch (e: HttpException){
+                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ViewHome", "HttpException: ${e.message}")
+            }
+        }
+    }
+
+    private fun fetchSpecificNote(noteId: Int){
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val token = TokenManager.getToken()
+                val authToken = "Bearer $token"
+                val response = apiService.getSpecificNote(authToken, noteId)
+                if (response.isSuccessful) {
+                    val note = response.body()
+                    if (note != null) {
+                        ifLiked = note.has_liked
+                        ifDisliked = note.has_disliked
+                        updateLikeDislikeUI()
+                        Log.d("ViewHome", "has_liked: $ifLiked, has_disliked: $ifDisliked")
+                    }
+                }
+
+            } catch (e: Exception) {
+                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ViewHome", "Exception: ${e.message}")
+            } catch (e: HttpException) {
+                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ViewHome", "HttpException: ${e.message}")
+            }
+        }
+    }
+
+    private fun updateLikeDislikeUI() {
+        if (ifLiked) {
+            btnLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.mixcolor))
+            btnDisLike.isClickable = false
+        } else {
+            btnLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+            btnDisLike.isClickable = true
+        }
+
+        if (ifDisliked) {
+            btnDisLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.mixcolor))
+            btnLike.isClickable = false
+        } else {
+            btnDisLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+            btnLike.isClickable = true
+        }
     }
 
     private fun fetchReactions(noteId: Int){

@@ -5,3 +5,8 @@ data class showReactions(
     val likes: Int,
     val dislikes: Int
 )
+
+data class showSpecificNotes(
+    val has_liked: Boolean,
+    val has_disliked: Boolean
+)

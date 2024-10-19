@@ -23,6 +23,7 @@ import com.group1.notamonotako.api.requests_responses.notification.GetNotificati
 import com.group1.notamonotako.api.requests_responses.notification.PostPendingNotification
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.api.requests_responses.reactions.showReactions
+import com.group1.notamonotako.api.requests_responses.reactions.showSpecificNotes
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
@@ -145,4 +146,21 @@ interface ApiService {
         @Path("note_id") noteId: Int
     ): Response<showReactions> // Return a single object, not a list
 
+    @POST("likePost/{note_id}")
+    suspend fun likePost(
+        @Header("Authorization") token: String,
+        @Path("note_id") noteId: Int
+    ): Response<Void>
+
+    @POST("dislikePost/{note_id}")
+    suspend fun dislikePost(
+        @Header("Authorization") token: String,
+        @Path("note_id") noteId: Int
+    ): Response<Void>
+
+    @GET("getSpecificNote/{note_id}")
+    suspend fun getSpecificNote(
+        @Header("Authorization") token: String,
+        @Path("note_id") noteId: Int
+    ): Response<showSpecificNotes>
 }

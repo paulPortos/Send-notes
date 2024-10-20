@@ -157,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_begin="75dp" />
 
         <TextView
             android:id="@+id/commentcount"
@@ -165,6 +165,9 @@
             android:layout_height="0dp"
             android:text="Comments: 0"
             android:textSize="7sp"
+            android:autoSizeMaxTextSize="1000sp"
+            android:autoSizeMinTextSize="1sp"
+            android:autoSizeTextType="uniform"
             android:textColor="@color/white"
             android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/guideline336"
@@ -177,14 +180,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.94" />
+            app:layout_constraintGuide_percent="0.92" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline337"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.18" />
+            app:layout_constraintGuide_percent="0.16" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -15,6 +15,7 @@ import com.group1.notamonotako.api.AccountManager
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.api.requests_responses.signin.User
 import com.group1.notamonotako.views.ViewHome
+import com.group1.notamonotako.views.ViewSendNotes
 
 class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
@@ -36,9 +37,8 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
 
         // Get the current user's ID
 
-
         holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, ViewHome::class.java)
+            val intent = Intent(it.context, ViewSendNotes::class.java)
             val updatedAtDate = item.updated_at?.substringBefore("T") ?: "No Date"
             intent.putExtra("note_id", item.notesId ?: -1)
             intent.putExtra("title", item.title ?: "No Title")

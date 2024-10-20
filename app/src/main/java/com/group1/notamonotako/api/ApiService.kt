@@ -14,7 +14,6 @@ import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_Pass
 import com.group1.notamonotako.api.requests_responses.forgetPassword.forgot_PasswordResponse
 import com.group1.notamonotako.api.requests_responses.forgetPassword.reset_Password
 import com.group1.notamonotako.api.requests_responses.notes.Note
-import com.group1.notamonotako.api.requests_responses.notes.NoteRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesResponse
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
@@ -24,6 +23,8 @@ import com.group1.notamonotako.api.requests_responses.notification.PostPendingNo
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.api.requests_responses.reactions.showReactions
 import com.group1.notamonotako.api.requests_responses.reactions.showSpecificNotes
+import com.group1.notamonotako.api.requests_responses.sendNotes.SendNotesRequest
+import com.group1.notamonotako.api.requests_responses.sendNotes.getSentNotesData
 import com.group1.notamonotako.api.requests_responses.signin.Login
 import com.group1.notamonotako.api.requests_responses.signin.LoginResponse
 import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
@@ -163,4 +164,15 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("note_id") noteId: Int
     ): Response<showSpecificNotes>
+
+    @GET("viewSentNotes")
+    suspend fun viewSentNotes(
+        @Header("Authorization") token: String
+    ): Response<List<getSentNotesData>>
+
+    @POST("sendNotes")
+    suspend fun sendNotes(
+        @Header("Authorization") token: String,
+        @Body request: SendNotesRequest
+    ): Response<Void>
 }

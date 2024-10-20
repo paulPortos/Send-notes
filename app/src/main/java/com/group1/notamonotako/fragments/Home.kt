@@ -68,8 +68,6 @@ class Home : Fragment() {
         tvNoNotes = view.findViewById(R.id.tvNoNotes)
         tvNoInternet = view.findViewById(R.id.tvNoInternet)
 
-
-
         svSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextChange(newText: String?): Boolean {
                 filterList(newText)

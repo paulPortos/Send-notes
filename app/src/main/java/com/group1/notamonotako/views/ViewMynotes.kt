@@ -25,6 +25,7 @@ import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
 import com.group1.notamonotako.api.requests_responses.notification.PostPendingNotification
+import com.group1.notamonotako.api.requests_responses.sendNotes.SendNotesRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -157,7 +158,9 @@ class ViewMynotes : AppCompatActivity() {
             flSend.visibility = View.GONE
             soundManager.playSoundEffect()
             viewBlur.visibility = View.GONE
-
+            val sentToEmail = etEmail.text.toString()
+            val sendByEmail = getEmail().toString()
+            sendNotes(noteId, sentToEmail, sendByEmail)
         }
 
 
@@ -244,6 +247,33 @@ class ViewMynotes : AppCompatActivity() {
                 Toast.makeText(this, "Note ID is missing", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun sendNotes (notesId: Int, sendTo: String, sentBy: String){
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val request = SendNotesRequest(notesId, sendTo, sentBy)
+                val token = TokenManager.getToken()
+                val bearerToken = "Bearer $token"
+                val response = apiService.sendNotes(bearerToken, request)
+                if (response.isSuccessful){
+                    Toast.makeText(this@ViewMynotes, "Note sent successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@ViewMynotes, "Failed to send note: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.e("SendNotes", "Error: ${response.code()}, Message: ${response.message()}")
+                    Log.e("SendNotes", "Error body: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception){
+                Log.e("SendNotes", "Error: ${e.message}", e)
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: HttpException){
+                Log.e("SendNotes", "Error: ${e.message}", e)
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
     }
 
     private fun shareNote(notesId: Int,title: String, creatorUsername: String, creatorEmail: String, contents: String, public: Boolean, publicize: Boolean){

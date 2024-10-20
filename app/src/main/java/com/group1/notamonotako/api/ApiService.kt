@@ -4,6 +4,7 @@ import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.admin.ResponseToAdmin
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostRequest
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostResponse
+import com.group1.notamonotako.api.requests_responses.comments.getCommentCount
 import com.group1.notamonotako.api.requests_responses.comments.getComments
 import com.group1.notamonotako.api.requests_responses.flashcards.FlashcardsResponse
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
@@ -163,4 +164,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("note_id") noteId: Int
     ): Response<showSpecificNotes>
+
+    @GET("notes/{note_id}/comments")
+
+    suspend fun getCommentsByNoteId(
+        @Header("Authorization") token: String,
+        @Path("note_id") noteId: Int): Response<getCommentCount>
+
 }
+

@@ -131,7 +131,7 @@ class Home : Fragment() {
                         } else {
                             // Notes available
                             data = publicNotes // Store in data to put in datalist
-                            val adapter = HomeAdapter(requireContext(), publicNotes)
+                            val adapter = HomeAdapter(requireContext(), publicNotes, this@Home)
                             rvhome.adapter = adapter
                             rvhome.visibility = View.VISIBLE
                             tvNoNotes.visibility = View.GONE

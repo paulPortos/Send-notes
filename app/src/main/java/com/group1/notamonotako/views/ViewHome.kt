@@ -163,8 +163,8 @@ class ViewHome : AppCompatActivity() {
                     Log.d("ViewHome", "Token is null")
                 }
         } catch (e: Exception) {
-            Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            Log.e("ViewHome", "Exception: ${e.message}")
+//            Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//            Log.e("ViewHome", "Exception: ${e.message}")
         } catch (e: HttpException){
             Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             Log.e("ViewHome", "HttpException: ${e.message}")
@@ -195,8 +195,8 @@ class ViewHome : AppCompatActivity() {
                     Log.d("ViewHome", "Token is null")
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.e("ViewHome", "Exception: ${e.message}")
+//                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//                Log.e("ViewHome", "Exception: ${e.message}")
             } catch (e: HttpException){
                 Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("ViewHome", "HttpException: ${e.message}")
@@ -222,8 +222,8 @@ class ViewHome : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.e("ViewHome", "Exception: ${e.message}")
+//                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//                Log.e("ViewHome", "Exception: ${e.message}")
             } catch (e: HttpException) {
                 Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("ViewHome", "HttpException: ${e.message}")
@@ -267,8 +267,8 @@ class ViewHome : AppCompatActivity() {
                     Log.e("ViewHome", "Error: ${response.code()}")
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.e("ViewHome", "Exception: ${e.message}")
+//                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//                Log.e("ViewHome", "Exception: ${e.message}")
             } catch (e: HttpException){
                 Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("ViewHome", "HttpException: ${e.message}")

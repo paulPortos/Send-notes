@@ -140,7 +140,7 @@ class SignInActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 progressBar.visibility = View.INVISIBLE
                 Toast.makeText(this@SignInActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.d("SignInActivity", e.message.toString())
+                Log.d("SignInActivitySignin", e.message.toString())
                 btnLoginNow.isClickable = true
             }
         }

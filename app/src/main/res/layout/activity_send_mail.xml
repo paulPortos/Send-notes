@@ -31,7 +31,7 @@
           android:autoSizeMinTextSize="18sp"
           android:autoSizeTextType="uniform"
           android:fontFamily="@font/noto_sans_semibold"
-          android:text="Notification"
+          android:text="Notes Sent"
           android:textColor="@color/white"
           android:textSize="18sp"
           app:layout_constraintBottom_toTopOf="@+id/guideline318"

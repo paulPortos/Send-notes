@@ -16,7 +16,7 @@ class ViewSendNotes : AppCompatActivity() {
     private lateinit var btnback : ImageButton
     private lateinit var sent_by : TextView
     private lateinit var title: TextView
-    private lateinit var time:  TextView
+    private lateinit var contents:  TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_send_notes)
@@ -25,8 +25,8 @@ class ViewSendNotes : AppCompatActivity() {
         btndelete = findViewById(R.id.btndelete)
         btncopy = findViewById(R.id.btncopy)
         sent_by = findViewById(R.id.sent_by)
-        title = findViewById(R.id.title)
-        time = findViewById(R.id.time)
+        title = findViewById(R.id.Title)
+        contents = findViewById(R.id.Contents)
 
         btnback.setOnClickListener {
             finish()

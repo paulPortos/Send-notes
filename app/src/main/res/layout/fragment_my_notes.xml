@@ -40,8 +40,17 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline246"
                 app:layout_constraintTop_toTopOf="@+id/guideline49" />
 
-
-
+            <ImageButton
+                android:id="@+id/btnSendNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:src="@drawable/baseline_email_24"
+                app:layout_constraintBottom_toTopOf="@+id/guideline67"
+                app:layout_constraintEnd_toStartOf="@+id/guideline337"
+                app:layout_constraintStart_toStartOf="@+id/guideline336"
+                app:layout_constraintTop_toTopOf="@+id/guideline49"
+                app:tint="@color/white" />
 
 
             <ProgressBar
@@ -219,14 +228,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.65" />
+                app:layout_constraintGuide_percent="0.72" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline247"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75" />
+                app:layout_constraintGuide_percent="0.81" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline248"
@@ -249,12 +258,21 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.75" />
 
+
+
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline251"
+                android:id="@+id/guideline336"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="20dp" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.6" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline337"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.69" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

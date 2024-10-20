@@ -23,6 +23,7 @@ import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
 import com.group1.notamonotako.views.GradientText
 import com.group1.notamonotako.views.NotificationActivity
+import com.group1.notamonotako.views.SendNotesActivity
 import com.group1.notamonotako.views.SettingsActivity
 import io.reactivex.Notification
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +43,7 @@ class  MyNotes : Fragment() {
     private lateinit var tvNoNotes : TextView
     private lateinit var tvNoInternet : TextView
     private lateinit var swiperefresh : SwipeRefreshLayout
+    private lateinit var btnSendNotes : ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +62,7 @@ class  MyNotes : Fragment() {
         swiperefresh = view.findViewById(R.id.swipeRefreshMyNotes)
         tvNoNotes = view.findViewById(R.id.tvNoNotes)
         tvNoInternet = view.findViewById(R.id.tvNoInternet)
+        btnSendNotes = view.findViewById(R.id.btnSendNotes)
 
 
         progressBar.visibility = View.INVISIBLE
@@ -76,6 +79,11 @@ class  MyNotes : Fragment() {
             startActivity(intent)
 
 
+        }
+        btnSendNotes.setOnClickListener {
+            val intent = Intent(requireContext(), SendNotesActivity::class.java)
+            startActivity(intent)
+            Log.d("SendNotes", "SendNotes button clicked")
         }
         swiperefresh.setOnRefreshListener {
             fetchNotes()

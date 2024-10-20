@@ -30,6 +30,7 @@ import com.group1.notamonotako.views.AddFlashcards
 import com.group1.notamonotako.views.AddNotes
 import com.group1.notamonotako.views.GradientText
 import com.group1.notamonotako.views.NotificationActivity
+import com.group1.notamonotako.views.SendNotesActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
@@ -82,6 +83,7 @@ class Home : Fragment() {
 
 
         })
+
 
 
 

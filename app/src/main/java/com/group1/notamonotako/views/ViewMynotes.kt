@@ -50,6 +50,12 @@ class ViewMynotes : AppCompatActivity() {
     private lateinit var btnShare : AppCompatButton
     private lateinit var flShare : FrameLayout
     private lateinit var soundManager: SoundManager
+    private lateinit var btnSend : AppCompatButton
+    private lateinit var btnSendNotes : AppCompatButton
+    private lateinit var btnCancelSend: AppCompatButton
+    private lateinit var flSend : FrameLayout
+    private lateinit var etEmail: EditText
+
 
 
 
@@ -72,6 +78,11 @@ class ViewMynotes : AppCompatActivity() {
         flShare = findViewById(R.id.flShare)
         btnCancelShare = findViewById(R.id.btnCancelShare)
         btnShare = findViewById(R.id.btnShare)
+        btnSend = findViewById(R.id.btnSend)
+        btnSendNotes = findViewById(R.id.btnSendNotes)
+        btnCancelSend = findViewById(R.id.btnCancelSend)
+        flSend = findViewById(R.id.flSend)
+        etEmail = findViewById(R.id.etEmail)
 
         soundManager = SoundManager(this) // Initialize SoundManager
         val isMuted = AccountManager.isMuted
@@ -126,6 +137,30 @@ class ViewMynotes : AppCompatActivity() {
 
         }
 
+        btnSend.setOnClickListener {
+            flShare.visibility = View.GONE
+            flSend.visibility = View.VISIBLE
+            viewBlur.visibility = View.VISIBLE
+            flSend.setOnTouchListener { _, _ -> true }
+            viewBlur.setOnTouchListener { _, _ -> true }
+            soundManager.playSoundEffect()
+        }
+
+        btnCancelSend.setOnClickListener {
+            flSend.visibility = View.GONE
+            viewBlur.visibility = View.GONE
+            soundManager.playSoundEffect()
+        }
+
+        //CODE MO TANG INA
+        btnSendNotes.setOnClickListener {
+            flSend.visibility = View.GONE
+            soundManager.playSoundEffect()
+            viewBlur.visibility = View.GONE
+
+        }
+
+
         btnCancelShare.setOnClickListener{
             flShare.visibility = View.GONE
             viewBlur.visibility = View.GONE
@@ -148,6 +183,8 @@ class ViewMynotes : AppCompatActivity() {
             }
             flShare.visibility = View.INVISIBLE
             viewBlur.visibility = View.INVISIBLE
+            soundManager.playSoundEffect()
+
         }
 
         deletebtn.setOnClickListener{
@@ -182,6 +219,8 @@ class ViewMynotes : AppCompatActivity() {
             soundManager.playSoundEffect()
 
         }
+
+
 
         UpdateNotes.setOnClickListener {
             soundManager.playSoundEffect()

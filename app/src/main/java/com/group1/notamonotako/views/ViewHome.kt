@@ -65,7 +65,7 @@ class ViewHome : AppCompatActivity() {
         tvLikeCount = findViewById(R.id.tvLikeCount)
         tvDisLikeCount = findViewById(R.id.tvDisLikeCount)
         tvCommentsCount = findViewById(R.id.tvCommentsCount)
-        soundManager = com.group1.notamonotako.api.SoundManager(this) // Initialize SoundManager
+        soundManager = SoundManager(this) // Initialize SoundManager
         val isMuted = AccountManager.isMuted
         soundManager.updateMediaPlayerVolume(isMuted)
 
@@ -93,11 +93,10 @@ class ViewHome : AppCompatActivity() {
         }
 
         btnLike.setOnClickListener {
-            soundManager.playSoundEffect()
-
             // Immediately update the state locally before making the API call
             ifLiked = !ifLiked
             ifDisliked = false // Reset dislike if like is clicked
+            soundManager.playSoundEffect()
             updateLikeDislikeUI() // Update the UI immediately
 
             // Call the API to like the post
@@ -105,11 +104,10 @@ class ViewHome : AppCompatActivity() {
         }
 
         btnDisLike.setOnClickListener {
-            soundManager.playSoundEffect()
-
             // Immediately update the state locally before making the API call
             ifDisliked = !ifDisliked
             ifLiked = false // Reset like if dislike is clicked
+            soundManager.playSoundEffect()
             updateLikeDislikeUI() // Update the UI immediately
 
             // Call the API to dislike the post

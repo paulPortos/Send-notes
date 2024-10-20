@@ -46,7 +46,7 @@ class SettingsActivity : AppCompatActivity() {
         sounds = findViewById(R.id.sounds)
         progressBar = findViewById(R.id.progressBar)
         btnChangePassword = findViewById(R.id.btnChangePassword)
-        mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects)
+        mediaPlayer = MediaPlayer.create(this,R.raw.soundeffects1)
         etemail = findViewById(R.id.tvemail2)
         etusername = findViewById(R.id.tvusername2)
         btnAbout = findViewById(R.id.btnAbout)

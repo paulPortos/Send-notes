@@ -8,7 +8,7 @@ class SoundManager(private val context: Context) {
     private lateinit var mediaPlayer: MediaPlayer
 
     init {
-        mediaPlayer = MediaPlayer.create(context, R.raw.soundeffects)
+        mediaPlayer = MediaPlayer.create(context, R.raw.soundeffects1)
         val isMuted = AccountManager.isMuted
         updateMediaPlayerVolume(isMuted)
     }

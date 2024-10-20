@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +13,6 @@ import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.SendNotesAdapter
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import retrofit2.Response
 
 class SendNotesActivity : AppCompatActivity() {
     private lateinit var btnClose : ImageButton
@@ -31,14 +29,13 @@ class SendNotesActivity : AppCompatActivity() {
         btnClose.setOnClickListener {
             finish()
         }
+
         fetchSentNotes()
         rvSendNotes.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this)
-
     }
     private fun fetchSentNotes() {
         lifecycleScope.launch {
-
             try {
                 val token = TokenManager.getToken()
                 val bearerToken = "Bearer $token"

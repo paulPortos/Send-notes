@@ -56,6 +56,7 @@ class SendNotesAdapter (val context: Context, private var data: List<getSentNote
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewSendNotes::class.java)
+            intent.putExtra("id", item.id ?: -1)
             intent.putExtra("note_id", item.notesId ?: -1)
             intent.putExtra("sent_by", item.sentBy ?: "No Sent By")
             intent.putExtra("title", item.title ?: "No Title")

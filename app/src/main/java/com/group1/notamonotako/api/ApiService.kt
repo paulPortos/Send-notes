@@ -175,4 +175,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body request: SendNotesRequest
     ): Response<Void>
+
+    @DELETE("deleteSentNote/{sendNotes_id}")
+    suspend fun deleteSentNote(
+        @Header("Authorization") token: String,
+        @Path("sendNotes_id") sendNotesId: Int
+    ): Response <Void>
 }

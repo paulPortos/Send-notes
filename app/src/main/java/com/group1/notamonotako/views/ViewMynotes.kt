@@ -153,14 +153,18 @@ class ViewMynotes : AppCompatActivity() {
             soundManager.playSoundEffect()
         }
 
-        //CODE MO TANG INA
+
         btnSendNotes.setOnClickListener {
             flSend.visibility = View.GONE
             soundManager.playSoundEffect()
             viewBlur.visibility = View.GONE
             val sentToEmail = etEmail.text.toString()
             val sendByEmail = getEmail().toString()
-            sendNotes(noteId, sentToEmail, sendByEmail)
+            if (sendByEmail.isEmpty()){
+                sendNotes(noteId, sentToEmail, sendByEmail)
+            } else {
+                Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
@@ -215,12 +219,10 @@ class ViewMynotes : AppCompatActivity() {
         }
 
         btnback.setOnClickListener{
-
             val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
             intent.putExtra("showMyNotesFragment", true)
             startActivity(intent)
             soundManager.playSoundEffect()
-
         }
 
 

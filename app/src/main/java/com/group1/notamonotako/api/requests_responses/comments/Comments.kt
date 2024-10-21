@@ -4,7 +4,7 @@ data class getComments(
     val username: String,
     val comment: String,
     val id: Int,
-    val notes_id: Int
+    val notes_id: Int,
 
 )
 

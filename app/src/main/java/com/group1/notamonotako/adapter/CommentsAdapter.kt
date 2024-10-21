@@ -3,6 +3,7 @@ package com.group1.notamonotako.adapter
 import ApiService
 import TokenManager
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +19,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.AccountManager
 import com.group1.notamonotako.api.requests_responses.comments.getComments
+import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
+import com.group1.notamonotako.views.CommentActivity
+import com.group1.notamonotako.views.ViewHome
 import kotlinx.coroutines.launch
 
 
-class CommentsAdapter (val context: Context, private var data: List<getComments>,  private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
+class CommentsAdapter (val context: Context, private var data: List<getComments>,private var owner:List<getPublicNotes>,  private val lifecycleOwner: LifecycleOwner,) : RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val btnDelete: ImageView = view.findViewById(R.id.btnDelete)
@@ -40,10 +44,23 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
         holder.username.text = item.username
         holder.message.text = item.comment
 
+        val owneritem = owner[position]
+
         val currentUsername = AccountManager.getUsername() // Ensure this returns the logged-in user's username
+        val currentUserId = AccountManager.getUserId()
 
         holder.itemView.setOnLongClickListener {
-            // Check if the username of the comment matches the current user's username
+
+            if (owneritem.user_id == currentUserId){
+                holder.btnDelete.visibility = View.GONE
+                holder.btnDelete.isClickable = true
+                View.GONE
+            } else {
+                holder.btnDelete.visibility = View.VISIBLE
+                View.VISIBLE
+            }
+
+
             if (item.username == currentUsername) {
                 // Allow long press and toggle checkbox visibility
                 holder.btnDelete.visibility = if (holder.btnDelete.visibility == View.VISIBLE) {

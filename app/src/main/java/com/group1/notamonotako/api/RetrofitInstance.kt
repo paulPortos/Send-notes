@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
 
-    private const val BASE_URL = "http:/192.168.0.101:8000/api/"
+    private const val BASE_URL = "http:/192.168.1.110:8000/api/"
 
     // Add the logging interceptor
     private val logging = HttpLoggingInterceptor().apply {
@@ -15,9 +15,9 @@ object RetrofitInstance {
     }
 
     private val httpClient = OkHttpClient.Builder()
-        .connectTimeout(10,TimeUnit.SECONDS)
-        .readTimeout(10,TimeUnit.SECONDS)
-        .writeTimeout(10,TimeUnit.SECONDS)
+        .connectTimeout(100,TimeUnit.SECONDS)
+        .readTimeout(100,TimeUnit.SECONDS)
+        .writeTimeout(100,TimeUnit.SECONDS)
         .addInterceptor(logging)
         .addInterceptor { chain ->
             val requestBuilder = chain.request().newBuilder()

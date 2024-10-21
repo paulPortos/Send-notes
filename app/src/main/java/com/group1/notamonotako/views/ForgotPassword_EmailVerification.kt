@@ -75,7 +75,7 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
                         }
 
                         if(response.isSuccessful){
-                            btnConfirmVerification.isClickable = false
+                            btnGetOTP.isClickable = false
                             Toast.makeText(this@ForgotPassword_EmailVerification, "OTP sent", Toast.LENGTH_SHORT).show()
                             textInputLayout.visibility = View.VISIBLE
                             OTPcountdown()
@@ -106,6 +106,7 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
                 Toast.makeText(this@ForgotPassword_EmailVerification, "Please enter your OTP", Toast.LENGTH_SHORT).show()
             }else{
                if(otp == OTP){
+                   btnConfirmVerification.isClickable = false
                    val intent = Intent(this@ForgotPassword_EmailVerification, ForgotPassword_ResetPassword::class.java)
                    startActivity(intent)
 
@@ -131,6 +132,7 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
             override fun onFinish() {
                 btnGetOTP.text = "GET OTP "
                 btnGetOTP.isEnabled = true
+                btnGetOTP.isClickable = true
                 textInputLayout.visibility = View.INVISIBLE
             }
         }.start()

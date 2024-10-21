@@ -38,7 +38,7 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
         // Get the current user's ID
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, ViewSendNotes::class.java)
+            val intent = Intent(it.context, ViewHome::class.java)
             val updatedAtDate = item.updated_at?.substringBefore("T") ?: "No Date"
             intent.putExtra("note_id", item.notesId ?: -1)
             intent.putExtra("title", item.title ?: "No Title")

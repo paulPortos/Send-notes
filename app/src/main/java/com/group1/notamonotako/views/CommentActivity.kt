@@ -85,13 +85,18 @@ class CommentActivity : AppCompatActivity() {
             try {
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = apiService.getComment(noteId)
+                val responseacc = apiService.getPublicNotes()
 
                 if (response.isSuccessful) {
                     val commentsList = response.body()
+                    val accounts = responseacc.body()
 
                     if (commentsList != null && commentsList.isNotEmpty()) {
                         // Passing `this@CommentActivity` as the `lifecycleOwner`
-                        val commentsAdapter = CommentsAdapter(this@CommentActivity, commentsList, this@CommentActivity)
+                        val commentsAdapter = accounts?.let {
+                            CommentsAdapter(this@CommentActivity, commentsList,
+                                accounts,this@CommentActivity)
+                        }
                         rvcomments.adapter = commentsAdapter
                     } else {
                         Toast.makeText(this@CommentActivity, "No comments found", Toast.LENGTH_SHORT).show()

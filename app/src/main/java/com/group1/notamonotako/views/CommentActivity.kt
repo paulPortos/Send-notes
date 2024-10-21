@@ -2,6 +2,7 @@ package com.group1.notamonotako.views
 
 import ApiService
 import TokenManager
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -48,6 +49,9 @@ class CommentActivity : AppCompatActivity() {
         soundManager.updateMediaPlayerVolume(isMuted)
 
         btnClose.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra("new_comment", false) // Indicate no new comment was added
+            setResult(RESULT_OK, resultIntent)
             // Navigate to CommentActivity directly
             finish()
             soundManager.playSoundEffect()
@@ -148,5 +152,11 @@ class CommentActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         soundManager.release() // Release media player when done
+    }
+    override fun onBackPressed() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("new_comment", false) // Indicate no new comment was added
+        setResult(RESULT_OK, resultIntent)
+        super.onBackPressed() // Call the default back button behavior
     }
 }

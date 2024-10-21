@@ -76,6 +76,7 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
     override fun getItemCount(): Int {
         return data.size
     }
+
     private fun deleteItem(commentId: Int, noteId: Int) {
         val token = TokenManager.getToken()
         if (token == null) {

@@ -23,4 +23,8 @@ data class CommentPostResponse(
 
 )
 
+data class getCommentCount(
+    val comment_count: Int
+)
+
 

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.CommentsAdapter
 import com.group1.notamonotako.api.AccountManager
@@ -28,6 +29,7 @@ class CommentActivity : AppCompatActivity() {
     private lateinit var btnClose: ImageButton
     private lateinit var commentAdapter: CommentsAdapter
     private lateinit var soundManager: SoundManager
+    private lateinit var swiperefresh : SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class CommentActivity : AppCompatActivity() {
         rvcomments = findViewById(R.id.rvcomments)
         tvComments = findViewById(R.id.tvComments)
         btnClose = findViewById(R.id.btnClose)
+        swiperefresh = findViewById(R.id.swipeRefreshLayout)
         rvcomments.setHasFixedSize(true)
         rvcomments.layoutManager = LinearLayoutManager(this)
         fetchComments()
@@ -49,6 +52,10 @@ class CommentActivity : AppCompatActivity() {
             finish()
             soundManager.playSoundEffect()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+        swiperefresh.setOnRefreshListener {
+            fetchComments()
+            swiperefresh.isRefreshing = false
         }
 
         etAddComment.setOnTouchListener { v, event ->

@@ -58,14 +58,22 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline257"
                 app:layout_constraintTop_toTopOf="@+id/guideline260" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvcomments"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline256"
                 app:layout_constraintEnd_toStartOf="@+id/guideline258"
                 app:layout_constraintStart_toStartOf="@+id/guideline257"
-                app:layout_constraintTop_toTopOf="@+id/guideline255" />
+                app:layout_constraintTop_toTopOf="@+id/guideline255">
+
+                <!-- RecyclerView wrapped inside SwipeRefreshLayout -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvcomments"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout3"

@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -85,6 +86,8 @@ class ViewHome : AppCompatActivity() {
         tvDate.text = updatedAt ?: "No date"
         fetchReactions(noteId)
         fetchSpecificNote(noteId)
+        getCommentCount(noteId, tvCommentsCount)
+
         Log.d("ViewHome onCreate", "has_liked: $ifLiked, has_disliked: $ifDisliked")
 
         btnback.setOnClickListener{
@@ -125,7 +128,7 @@ class ViewHome : AppCompatActivity() {
             // Pass data to the CommentActivity if needed (e.g., note_id)
             intent.putExtra("note_id", noteId)  // Example of passing note_id
 
-            startActivity(intent)
+            commentActivityResultLauncher.launch(intent)
 
             // Add a transition animation between activities
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -137,6 +140,42 @@ class ViewHome : AppCompatActivity() {
         super.onDestroy()
         soundManager.release() // Release media player when done
     }
+
+
+    private fun getCommentCount(noteId: Int, tvCommentsCount: TextView){
+        lifecycleScope.launch {
+            try{
+
+                val token = TokenManager.getToken()
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val response = apiService.getCommentCountByNoteId("Bearer $token",noteId)
+
+                if (response.isSuccessful) {
+                    val commentCount = response.body()?.comment_count ?: 0
+
+                    tvCommentsCount.text = commentCount.toString()
+                    Log.d("countercomment", "Comment count: $commentCount")
+                }
+
+            }catch (e: Exception){
+                Toast.makeText(this@ViewHome, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ViewHome", "Exception: ${e.message}")
+            }
+
+
+        }
+    }
+    private val commentActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result ->
+        // Check if the result is okay
+        if (result.resultCode == RESULT_OK) {
+            val noteId = intent.getIntExtra("note_id", -1)
+            // Call getCommentCount to refresh the comment count after adding a comment
+            getCommentCount(noteId, tvCommentsCount)
+        }
+    }
+
+
 
     private fun likePostNotes(noteId: Int){
         lifecycleScope.launch {

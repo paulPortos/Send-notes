@@ -161,9 +161,9 @@ class ViewMynotes : AppCompatActivity() {
             val sentToEmail = etEmail.text.toString()
             val sendByEmail = getEmail().toString()
             if (sendByEmail.isEmpty()){
-                sendNotes(noteId, sentToEmail, sendByEmail)
-            } else {
                 Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show()
+            } else {
+                sendNotes(noteId, sentToEmail, sendByEmail)
             }
         }
 
@@ -260,7 +260,13 @@ class ViewMynotes : AppCompatActivity() {
                 val bearerToken = "Bearer $token"
                 val response = apiService.sendNotes(bearerToken, request)
                 if (response.isSuccessful){
-                    Toast.makeText(this@ViewMynotes, "Note sent successfully", Toast.LENGTH_SHORT).show()
+                    if (response.code() == 404){
+                        Toast.makeText(this@ViewMynotes, "Email is not found", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@ViewMynotes, "Note sent successfully", Toast.LENGTH_SHORT).show()
+                    }
+                } else if (response.code() == 404){
+                    Toast.makeText(this@ViewMynotes, "Email is not found", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this@ViewMynotes, "Failed to send note: ${response.code()}", Toast.LENGTH_SHORT).show()
                     Log.e("SendNotes", "Error: ${response.code()}, Message: ${response.message()}")

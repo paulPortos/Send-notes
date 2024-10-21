@@ -312,7 +312,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/btn_white_corner"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white"
                 android:padding="10dp"
                 android:hint="Email"

@@ -158,7 +158,7 @@ class ViewMynotes : AppCompatActivity() {
             flSend.visibility = View.GONE
             soundManager.playSoundEffect()
             viewBlur.visibility = View.GONE
-            val sentToEmail = etEmail.text.toString()
+            val sentToEmail = etEmail.text.toString().trim()
             val sendByEmail = getEmail().toString()
             if (sendByEmail.isEmpty()){
                 Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show()

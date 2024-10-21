@@ -53,7 +53,7 @@ class ForgotPassword_EmailVerification : AppCompatActivity() {
         btnGetOTP.setOnClickListener {
             lifecycleScope.launch {
                 btnConfirmVerification.isClickable = true
-                val email = etEmail.text.toString()
+                val email = etEmail.text.toString().trim()
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val forgotPassword = forgot_Password(email = email)
                 // Store the token received from the server

@@ -6,12 +6,17 @@ import android.content.pm.ActivityInfo
 import android.graphics.LinearGradient
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +34,12 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var btnSignIn: Button
     private lateinit var btnSignUp : AppCompatButton
     private lateinit var progressBar: ProgressBar
-
+    private var progressStatus = 0
+    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var btnDone : AppCompatButton
+    private lateinit var flEmail : FrameLayout
+    private lateinit var tvVerify : TextView
+    private lateinit var  ivEmail : ImageView
     // Initialize ViewModel using the factory to provide ApiService
     private val signUpViewModel: SignUpViewModel by viewModels {
         SignUpViewModelFactory(RetrofitInstance.create(ApiService::class.java))
@@ -49,9 +59,15 @@ class SignUpActivity : AppCompatActivity() {
         btnLoginNow = findViewById(R.id.btnSignUpNow)
         btnSignIn = findViewById(R.id.btnSignIn)
         etEmail = findViewById(R.id.etEmail)
+        btnDone = findViewById(R.id.btnDone)
+        flEmail = findViewById(R.id.flEmailVerify)
+        ivEmail = findViewById(R.id.ivEmail)
+        tvVerify = findViewById(R.id.tvVerify)
         progressBar = findViewById(R.id.progressBar)
-        progressBar.visibility = View.INVISIBLE
+        progressBar.visibility = View.GONE
+        progressBar.max = 5  // Set max value to 5 for 5 seconds
 
+        // Start the 5-second loop
 
         btnLoginNow.setOnClickListener {
             val email = etEmail.text.toString().trim()
@@ -63,7 +79,8 @@ class SignUpActivity : AppCompatActivity() {
             } else if (password == confirmPassword) {
                 if (username.length >= 5 && password.length >= 8) {
                     signUpViewModel.registerUser(email, username, password)
-                    progressBar.visibility = View.VISIBLE
+                    startProgressBarLoop()
+
                 } else if (username.length < 5) {
                     Toast.makeText(this@SignUpActivity, "Username must be at least 5 characters", Toast.LENGTH_SHORT).show()
                 } else if (password.length < 8) {
@@ -73,30 +90,31 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
         }
+        btnDone.setOnClickListener {
+            val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            Toast.makeText(this@SignUpActivity, "Successfully Verified", Toast.LENGTH_SHORT).show()
+
+        }
 
 
         btnSignIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
-            progressBar.visibility = View.VISIBLE
+            finish()
         }
 
 
 
         // Observe registration result
         signUpViewModel.registrationResult.observe(this) { result ->
-            progressBar.visibility = View.INVISIBLE
             btnLoginNow.isClickable = true
 
             result.onSuccess { response ->
                 // Handle successful registration
                 response?.let {
-                    Toast.makeText(this@SignUpActivity, "Successfully signed up", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
                     btnLoginNow.isClickable = false
-                    finish()
                 } ?: run {
                     Toast.makeText(this@SignUpActivity, "Response is null", Toast.LENGTH_SHORT).show()
                 }
@@ -122,5 +140,25 @@ class SignUpActivity : AppCompatActivity() {
             super.onKeyDown(keyCode, event)
         }
     }
+    private fun startProgressBarLoop() {
+        progressStatus = 0 // Reset progress
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                progressStatus++
+                progressBar.progress = progressStatus
 
+                if (progressStatus < 5) {
+                    handler.postDelayed(this, 1000)
+                    progressBar.visibility = View.VISIBLE  // Hide the progress bar after 5 seconds
+                    flEmail.visibility = View.VISIBLE
+
+                } else {
+                    progressBar.visibility = View.GONE  // Hide the progress bar after 5 seconds
+                    tvVerify.visibility = View.VISIBLE
+                    btnDone.visibility = View.VISIBLE
+                    ivEmail.visibility = View.VISIBLE
+                }
+            }
+        }, 1000)
+    }
 }

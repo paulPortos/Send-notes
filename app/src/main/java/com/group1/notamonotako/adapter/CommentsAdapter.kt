@@ -42,12 +42,12 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
         holder.message.text = item.comment
         val soundManager = SoundManager(context) // Initialize SoundManager
 
-        val currentUsername = AccountManager.getUsername() // Ensure this returns the logged-in user's username
+        val currentuserid = AccountManager.getUserId() // Ensure this returns the logged-in user's username
 
         holder.itemView.setOnLongClickListener {
             soundManager.playSoundEffect()
             // Check if the username of the comment matches the current user's username
-            if (item.username == currentUsername) {
+            if (item.user_id == currentuserid) {
                 // Allow long press and toggle checkbox visibility
                 holder.btnDelete.visibility = if (holder.btnDelete.visibility == View.VISIBLE) {
                     holder.btnDelete.visibility = View.GONE

@@ -162,7 +162,6 @@ class ViewHome : AppCompatActivity() {
                 Log.e("ViewHome", "Exception: ${e.message}")
             }
 
-
         }
     }
     private val commentActivityResultLauncher = registerForActivityResult(

@@ -114,8 +114,8 @@ class SignInActivity : AppCompatActivity() {
                 }else{
                     if (response.isSuccessful) {
                         response.body()?.let { loginResponse ->
-
                            //gets the Token,email and username to the managers
+
                             TokenManager.saveToken(loginResponse.token)
                             AccountManager.saveEmail(loginResponse.user.email)
                             AccountManager.saveUsername(loginResponse.user.username)

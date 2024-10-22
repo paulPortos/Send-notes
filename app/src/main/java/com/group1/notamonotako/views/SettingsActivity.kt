@@ -130,9 +130,9 @@ class SettingsActivity : AppCompatActivity() {
                     startActivity(intent)
                     progressBar.visibility = View.VISIBLE
                     btnsign_out.isClickable = false
-
-
+                    
                     finish()
+
                 } else {
                     progressBar.visibility = View.INVISIBLE
                     btnsign_out.isClickable = true

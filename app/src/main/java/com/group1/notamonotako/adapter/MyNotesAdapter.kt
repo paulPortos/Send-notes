@@ -25,7 +25,6 @@ class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerV
         val public : TextView = noteView.findViewById(R.id.tvPublic)
         val pending : TextView = noteView.findViewById(R.id.tvPending)
 
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
@@ -62,7 +61,6 @@ class MyNotesAdapter(val context: Context, val notelist: List<Note>) : RecyclerV
         } else{
             holder.pending.visibility = View.GONE
             holder.public.visibility = View.GONE
-
         }
 
 

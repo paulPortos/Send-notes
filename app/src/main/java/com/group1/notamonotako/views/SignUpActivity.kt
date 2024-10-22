@@ -18,12 +18,13 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
-import com.group1.notamonotako.coroutines.signup.SignUpViewModel
-import com.group1.notamonotako.coroutines.signup.SignUpViewModelFactory
+import com.group1.notamonotako.api.requests_responses.signup.RegisterRequests
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -40,10 +41,6 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var flEmail : FrameLayout
     private lateinit var tvVerify : TextView
     private lateinit var  ivEmail : ImageView
-    // Initialize ViewModel using the factory to provide ApiService
-    private val signUpViewModel: SignUpViewModel by viewModels {
-        SignUpViewModelFactory(RetrofitInstance.create(ApiService::class.java))
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,8 +75,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this@SignUpActivity, "Fill up all fields", Toast.LENGTH_SHORT).show()
             } else if (password == confirmPassword) {
                 if (username.length >= 5 && password.length >= 8) {
-                    signUpViewModel.registerUser(email, username, password)
-
+                    registerUser(username, email, password)
                 } else if (username.length < 5) {
                     Toast.makeText(this@SignUpActivity, "Username must be at least 5 characters", Toast.LENGTH_SHORT).show()
                 } else if (password.length < 8) {
@@ -89,14 +85,13 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this@SignUpActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
         }
+
         btnDone.setOnClickListener {
             val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             Toast.makeText(this@SignUpActivity, "Successfully Verified", Toast.LENGTH_SHORT).show()
-
         }
-
 
         btnSignIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
@@ -104,31 +99,47 @@ class SignUpActivity : AppCompatActivity() {
             finish()
         }
 
+    }
 
+    private fun registerUser(username: String, email: String, password: String){
+        lifecycleScope.launch {
+            val apiService = RetrofitInstance.create(ApiService::class.java)
+            val registerRequest = RegisterRequests(username = username, email = email, password = password)
+            try {
+                val response = apiService.register(registerRequest)
 
-        // Observe registration result
-        signUpViewModel.registrationResult.observe(this) { result ->
-            btnLoginNow.isClickable = true
+                if (response.isSuccessful) {
+                    val registrationResponse = response.body()
+                    Log.d("Registration", "Email sent successfully: $registrationResponse")
+                    startProgressBarLoop()
 
-            result.onSuccess { response ->
-                // Handle successful registration
-                startProgressBarLoop()
-                response?.let {
                     btnLoginNow.isClickable = false
-                } ?: run {
-                    Toast.makeText(this@SignUpActivity, "Response is null", Toast.LENGTH_SHORT).show()
-                }
-            }.onFailure { error ->
-                // Handle registration errors
-                Toast.makeText(this@SignUpActivity, "Invalid Email", Toast.LENGTH_SHORT).show()
-                Log.d("TESTER", "Error: ${error.message}")
-                btnLoginNow.isClickable = true
+                } else if (response.code() == 410){
+                    Log.d("Registration", "Registration failed: $response")
+                    Toast.makeText(this@SignUpActivity, "username already exists. Try another username", Toast.LENGTH_SHORT).show()
+                    btnLoginNow.isClickable = true
+                } else if (response.code() == 409){
+                    Log.d("Registration", "Registration failed: $response")
+                    Toast.makeText(this@SignUpActivity, "email already exists. Try another email", Toast.LENGTH_SHORT).show()
+                    btnLoginNow.isClickable = true
 
+                } else{
+                    Log.e("Registration", "Registration failed with code: ${response.code()}")
+                    Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+                    btnLoginNow.isClickable = true
+                }
+            } catch(e: Exception) {
+                Log.e("Registration", "Registration failed", e)
+                Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+                btnLoginNow.isClickable = true
+            } catch (e: HttpException) {
+                Log.e("Registration", "Registration failed", e)
+                Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+                btnLoginNow.isClickable = true
             }
         }
-
-
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
     }
@@ -140,19 +151,21 @@ class SignUpActivity : AppCompatActivity() {
             super.onKeyDown(keyCode, event)
         }
     }
+
     private fun startProgressBarLoop() {
         progressStatus = 0 // Reset progress
+        Toast.makeText(this@SignUpActivity, "Email sent successfully", Toast.LENGTH_SHORT).show()
         handler.postDelayed(object : Runnable {
             override fun run() {
                 progressStatus++
                 progressBar.progress = progressStatus
-
                 if (progressStatus < 5) {
                     handler.postDelayed(this, 1000)
                     progressBar.visibility = View.VISIBLE  // Hide the progress bar after 5 seconds
                     flEmail.visibility = View.VISIBLE
 
                 } else {
+
                     progressBar.visibility = View.GONE  // Hide the progress bar after 5 seconds
                     tvVerify.visibility = View.VISIBLE
                     btnDone.visibility = View.VISIBLE

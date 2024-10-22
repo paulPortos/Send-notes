@@ -59,7 +59,6 @@ class SignInActivity : AppCompatActivity() {
         btnSignIn = findViewById(R.id.btnSignIn)
 
 
-        GradientText.setGradientText(btnSignIn,this)
 
 
 

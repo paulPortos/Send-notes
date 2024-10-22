@@ -10,7 +10,9 @@
     app:cardMaxElevation="10dp"
     android:translationX="2dp"
     android:translationY="2dp"
-   >
+    android:layout_marginTop="10dp"
+
+    >
 
 
 

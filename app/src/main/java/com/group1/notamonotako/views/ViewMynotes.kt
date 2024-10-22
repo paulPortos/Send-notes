@@ -379,6 +379,11 @@ class ViewMynotes : AppCompatActivity() {
                         val email = getEmail().toString()
                         updateAdminChanges(noteId, updatedTitle, updatedContent, username, email)
                         Toast.makeText(this@ViewMynotes, "Note updated and pending", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
+                        intent.putExtra("showMyNotesFragment", true)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
                     }else {
                         Toast.makeText(this@ViewMynotes, "Note updated successfully", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@ViewMynotes, HomeActivity::class.java)

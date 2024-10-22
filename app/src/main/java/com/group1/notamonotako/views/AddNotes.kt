@@ -55,11 +55,14 @@ class AddNotes : AppCompatActivity() {
             val title = title.text.toString()
             val contents = contents.text.toString()
             if (title.isEmpty() || contents.isEmpty()) {
+                doneButton.isClickable=true
                 // Show an error message or take appropriate action
                 Toast.makeText(this, "Title and Contents must not be empty", Toast.LENGTH_SHORT).show()
             } else {
                 CreateData(title, contents)
                 progressBar.visibility = View.VISIBLE
+                doneButton.isClickable=false
+
             }
         }
     }
@@ -73,6 +76,7 @@ class AddNotes : AppCompatActivity() {
                 val response = apiService.createNote(postNotes)
 
                 if (response.isSuccessful) {
+
                     val noteId = response.body()?.id
                     val dateString = response.body()?.updated_at // Assuming this is available in the response
 

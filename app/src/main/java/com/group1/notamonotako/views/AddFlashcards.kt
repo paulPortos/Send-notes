@@ -31,7 +31,7 @@ class AddFlashcards : AppCompatActivity() {
     private lateinit var btnBack: ImageButton
     private lateinit var title : EditText
     private lateinit var contents : EditText
-    private lateinit var btnCheck : Button
+    private lateinit var btnCheck : ImageButton
     private lateinit var btnAbout : ImageButton
     private lateinit var tvAbout : TextView
     private lateinit var viewBlur: View
@@ -119,6 +119,7 @@ class AddFlashcards : AppCompatActivity() {
             val content = contents.text.toString()
             if (content.isNotBlank()) {
                 addToContentsList(content)
+                btnCheck.isClickable=false
             }
             //log content
             Log.d("AddFlashcards", "Content List: $contentsList")
@@ -130,6 +131,7 @@ class AddFlashcards : AppCompatActivity() {
                 val intent = Intent(this@AddFlashcards, HomeActivity::class.java)
                 startActivity(intent)
             } else {
+                btnCheck.isClickable=true
                 Toast.makeText(this, "Title and cards are required", Toast.LENGTH_SHORT).show()
             }
         }

@@ -39,11 +39,11 @@ class SignUpViewModel(private val apiService: ApiService) : ViewModel() {
                     _registrationResult.postValue(Result.failure(Exception(errorMessage)))
                 }
             } catch (e: IOException) {
-                // Handle network-related errors
-                _registrationResult.postValue(Result.failure(Exception("Network error: ${e.message}")))
+                // Handle network-related errors (e.g., request timeout)
+                _registrationResult.postValue(Result.failure(e))
             } catch (e: HttpException) {
-                // Handle HTTP-related errors
-                _registrationResult.postValue(Result.failure(Exception("HTTP error: ${e.message()}")))
+                // Handle network-related errors (e.g., request timeout)
+                _registrationResult.postValue(Result.failure(e))
             }
         }
     }

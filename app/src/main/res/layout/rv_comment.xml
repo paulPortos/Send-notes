@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content"
-        android:weightSum="57"
+        android:weightSum="100"
         >
         <TextView
             android:layout_width="0.1dp"
@@ -34,7 +34,7 @@
         android:textSize="16sp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:layout_weight="28"
+        android:layout_weight="99"
         android:textStyle="bold" />
         <ImageView
 
@@ -44,8 +44,8 @@
             android:visibility="gone"
             android:src="@drawable/baseline_delete_24"
             android:layout_marginTop="10dp"
-            android:paddingStart="100dp"
-            android:layout_weight="28"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
 
             android:buttonTint="@color/white" />
     </LinearLayout>

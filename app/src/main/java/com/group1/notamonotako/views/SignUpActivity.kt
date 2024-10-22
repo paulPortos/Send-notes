@@ -79,7 +79,6 @@ class SignUpActivity : AppCompatActivity() {
             } else if (password == confirmPassword) {
                 if (username.length >= 5 && password.length >= 8) {
                     signUpViewModel.registerUser(email, username, password)
-                    startProgressBarLoop()
 
                 } else if (username.length < 5) {
                     Toast.makeText(this@SignUpActivity, "Username must be at least 5 characters", Toast.LENGTH_SHORT).show()
@@ -113,6 +112,7 @@ class SignUpActivity : AppCompatActivity() {
 
             result.onSuccess { response ->
                 // Handle successful registration
+                startProgressBarLoop()
                 response?.let {
                     btnLoginNow.isClickable = false
                 } ?: run {

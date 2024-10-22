@@ -22,20 +22,6 @@
             app:layout_constraintStart_toStartOf="parent">
 
 
-            <TextView
-                android:id="@+id/timestamp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans"
-                android:hint="Date"
-                android:textAlignment="center"
-                android:textColorHint="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline324"
-                app:layout_constraintStart_toStartOf="@+id/guideline323"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.059" />
-
             <EditText
                 android:id="@+id/title"
                 android:layout_width="0dp"
@@ -106,25 +92,20 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline59"
                 app:layout_constraintTop_toTopOf="@+id/guideline325" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ImageButton
                 android:id="@+id/btn_check"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:autoSizeMaxTextSize="15sp"
-                android:autoSizeMinTextSize="12sp"
-                android:autoSizeTextType="uniform"
-                android:background="@drawable/btn_white_gradient"
-                android:fontFamily="@font/noto_sans"
-                android:text="CREATE"
-                android:textColor="@color/white"
-                android:textSize="12sp"
+                android:background="@color/transparent"
+                android:src="@drawable/baseline_check_24"
                 android:elevation="0.1dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline61"
                 app:layout_constraintEnd_toStartOf="@+id/guideline58"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline63"
                 app:layout_constraintTop_toTopOf="@+id/guideline56"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                app:tint="@color/white" />
 
 
             <TextView

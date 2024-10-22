@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.AccountManager
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.api.requests_responses.signin.User
 import com.group1.notamonotako.views.ViewHome
@@ -34,10 +36,12 @@ class HomeAdapter(val context: Context, private var data: List<getPublicNotes>) 
         val item = data[position]
         holder.title.text = item.title
         holder.contents.text = item.contents
+        val soundManager = SoundManager(context) // Initialize SoundManager
 
         // Get the current user's ID
 
         holder.itemView.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(it.context, ViewHome::class.java)
             val updatedAtDate = item.updated_at?.substringBefore("T") ?: "No Date"
             intent.putExtra("note_id", item.notesId ?: -1)

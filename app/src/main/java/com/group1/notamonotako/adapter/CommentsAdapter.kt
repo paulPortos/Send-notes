@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.api.AccountManager
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.comments.getComments
 import kotlinx.coroutines.launch
 
@@ -39,10 +40,12 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
         val item = data[position]
         holder.username.text = item.username
         holder.message.text = item.comment
+        val soundManager = SoundManager(context) // Initialize SoundManager
 
         val currentUsername = AccountManager.getUsername() // Ensure this returns the logged-in user's username
 
         holder.itemView.setOnLongClickListener {
+            soundManager.playSoundEffect()
             // Check if the username of the comment matches the current user's username
             if (item.username == currentUsername) {
                 // Allow long press and toggle checkbox visibility
@@ -64,6 +67,7 @@ class CommentsAdapter (val context: Context, private var data: List<getComments>
 
         holder.btnDelete.setOnClickListener {
            deleteItem(item.id,item.notes_id)
+            soundManager.playSoundEffect()
         }
     }
 

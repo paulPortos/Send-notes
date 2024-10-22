@@ -67,6 +67,7 @@ class CommentActivity : AppCompatActivity() {
                 // Check if the drawableEnd was clicked
                 if (event.rawX >= (etAddComment.right - etAddComment.compoundDrawables[2].bounds.width())) {
                     // Handle submission of the edit text content
+                    soundManager.playSoundEffect()
                     submitComment(etAddComment.text.toString())
                     return@setOnTouchListener true
                 }

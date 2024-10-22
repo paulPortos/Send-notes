@@ -10,10 +10,12 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.notes.PostnotesRequest
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -35,6 +37,7 @@ class ViewSendNotes : AppCompatActivity() {
         tvSentBy = findViewById(R.id.sent_by)
         tvTitle = findViewById(R.id.Title)
         tvContents = findViewById(R.id.Contents)
+        val soundManager = SoundManager(this) // Initialize SoundManager
 
 
         val intent = intent
@@ -49,14 +52,17 @@ class ViewSendNotes : AppCompatActivity() {
         this.tvSentBy.text = "Sent by: $sentBy"
 
         btnback.setOnClickListener {
+            soundManager.playSoundEffect()
             finish()
         }
 
         btndelete.setOnClickListener {
+            soundManager.playSoundEffect()
             deleteSentNotes(id, false)
         }
 
         btncopy.setOnClickListener{
+            soundManager.playSoundEffect()
             val titleString = tvTitle.text.toString()
             val contentsString = tvContents.text.toString()
             val publicDefaultValue = false
@@ -95,12 +101,14 @@ class ViewSendNotes : AppCompatActivity() {
                             Toast.makeText(this@ViewSendNotes, "Note copied successfully", Toast.LENGTH_SHORT).show()
                             Log.d("ViewSendNotes", "Note copied successfully")
                             val intent = Intent(this@ViewSendNotes, HomeActivity::class.java)
+                            intent.putExtra("showMyNotesFragment", true) // Pass this extra to show the MyNotes fragment
                             startActivity(intent)
                             finish()
                         } else {
                             Toast.makeText(this@ViewSendNotes, "Note deleted successfully", Toast.LENGTH_SHORT).show()
                             Log.d("ViewSendNotes", "Note deleted successfully")
-                            val intent = Intent(this@ViewSendNotes, SendNotesActivity::class.java)
+                            val intent = Intent(this@ViewSendNotes, HomeActivity::class.java)
+                            intent.putExtra("showMyNotesFragment", true) // Pass this extra to show the MyNotes fragment
                             startActivity(intent)
                             finish()
                         }

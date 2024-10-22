@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyNotesAdapter
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.views.GradientText
 import com.group1.notamonotako.views.NotificationActivity
 import com.group1.notamonotako.views.SendNotesActivity
@@ -63,24 +64,28 @@ class  MyNotes : Fragment() {
         tvNoNotes = view.findViewById(R.id.tvNoNotes)
         tvNoInternet = view.findViewById(R.id.tvNoInternet)
         btnSendNotes = view.findViewById(R.id.btnSendNotes)
+        val soundManager = SoundManager(requireContext()) // Initialize SoundManager
 
 
         progressBar.visibility = View.INVISIBLE
         GradientText.setGradientText(tvMyNotes, requireContext())
 
         btnNotification.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(requireContext(), NotificationActivity::class.java)
             startActivity(intent)
             Log.d("Notification", "Notification button clicked")
         }
 
         btnSettings.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
 
 
         }
         btnSendNotes.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(requireContext(), SendNotesActivity::class.java)
             startActivity(intent)
             Log.d("SendNotes", "SendNotes button clicked")

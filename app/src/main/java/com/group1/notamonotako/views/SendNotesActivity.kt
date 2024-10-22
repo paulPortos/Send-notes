@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.SendNotesAdapter
+import com.group1.notamonotako.api.SoundManager
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -22,11 +23,14 @@ class SendNotesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_mail)
 
+        val soundManager = SoundManager(this) // Initialize SoundManager
+
         btnClose = findViewById(R.id.btnClose)
         rvSendNotes = findViewById(R.id.rvSendNotes)
         rvSendNotes.layoutManager = LinearLayoutManager(this)
 
         btnClose.setOnClickListener {
+            soundManager.playSoundEffect()
             finish()
         }
 

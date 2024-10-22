@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.MyFlashcardsAdapter
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.views.GradientText
 import com.group1.notamonotako.views.NotificationActivity
@@ -52,6 +53,7 @@ class MyFlashcards : Fragment() {
         tvNoInternet = view.findViewById(R.id.tvNoInternet)
         btnNotification = view.findViewById(R.id.btnNotification)
         progressBar.visibility = View.INVISIBLE
+        val soundManager = SoundManager(requireContext()) // Initialize SoundManager
 
         // Set up Grid layout with 2 columns
         rv_myFlashcards.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -64,8 +66,10 @@ class MyFlashcards : Fragment() {
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
+            soundManager.playSoundEffect()
         }
         btnNotification.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(requireContext(), NotificationActivity::class.java)
             startActivity(intent)
             Log.d("Notification", "Notification button clicked")

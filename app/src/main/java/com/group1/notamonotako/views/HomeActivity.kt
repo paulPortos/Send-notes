@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.databinding.ActivityHomeBinding
 import com.group1.notamonotako.fragments.Home
 import com.group1.notamonotako.fragments.MyFlashcards
@@ -56,6 +57,9 @@ class HomeActivity : AppCompatActivity() {
 
         // Initialize TokenManager
         TokenManager.init(this)
+
+        val soundManager = SoundManager(this) // Initialize SoundManager
+
         // Log the token to Logcat
         val token = TokenManager.getToken()
         Log.d("TOKEN", "Stored Token: $token")
@@ -105,6 +109,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         flashcardsFabBtn.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(this, AddFlashcards::class.java) // Create intent for Notes activity
             startActivity(intent)
             progressBar.visibility = View.INVISIBLE
@@ -112,6 +117,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         notesFabBtn.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(this, AddNotes::class.java) // Create intent for Notes activity
             startActivity(intent)
             progressBar.visibility = View.INVISIBLE
@@ -121,8 +127,10 @@ class HomeActivity : AppCompatActivity() {
             progressBar.visibility = View.INVISIBLE
             if (areFabButtonsVisible) {
                 shrinkFab()
+                soundManager.playSoundEffect()
             } else {
                 expandFab()
+                soundManager.playSoundEffect()
             }
         }
 
@@ -143,6 +151,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment, tag: String) {
+
         val fragmentManager = supportFragmentManager
         val currentFragment = fragmentManager.findFragmentByTag(tag)
 

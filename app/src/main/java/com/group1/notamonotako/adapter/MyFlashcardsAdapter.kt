@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.flashcards.GetFlashcards
 import com.group1.notamonotako.views.ViewFlashcards
 
@@ -19,12 +20,14 @@ class MyFlashcardsAdapter(
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val cards: TextView = view.findViewById(R.id.contents)
+        val soundManager = SoundManager(context) // Initialize SoundManager
 
         fun bind(item: GetFlashcards) {
             title.text = item.title
             // Display cards as a comma-separated string
             cards.text = item.cards.joinToString(", ")
             itemView.setOnClickListener {
+                soundManager.playSoundEffect()
                 // Create an intent to navigate to ViewFlashcards
                 val intent = Intent(context, ViewFlashcards::class.java).apply {
                     val updatedAtDate = item.updatedAt?.substringBefore("T")

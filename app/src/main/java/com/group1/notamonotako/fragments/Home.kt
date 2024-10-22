@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.group1.notamonotako.adapter.HomeAdapter
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.public_notes.getPublicNotes
 import com.group1.notamonotako.views.AddFlashcards
 import com.group1.notamonotako.views.AddNotes
@@ -54,6 +55,8 @@ class Home : Fragment() {
     private var hasShownNoDataToast = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        val soundManager = SoundManager(requireContext()) // Initialize SoundManager
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         btnSettings = view.findViewById(R.id.btnSettings)
@@ -88,6 +91,7 @@ class Home : Fragment() {
         btnSettings.setOnClickListener {
             val intent = Intent(requireContext(),SettingsActivity::class.java)
             startActivity(intent)
+            soundManager.playSoundEffect()
 
 
         }
@@ -96,6 +100,7 @@ class Home : Fragment() {
             val intent = Intent(requireContext(), NotificationActivity::class.java)
             startActivity(intent)
             Log.d("Notification", "Notification button clicked")
+            soundManager.playSoundEffect()
         }
 
 

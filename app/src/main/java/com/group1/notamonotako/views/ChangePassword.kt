@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordRequest
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -33,7 +34,11 @@ class ChangePassword : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
         TokenManager.init(this)
+
+        val soundManager = SoundManager(this) // Initialize SoundManager
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
+
 
         if (!TokenManager.isLoggedIn()) {
             // If not logged in, redirect to SignInActivity
@@ -51,10 +56,12 @@ class ChangePassword : AppCompatActivity() {
         btnConfirmResetPassword = findViewById(R.id.btnConfirmResetPassword)
 
         btnBack.setOnClickListener {
-         finish()
+             finish()
+            soundManager.playSoundEffect()
         }
 
         btnConfirmResetPassword.setOnClickListener {
+            soundManager.playSoundEffect()
             val oldPass = etOldPassword.text.toString()
             val newPass = etNewPassword.text.toString()
             val confirmpass = etConfirmNewPassword.text.toString()

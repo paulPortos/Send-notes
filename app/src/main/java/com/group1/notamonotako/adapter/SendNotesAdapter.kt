@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.notamonotako.R
+import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.notification.GetNotification
 import com.group1.notamonotako.api.requests_responses.sendNotes.getSentNotesData
 import com.group1.notamonotako.views.ViewHome
@@ -53,8 +54,10 @@ class SendNotesAdapter (val context: Context, private var data: List<getSentNote
         }
         holder.title.text = item.title
         holder.sentBy.text = item.sentBy
+        val soundManager = SoundManager(context) // Initialize SoundManager
 
         holder.itemView.setOnClickListener {
+            soundManager.playSoundEffect()
             val intent = Intent(it.context, ViewSendNotes::class.java)
             intent.putExtra("id", item.id ?: -1)
             intent.putExtra("note_id", item.notesId ?: -1)

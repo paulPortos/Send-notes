@@ -2,6 +2,7 @@ import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordR
 import com.group1.notamonotako.api.requests_responses.ChangePass.ChangePasswordResponse
 import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
 import com.group1.notamonotako.api.requests_responses.admin.ResponseToAdmin
+import com.group1.notamonotako.api.requests_responses.admin.updateAdminChangesForm
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostRequest
 import com.group1.notamonotako.api.requests_responses.comments.CommentPostResponse
 import com.group1.notamonotako.api.requests_responses.comments.getCommentCount
@@ -188,4 +189,10 @@ interface ApiService {
     suspend fun getCommentCountByNoteId(
         @Header("Authorization") token: String,
         @Path("note_id") noteId: Int): Response<getCommentCount>
+
+    @PUT("updateAdminChanges/{note_id}")
+    suspend fun updateAdmin(
+        @Path("note_id") noteId: Int,
+        @Body request: updateAdminChangesForm
+    ): Response<Void>
 }

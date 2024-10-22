@@ -25,3 +25,10 @@ class ResponseToAdmin(
     val public: Boolean,
     val updated_at : String,
 )
+
+data class updateAdminChangesForm(
+    val title: String,
+    val contents: String,
+    val creator_username: String,
+    val creator_email: String,
+)

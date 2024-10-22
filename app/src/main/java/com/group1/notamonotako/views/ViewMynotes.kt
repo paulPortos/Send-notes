@@ -22,6 +22,7 @@ import com.group1.notamonotako.api.AccountManager.getEmail
 import com.group1.notamonotako.api.AccountManager.getUsername
 import com.group1.notamonotako.api.SoundManager
 import com.group1.notamonotako.api.requests_responses.admin.PostToAdmin
+import com.group1.notamonotako.api.requests_responses.admin.updateAdminChangesForm
 import com.group1.notamonotako.api.requests_responses.notes.UpdateNotes
 import com.group1.notamonotako.api.requests_responses.notes.UpdateToPublicNotes
 import com.group1.notamonotako.api.requests_responses.notification.PostPendingNotification
@@ -225,8 +226,6 @@ class ViewMynotes : AppCompatActivity() {
             soundManager.playSoundEffect()
         }
 
-
-
         UpdateNotes.setOnClickListener {
             soundManager.playSoundEffect()
 
@@ -238,9 +237,9 @@ class ViewMynotes : AppCompatActivity() {
                 if (recentTitle != titleString || recentContents != contentsString) {
                     if (publicize){
                         shareNote(noteId, titleString, creatorsUsername, creatorsEmail, contentsString, false, publicize)
-                        updateNote(noteId, publicize)
+                        updateNote(noteId, publicize, toPublic)
                     } else {
-                        updateNote(noteId, publicize)
+                        updateNote(noteId, publicize, toPublic)
                     }
                 } else {
                     Toast.makeText(this, "No changes detected", Toast.LENGTH_SHORT).show()
@@ -345,7 +344,7 @@ class ViewMynotes : AppCompatActivity() {
         }
     }
 
-    private fun updateNote(noteId: Int, publicize: Boolean) {
+    private fun updateNote(noteId: Int, publicize: Boolean, toPublic: Boolean) {
         val token = TokenManager.getToken()
         if (token == null) {
             Toast.makeText(this, "Authorization token missing", Toast.LENGTH_SHORT).show()
@@ -375,7 +374,12 @@ class ViewMynotes : AppCompatActivity() {
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                         finish()
-                    } else {
+                    } else if (toPublic){
+                        val username = getUsername().toString()
+                        val email = getEmail().toString()
+                        updateAdminChanges(noteId, updatedTitle, updatedContent, username, email)
+                        Toast.makeText(this@ViewMynotes, "Note updated and pending", Toast.LENGTH_SHORT).show()
+                    }else {
                         Toast.makeText(this@ViewMynotes, "Note updated successfully", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@ViewMynotes, HomeActivity::class.java)
                         intent.putExtra("showMyNotesFragment", true)
@@ -415,6 +419,28 @@ class ViewMynotes : AppCompatActivity() {
                 }
             } catch (e: Exception){
                 e.printStackTrace()
+            }
+        }
+    }
+
+    private fun updateAdminChanges(noteId: Int,title: String,  contents: String,  creatorUsername: String, creatorEmail: String,){
+        lifecycleScope.launch {
+            try {
+                val apiService = RetrofitInstance.create(ApiService::class.java)
+                val post = updateAdminChangesForm(title, contents, creatorUsername, creatorEmail)
+                val response = apiService.updateAdmin(noteId, post)
+                if (response.isSuccessful){
+                    Log.e("UpdateAdminChanges Success", "Response: ${response.body()}")
+                    Log.e("UpdateAdminChanges Success", "Response code: ${response.code()}, Message: ${response.message()}")
+                } else {
+                    Log.e("UpdateAdminChanges Fail", "Error: ${response.code()}, Message: ${response.message()}")
+                }
+            } catch (e: Exception){
+                Log.e("UpdateAdminChanges", "Error: ${e.message}", e)
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: HttpException){
+                Log.e("UpdateAdminChanges", "Error: ${e.message}", e)
+                Toast.makeText(this@ViewMynotes, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

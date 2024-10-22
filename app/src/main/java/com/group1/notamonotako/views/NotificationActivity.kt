@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.NotificationAdapter
 import com.group1.notamonotako.api.AccountManager
@@ -30,12 +31,15 @@ class NotificationActivity : AppCompatActivity() {
     private lateinit var soundManager: SoundManager
     private lateinit var tvNoNotifications : TextView
     private lateinit var tvNoInternet : TextView
+    private lateinit var swipeRefreshnotification : SwipeRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
         rvNotification = findViewById(R.id.rvNotification)
         tvNoNotifications = findViewById(R.id.tvNoNotifications)
         tvNoInternet = findViewById(R.id.tvNoInternet)
+        swipeRefreshnotification = findViewById(R.id.swipeRefreshNotification)
+
 
         soundManager = SoundManager(this) // Initialize SoundManager
         val isMuted = AccountManager.isMuted
@@ -45,6 +49,11 @@ class NotificationActivity : AppCompatActivity() {
 
         rvNotification.layoutManager = LinearLayoutManager(this@NotificationActivity)
         fetchNotifications()
+
+        swipeRefreshnotification.setOnRefreshListener {
+            fetchNotifications()
+            swipeRefreshnotification.isRefreshing = false
+        }
 
         btnClose = findViewById(R.id.btnClose)
 

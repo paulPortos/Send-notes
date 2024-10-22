@@ -109,6 +109,8 @@ class SignInActivity : AppCompatActivity() {
                     progressBar.visibility = View.INVISIBLE
                     btnLoginNow.isClickable = true
 
+                }else if(response.code() ==403){
+                    Toast.makeText(this@SignInActivity,"Email not yet verify",Toast.LENGTH_SHORT).show()
                 }else{
                     if (response.isSuccessful) {
                         response.body()?.let { loginResponse ->

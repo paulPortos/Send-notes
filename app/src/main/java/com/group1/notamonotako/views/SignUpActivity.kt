@@ -35,7 +35,6 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var btnSignIn: Button
     private lateinit var btnSignUp : AppCompatButton
     private lateinit var progressBar: ProgressBar
-    private var progressStatus = 0
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var btnDone : AppCompatButton
     private lateinit var flEmail : FrameLayout
@@ -62,11 +61,12 @@ class SignUpActivity : AppCompatActivity() {
         tvVerify = findViewById(R.id.tvVerify)
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.GONE
-        progressBar.max = 5  // Set max value to 5 for 5 seconds
+
 
         // Start the 5-second loop
 
         btnLoginNow.setOnClickListener {
+
             val email = etEmail.text.toString().trim()
             val username = etUsername.text.toString().trim()
             val password = etPassword.text.toString().trim()
@@ -76,6 +76,8 @@ class SignUpActivity : AppCompatActivity() {
             } else if (password == confirmPassword) {
                 if (username.length >= 5 && password.length >= 8) {
                     registerUser(username, email, password)
+                    flEmail.visibility = View.VISIBLE
+                    progressBar.visibility = View.VISIBLE
                 } else if (username.length < 5) {
                     Toast.makeText(this@SignUpActivity, "Username must be at least 5 characters", Toast.LENGTH_SHORT).show()
                 } else if (password.length < 8) {
@@ -90,7 +92,6 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
-            Toast.makeText(this@SignUpActivity, "Successfully Verified", Toast.LENGTH_SHORT).show()
         }
 
         btnSignIn.setOnClickListener {
@@ -116,23 +117,33 @@ class SignUpActivity : AppCompatActivity() {
                     btnLoginNow.isClickable = false
                 } else if (response.code() == 410){
                     Log.d("Registration", "Registration failed: $response")
+                    flEmail.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                     Toast.makeText(this@SignUpActivity, "username already exists. Try another username", Toast.LENGTH_SHORT).show()
                     btnLoginNow.isClickable = true
                 } else if (response.code() == 409){
                     Log.d("Registration", "Registration failed: $response")
+                    flEmail.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                     Toast.makeText(this@SignUpActivity, "email already exists. Try another email", Toast.LENGTH_SHORT).show()
                     btnLoginNow.isClickable = true
 
                 } else{
+                    flEmail.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                     Log.e("Registration", "Registration failed with code: ${response.code()}")
                     Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                     btnLoginNow.isClickable = true
                 }
             } catch(e: Exception) {
+                flEmail.visibility = View.INVISIBLE
+                progressBar.visibility = View.INVISIBLE
                 Log.e("Registration", "Registration failed", e)
                 Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                 btnLoginNow.isClickable = true
             } catch (e: HttpException) {
+                flEmail.visibility = View.INVISIBLE
+                progressBar.visibility = View.INVISIBLE
                 Log.e("Registration", "Registration failed", e)
                 Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                 btnLoginNow.isClickable = true
@@ -153,18 +164,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun startProgressBarLoop() {
-        progressStatus = 0 // Reset progress
-        Toast.makeText(this@SignUpActivity, "Email sent successfully", Toast.LENGTH_SHORT).show()
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                progressStatus++
-                progressBar.progress = progressStatus
-                if (progressStatus < 5) {
-                    handler.postDelayed(this, 1000)
-                    progressBar.visibility = View.VISIBLE  // Hide the progress bar after 5 seconds
-                    flEmail.visibility = View.VISIBLE
 
-                } else {
+        Toast.makeText(this@SignUpActivity, "Email sent successfully", Toast.LENGTH_SHORT).show()
+
+                   // Hide the progress bar after 5 seconds
 
                     progressBar.visibility = View.GONE  // Hide the progress bar after 5 seconds
                     tvVerify.visibility = View.VISIBLE
@@ -172,6 +175,4 @@ class SignUpActivity : AppCompatActivity() {
                     ivEmail.visibility = View.VISIBLE
                 }
             }
-        }, 1000)
-    }
-}
+

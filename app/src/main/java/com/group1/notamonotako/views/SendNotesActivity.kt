@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.group1.notamonotako.R
 import com.group1.notamonotako.adapter.SendNotesAdapter
 import com.group1.notamonotako.api.SoundManager
@@ -19,6 +20,7 @@ class SendNotesActivity : AppCompatActivity() {
     private lateinit var btnClose : ImageButton
     private lateinit var rvSendNotes: RecyclerView
     private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var swipeRefreshSendMail : SwipeRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_mail)
@@ -27,11 +29,16 @@ class SendNotesActivity : AppCompatActivity() {
 
         btnClose = findViewById(R.id.btnClose)
         rvSendNotes = findViewById(R.id.rvSendNotes)
+       swipeRefreshSendMail = findViewById(R.id.swipeRefresherMail)
         rvSendNotes.layoutManager = LinearLayoutManager(this)
 
         btnClose.setOnClickListener {
             soundManager.playSoundEffect()
             finish()
+        }
+        swipeRefreshSendMail.setOnRefreshListener {
+            fetchSentNotes()
+            swipeRefreshSendMail.isRefreshing = false
         }
 
         fetchSentNotes()

@@ -131,20 +131,20 @@ class SignUpActivity : AppCompatActivity() {
                 } else{
                     flEmail.visibility = View.INVISIBLE
                     progressBar.visibility = View.INVISIBLE
-                    Log.e("Registration", "Registration failed with code: ${response.code()}")
+                    Log.e("Registration", "Registration failed with code: ${response.code()} ${response.message()}")
                     Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                     btnLoginNow.isClickable = true
                 }
             } catch(e: Exception) {
                 flEmail.visibility = View.INVISIBLE
                 progressBar.visibility = View.INVISIBLE
-                Log.e("Registration", "Registration failed", e)
+                Log.e("Registrationex", "Registration failed", e)
                 Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                 btnLoginNow.isClickable = true
             } catch (e: HttpException) {
                 flEmail.visibility = View.INVISIBLE
                 progressBar.visibility = View.INVISIBLE
-                Log.e("Registration", "Registration failed", e)
+                Log.e("Registrationhttp", "Registration failed", e)
                 Toast.makeText(this@SignUpActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                 btnLoginNow.isClickable = true
             }

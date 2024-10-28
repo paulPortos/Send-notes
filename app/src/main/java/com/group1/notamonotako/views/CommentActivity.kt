@@ -31,7 +31,7 @@ class CommentActivity : AppCompatActivity() {
     private lateinit var commentAdapter: CommentsAdapter
     private lateinit var soundManager: SoundManager
     private lateinit var swiperefresh : SwipeRefreshLayout
-
+    private lateinit var NoComment: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
@@ -42,6 +42,7 @@ class CommentActivity : AppCompatActivity() {
         swiperefresh = findViewById(R.id.swipeRefreshLayout)
         rvcomments.setHasFixedSize(true)
         rvcomments.layoutManager = LinearLayoutManager(this)
+        NoComment = findViewById(R.id.NoComment)
         fetchComments()
 
         soundManager = SoundManager(this) // Initialize SoundManager
@@ -88,6 +89,8 @@ class CommentActivity : AppCompatActivity() {
         // Fetch comments from the API
         lifecycleScope.launch {
             try {
+                NoComment.visibility = TextView.GONE
+                rvcomments.visibility = RecyclerView.VISIBLE
                 val apiService = RetrofitInstance.create(ApiService::class.java)
                 val response = apiService.getComment(noteId)
 
@@ -98,8 +101,11 @@ class CommentActivity : AppCompatActivity() {
                         // Passing `this@CommentActivity` as the `lifecycleOwner`
                         val commentsAdapter = CommentsAdapter(this@CommentActivity, commentsList, this@CommentActivity)
                         rvcomments.adapter = commentsAdapter
+                        rvcomments.visibility = RecyclerView.VISIBLE
+                        NoComment.visibility = TextView.GONE
                     } else {
-                        Toast.makeText(this@CommentActivity, "No comments found", Toast.LENGTH_SHORT).show()
+                        rvcomments.visibility = RecyclerView.GONE
+                        NoComment.visibility = TextView.VISIBLE
                     }
                 } else {
                     Log.e("FetchCommentsError", "Failed to fetch comments: ${response.code()}")

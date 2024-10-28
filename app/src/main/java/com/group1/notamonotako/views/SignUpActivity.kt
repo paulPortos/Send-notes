@@ -128,6 +128,12 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this@SignUpActivity, "email already exists. Try another email", Toast.LENGTH_SHORT).show()
                     btnLoginNow.isClickable = true
 
+                } else if(response.code() == 422){
+                    flEmail.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
+                    Log.e("Invalid_Email", "Registration failed with code: ${response.code()} ${response.message()}")
+                    Toast.makeText(this@SignUpActivity, "Invalid Email", Toast.LENGTH_SHORT).show()
+                    btnLoginNow.isClickable = true
                 } else{
                     flEmail.visibility = View.INVISIBLE
                     progressBar.visibility = View.INVISIBLE

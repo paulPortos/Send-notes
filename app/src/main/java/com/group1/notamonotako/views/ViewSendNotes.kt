@@ -79,11 +79,14 @@ class ViewSendNotes : AppCompatActivity() {
                 val response = apiService.createNote(notesRequest)
                 if (response.isSuccessful) {
                     deleteSentNotes(id, true)
+                    btncopy.isClickable =false
                 } else {
                     Log.e("ViewSendNotes", "Failed to create note: ${response.code()}")
+                    btncopy.isClickable = true
                 }
             } catch (e: Exception) {
                 Log.e("ViewSendNotes", "Exception: ${e.message}")
+                btncopy.isClickable =true
             }
         }
     }

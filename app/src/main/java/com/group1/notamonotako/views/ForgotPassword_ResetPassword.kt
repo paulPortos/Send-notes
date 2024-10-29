@@ -54,14 +54,19 @@ class ForgotPassword_ResetPassword : AppCompatActivity() {
                         val newPassword = reset_Password(password = password, token = OTP, email = email)
                         val response = apiService.resetPassword(newPassword)
 
-                        if(response.isSuccessful) {
-                            Toast.makeText(this@ForgotPassword_ResetPassword, "Password changed successfully", Toast.LENGTH_SHORT).show()
-                            btnConfirmResetPassword.isClickable = false
-                            // Navigate to SignInActivity
-                            val intent = Intent(this@ForgotPassword_ResetPassword, SignInActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Prevent going back
-                            startActivity(intent)
-                        }
+                        if(response.code()==400){
+                            Toast.makeText(this@ForgotPassword_ResetPassword, "Your new password cannot be the same as the old password", Toast.LENGTH_SHORT).show()
+                        }else{
+                            if(response.isSuccessful) {
+                                Toast.makeText(this@ForgotPassword_ResetPassword, "Password changed successfully", Toast.LENGTH_SHORT).show()
+                                btnConfirmResetPassword.isClickable = false
+                                // Navigate to SignInActivity
+                                val intent = Intent(this@ForgotPassword_ResetPassword, SignInActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Prevent going back
+                                startActivity(intent)
+
+                        }}
+
                     }
                 } catch (e: Exception) {
                     btnConfirmResetPassword.isClickable = true
